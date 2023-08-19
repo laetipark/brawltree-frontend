@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Main Bold";
+    src: url("../fonts/TmoneyRoundWindExtraBold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Main Medium";
+    src: url("../fonts/TmoneyRoundWindRegular.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Logo Font";
+    src: url("../fonts/Uniwars_W00.ttf") format("truetype");
+}

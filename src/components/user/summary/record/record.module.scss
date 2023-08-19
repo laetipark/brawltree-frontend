@@ -1,0 +1,15 @@
+.recordWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: flex-start
+}
+
+@media (min-width: 576px) {
+  .recordWrapper {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    column-gap: 1%;
+  }
+}

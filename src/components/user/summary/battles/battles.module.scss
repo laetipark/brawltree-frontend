@@ -1,0 +1,33 @@
+.battlesWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.battleTitle {
+  font-family: "Main Bold", serif;
+  font-size: 24px;
+}
+
+.battleContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #EAE7B1;
+  border: 2px solid #A8DE8E;
+  border-radius: 6px;
+}
+
+.battleButton {
+  width: 100%;
+  text-align: center;
+  background-color: #088395;
+  border-top: 2px solid #227C70;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  padding: 6px 0 8px 0;
+  color: #E6E2C3;
+  font-family: "Main Bold", serif;
+  font-size: 18px;
+  transition: background-color 0.2s ease-in-out;
+}

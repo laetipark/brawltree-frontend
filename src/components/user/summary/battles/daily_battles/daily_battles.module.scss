@@ -1,0 +1,53 @@
+.dailyBattlesWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.dailyBattlesContent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0 10px 0;
+  gap: 1%;
+}
+
+.battleSummaryBox {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 60px;
+  height: 60px;
+  margin: 0 0 4px 0;
+  border: 1px solid #39375B;
+  border-radius: 10px;
+  position: relative;
+}
+
+.gameModeImage {
+  padding-bottom: 16px;
+  width: 48px;
+  height: 40px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.brawlerImage {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  opacity: .8;
+  margin-right: 6px;
+}
+
+.dateText {
+  font-size: 10px;
+  position: absolute;
+  bottom: 1px;
+  right: -4px;
+  margin-right: 6px;
+  white-space: nowrap;
+}

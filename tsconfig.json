@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "allowJs": true,
+    "outDir": "./dist",
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "incremental": true,
+    "lib": [
+      "ES2015",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "jsx": "react-jsx",
+    "esModuleInterop": true
+  },
+  "include": [
+    "./"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ],
+  "extends": "./tsconfig.paths.json"
+}

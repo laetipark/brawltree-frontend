@@ -1,0 +1,36 @@
+@import url(./common/fonts.css);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #E5F9DB;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+button {
+    font-size: 16px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+    font-family: "Main Bold", serif;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}

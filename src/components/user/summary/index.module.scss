@@ -1,0 +1,28 @@
+.recordsWrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  padding: 10px;
+  gap: 10px;
+}
+
+@media (min-width: 576px) {
+  .recordsWrapper {
+    max-width: 536px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .recordsWrapper {
+    max-width: 728px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .recordsWrapper {
+    max-width: 924px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,21 @@
+.totalWrapper {
+  max-width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #343A40;
+}
+
+.totalWrapper > div {
+  display: flex;
+  justify-content: center;
+  color: white;
+  gap: 20px;
+}
+
+.totalWrapper > div > a {
+  display: flex;
+  color: white;
+  text-decoration: none;
+  align-items: center;
+  gap: 8px;
+}

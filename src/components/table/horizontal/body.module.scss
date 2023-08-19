@@ -1,0 +1,26 @@
+.bodyWrapper {
+  display: table-row-group;
+}
+
+.bodyWrapper > div {
+  display: table-row;
+}
+
+.bodyWrapper > div > div {
+  display: table-cell;
+  padding: 10px;
+  border-right: 1px solid #B4E197;
+  border-bottom: 1px solid #B4E197;
+  background-color: #E9EFC0;
+  vertical-align: middle;
+}
+
+.bodyWrapper > div > div:first-child {
+  border-left: 1px solid #B4E197;
+}
+
+.bodyWrapper > div > div > img {
+  width: 16px;
+  margin-right: 4px;
+  object-fit: contain;
+}

@@ -1,0 +1,95 @@
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  max-width: 100%;
+  min-height: 300px;
+  padding: 12px;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .app {
+    max-width: 556px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    max-width: 748px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    max-width: 924px;
+    margin: 0 auto;
+  }
+}
+
+.titleBox {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Logo Font', serif;
+}
+
+.titleBox > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.titleBox > div > img {
+  width: 40px;
+  object-fit: contain;
+}
+
+.titleBox > div > div {
+  font-family: 'Logo Font', serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.inputBox {
+  display: flex;
+  align-items: center;
+  width: 320px;
+  font-size: 24px;
+}
+
+.inputBox > svg {
+  padding: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  background-color: #76BA99;
+  color: white;
+}
+
+.inputBox > input {
+  border: none;
+  padding: 10px;
+  width: 178px;
+  height: 24px;
+  font-size: 16px;
+}
+
+
+.inputBox > button {
+  padding: 10px;
+  height: 44px;
+  background-color: #CA955C;
+  border: none;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  font-family: 'Logo Font', serif;
+  color: #EDDFB3;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.inputBox > button:hover {
+  background-color: #876445;
+}

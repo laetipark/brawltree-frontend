@@ -1,0 +1,102 @@
+/* header-title */
+
+.titleWrapper {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.titleWrapper img {
+  vertical-align: middle;
+  width: 100%;
+}
+
+@media (min-width: 410px) {
+  .titleWrapper img {
+    width: 360px;
+  }
+}
+
+.menuWrapper {
+  background-color: #343A40;
+  color: white;
+  padding: 10px
+}
+
+.menuWrapper > div {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuLogo {
+  width: 40px;
+}
+
+@media (min-width: 576px) {
+  .menuWrapper > div {
+    max-width: 556px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .menuWrapper > div {
+    max-width: 748px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menuWrapper > div {
+    max-width: 924px;
+    margin: 0 auto;
+  }
+}
+
+.menuLogo {
+  margin: 0.8rem 1rem;
+  max-width: 40px;
+  max-height: 40px;
+}
+
+.menuToggle {
+  display: block;
+  font-size: 24px;
+  padding: 5px;
+}
+
+@media (min-width: 768px) {
+  .menuToggle {
+    display: none;
+  }
+}
+
+.menuList {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  font-size: 18px;
+  column-gap: 20px;
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .menuList {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+  }
+}
+
+.menuList > li {
+  padding: 0;
+}
+
+.menuList > li > a {
+  color: white;
+  text-decoration-line: none;
+}

@@ -1,0 +1,27 @@
+.brawlersWrapper {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+  padding: 10px;
+}
+
+@media (min-width: 576px) {
+  .brawlersWrapper {
+    max-width: 536px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .brawlersWrapper {
+    max-width: 728px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brawlersWrapper {
+    max-width: 924px;
+    margin: 0 auto;
+  }
+}

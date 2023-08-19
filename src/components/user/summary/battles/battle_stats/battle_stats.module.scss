@@ -1,0 +1,87 @@
+.battleStatsWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.battleStatsWrapper > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  padding: 2px 0 2px 0;
+}
+
+.battleStatsWrapper > div text {
+  font-family: "Main Medium", serif !important;
+}
+
+@media (min-width: 576px) {
+  .battleStatsWrapper {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .battleStatsWrapper > div {
+    width: 50%;
+  }
+}
+
+.calendarLegend {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: center;
+  border-radius: 6px;
+  background-color: #643843;
+  gap: 4px;
+  padding: 10px;
+  color: white;
+  font-size: 13px;
+}
+
+.battleDate {
+  color: #E7CBCB;
+}
+
+.brawlerPicksWrapper > div {
+  display: grid;
+  grid-template-columns: 10% 40% 15% 15%;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  border-bottom: 1px solid #227C70;
+  padding: 4px;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.brawlerPicksWrapper > div:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 576px) {
+  .brawlerPicksWrapper {
+    border-left: 2px solid #227C70;
+  }
+}
+
+.brawlerPicksWrapper > div > img {
+  width: 100%;
+  height: 32px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+
+.brawlerPicksContent > div:first-child {
+  font-family: "Main Bold", serif;
+  font-size: 12px;
+}
+
+.brawlerPicksContent > div:nth-child(2) {
+  font-size: 9px;
+  color: #0B666A;
+}
