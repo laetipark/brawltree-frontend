@@ -1,89 +1,53 @@
-.brawlerWrapper {
+/* brawlers 틀 */
+
+.brawlersWrapper {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.brawlerTitle {
+.brawlersTitle {
   font-family: "Main Bold", serif;
   font-size: 24px;
 }
 
-.brawlerContent {
+.brawlersContent {
   display: grid;
   grid-template-columns: 100%;
   justify-content: space-between;
-  row-gap: 4px;
+  row-gap: 8px;
 }
 
-@media (min-width: 576px) {
-  .brawlerContent {
+@media (min-width: 768px) {
+  .brawlersContent {
     display: grid;
     grid-template-columns: 49.5% 49.5%;
     justify-content: space-between;
-    row-gap: 4px;
+    row-gap: 8px;
   }
 }
 
-.brawlerItemButton {
-  display: none;
-}
-
-.brawlerItem {
-  display: grid;
-  grid-template-columns: 10% 35% 17% 17% 17% 3%;
-  justify-content: space-between;
-  align-items: center;
-  justify-items: center;
-  background-color: #EAE7B1;
-  border: 2px solid #A8DE8E;
-  border-radius: 6px;
-  padding: 1%;
-}
-
-.brawlerItem > img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  object-position: center;
-  align-self: center;
-}
-
-.brawlerItem > div {
+.brawlersContent > div {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.brawlerTrophy > div:first-child {
-  font-family: "Main Bold", serif;
-  font-size: 14px;
-}
-
-.brawlerTrophy > div:nth-child(2) {
-  font-size: 11px;
-  color: #0B666A;
+  gap: 8px;
 }
 
 .brawlerDetail {
-  display: flex;
   flex-direction: column;
-  background-color: #EAE7B1;
-  border: 2px solid #A8DE8E;
+  flex-wrap: wrap;
+  align-content: center;
   border-radius: 6px;
-  padding: 10px;
-  font-size: 10px;
+  padding: 12px;
+  font-size: 13px;
 }
 
 .brawlerDetail > div {
   display: flex;
-  gap: 10px;
+  justify-content: space-evenly;
+  gap: 8px;
 }
 
-.brawlerDetail > div img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  object-position: center;
-  align-self: center;
+.brawlerDetail text {
+  font-family: "Main Bold", serif !important;
 }

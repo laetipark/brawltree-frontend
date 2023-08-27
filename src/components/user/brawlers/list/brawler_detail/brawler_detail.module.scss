@@ -1,0 +1,58 @@
+.brawlerDetailInfo > img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brawlerDetailInfo > img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brawlerDetailInfo > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.brawlerDetailInfo > div > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.brawlerDetailInfo > div > img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: left;
+  border-radius: 10%;
+}
+
+.brawlerModeImage {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brawlerRankImage {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brawlerName {
+  font-family: "Main Bold", serif;
+  font-size: 24px;
+}
+
+.brawlerDetailInfo > div > div > div {
+  display: flex;
+  font-size: 16px;
+}

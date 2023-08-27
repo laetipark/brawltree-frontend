@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 
-import {Line} from "@nivo/line";
-
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowDown, faArrowUp} from '@fortawesome/free-solid-svg-icons';
+import BrawlerSummary from "~/components/user/brawlers/list/brawler_summary/brawler_summary";
+import BrawlerDetail from "~/components/user/brawlers/list/brawler_detail/brawler_detail";
 
 import config from "~/config/config";
 import styles from "./brawler_list.module.scss";
+import {Line} from "@nivo/line";
 
 const UserBrawlerList = ({id}) => {
     const [userBrawlers, setUserBrawlers] = useState([]);
@@ -42,153 +41,126 @@ const UserBrawlerList = ({id}) => {
     };
 
     return (
-        <div className={styles.brawlerWrapper}>
-            <h1 className={styles.brawlerTitle}>브롤러 정보
+        <div className={styles.brawlersWrapper}>
+            <h1 className={styles.brawlersTitle}>브롤러 정보
                 <span>({userBrawlers?.length}종)</span>
             </h1>
-            <div className={styles.brawlerContent}>
+            <div className={styles.brawlersContent}>
                 {
-                    userBrawlers.map(brawler => {
-                        const trophyChange = brawler.TROPHY_CUR - brawler.TROPHY_BGN > 0 ? `+${brawler.TROPHY_CUR - brawler.TROPHY_BGN}` : brawler.TROPHY_CUR - brawler.TROPHY_BGN;
-                        const brawlerGadgets = userBrawlerItems?.filter(item => item.BRAWLER_ID === brawler.BRAWLER_ID && item.ITEM_K === "gadget");
-                        const brawlerStarPowers = userBrawlerItems?.filter(item => item.BRAWLER_ID === brawler.BRAWLER_ID && item.ITEM_K === "starPower");
-                        const brawlerGears = userBrawlerItems?.filter(item => item.BRAWLER_ID === brawler.BRAWLER_ID && item.ITEM_K === "gear");
+                    userBrawlers.map(({
+                                          BRAWLER_ID,
+                                          BRAWLER_NM,
+                                          BRAWLER_RRT,
+                                          MATCH_PCK_R_PL,
+                                          MATCH_PCK_R_TL,
+                                          MATCH_VIC_R_PL,
+                                          MATCH_VIC_R_TL,
+                                          TROPHY_BGN,
+                                          TROPHY_CUR,
+                                          TROPHY_HGH,
+                                          TROPHY_RNK
+                                      }) => {
+                        const brawlerData = userBrawlerGraphs?.filter(item => item.BRAWLER_ID === BRAWLER_ID);
                         const brawlerGraphData = [{
-                            id: brawler.BRAWLER_ID,
+                            id: BRAWLER_ID,
                             color: "hsl(137, 70%, 50%)",
-                            data: userBrawlerGraphs?.filter(item => item.BRAWLER_ID === brawler.BRAWLER_ID)
+                            data: brawlerData
                         }];
-
+                        /*
+                            background-color: ${props => (BRAWLER_RRT === "기본" ? "#94D7F4" :
+                                    BRAWLER_RRT === "희귀" ? "#2EDD1C" :
+                                            BRAWLER_RRT === "초희귀" ? "#0087FA" :
+                                                    BRAWLER_RRT === "영웅" ? "#B116ED" :
+                                                            BRAWLER_RRT === "신화" ? "#D6001A" :
+                                                                    BRAWLER_RRT === "전설" ? "#FFF11E" : "")};
+                            background-image: linear-gradient(${props => (BRAWLER_RRT === "크로마틱" ? "45deg, purple 40%, red 50%, yellow 60%" : "")});
+                            */
                         return (
-                            <div key={brawler.BRAWLER_ID}>
-                                <input className={styles.brawlerItemButton}
-                                       type={"checkbox"}
-                                       id={`brawler_${brawler.BRAWLER_ID}`}
-                                       name={`brawler_${brawler.BRAWLER_ID}`}
-                                       checked={checkedList.includes(brawler.BRAWLER_ID)}
-                                       onChange={(e) => checkHandler(e, brawler.BRAWLER_ID)}/>
-                                <label htmlFor={`brawler_${brawler.BRAWLER_ID}`}
-                                       className={styles.brawlerItem}>
-                                    <img src={`/images/brawlers/pin/${brawler.BRAWLER_ID}.webp`}
-                                         alt={brawler.BRAWLER_ID}/>
-                                    <h5>{brawler.BRAWLER_NM}</h5>
-                                    <div className={styles.brawlerTrophy}>
-                                        <div>현재</div>
-                                        <div>{brawler.TROPHY_CUR}개</div>
-                                    </div>
-                                    <div className={styles.brawlerTrophy}>
-                                        <div>최고</div>
-                                        <div>{brawler.TROPHY_HGH}개</div>
-                                    </div>
-                                    <div className={styles.brawlerTrophy}>
-                                        <div>변화량</div>
-                                        <div>{trophyChange}개</div>
-                                    </div>
-                                    {
-                                        checkedList.includes(brawler.BRAWLER_ID) ? (
-                                            <FontAwesomeIcon fontSize={10}
-                                                             icon={faArrowDown}/>) : (
-                                            <FontAwesomeIcon fontSize={10}
-                                                             icon={faArrowUp}/>)
-                                    }
-
-                                </label>
+                            <div key={BRAWLER_ID}>
+                                <BrawlerSummary BRAWLER_ID={BRAWLER_ID}
+                                                BRAWLER_NM={BRAWLER_NM}
+                                                TROPHY_BGN={TROPHY_BGN}
+                                                TROPHY_CUR={TROPHY_CUR}
+                                                TROPHY_HGH={TROPHY_HGH}
+                                                checkedList={checkedList}
+                                                checkHandler={checkHandler}
+                                />
                                 <div className={styles.brawlerDetail}
-                                     style={{display: checkedList.includes(brawler.BRAWLER_ID) ? "flex" : "none"}}>
+                                     style={{
+                                         display: checkedList.includes(BRAWLER_ID) ? "flex" : "none",
+                                         backgroundColor: BRAWLER_RRT === "Trophy Road" ? "#CDFCF6" :
+                                             BRAWLER_RRT === "Rare" ? "#C3EDC0" :
+                                                 BRAWLER_RRT === "Super Rare" ? "#BCCEF8" :
+                                                     BRAWLER_RRT === "Epic" ? "#B2A4FF" :
+                                                         BRAWLER_RRT === "Mythic" ? "#FFB4B4" :
+                                                             BRAWLER_RRT === "Legendary" ? "#FDF7C3" : "",
+                                         backgroundImage: `linear-gradient(${BRAWLER_RRT === "Chromatic" ? "45deg, #B2A4FF 20%, #FFB4B4 50%, #FDF7C3 80%" : ""})`
+                                     }}>
+                                    <BrawlerDetail BRAWLER_ID={BRAWLER_ID}
+                                                   BRAWLER_NM={BRAWLER_NM}
+                                                   MATCH_PCK_R_PL={MATCH_PCK_R_PL}
+                                                   MATCH_PCK_R_TL={MATCH_PCK_R_TL}
+                                                   MATCH_VIC_R_PL={MATCH_VIC_R_PL}
+                                                   MATCH_VIC_R_TL={MATCH_VIC_R_TL}
+                                                   TROPHY_RNK={TROPHY_RNK}
+                                                   userBrawlerItems={userBrawlerItems}/>
                                     {
-                                        brawlerGadgets && <div>
-                                            {
-                                                brawlerGadgets?.map(({ITEM_ID, ITEM_NM}) => (
-                                                        <div>
-                                                            <div>
-                                                                <img src={`/images/brawlers/gadgets/${ITEM_ID}.webp`}
-                                                                     alt={ITEM_ID}/>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                )
-                                            }
-                                        </div>
-                                    }
-                                    {
-                                        brawlerStarPowers && <div>
-                                            {
-                                                brawlerStarPowers?.map(({ITEM_ID, ITEM_NM}) => (
-                                                        <div>
-                                                            <div>
-                                                                <img src={`/images/brawlers/star_powers/${ITEM_ID}.webp`}
-                                                                     alt={ITEM_ID}/>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                )
-                                            }
-                                        </div>
-                                    }
-                                    {
-                                        brawlerGears && <div>
-                                            {
-                                                brawlerGears?.map(({ITEM_ID, ITEM_NM}) => (
-                                                        <div>
-                                                            <div>
-                                                                <img src={`/images/brawlers/gears/${ITEM_ID}.webp`}
-                                                                     alt={ITEM_ID}/>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                )
-                                            }
-                                        </div>
-                                    }
-                                    {
-                                        brawlerGraphData[0].data.length !== 0 && <Line
+                                        brawlerGraphData[0].data.length > 1 && <Line
                                             data={brawlerGraphData}
-                                            width={250}
-                                            height={200}
-                                            margin={{top: 50, right: 110, bottom: 50, left: 60}}
-                                            xScale={{type: 'point'}}
+                                            width={360}
+                                            height={280}
+                                            margin={{top: 20, right: 30, bottom: 48, left: 50}}
+                                            yFormat=" >-.0f"
+                                            xScale={{type: "point"}}
                                             yScale={{
-                                                type: 'linear',
-                                                min: 0,
-                                                max: 100,
+                                                type: "linear",
+                                                min: brawlerData.map(item => item.y).reduce((a, b) => {
+                                                    return Math.min(a, b);
+                                                }) - 40,
+                                                max: brawlerData.map(item => item.y).reduce((a, b) => {
+                                                    return Math.max(a, b);
+                                                }) + 40,
                                                 stacked: true,
                                                 reverse: false
                                             }}
-                                            yFormat=" >-.2f"
                                             axisTop={null}
                                             axisRight={null}
                                             axisBottom={{
                                                 tickSize: 5,
                                                 tickPadding: 5,
                                                 tickRotation: 0,
-                                                legend: 'transportation',
+                                                legend: "Date",
                                                 legendOffset: 36,
-                                                legendPosition: 'middle'
+                                                legendPosition: "middle"
                                             }}
                                             axisLeft={{
                                                 tickSize: 5,
                                                 tickPadding: 5,
                                                 tickRotation: 0,
-                                                legend: 'count',
-                                                legendOffset: -40,
-                                                legendPosition: 'middle'
+                                                legendOffset: -44,
+                                                legendPosition: "middle"
                                             }}
-                                            pointSize={10}
-                                            pointColor={{theme: 'background'}}
+                                            colors={{scheme: "category10"}}
+                                            enableArea={true}
+                                            areaBaselineValue={brawlerData.map(item => item.y).reduce((a, b) => {
+                                                return Math.min(a, b);
+                                            }) - 40}
+                                            pointSize={8}
+                                            pointColor={{from: "color"}}
                                             pointBorderWidth={2}
-                                            pointBorderColor={{from: 'serieColor'}}
+                                            pointBorderColor={{from: "serieColor"}}
                                             pointLabelYOffset={-12}
                                             useMesh={true}
                                             animate={false}></Line>
                                     }
                                 </div>
                             </div>
-                        )
+                        );
                     })
                 }
             </div>
         </div>
-    )
+    );
 };
 
 export default UserBrawlerList;

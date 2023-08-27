@@ -1,0 +1,106 @@
+.battleLogsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  gap: 10px;
+}
+
+.battleLogsTitle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2px;
+  background-color: #EAE7B1;
+  border: 2px solid #A8DE8E;
+  border-radius: 6px;
+  gap: 4px;
+}
+
+@media (min-width: 576px) {
+  .battleLogsTitle {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: start;
+  }
+}
+
+.battleLogsTitle > div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+}
+
+.battleLogsRecordGraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.battleLogsText {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 6px;
+  font-family: "Main Bold", serif;
+  font-size: 16px;
+  gap: 2px;
+}
+
+.battleLogsTitle text {
+  font-family: "Main Medium", serif !important;
+}
+
+.battleLogsBrawlers {
+  display: grid;
+  grid-template-columns: 12% 35% 17% 17% 17%;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
+  justify-items: start;
+  padding: 6px;
+  font-family: "Main Bold", serif;
+  font-size: 16px;
+}
+
+.battleLogsBrawlers > img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  object-position: center;
+  align-self: center;
+}
+
+.brawlerName {
+  font-size: 13px;
+}
+
+.brawlerGame {
+  font-family: "Main Medium", serif;
+  font-size: 12px;
+  color: #0B666A;
+}
+
+.battleLogsContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .battleLogsContent {
+    display: grid;
+    grid-template-columns: 49.5% 49.5%;
+    row-gap: 4px;
+  }
+}
+
+.battleLogsContent > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

@@ -13,7 +13,7 @@
 
 .menuList > ul {
   display: grid;
-  grid-template-columns: 30% 30% 30%;
+  grid-template-columns: 49.5% 49.5%;
   width: 100%;
   justify-content: space-between;
   list-style: none;
@@ -52,7 +52,7 @@
 .menuList > ul > li > label > div {
   display: flex;
   justify-content: center;
-  background-color: #CFFF8D;
+  background-color: #A8E890;
   border: none;
   border-radius: 6px;
   padding: 10px;
@@ -65,5 +65,5 @@
 }
 
 .menuList > ul > li > input:checked + label > div {
-  background-color: #A8E890;
+  background-color: #CFFF8D;
 }

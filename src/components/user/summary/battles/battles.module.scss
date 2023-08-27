@@ -4,7 +4,7 @@
   gap: 10px;
 }
 
-.battleTitle {
+.battlesTitle {
   font-family: "Main Bold", serif;
   font-size: 24px;
 }
@@ -16,6 +16,14 @@
   background-color: #EAE7B1;
   border: 2px solid #A8DE8E;
   border-radius: 6px;
+}
+
+.battleContentMenus {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  background-color: #A8DE8E;
+  padding: 4px;
 }
 
 .battleButton {

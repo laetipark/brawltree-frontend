@@ -1,30 +1,29 @@
-.battleStatsWrapper {
+.battleSummaryWrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.battleStatsWrapper > div {
+.battleSummaryWrapper > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   width: 100%;
   padding: 2px 0 2px 0;
 }
 
-.battleStatsWrapper > div text {
+.battleSummaryWrapper > div text {
   font-family: "Main Medium", serif !important;
 }
 
 @media (min-width: 576px) {
-  .battleStatsWrapper {
+  .battleSummaryWrapper {
     flex-direction: row;
     justify-content: center;
     gap: 0;
   }
 
-  .battleStatsWrapper > div {
+  .battleSummaryWrapper > div {
     width: 50%;
   }
 }

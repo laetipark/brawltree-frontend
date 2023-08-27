@@ -42,19 +42,6 @@ const UserMenu = () => {
                             </div>
                         </label>
                     </li>
-                    <li>
-                        <input className={styles.typeButton}
-                               type={"radio"}
-                               id={"battles"}
-                               name={"battles"}
-                               checked={menu === "battles"}
-                               onChange={handleRadioButton}/>
-                        <label htmlFor={"battles"}>
-                            <div>
-                                Team
-                            </div>
-                        </label>
-                    </li>
                 </ul>
             </div>
             {
