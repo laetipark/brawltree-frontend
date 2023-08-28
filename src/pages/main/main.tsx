@@ -1,6 +1,4 @@
-import {useState, useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
-import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 import {faHashtag} from "@fortawesome/free-solid-svg-icons";
 
@@ -20,7 +18,6 @@ const Main = () => {
             </div>
             <form className={styles.inputBox}
                   onSubmit={e => {
-                      console.log(e.type)
                       navigate(`./brawlian/${e.target[0].value.toUpperCase()}`);
                   }}>
                 <FontAwesomeIcon icon={faHashtag}/>

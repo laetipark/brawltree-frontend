@@ -84,10 +84,12 @@
   flex-direction: column;
 }
 
-.battleLogsDetailContent > div {
+.battleLogsDetailContent > a {
   display: grid;
-  grid-template-columns: 10% 40% 20%;
+  grid-template-columns: 10% 60% 30%;
   padding: 8px;
+  color: black;
+  text-decoration-line: none;
 }
 
 .matchBrawler {

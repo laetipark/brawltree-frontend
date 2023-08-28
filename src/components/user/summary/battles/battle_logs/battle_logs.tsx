@@ -98,84 +98,86 @@ const UserBattleLogs = ({id, type, mode}) => {
         });
     }, [id, type, mode]);
 
-    console.log(userBattles);
-
     return (
         <div className={styles.battleLogsWrapper}>
             <div className={styles.battleLogsTitle}>
                 <div className={styles.battleLogsRecordGraph}>
-                    <div className={styles.battleLogsText}>
-                        <span>{matchCount}전</span>
-                        <span style={{color: "#5AA469"}}>{victoryCount}승</span>
-                        <span style={{color: "#556FB5"}}>{drawCount}무</span>
-                        <span style={{color: "#D35D6E"}}>{defeatCount}패</span>
-                        <span>(최근 30게임)</span>
+                    <div>
+                        <div className={styles.battleLogsText}>
+                            <span>{matchCount}전</span>
+                            <span style={{color: "#5AA469"}}>{victoryCount}승</span>
+                            <span style={{color: "#556FB5"}}>{drawCount}무</span>
+                            <span style={{color: "#D35D6E"}}>{defeatCount}패</span>
+                            <span>(최근 30게임)</span>
+                        </div>
+                        <Pie data={battleData}
+                             width={280}
+                             height={120}
+                             margin={{top: 4, bottom: 4, right: 120}}
+                             startAngle={-180}
+                             endAngle={180}
+                             innerRadius={0.4}
+                             colors={{scheme: 'set1'}}
+                             enableArcLinkLabels={false}
+                             arcLabelsSkipAngle={10}
+                             isInteractive={false}
+                             animate={false}
+                             legends={[
+                                 {
+                                     anchor: 'right',
+                                     direction: 'column',
+                                     justify: false,
+                                     translateX: 120,
+                                     translateY: 0,
+                                     itemsSpacing: 10,
+                                     itemWidth: 120,
+                                     itemHeight: 8,
+                                     itemTextColor: '#111',
+                                     itemDirection: 'left-to-right',
+                                     itemOpacity: 1,
+                                     symbolSize: 12,
+                                     symbolShape: 'circle',
+                                 }
+                             ]}
+                        />
                     </div>
-                    <Pie data={battleData}
-                         width={280}
-                         height={120}
-                         margin={{top: 4, bottom: 4, right: 120}}
-                         startAngle={-180}
-                         endAngle={180}
-                         innerRadius={0.4}
-                         colors={{scheme: 'set1'}}
-                         enableArcLinkLabels={false}
-                         arcLabelsSkipAngle={10}
-                         isInteractive={false}
-                         animate={false}
-                         legends={[
-                             {
-                                 anchor: 'right',
-                                 direction: 'column',
-                                 justify: false,
-                                 translateX: 120,
-                                 translateY: 0,
-                                 itemsSpacing: 10,
-                                 itemWidth: 120,
-                                 itemHeight: 8,
-                                 itemTextColor: '#111',
-                                 itemDirection: 'left-to-right',
-                                 itemOpacity: 1,
-                                 symbolSize: 12,
-                                 symbolShape: 'circle',
-                             }
-                         ]}
-                    />
-                    <div className={styles.battleLogsText}>
-                        <span>사용한 브롤러 역할군</span>
+                    <div>
+                        <div className={styles.battleLogsText}>
+                            <span>사용한 브롤러 역할군</span>
+                        </div>
+                        <Pie data={brawlerData}
+                             width={280}
+                             height={120}
+                             margin={{top: 4, bottom: 4, right: 120}}
+                             valueFormat=" >-~%"
+                             sortByValue={true}
+                             innerRadius={0.4}
+                             colors={{scheme: 'set3'}}
+                             enableArcLinkLabels={false}
+                             arcLabelsSkipAngle={10}
+                             isInteractive={false}
+                             animate={false}
+                             legends={[
+                                 {
+                                     anchor: 'right',
+                                     direction: 'column',
+                                     justify: false,
+                                     translateX: 120,
+                                     translateY: 0,
+                                     itemsSpacing: 10,
+                                     itemWidth: 120,
+                                     itemHeight: 8,
+                                     itemTextColor: '#111',
+                                     itemDirection: 'left-to-right',
+                                     itemOpacity: 1,
+                                     symbolSize: 12,
+                                     symbolShape: 'circle',
+                                 }
+                             ]}
+                        />
                     </div>
-                    <Pie data={brawlerData}
-                         width={280}
-                         height={120}
-                         margin={{top: 4, bottom: 4, right: 120}}
-                         valueFormat=" >-~%"
-                         sortByValue={true}
-                         innerRadius={0.4}
-                         colors={{scheme: 'set3'}}
-                         enableArcLinkLabels={false}
-                         arcLabelsSkipAngle={10}
-                         isInteractive={false}
-                         animate={false}
-                         legends={[
-                             {
-                                 anchor: 'right',
-                                 direction: 'column',
-                                 justify: false,
-                                 translateX: 120,
-                                 translateY: 0,
-                                 itemsSpacing: 10,
-                                 itemWidth: 120,
-                                 itemHeight: 8,
-                                 itemTextColor: '#111',
-                                 itemDirection: 'left-to-right',
-                                 itemOpacity: 1,
-                                 symbolSize: 12,
-                                 symbolShape: 'circle',
-                             }
-                         ]}
-                    />
                 </div>
-                <div>
+                <div className={styles.battleLogsBrawlerRecord}>
                     <div className={styles.battleLogsText}>
                         <span>사용한 브롤러 전투 기록</span>
                     </div>
@@ -203,7 +205,8 @@ const UserBattleLogs = ({id, type, mode}) => {
                 {
                     userBattles.map(({BATTLE_INFO, BATTLE_PLAYERS}) => {
                         return (
-                            <BattleLog BATTLE_INFO={BATTLE_INFO}
+                            <BattleLog key={BATTLE_INFO.MATCH_DT}
+                                       BATTLE_INFO={BATTLE_INFO}
                                        BATTLE_PLAYERS={BATTLE_PLAYERS}/>
                         );
                     })

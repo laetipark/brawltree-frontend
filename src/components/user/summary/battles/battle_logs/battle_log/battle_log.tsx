@@ -1,8 +1,13 @@
+import React, {useContext, useState} from "react";
+import {Link} from "react-router-dom";
 import moment from "moment/moment";
-import styles from "./battle_log.module.scss";
+
+import UserContext from "~/context/user_context";
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp} from "@fortawesome/free-solid-svg-icons";
-import React, {useState} from "react";
+
+import styles from "./battle_log.module.scss";
 
 const matchResults = ["Victory", "Draw", "Defeat"];
 const matchResultColors = ["#9ED2BE", "#9EA1D4", "#FD8A8A"];
@@ -17,6 +22,9 @@ const typeArray = {
 const roman = ["I", "II", "III"];
 
 const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
+    const context = useContext(UserContext);
+    const {setUser, setRetryCount} = context
+
     const [isChecked, setIsChecked] = useState(false);
 
     const dateDiff = moment.duration(moment().diff(moment(BATTLE_INFO.MATCH_DT))).days();
@@ -36,8 +44,8 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
     };
 
     return (
-        <div key={BATTLE_INFO.MATCH_DT}>
-            <div key={BATTLE_INFO.MATCH_DT}>
+        <div>
+            <div>
                 <input className={styles.battleSummaryButton}
                        type={"checkbox"}
                        id={BATTLE_INFO.MATCH_DT}
@@ -100,7 +108,6 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                  style={{display: isChecked ? "flex" : "none"}}>
                 {
                     matchTeams.map((team: any[], index: number) => {
-
                         const teamMatchResult = BATTLE_INFO.MAP_MD_CD === 3 ?
                             (team.find(item => item.PLAYER_ID === BATTLE_INFO.USER_ID) !== undefined ?
                                 BATTLE_INFO.MATCH_RES + 1 :
@@ -108,27 +115,36 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                             matchTeams[index][0].MATCH_RES + 1;
 
                         return (
-                            <React.Fragment>
+                            <React.Fragment key={`${BATTLE_INFO.MATCH_DT}_${index}`}>
                                 <div className={styles.battleLogsDetailTitle}>
                                     {matchResults[teamMatchResult]}({BATTLE_INFO.MAP_MD_CD === 3 ? (index === 0 ? "블루" : "레드") : `${index + 1}등`})
                                 </div>
                                 <div className={styles.battleLogsDetailContent}
                                      style={{backgroundColor: matchResultColors[teamMatchResult]}}>
                                     {
-                                        team.map(player => {
+                                        team.map(({BRAWLER_ID, BRAWLER_PWR, BRAWLER_TRP, PLAYER_ID, PLAYER_NM, PLAYER_SP_BOOL}) => {
                                             return (
-                                                <div>
+                                                <Link key={`${BATTLE_INFO.MATCH_DT}_${index}_${PLAYER_ID}`}
+                                                      to={`/brawlian/${PLAYER_ID.replace("#", "")}`}
+                                                      onClick={() => {
+                                                          setUser({
+                                                              USER_ID: "", USER_NM: "", USER_PRFL: "",
+                                                              USER_LST_BT: undefined, USER_LST_CK: undefined,
+                                                              USER_CR: "", USER_CR_NM: "",
+                                                          });
+                                                          setRetryCount(0);
+                                                      }}>
                                                     <div>
                                                         <img className={styles.matchBrawler}
-                                                             src={`/images/brawlers/profile/${player.BRAWLER_ID}.webp`}
+                                                             src={`/images/brawlers/profile/${BRAWLER_ID}.webp`}
                                                              alt={"브롤러"}/>
                                                     </div>
                                                     <div>
                                                         <div className={styles.matchTitle}>
-                                                            {player.PLAYER_NM}
+                                                            {PLAYER_NM}
                                                         </div>
                                                         <div className={styles.matchSubTitle}>
-                                                            {player.PLAYER_SP_BOOL === 1 && (
+                                                            {PLAYER_SP_BOOL === 1 && (
                                                                 <React.Fragment>
                                                                     <img
                                                                         src={`/images/game/icon/logo_star.webp`}
@@ -140,29 +156,29 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                     </div>
                                                     <div>
                                                         <div className={styles.matchTitle}>
-                                                            POWER {player.BRAWLER_PWR}
+                                                            POWER {BRAWLER_PWR}
                                                         </div>
                                                         <div className={styles.matchSubTitle}>
                                                             {[2, 3].includes(BATTLE_INFO.MATCH_TYP) ?
                                                                 (
                                                                     <React.Fragment>
                                                                         <img
-                                                                            src={`/images/rank/power_league/${Math.floor(player.BRAWLER_TRP / 3)}.webp`}
-                                                                            alt={player.BRAWLER_TRP}/>
-                                                                        <span>{roman[(player.BRAWLER_TRP % 3)]}</span>
+                                                                            src={`/images/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
+                                                                            alt={BRAWLER_TRP}/>
+                                                                        <span>{roman[(BRAWLER_TRP % 3)]}</span>
                                                                     </React.Fragment>
                                                                 ) : (
                                                                     <React.Fragment>
                                                                         <img
                                                                             src={`/images/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
                                                                             alt={"게임모드"}/>
-                                                                        <span>{player.BRAWLER_TRP}</span>
+                                                                        <span>{BRAWLER_TRP}</span>
                                                                     </React.Fragment>
                                                                 )
                                                             }
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </Link>
                                             )
                                         })
                                     }

@@ -14,8 +14,10 @@ function App() {
         <React.Fragment>
             <Header/>
             <Routes>
-                <Route path="/" element={<Main/>}/>
-                <Route path="/brawlian/:id" element={<User/>}/>
+                <Route path="/"
+                       element={<Main/>}/>
+                <Route path="/brawlian/:id"
+                       element={<User/>}/>
             </Routes>
             <Footer/>
         </React.Fragment>

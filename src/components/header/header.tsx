@@ -33,27 +33,27 @@ const Header = () => {
                     <ul className={styles.menuList}
                         style={useMediaQuery({maxWidth: 768}) ? {display: `${isToggled ? "flex" : "none"}`} : {}}>
                         <li>
-                            <Link to="/"
+                            <Link to={"/"}
                                   onClick={() => setIsToggled(false)}>메인</Link>
                         </li>
                         <li>
-                            <Link to="/brawler"
+                            <Link to={"/brawler"}
                                   onClick={() => setIsToggled(false)}>브롤러</Link>
                         </li>
                         <li>
-                            <Link to="/rotation"
+                            <Link to={"/rotation"}
                                   onClick={() => setIsToggled(false)}>로테이션</Link>
                         </li>
                         <li>
-                            <Link to="/battle"
+                            <Link to={"/battle"}
                                   onClick={() => setIsToggled(false)}>게임 맵</Link>
                         </li>
                         <li>
-                            <Link to="/season"
+                            <Link to={"/season"}
                                   onClick={() => setIsToggled(false)}>통계</Link>
                         </li>
                         <li>
-                            <Link to="/season"
+                            <Link to={"/season"}
                                   onClick={() => setIsToggled(false)}>랭킹</Link>
                         </li>
                     </ul>

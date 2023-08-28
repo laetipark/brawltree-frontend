@@ -1,20 +1,23 @@
-import React from "react";
+import React, {useContext} from "react";
 import {CopyToClipboard} from "react-copy-to-clipboard";
+
+import UserContext from "~/context/user_context";
 
 import styles from "./title.module.scss";
 
-const UserTitle = ({user}) => {
-    const {USER_ID, USER_NM, USER_PRFL} = user;
+const UserTitle = () => {
+    const context = useContext(UserContext);
+    const {user} = context
 
     return (
         <div className={styles.titleWrapper}>
             <div className={styles.titleBox}>
                 <img className={styles.image}
-                     src={`/images/brawlian/profile/${USER_PRFL}.webp`}
+                     src={`/images/brawlian/profile/${user.USER_PRFL}.webp`}
                      alt={"프로필"}/>
                 <div>
-                    <div className={styles.realNameBox}>{`${USER_NM}`}</div>
-                    <p className={"tagBox"}>{USER_ID}</p>
+                    <div className={styles.realNameBox}>{`${user.USER_NM}`}</div>
+                    <p className={"tagBox"}>{user.USER_ID}</p>
                 </div>
             </div>
             <div className={styles.reloadBox}>
@@ -24,11 +27,11 @@ const UserTitle = ({user}) => {
                 1분 전
             </div>
             <div className={styles.copyBox}>
-                <CopyToClipboard text={USER_ID}
+                <CopyToClipboard text={user.USER_ID}
                                  onCopy={() => alert("태그를 복사했습니다.")}>
                     <span className={styles.copyButton}>태그 복사</span>
                 </CopyToClipboard>
-                <CopyToClipboard text={USER_ID}>
+                <CopyToClipboard text={user.USER_ID}>
                     <a className={styles.copyButton}
                        href={"brawlstars://"}>
                         태그 복사 + 게임 실행
