@@ -13,7 +13,7 @@ const UserTitle = () => {
         <div className={styles.titleWrapper}>
             <div className={styles.titleBox}>
                 <img className={styles.image}
-                     src={`/images/brawlian/profile/${user.USER_PRFL}.webp`}
+                     src={`https://cdn.brawltree.me/brawlian/profile/${user.USER_PRFL}.webp`}
                      alt={"프로필"}/>
                 <div>
                     <div className={styles.realNameBox}>{`${user.USER_NM}`}</div>

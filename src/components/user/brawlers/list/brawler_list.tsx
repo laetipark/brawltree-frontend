@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
 import axios from "axios";
+import React, {useState, useEffect} from "react";
 
 import BrawlerSummary from "~/components/user/brawlers/list/brawler_summary/brawler_summary";
 import BrawlerDetail from "~/components/user/brawlers/list/brawler_detail/brawler_detail";

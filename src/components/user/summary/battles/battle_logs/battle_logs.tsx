@@ -184,7 +184,7 @@ const UserBattleLogs = ({id, type, mode}) => {
                     {userRecentBrawlers.map(({BRAWLER_ID, BRAWLER_NM, MATCH_CNT_TOT, MATCH_CNT_RES}) => (
                         <div key={BRAWLER_ID}
                              className={styles.battleLogsBrawlers}>
-                            <img src={`/images/brawlers/pin/${BRAWLER_ID}.webp`}
+                            <img src={`https://cdn.brawltree.me/brawlers/pins/${BRAWLER_ID}.webp`}
                                  alt={"브롤러"}/>
                             <div>
                                 <div className={styles.brawlerName}>

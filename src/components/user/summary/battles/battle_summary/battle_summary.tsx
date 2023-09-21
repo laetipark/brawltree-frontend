@@ -11,8 +11,8 @@ const UserBattleSummary = ({userBattles, userBrawlers, season}) => {
                     userBattles[0] &&
                     <TimeRange
                         data={userBattles[0]}
-                        from={season.SEASON_BGN_DT?.slice(0, 10) || "1998-02-05"}
-                        to={season.SEASON_END_DT?.slice(0, 10) || "1998-02-05"}
+                        from={season.SEASON_BGN_DT?.slice(0, 10) || "2023-09-09"}
+                        to={season.SEASON_END_DT?.slice(0, 10) || "2023-09-09"}
                         width={320}
                         height={200}
                         emptyColor={"#DDDDDD"}
@@ -48,7 +48,7 @@ const UserBattleSummary = ({userBattles, userBrawlers, season}) => {
                         userBrawlers.map(({BRAWLER_ID, BRAWLER_NM, MATCH_CNT, MATCH_PCK_R, MATCH_VIC_R}) => {
                             return (
                                 <div key={BRAWLER_ID}>
-                                    <img src={`/images/brawlers/pin/${BRAWLER_ID}.webp`}
+                                    <img src={`https://cdn.brawltree.me/brawlers/pins/${BRAWLER_ID}.webp`}
                                          alt={'브롤러 프로필'}/>
                                     <div className={styles.brawlerPicksContent}>
                                         <div>

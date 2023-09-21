@@ -59,12 +59,12 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                        }}>
                     <div className={styles.matchInfo}>
                         <img className={styles.brawlerImage}
-                             src={`/images/brawlers/profile/${BATTLE_INFO.BRAWLER_ID}.webp`}
+                             src={`https://cdn.brawltree.me/brawlers/profiles/${BATTLE_INFO.BRAWLER_ID}.webp`}
                              alt={"브롤러"}/>
                         <div className={styles.gameModeImage}>
-                            <img src={`/images/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
+                            <img src={`https://cdn.brawltree.me/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
                                  alt={"게임모드"}/>
-                            <img src={`/images/modes/icon/${BATTLE_INFO.MAP_MD}.webp`}
+                            <img src={`https://cdn.brawltree.me/modes/icon/${BATTLE_INFO.MAP_MD}.webp`}
                                  alt={"게임모드"}/>
                         </div>
                         <div>
@@ -136,7 +136,7 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                       }}>
                                                     <div>
                                                         <img className={styles.matchBrawler}
-                                                             src={`/images/brawlers/profile/${BRAWLER_ID}.webp`}
+                                                             src={`https://cdn.brawltree.me/brawlers/profiles/${BRAWLER_ID}.webp`}
                                                              alt={"브롤러"}/>
                                                     </div>
                                                     <div>
@@ -147,7 +147,7 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                             {PLAYER_SP_BOOL === 1 && (
                                                                 <React.Fragment>
                                                                     <img
-                                                                        src={`/images/game/icon/logo_star.webp`}
+                                                                        src={`https://cdn.brawltree.me/game/icon/logo_star.webp`}
                                                                         alt={"게임모드"}/>
                                                                     <span>Star Player</span>
                                                                 </React.Fragment>
@@ -163,14 +163,14 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                                 (
                                                                     <React.Fragment>
                                                                         <img
-                                                                            src={`/images/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
+                                                                            src={`https://cdn.brawltree.me/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
                                                                             alt={BRAWLER_TRP}/>
                                                                         <span>{roman[(BRAWLER_TRP % 3)]}</span>
                                                                     </React.Fragment>
                                                                 ) : (
                                                                     <React.Fragment>
                                                                         <img
-                                                                            src={`/images/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
+                                                                            src={`https://cdn.brawltree.me/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
                                                                             alt={"게임모드"}/>
                                                                         <span>{BRAWLER_TRP}</span>
                                                                     </React.Fragment>

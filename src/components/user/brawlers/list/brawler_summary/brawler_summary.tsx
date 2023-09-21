@@ -20,11 +20,11 @@ const BrawlerSummary = ({
                    onChange={(e) => checkHandler(e, BRAWLER_ID)}/>
             <label htmlFor={`brawler_${BRAWLER_ID}`}
                    className={styles.brawlerSummary}>
-                <img src={`/images/brawlers/profile/${BRAWLER_ID}.webp`}
+                <img src={`https://cdn.brawltree.me/brawlers/profiles/${BRAWLER_ID}.webp`}
                      alt={BRAWLER_ID}/>
                 <h4>{BRAWLER_NM}</h4>
                 <div>
-                    <img src={`/images/modes/icon/trophyLeague.webp`}
+                    <img src={`https://cdn.brawltree.me/modes/icon/trophyLeague.webp`}
                          alt={"브롤러"}/>
                     <div className={styles.brawlerTrophy}>
                         <div>현재</div>

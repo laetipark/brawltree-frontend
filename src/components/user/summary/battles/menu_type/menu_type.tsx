@@ -27,7 +27,7 @@ const MenuType = ({type, setMatchType}) => {
                     onClick={() => {
                         setChecked(!checked)
                     }}>
-                <img src={`/images/modes/icon/${image[type]}.webp`}
+                <img src={`https://cdn.brawltree.me/modes/icon/${image[type]}.webp`}
                      alt={"type_7"}
                 />
                 <div>{content[type]}</div>
@@ -45,7 +45,7 @@ const MenuType = ({type, setMatchType}) => {
                            setChecked(!checked);
                        }}/>
                 <label htmlFor={"type_7"}>
-                    <img src={`/images/modes/icon/all.webp`}
+                    <img src={`https://cdn.brawltree.me/modes/icon/all.webp`}
                          alt={"type_7"}
                     />
                     <div>ALL</div>
@@ -61,7 +61,7 @@ const MenuType = ({type, setMatchType}) => {
                            setChecked(!checked);
                        }}/>
                 <label htmlFor={"type_0"}>
-                    <img src={`/images/modes/icon/trophyLeague.webp`}
+                    <img src={`https://cdn.brawltree.me/modes/icon/trophyLeague.webp`}
                          alt={"type_0"}
                     />
                     <div>트로피 리그</div>
@@ -77,7 +77,7 @@ const MenuType = ({type, setMatchType}) => {
                            setChecked(!checked);
                        }}/>
                 <label htmlFor={"type_2"}>
-                    <img src={`/images/modes/icon/powerLeagueSolo.webp`}
+                    <img src={`https://cdn.brawltree.me/modes/icon/powerLeagueSolo.webp`}
                          alt={"type_2"}
                     />
                     <div>파워 리그(솔로)</div>
@@ -93,7 +93,7 @@ const MenuType = ({type, setMatchType}) => {
                            setChecked(!checked);
                        }}/>
                 <label htmlFor={"type_3"}>
-                    <img src={`/images/modes/icon/powerLeagueTeam.webp`}
+                    <img src={`https://cdn.brawltree.me/modes/icon/powerLeagueTeam.webp`}
                          alt={"type_3"}
                     />
                     <div>파워 리그(팀)</div>

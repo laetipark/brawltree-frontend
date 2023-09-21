@@ -1,10 +1,11 @@
-import {useEffect, useState} from "react";
 import axios from "axios";
+import {useEffect, useState} from "react";
 
 import TableHorizontal from "~/components/table/horizontal/table";
 
 import config from "~/config/config";
-import styled from "./record.module.scss";
+
+import styles from "./record.module.scss";
 
 const roman = ["I", "II", "III"];
 
@@ -24,7 +25,7 @@ const UserRecord = ({id}) => {
     }, [id]);
 
     return (
-        <div className={styled.recordWrapper}>
+        <div className={styles.recordWrapper}>
             <TableHorizontal
                 headRow={"현재 기록"}
                 bodyRowContents={[
@@ -37,8 +38,8 @@ const UserRecord = ({id}) => {
                 bodyRowImages={[
                     [null, null],
                     [null, null],
-                    [null, `/images/rank/power_league/${Math.floor(userProfile.PL_SL_CUR / 3)}.webp`],
-                    [null, `/images/rank/power_league/${Math.floor(userProfile.PL_TM_CUR / 3)}.webp`],
+                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_SL_CUR / 3)}.webp`],
+                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_TM_CUR / 3)}.webp`],
                     [null, null]
                 ]}
             />
@@ -61,8 +62,8 @@ const UserRecord = ({id}) => {
                     [null, null],
                     [null, null],
                     [null, null],
-                    [null, `/images/rank/power_league/${Math.floor(userProfile.PL_SL_HGH / 3)}.webp`],
-                    [null, `/images/rank/power_league/${Math.floor(userProfile.PL_TM_HGH / 3)}.webp`]
+                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_SL_HGH / 3)}.webp`],
+                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_TM_HGH / 3)}.webp`]
                 ]}
             />
         </div>
