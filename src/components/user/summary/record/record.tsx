@@ -38,8 +38,8 @@ const UserRecord = ({id}) => {
                 bodyRowImages={[
                     [null, null],
                     [null, null],
-                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_SL_CUR / 3)}.webp`],
-                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_TM_CUR / 3)}.webp`],
+                    [null, `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_SL_CUR / 3)}.webp`],
+                    [null, `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_TM_CUR / 3)}.webp`],
                     [null, null]
                 ]}
             />
@@ -62,8 +62,8 @@ const UserRecord = ({id}) => {
                     [null, null],
                     [null, null],
                     [null, null],
-                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_SL_HGH / 3)}.webp`],
-                    [null, `https://cdn.brawltree.me/rank/power_league/${Math.floor(userProfile.PL_TM_HGH / 3)}.webp`]
+                    [null, `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_SL_HGH / 3)}.webp`],
+                    [null, `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_TM_HGH / 3)}.webp`]
                 ]}
             />
         </div>

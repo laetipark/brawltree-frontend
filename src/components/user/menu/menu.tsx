@@ -8,8 +8,8 @@ import styles from "./menu.module.scss";
 const UserMenu = () => {
     const [menu, setMenu] = useState("summary");
 
-    const handleRadioButton = (e) => {
-        setMenu(e.target.name);
+    const handleRadioButton = ({target}) => {
+        setMenu(target.name);
     };
 
     return (

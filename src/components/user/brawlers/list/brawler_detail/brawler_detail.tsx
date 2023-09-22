@@ -1,5 +1,7 @@
 import ItemTooltip from "~/components/items/item_info/item_info";
 
+import config from "~/config/config";
+
 import styles from "./brawler_detail.module.scss";
 
 const BrawlerDetail = ({
@@ -21,32 +23,32 @@ const BrawlerDetail = ({
     return (
         <div className={styles.brawlerDetailInfo}>
             <div>
-                <img src={`https://cdn.brawltree.me/brawlers/profiles/${BRAWLER_ID}.webp`}
+                <img src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
                      alt={"브롤러"}/>
                 <div>
                     <img className={styles.brawlerModeImage}
-                         src={`https://cdn.brawltree.me/modes/icon/trophyLeague.webp`}
+                         src={`${config.assets}/modes/icon/trophyLeague.webp`}
                          alt={"브롤러"}/>
                     <span>Pick</span>
                     <span>{MATCH_PCK_R_TL}%</span>
                 </div>
                 <div>
                     <img className={styles.brawlerModeImage}
-                         src={`https://cdn.brawltree.me/modes/icon/trophyLeague.webp`}
+                         src={`${config.assets}/modes/icon/trophyLeague.webp`}
                          alt={"브롤러"}/>
                     <span>Win</span>
                     <span>{MATCH_VIC_R_TL}%</span>
                 </div>
                 <div>
                     <img className={styles.brawlerModeImage}
-                         src={`https://cdn.brawltree.me/modes/icon/powerLeague.webp`}
+                         src={`${config.assets}/modes/icon/powerLeague.webp`}
                          alt={"브롤러"}/>
                     <span>Pick</span>
                     <span>{MATCH_PCK_R_PL}%</span>
                 </div>
                 <div>
                     <img className={styles.brawlerModeImage}
-                         src={`https://cdn.brawltree.me/modes/icon/powerLeague.webp`}
+                         src={`${config.assets}/modes/icon/powerLeague.webp`}
                          alt={"브롤러"}/>
                     <span>Win</span>
                     <span>{MATCH_VIC_R_PL}%</span>
@@ -55,7 +57,7 @@ const BrawlerDetail = ({
             <div>
                 <div>
                     <img className={styles.brawlerRankImage}
-                         src={`https://cdn.brawltree.me/rank/trophy_league/${TROPHY_RNK}.webp`}
+                         src={`${config.assets}/rank/trophy_league/${TROPHY_RNK}.webp`}
                          alt={"브롤러"}/>
                     <span className={styles.brawlerName}>{BRAWLER_NM}</span>
                 </div>

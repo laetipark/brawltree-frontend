@@ -1,7 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Routes, Route} from "react-router-dom";
-
-import './index.css';
 
 import Header from "~/components/header/header";
 import Footer from "~/components/footer/footer";
@@ -9,7 +7,14 @@ import Footer from "~/components/footer/footer";
 import Main from "~/pages/main/main";
 import User from "~/pages/user/user";
 
-function App() {
+const App = () => {
+    useEffect(() => {
+        const ws = new WebSocket("wss://brawltree.me/ws");
+        ws.onopen = () => {
+            console.log("connected!!");
+        };
+    }, []);
+
     return (
         <React.Fragment>
             <Header/>
@@ -22,6 +27,6 @@ function App() {
             <Footer/>
         </React.Fragment>
     );
-}
+};
 
 export default App;

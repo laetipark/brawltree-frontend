@@ -3,6 +3,8 @@ import {CopyToClipboard} from "react-copy-to-clipboard";
 
 import UserContext from "~/context/user_context";
 
+import config from "~/config/config";
+
 import styles from "./title.module.scss";
 
 const UserTitle = () => {
@@ -13,7 +15,7 @@ const UserTitle = () => {
         <div className={styles.titleWrapper}>
             <div className={styles.titleBox}>
                 <img className={styles.image}
-                     src={`https://cdn.brawltree.me/brawlian/profile/${user.USER_PRFL}.webp`}
+                     src={`${config.assets}/brawlian/profile/${user.USER_PRFL}.webp`}
                      alt={"프로필"}/>
                 <div>
                     <div className={styles.realNameBox}>{`${user.USER_NM}`}</div>

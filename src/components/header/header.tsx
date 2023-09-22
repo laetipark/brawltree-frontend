@@ -15,14 +15,14 @@ const Header = () => {
             <div className={styles.titleWrapper}>
                 <Link to="/"
                       onClick={() => setIsToggled(false)}>
-                    <img src={require(`../../images/logo/logo_horizontal.png`)}
+                    <img src={"/images/logo/logo_horizontal.png"}
                          alt={"Blossom Logo"}/>
                 </Link>
             </div>
             <div className={styles.menuWrapper}>
                 <div>
                     <img className={styles.menuLogo}
-                         src={require(`../../images/logo/logo192.png`)}
+                         src={"/images/logo/logo192.png"}
                          alt={"Blossom Logo"}/>
                     <div className={styles.menuToggle}
                          onClick={() => {

@@ -1,6 +1,8 @@
 import React, {useRef} from "react";
 import useWindowClick from "~/hooks/use_window_click";
 
+import config from "~/config/config";
+
 import styles from "./menu_mode.module.scss";
 
 const TypeMode = ({mode, setMatchMode, type, rotationTL, rotationPL}) => {
@@ -24,7 +26,7 @@ const TypeMode = ({mode, setMatchMode, type, rotationTL, rotationPL}) => {
                     onClick={() => {
                         setChecked(!checked)
                     }}>
-                <img src={`https://cdn.brawltree.me/modes/icon/${mode}.webp`}
+                <img src={`${config.assets}/modes/icon/${mode}.webp`}
                      alt={mode}
                 />
                 <div>{modeKR[mode]}</div>
@@ -46,7 +48,7 @@ const TypeMode = ({mode, setMatchMode, type, rotationTL, rotationPL}) => {
                                            setChecked(!checked);
                                        }}/>
                                 <label htmlFor={modeName}>
-                                    <img src={`https://cdn.brawltree.me/modes/icon/${modeName}.webp`}
+                                    <img src={`${config.assets}/modes/icon/${modeName}.webp`}
                                          alt={modeName}
                                     />
                                     <div>{modeKR[modeName]}</div>
@@ -65,7 +67,7 @@ const TypeMode = ({mode, setMatchMode, type, rotationTL, rotationPL}) => {
                                        setChecked(!checked);
                                    }}/>
                             <label htmlFor={modeName}>
-                                <img src={`https://cdn.brawltree.me/modes/icon/${modeName}.webp`}
+                                <img src={`${config.assets}/modes/icon/${modeName}.webp`}
                                      alt={modeName}
                                 />
                                 <div>{modeKR[modeName]}</div>

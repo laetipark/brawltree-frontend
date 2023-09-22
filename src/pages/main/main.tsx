@@ -12,7 +12,8 @@ const Main = () => {
         <div className={styles.app}>
             <div className={styles.titleBox}>
                 <div>
-                    <img src={require("../../images/logo/logo192.png")} alt={"brawlies"}/>
+                    <img src={"/images/logo/logo192.png"}
+                         alt={"brawlies"}/>
                     <div>Brawl Tree</div>
                 </div>
             </div>

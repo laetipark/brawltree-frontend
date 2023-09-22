@@ -1,6 +1,8 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp} from "@fortawesome/free-solid-svg-icons";
 
+import config from "~/config/config";
+
 import styles from "./brawler_summary.module.scss";
 
 const BrawlerSummary = ({
@@ -20,11 +22,11 @@ const BrawlerSummary = ({
                    onChange={(e) => checkHandler(e, BRAWLER_ID)}/>
             <label htmlFor={`brawler_${BRAWLER_ID}`}
                    className={styles.brawlerSummary}>
-                <img src={`https://cdn.brawltree.me/brawlers/profiles/${BRAWLER_ID}.webp`}
+                <img src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
                      alt={BRAWLER_ID}/>
                 <h4>{BRAWLER_NM}</h4>
                 <div>
-                    <img src={`https://cdn.brawltree.me/modes/icon/trophyLeague.webp`}
+                    <img src={`${config.assets}/modes/icon/trophyLeague.webp`}
                          alt={"브롤러"}/>
                     <div className={styles.brawlerTrophy}>
                         <div>현재</div>

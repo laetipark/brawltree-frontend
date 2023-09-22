@@ -25,7 +25,7 @@ const User = () => {
     const [user, setUser] =
         useState<User>({
             USER_ID: "", USER_NM: "", USER_PRFL: "",
-            USER_LST_BT: undefined, USER_LST_CK: undefined,
+            USER_LST_BT: new Date(0), USER_LST_CK:  new Date(0),
             USER_CR: "", USER_CR_NM: "",
         });
     const [retryCount, setRetryCount] = useState(0);

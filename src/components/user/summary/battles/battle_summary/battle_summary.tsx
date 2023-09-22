@@ -1,4 +1,7 @@
 import {TimeRange} from "@nivo/calendar";
+
+import config from "~/config/config";
+
 import styles from "./battle_summary.module.scss";
 
 const UserBattleSummary = ({userBattles, userBrawlers, season}) => {
@@ -26,7 +29,7 @@ const UserBattleSummary = ({userBattles, userBrawlers, season}) => {
                         dayBorderWidth={2}
                         dayBorderColor={"#EEEEEE"}
                         tooltip={n => {
-                            const matchChange = userBattles[1].find(battle => battle.day === n.day).value;
+                            const matchChange = userBattles[1].find(({day}) => day === n.day).value;
                             return (
                                 <div className={styles.calendarLegend}>
                                     <span>
@@ -48,7 +51,7 @@ const UserBattleSummary = ({userBattles, userBrawlers, season}) => {
                         userBrawlers.map(({BRAWLER_ID, BRAWLER_NM, MATCH_CNT, MATCH_PCK_R, MATCH_VIC_R}) => {
                             return (
                                 <div key={BRAWLER_ID}>
-                                    <img src={`https://cdn.brawltree.me/brawlers/pins/${BRAWLER_ID}.webp`}
+                                    <img src={`${config.assets}/brawlers/pins/${BRAWLER_ID}.webp`}
                                          alt={'브롤러 프로필'}/>
                                     <div className={styles.brawlerPicksContent}>
                                         <div>

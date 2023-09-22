@@ -1,26 +1,50 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "types": [
+      "vite/client",
+      "vite-plugin-svgr/client"
+    ],
     "module": "esnext",
     "allowJs": true,
     "outDir": "./dist",
     "noEmitOnError": true,
     "moduleResolution": "node",
     "incremental": true,
-    "lib": [
-      "ES2015",
-      "DOM",
-      "DOM.Iterable"
-    ],
     "jsx": "react-jsx",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "~/config/*": [
+        "./src/config/*"
+      ],
+      "~/images/*": [
+        "./src/images/*"
+      ],
+      "~/pages/*": [
+        "./src/pages/*"
+      ],
+      "~/components/*": [
+        "./src/components/*"
+      ],
+      "~/context/*": [
+        "./src/context/*"
+      ],
+      "~/hooks/*": [
+        "./src/hooks/*"
+      ]
+    }
   },
   "include": [
-    "./"
+    "src"
   ],
-  "exclude": [
-    "node_modules",
-    "**/*.test.ts"
-  ],
-  "extends": "./tsconfig.paths.json"
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

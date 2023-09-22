@@ -7,6 +7,8 @@ import UserContext from "~/context/user_context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp} from "@fortawesome/free-solid-svg-icons";
 
+import config from "~/config/config";
+
 import styles from "./battle_log.module.scss";
 
 const matchResults = ["Victory", "Draw", "Defeat"];
@@ -59,12 +61,12 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                        }}>
                     <div className={styles.matchInfo}>
                         <img className={styles.brawlerImage}
-                             src={`https://cdn.brawltree.me/brawlers/profiles/${BATTLE_INFO.BRAWLER_ID}.webp`}
+                             src={`${config.assets}/brawlers/profiles/${BATTLE_INFO.BRAWLER_ID}.webp`}
                              alt={"브롤러"}/>
                         <div className={styles.gameModeImage}>
-                            <img src={`https://cdn.brawltree.me/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
+                            <img src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
                                  alt={"게임모드"}/>
-                            <img src={`https://cdn.brawltree.me/modes/icon/${BATTLE_INFO.MAP_MD}.webp`}
+                            <img src={`${config.assets}/modes/icon/${BATTLE_INFO.MAP_MD}.webp`}
                                  alt={"게임모드"}/>
                         </div>
                         <div>
@@ -136,7 +138,7 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                       }}>
                                                     <div>
                                                         <img className={styles.matchBrawler}
-                                                             src={`https://cdn.brawltree.me/brawlers/profiles/${BRAWLER_ID}.webp`}
+                                                             src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
                                                              alt={"브롤러"}/>
                                                     </div>
                                                     <div>
@@ -147,7 +149,7 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                             {PLAYER_SP_BOOL === 1 && (
                                                                 <React.Fragment>
                                                                     <img
-                                                                        src={`https://cdn.brawltree.me/game/icon/logo_star.webp`}
+                                                                        src={`${config.assets}/game/icon/logo_star.webp`}
                                                                         alt={"게임모드"}/>
                                                                     <span>Star Player</span>
                                                                 </React.Fragment>
@@ -163,14 +165,14 @@ const BattleLog = ({BATTLE_INFO, BATTLE_PLAYERS}) => {
                                                                 (
                                                                     <React.Fragment>
                                                                         <img
-                                                                            src={`https://cdn.brawltree.me/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
+                                                                            src={`${config.assets}/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
                                                                             alt={BRAWLER_TRP}/>
                                                                         <span>{roman[(BRAWLER_TRP % 3)]}</span>
                                                                     </React.Fragment>
                                                                 ) : (
                                                                     <React.Fragment>
                                                                         <img
-                                                                            src={`https://cdn.brawltree.me/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
+                                                                            src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
                                                                             alt={"게임모드"}/>
                                                                         <span>{BRAWLER_TRP}</span>
                                                                     </React.Fragment>
