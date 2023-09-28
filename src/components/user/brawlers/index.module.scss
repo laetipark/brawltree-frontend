@@ -1,4 +1,4 @@
-.app {
+.brawlersWrapper {
   display: flex;
   flex-direction: column;
   width: calc(100% - 20px);
@@ -6,21 +6,21 @@
 }
 
 @media (min-width: 576px) {
-  .app {
+  .brawlersWrapper {
     max-width: 536px;
     margin: 0 auto;
   }
 }
 
 @media (min-width: 768px) {
-  .app {
+  .brawlersWrapper {
     max-width: 728px;
     margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
-  .app {
+  .brawlersWrapper {
     max-width: 924px;
     margin: 0 auto;
   }

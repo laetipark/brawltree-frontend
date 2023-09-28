@@ -49,11 +49,11 @@ const Header = () => {
                                   onClick={() => setIsToggled(false)}>게임 맵</Link>
                         </li>
                         <li>
-                            <Link to={"/season"}
+                            <Link to={"/seasons"}
                                   onClick={() => setIsToggled(false)}>통계</Link>
                         </li>
                         <li>
-                            <Link to={"/season"}
+                            <Link to={"/seasons"}
                                   onClick={() => setIsToggled(false)}>랭킹</Link>
                         </li>
                     </ul>

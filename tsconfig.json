@@ -22,9 +22,6 @@
       "~/config/*": [
         "./src/config/*"
       ],
-      "~/images/*": [
-        "./src/images/*"
-      ],
       "~/pages/*": [
         "./src/pages/*"
       ],

@@ -14,9 +14,11 @@ const UserTitle = () => {
     return (
         <div className={styles.titleWrapper}>
             <div className={styles.titleBox}>
-                <img className={styles.image}
-                     src={`${config.assets}/brawlian/profile/${user.USER_PRFL}.webp`}
-                     alt={"프로필"}/>
+                {user.USER_PRFL !== "" &&
+                    <img className={styles.image}
+                         src={`${config.assets}/brawlian/profile/${user.USER_PRFL}.webp`}
+                         alt={user.USER_PRFL}/>
+                }
                 <div>
                     <div className={styles.realNameBox}>{`${user.USER_NM}`}</div>
                     <p className={"tagBox"}>{user.USER_ID}</p>
