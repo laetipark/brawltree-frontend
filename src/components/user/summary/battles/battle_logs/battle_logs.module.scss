@@ -32,6 +32,7 @@
     align-items: start;
   }
 }
+
 .battleLogsRecordGraph {
   display: flex;
   flex-direction: column;
@@ -43,7 +44,7 @@
 .battleLogsBrawlerRecord {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .battleLogsText {

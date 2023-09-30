@@ -7,8 +7,6 @@ import styles from './battle_summary.module.scss';
 const UserBattleSummary = ({ userBattles, userBrawlers, season }) => {
   const colors = ['#9DC08B', '#609966', '#557153', '#40513B'];
 
-  console.log(userBrawlers)
-
   return (
     <div className={styles.battleSummaryWrapper}>
       <div>
@@ -34,12 +32,12 @@ const UserBattleSummary = ({ userBattles, userBrawlers, season }) => {
               const matchChange = userBattles[1].find(({ day }) => day === n.day).value;
               return (
                 <div className={styles.calendarLegend}>
-                                    <span>
-                                        {n.value} battles({matchChange > 0 ? `+${matchChange}` : matchChange})
-                                    </span>
+                  <span>
+                      {n.value} battles({matchChange > 0 ? `+${matchChange}` : `${matchChange || 0}`})
+                  </span>
                   <span className={styles.battleDate}>
-                                        on {n.day}
-                                    </span>
+                      on {n.day}
+                  </span>
                 </div>
               );
             }}

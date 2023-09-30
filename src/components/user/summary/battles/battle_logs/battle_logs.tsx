@@ -99,6 +99,7 @@ const UserBattleLogs = ({ id, type, mode }) => {
   }, [id, type, mode]);
 
   return (
+    (userRecentBattles?.length || 0) > 0 &&
     <div className={styles.battleLogsWrapper}>
       <div className={styles.battleLogsTitle}>
         <div className={styles.battleLogsRecordGraph}>

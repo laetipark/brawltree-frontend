@@ -34,7 +34,7 @@ const TypeMode = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
       <div className={styles.typeMenuList}
            style={{ display: checked ? 'flex' : 'none' }}>
         {
-          type === 0 || type === 7 ? (
+          type === '0' || type === '7' ? (
             rotationTL?.map((modeName: string) => (
               <React.Fragment key={`${modeName}`}>
                 <input className={styles.typeButton}

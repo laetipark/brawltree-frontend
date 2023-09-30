@@ -10,7 +10,7 @@ import UserContext from '~/context/user_context';
 import config from '~/config/config';
 import styles from './user.module.scss';
 
-type User = {
+type UserEntity = {
   USER_ID: string;
   USER_NM: string;
   USER_PRFL: string;
@@ -23,7 +23,7 @@ type User = {
 const User = () => {
   const { id } = useParams();
   const [user, setUser] =
-    useState<User>({
+    useState<UserEntity>({
       USER_ID: '', USER_NM: '', USER_PRFL: '',
       USER_LST_BT: new Date(0), USER_LST_CK: new Date(0),
       USER_CR: '', USER_CR_NM: '',
@@ -40,7 +40,7 @@ const User = () => {
             setRetryCount(retryCount + 1);
           }
         });
-    } else if (retryCount < 3 && !user.USER_LST_CK) {
+    } else if (retryCount < 3 && !(new Date(user.USER_LST_CK).getTime() > 0)) {
       const timer = setTimeout(() => {
         axios.get(`${config.url}/brawlian/${id}`)
           .then(async (result) => {
@@ -58,10 +58,12 @@ const User = () => {
     } else {
 
     }
-  }, [id, retryCount]);
+  }, [id, retryCount, user.USER_LST_CK]);
+
+  console.log(user.USER_LST_CK)
 
   return (
-    user.USER_LST_CK &&
+    (new Date(user.USER_LST_CK).getTime() > 0) &&
     <UserContext.Provider value={{ user, setUser, setRetryCount }}>
       <div className={styles.app}>
         <UserTitle />

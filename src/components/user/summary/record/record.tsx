@@ -15,6 +15,7 @@ const UserRecord = ({ id }) => {
     VICTORY_TRP: 0, VICTORY_DUO: 0,
     BRAWLER_RNK_25: 0, BRAWLER_RNK_30: 0, BRAWLER_RNK_35: 0,
     PL_SL_CUR: 0, PL_SL_HGH: 0, PL_TM_CUR: 0, PL_TM_HGH: 0,
+    CLUB_ID: '', CLUB_NM: '',
   });
 
   useEffect(() => {
@@ -30,10 +31,10 @@ const UserRecord = ({ id }) => {
         headRow={'현재 기록'}
         bodyRowContents={[
           ['현재 트로피', `${userProfile.TROPHY_CUR}개`],
-          ['트로피 변화량', userProfile.TROPHY_CHG > 0 ? `+${userProfile.TROPHY_CHG}` : userProfile.TROPHY_CHG],
+          ['트로피 변화량', userProfile.TROPHY_CHG > 0 ? `+${userProfile.TROPHY_CHG}개` : `${userProfile.TROPHY_CHG || 0}개`],
           ['솔로 리그 현재 랭크', roman[(userProfile.PL_SL_CUR % 3)]],
           ['팀 리그 현재 랭크', roman[(userProfile.PL_TM_CUR % 3)]],
-          ['소속 클럽', 'BLOSSOM'],
+          ['소속 클럽', userProfile.CLUB_NM.replace(/(<+)([/c]+|c[1-9])(>)/g, '')],
         ]}
         bodyRowImages={[
           [null, null],
