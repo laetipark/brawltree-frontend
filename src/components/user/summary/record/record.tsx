@@ -1,7 +1,9 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import TableHorizontal from '~/components/table/horizontal/table';
+
+import UserContext from '~/context/user_context';
 
 import config from '~/config/config';
 
@@ -9,17 +11,30 @@ import styles from './record.module.scss';
 
 const roman = ['I', 'II', 'III'];
 
-const UserRecord = ({ id }) => {
+const UserRecord = () => {
+  const context = useContext(UserContext);
+  const { id } = context;
+
   const [userProfile, setUserProfile] = useState({
-    TROPHY_CUR: 0, TROPHY_CHG: 0, TROPHY_HGH: 0,
-    VICTORY_TRP: 0, VICTORY_DUO: 0,
-    BRAWLER_RNK_25: 0, BRAWLER_RNK_30: 0, BRAWLER_RNK_35: 0,
-    PL_SL_CUR: 0, PL_SL_HGH: 0, PL_TM_CUR: 0, PL_TM_HGH: 0,
-    CLUB_ID: '', CLUB_NM: '',
+    TROPHY_CUR: 0,
+    TROPHY_CHG: 0,
+    TROPHY_HGH: 0,
+    VICTORY_TRP: 0,
+    VICTORY_DUO: 0,
+    BRAWLER_RNK_25: 0,
+    BRAWLER_RNK_30: 0,
+    BRAWLER_RNK_35: 0,
+    PL_SL_CUR: 0,
+    PL_SL_HGH: 0,
+    PL_TM_CUR: 0,
+    PL_TM_HGH: 0,
+    CLUB_ID: '',
+    CLUB_NM: '',
   });
 
   useEffect(() => {
-    axios.get(`${config.url}/brawlian/${id}/profile`, {})
+    axios
+      .get(`${config.url}/brawlian/${id}/profile`, {})
       .then(async (result) => {
         setUserProfile(result.data);
       });
@@ -31,16 +46,36 @@ const UserRecord = ({ id }) => {
         headRow={'현재 기록'}
         bodyRowContents={[
           ['현재 트로피', `${userProfile.TROPHY_CUR}개`],
-          ['트로피 변화량', userProfile.TROPHY_CHG > 0 ? `+${userProfile.TROPHY_CHG}개` : `${userProfile.TROPHY_CHG || 0}개`],
-          ['솔로 리그 현재 랭크', roman[(userProfile.PL_SL_CUR % 3)]],
-          ['팀 리그 현재 랭크', roman[(userProfile.PL_TM_CUR % 3)]],
-          ['소속 클럽', userProfile.CLUB_NM.replace(/(<+)([/c]+|c[1-9])(>)/g, '')],
+          [
+            '트로피 변화량',
+            userProfile.TROPHY_CHG > 0
+              ? `+${userProfile.TROPHY_CHG}개`
+              : `${userProfile.TROPHY_CHG || 0}개`,
+          ],
+          ['솔로 리그 현재 랭크', roman[userProfile.PL_SL_CUR % 3]],
+          ['팀 리그 현재 랭크', roman[userProfile.PL_TM_CUR % 3]],
+          [
+            '소속 클럽',
+            userProfile.CLUB_NM.replace(/(<+)([/c]+|c[1-9])(>)/g, ''),
+          ],
         ]}
         bodyRowImages={[
           [null, null],
           [null, null],
-          [null, userProfile.PL_SL_CUR && `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_SL_CUR / 3)}.webp`],
-          [null, userProfile.PL_TM_CUR && `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_TM_CUR / 3)}.webp`],
+          [
+            null,
+            userProfile.PL_SL_CUR &&
+              `${config.assets}/rank/power_league/${Math.floor(
+                userProfile.PL_SL_CUR / 3,
+              )}.webp`,
+          ],
+          [
+            null,
+            userProfile.PL_TM_CUR &&
+              `${config.assets}/rank/power_league/${Math.floor(
+                userProfile.PL_TM_CUR / 3,
+              )}.webp`,
+          ],
           [null, null],
         ]}
       />
@@ -53,8 +88,8 @@ const UserRecord = ({ id }) => {
           ['25랭크 개수', `${userProfile.BRAWLER_RNK_25}개`],
           ['30랭크 개수', `${userProfile.BRAWLER_RNK_30}개`],
           ['35랭크 개수', `${userProfile.BRAWLER_RNK_35}개`],
-          ['솔로 리그 최고 랭크', roman[(userProfile.PL_SL_HGH % 3)]],
-          ['팀 리그 최고 랭크', roman[(userProfile.PL_TM_HGH % 3)]],
+          ['솔로 리그 최고 랭크', roman[userProfile.PL_SL_HGH % 3]],
+          ['팀 리그 최고 랭크', roman[userProfile.PL_TM_HGH % 3]],
         ]}
         bodyRowImages={[
           [null, null],
@@ -63,8 +98,20 @@ const UserRecord = ({ id }) => {
           [null, null],
           [null, null],
           [null, null],
-          [null, userProfile.PL_SL_HGH && `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_SL_HGH / 3)}.webp`],
-          [null, userProfile.PL_TM_HGH && `${config.assets}/rank/power_league/${Math.floor(userProfile.PL_TM_HGH / 3)}.webp`],
+          [
+            null,
+            userProfile.PL_SL_HGH &&
+              `${config.assets}/rank/power_league/${Math.floor(
+                userProfile.PL_SL_HGH / 3,
+              )}.webp`,
+          ],
+          [
+            null,
+            userProfile.PL_TM_HGH &&
+              `${config.assets}/rank/power_league/${Math.floor(
+                userProfile.PL_TM_HGH / 3,
+              )}.webp`,
+          ],
         ]}
       />
     </div>

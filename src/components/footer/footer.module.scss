@@ -1,18 +1,19 @@
-.totalWrapper {
-  max-width: 100%;
-  margin-top: 20px;
+.footerWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 60px;
   padding: 20px;
   background-color: #343A40;
 }
 
-.totalWrapper > div {
+.footerWrapper > div {
   display: flex;
   justify-content: center;
   color: white;
   gap: 20px;
 }
 
-.totalWrapper > div > a {
+.footerWrapper > div > a {
   display: flex;
   color: white;
   text-decoration: none;

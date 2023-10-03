@@ -1,0 +1,87 @@
+.mapMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: #A8D1D1;
+}
+
+.mapTypeGroup {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: space-around;
+  padding: 12px;
+  list-style: none;
+}
+
+.mapTypeGroup > li {
+  display: flex;
+}
+
+.mapTypeGroup > li > input {
+  display: none;
+}
+
+.mapTypeGroup > li > label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #F4F7C5;
+  border: 4px solid #F4F7C5;
+  border-radius: 6px;
+  padding: 8px;
+  font-family: "Main Bold", serif;
+  font-size: 20px;
+  transition: border 0.3s;
+}
+
+.mapTypeGroup > li > input:disabled + label {
+  border-color: #B7C4CF;
+  background-color: #B7C4CF;
+}
+
+.mapTypeGroup > li > input:hover:not[disabled] + label {
+  border-color: #EB6383;
+}
+
+.mapTypeGroup > li > input:checked + label {
+  border-color: #EA907A;
+}
+
+.mapGradeGroup {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  gap: 4px;
+}
+
+.mapGradeGroup > li {
+  display: flex;
+  width: 100%;
+  gap: 4px;
+}
+
+.mapGradeGroup > li > input {
+  display: none;
+}
+
+.mapGradeGroup > li > label {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #F4F7C5;
+  border: 4px solid #F4F7C5;
+  border-radius: 6px;
+  padding: 4px;
+  font-family: "Main Bold", serif;
+  font-size: 20px;
+  transition: border 0.3s;
+}
+
+.mapGradeGroup > li > input:checked + label {
+  border-color: #FBC687;
+}
+
+.mapMenuItemImage {
+  height: 24px;
+  object-fit: cover;
+  object-position: center;
+}

@@ -7,7 +7,7 @@ import styles from "./footer.module.scss";
 
 const Footer = () => {
     return (
-        <footer className={styles.totalWrapper}>
+        <footer className={styles.footerWrapper}>
             <div>
                 <a href={'https://github.com/laeti-park/blossom-stats-frontend'} target={'_blank'} rel="noreferrer">
                     <FontAwesomeIcon icon={faGamepad}/> 오픈소스
