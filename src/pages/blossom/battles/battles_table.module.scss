@@ -1,0 +1,72 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 12px;
+  gap: 12px;
+}
+
+@media (min-width: 576px) {
+  .app {
+    width: 556px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    width: 748px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    width: 924px;
+  }
+}
+
+.menuWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.table {
+  display: table;
+  width: 100%;
+}
+
+.body {
+  display: table-row-group;
+}
+
+.battlesMenus {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .battlesMenus {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .filter {
+    display: grid;
+    grid-template-columns: 59% 39%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

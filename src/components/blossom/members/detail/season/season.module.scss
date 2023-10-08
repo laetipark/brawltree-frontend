@@ -1,0 +1,63 @@
+.seasonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.seasonWrapper > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.seasonStatsSummary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.seasonStatsToggle {
+  display: flex;
+  align-items: center;
+  width: 140px;
+  gap: 8px;
+  transition: border-bottom-color 0.3s;
+}
+
+.matchList {
+  display: grid;
+  grid-template-columns: 100%;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@media (min-width: 768px) {
+  .matchList {
+    grid-template-columns: 49.5% 49.5%;
+    gap: 4px;
+  }
+}
+
+.matchList > div {
+  display: grid;
+  grid-template-columns: 14% 86%;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 12px;
+  border: 2px solid #A8DE8E;
+  border-radius: 4px;
+  background-color: #EAE7B1;
+}
+
+.modeImage {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.rankImage {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}

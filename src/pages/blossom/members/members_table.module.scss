@@ -1,0 +1,51 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+  padding: 12px;
+  gap: 12px;
+}
+
+@media (min-width: 576px) {
+  .app {
+    width: 556px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    width: 748px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    width: 924px;
+  }
+}
+
+.table {
+  display: table;
+  width: 100%;
+}
+
+.body {
+  display: table-row-group;
+}
+
+.filter {
+  display: grid;
+  grid-template-columns: 100%;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .filter {
+    display: grid;
+    grid-template-columns: 59% 39%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

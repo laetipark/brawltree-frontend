@@ -1,6 +1,6 @@
 import React from 'react';
 
-import EventMenu from '~/components/events/events_menu';
+import EventMenu from '~/components/events';
 
 import styles from './events.module.scss';
 

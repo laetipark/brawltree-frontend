@@ -1,0 +1,17 @@
+.membersSummaryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.membersSummaryInfo {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 4px;
+}
+
+.membersSummaryInfo >div {
+  display: flex;
+  gap: 4px;
+}

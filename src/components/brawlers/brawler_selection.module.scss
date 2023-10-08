@@ -1,0 +1,59 @@
+.brawlerSelectionWrapper {
+  display: flex;
+  height: 200px;
+  overflow-y: scroll;
+
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .brawlerSelectionWrapper {
+    height: 100%;
+  }
+}
+
+.brawlerSelectionWrapper > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+}
+
+.brawlerButton {
+  display: none;
+
+  & + label {
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #C3AED6;
+    transition: background-color 0.3s;
+  }
+
+  &:checked + label {
+    background-color: #8675A9;
+  }
+
+  &:hover + label {
+    background-color: #8675A9;
+  }
+
+  &:disabled + label {
+    background-color: #DDDDDD;
+    filter: grayscale(100%);
+    outline: none;
+  }
+}
+
+.brawlerImage > img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  object-position: left;
+  color: #212529;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 4px;
+}

@@ -1,17 +1,17 @@
 /* brawlers 틀 */
 
-.app {
+.brawlerListWrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.brawlersTitle {
+.brawlerListTitle {
   font-family: "Main Bold", serif;
   font-size: 24px;
 }
 
-.brawlersContent {
+.brawlerListContent {
   display: grid;
   grid-template-columns: 100%;
   justify-content: space-between;
@@ -19,7 +19,7 @@
 }
 
 @media (min-width: 768px) {
-  .brawlersContent {
+  .brawlerListContent {
     display: grid;
     grid-template-columns: 49.5% 49.5%;
     justify-content: space-between;
@@ -27,7 +27,7 @@
   }
 }
 
-.brawlersContent > div {
+.brawlerListContent > div {
   display: flex;
   flex-direction: column;
   gap: 8px;

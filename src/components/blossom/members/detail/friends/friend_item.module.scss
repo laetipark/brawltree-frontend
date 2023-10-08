@@ -1,0 +1,55 @@
+.friendWrapper {
+  width: 100%;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.friendWrapper:hover {
+  background-color: #A8DE8E;
+}
+
+.friendSummary {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  border: 2px solid #A8DE8E;
+  border-radius: 4px;
+  background-color: #EAE7B1;
+  gap: 4px;
+  transition: border-color 0.3s;
+}
+
+.friendSummary:hover {
+  border-color: #4E944F;
+}
+
+.friendSummary > div {
+  display: flex;
+  gap: 4px;
+}
+
+.friendDetail {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.friendDetail > div {
+  display: grid;
+  grid-template-columns: 49% 49%;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.friendDetail > div > div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 import useInterval from '~/hooks/use_interval';
@@ -9,6 +9,7 @@ import config from '~/config/config';
 import styles from './event_item.module.scss';
 
 const EventItem = ({ event, type }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const nextTime = moment(
     type === 'end' ? event.ROTATION_END_DT : event.ROTATION_BGN_DT,
@@ -40,10 +41,14 @@ const EventItem = ({ event, type }) => {
 
   return (
     <div
-      key={event.ROTATION_BGN_DT}
+      key={event.ROTATION_BGN_DT?.toString()}
       className={styles.eventWrapper}
       onClick={() => {
-        navigate(`../maps/${event.MAP_ID}`);
+        navigate(
+          `${!/\/blossom.*/g.test(location.pathname) ? '' : '/blossom'}/maps/${
+            event.MAP_ID
+          }`,
+        );
       }}
     >
       <div>

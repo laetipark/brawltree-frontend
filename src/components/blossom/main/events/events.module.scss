@@ -1,0 +1,61 @@
+.eventsSummaryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eventItem {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 8px;
+}
+
+.eventItem > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eventItem img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.mapItem {
+  display: flex;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #E6E5A3;
+
+  &::before {
+    content: '';
+    position: relative;
+    left: -4px;
+    width: 4px;
+    height: 100%;
+    background-color: #A9AF7E;
+    transition: background-color 0.3s;
+  }
+
+  &:hover::before {
+    background-color: #557153;
+  }
+}
+
+.mapList:hover {
+  background-color: #FF8989;
+}
+
+.mapItem > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.mapItem > div > div {
+  display: flex;
+  gap: 4px;
+}

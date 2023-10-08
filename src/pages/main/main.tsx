@@ -13,15 +13,16 @@ const Main = () => {
     <div className={styles.app}>
       <div className={styles.titleBox}>
         <div>
-          <img src={'/images/logo/logo192.png'}
-               alt={'Logo'} />
+          <img src={'/images/logo/brawltree/logo192.png'} alt={'Logo'} />
           <div>Brawl Tree</div>
         </div>
       </div>
-      <form className={styles.inputBox}
-            onSubmit={e => {
-              navigate(`./brawlian/${e.target[0].value.toUpperCase()}`);
-            }}>
+      <form
+        className={styles.inputBox}
+        onSubmit={(e) => {
+          navigate(`./brawlian/${e.target[0].value.toUpperCase()}`);
+        }}
+      >
         <FontAwesomeIcon icon={faHashtag} />
         <input
           type={'text'}
@@ -29,12 +30,10 @@ const Main = () => {
           required={true}
           placeholder={'유저 태그'}
           maxLength={12}
-          pattern='#?[O0289PYLQGRJCUVopylqgrjcuv]{3,12}'
+          pattern="#?[O0289PYLQGRJCUVopylqgrjcuv]{3,12}"
           style={{ textTransform: 'uppercase' }}
         />
-        <button type={'submit'}>
-          TREE
-        </button>
+        <button type={'submit'}>TREE</button>
       </form>
     </div>
   );

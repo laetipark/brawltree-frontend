@@ -1,29 +1,30 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
-import UserMenuType from '~/components/user/summary/battles/menu_type/menu_type';
-import UserMenuMode from '~/components/user/summary/battles/menu_mode/menu_mode';
+import UserMenuType from '~/components/menu/menu_type/menu_type';
+import UserMenuMode from '~/components/menu/menu_mode/menu_mode';
 import UserBattleSummary from '~/components/user/summary/battles/battle_summary/battle_summary';
 import UserBattleLogs from '~/components/user/summary/battles/battle_logs/battle_logs';
 
 import UserContext from '~/context/user_context';
 
-import config from '~/config/config';
-
 import styles from './battles.module.scss';
 
 const UserBattles = () => {
   const context = useContext(UserContext);
-  const { id } = context;
-
-  const [type, setType] = useState('7');
-  const [mode, setMode] = useState('all');
-  const [rotationTL, setRotationTL] = useState([]);
-  const [rotationPL, setRotationPL] = useState([]);
-
-  const [userBattles, setUserBattles] = useState([[], []]);
-  const [userBrawlers, setUserBrawlers] = useState([]);
-  const [season, setSeason] = useState({});
+  const {
+    rotationTL,
+    rotationPL,
+    type,
+    mode,
+    setType,
+    setMode,
+    battlesSummary,
+    brawlersSummary,
+    recentBattles,
+    recentBrawlers,
+    battles,
+    season,
+  } = context;
 
   const setMatchType = ({ target }) => {
     setType(target.value);
@@ -33,23 +34,6 @@ const UserBattles = () => {
   const setMatchMode = ({ target }) => {
     setMode(target.value);
   };
-
-  useEffect(() => {
-    axios
-      .get(`${config.url}/brawlian/${id}/battles/summary`, {
-        params: {
-          type: type,
-          mode: mode,
-        },
-      })
-      .then(async (result) => {
-        setUserBattles(result.data.userBattles);
-        setUserBrawlers(result.data.userBrawlers);
-        setRotationTL(result.data.rotationTL);
-        setRotationPL(result.data.rotationPL);
-        setSeason(result.data.season);
-      });
-  }, [id, type, mode]);
 
   return (
     <div className={styles.battlesWrapper}>
@@ -66,12 +50,16 @@ const UserBattles = () => {
           />
         </div>
         <UserBattleSummary
-          userBattles={userBattles}
-          userBrawlers={userBrawlers}
+          battlesSummary={battlesSummary}
+          brawlersSummary={brawlersSummary}
           season={season}
         />
       </div>
-      <UserBattleLogs id={id} type={type} mode={mode} />
+      <UserBattleLogs
+        recentBattles={recentBattles}
+        recentBrawlers={recentBrawlers}
+        battles={battles}
+      />
     </div>
   );
 };

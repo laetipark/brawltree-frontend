@@ -1,0 +1,72 @@
+.bodyRow {
+  display: table-row;
+  text-align: left;
+}
+
+.bodyRow > div {
+  display: table-cell;
+  padding: 10px;
+  border-right: 1px solid #c6c9cc;
+  border-bottom: 1px solid #c6c9cc;
+  text-align: left;
+  background-color: #FFE3E1;
+}
+
+.bodyRow > div > img {
+  height: 18px;
+  margin-right: 4px;
+}
+
+.bodyRow > div:first-child {
+  width: 70%;
+  border-left: 1px solid #c6c9cc;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #FF9494;
+  }
+
+  &::before {
+    content: '>';
+    position: relative;
+    left: -4px;
+    font-family: "Main Bold", serif;
+  }
+}
+
+.bodyRow > div:nth-child(n+2) {
+  width: 30%;
+  text-align: right;
+}
+
+.bodyRow > div:nth-child(n+3) {
+  display: none;
+}
+
+@media (min-width: 576px) {
+  .bodyRow > div:first-child {
+    width: 50%;
+  }
+
+  .bodyRow > div:nth-child(n+2) {
+    width: 25%;
+  }
+
+  .bodyRow > div:nth-child(3) {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 768px) {
+  .bodyRow > div:first-child {
+    width: 40%;
+  }
+
+  .bodyRow > div:nth-child(n+2) {
+    width: 20%;
+  }
+
+  .bodyRow > div:nth-child(n+3) {
+    display: table-cell;
+  }
+}
