@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -6,7 +5,7 @@ import MapInfo from '~/components/maps/detail';
 import MapMenu from '~/components/maps/detail/menu/menu';
 import MapStats from '~/components/maps/detail/stats/stats';
 
-import config from '~/config/config';
+import MapService from '~/services/map_service';
 
 import styles from './detail.module.scss';
 
@@ -19,15 +18,14 @@ const MapDetail = () => {
     ROTATION_TL_BOOL: false,
     ROTATION_PL_BOOL: false,
   });
+  const [brawlerStats, setBrawlerStats] = useState([]);
 
   useEffect(() => {
-    axios.get(`${config.url}/maps/${id}`).then(async (result) => {
-      setMapInfo(result.data);
-      if (result.data.ROTATION_TL_BOOL === 0) {
-        setType('2');
-      }
+    MapService.getMap({ id, type, grade }).then((data) => {
+      setMapInfo(data.map);
+      setBrawlerStats(data.map);
     });
-  }, [id]);
+  }, [id, type, grade]);
 
   return (
     mapInfo.MAP_ID && (
@@ -41,7 +39,7 @@ const MapDetail = () => {
           rotationTL={mapInfo.ROTATION_TL_BOOL}
           rotationPL={mapInfo.ROTATION_PL_BOOL}
         />
-        <MapStats id={id} type={type} grade={grade} />
+        <MapStats brawlers={brawlerStats} />
       </div>
     )
   );

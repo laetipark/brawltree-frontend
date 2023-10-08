@@ -48,7 +48,7 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>트로피 리그 픽률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerTL?.MATCH_CNT_RATE * 100) / 100.0}
+                  {Math.round(brawlerTL?.MATCH_CNT_RATE * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -63,7 +63,7 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>트로피 리그 승률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerTL?.MATCH_CNT_VIC_RATE * 100) / 100.0}
+                  {Math.round(brawlerTL?.MATCH_CNT_VIC_RATE * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -80,12 +80,12 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>파워 리그 픽률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerPLSolo?.MATCH_CNT_RATE * 100) / 100.0}
+                  {Math.round(brawlerPLSolo?.MATCH_CNT_RATE * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
                 <span>/</span>
                 <span>
-                  {Math.round(brawlerPLTeam?.MATCH_CNT_RATE * 100) / 100.0}
+                  {Math.round(brawlerPLTeam?.MATCH_CNT_RATE * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -100,12 +100,14 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>파워 리그 승률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerPLSolo?.MATCH_CNT_VIC_RATE * 100) / 100.0}
+                  {Math.round(brawlerPLSolo?.MATCH_CNT_VIC_RATE * 100) /
+                    100.0 || 0}
                 </span>
                 <span>%</span>
                 <span>/</span>
                 <span>
-                  {Math.round(brawlerPLTeam?.MATCH_CNT_VIC_RATE * 100) / 100.0}
+                  {Math.round(brawlerPLTeam?.MATCH_CNT_VIC_RATE * 100) /
+                    100.0 || 0}
                 </span>
                 <span>%</span>
               </div>

@@ -1,18 +1,15 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-import config from '~/config/config';
+import EventItem from './event_item/event_item';
+import EventService from '~/services/event_service';
 
-import styles from '~/components/events/menu_items/menu_items.module.scss';
-import EventItem from '~/components/events/menu_items/event_item/event_item';
+import styles from './menu_items.module.scss';
 
 const PLEvents = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
-    axios.get(`${config.url}/events/pl`).then(async (result) => {
-      setEvents(result.data);
-    });
+    EventService.getPLEvents().then((data) => setEvents(data));
   }, []);
 
   return (

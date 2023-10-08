@@ -1,25 +1,10 @@
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import config from '~/config/config';
 
 import styles from './stats.module.scss';
 
-const MapStats = ({ id, type, grade }) => {
-  const [brawlers, setBrawlers] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${config.url}/maps/${id}/stats`, {
-        params: {
-          type: type,
-          grade: grade,
-        },
-      })
-      .then(async (result) => {
-        setBrawlers(result.data);
-      });
-  }, [type, grade, id]);
+const MapStats = ({brawlers}) => {
 
   return (
     <div className={styles.brawlerStatsWrapper}>
