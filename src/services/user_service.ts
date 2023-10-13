@@ -2,14 +2,18 @@ import axios from 'axios';
 import config from '~/config/config';
 
 export default class UserService {
-  static getUser = ({ id, type, mode }) =>
+  static getUsers = (keyword: string) =>
     axios
-      .get(`${config.url}/brawlian/${id}`, {
+      .get(`${config.url}/brawlian/`, {
         params: {
-          type: type,
-          mode: mode,
+          keyword: keyword,
         },
       })
+      .then((result) => result.data);
+
+  static getUser = ({ id }) =>
+    axios
+      .get(`${config.url}/brawlian/${id}`)
       .then(async (result) => result.data);
 
   static getUserBrawlers = ({ id }) => {
@@ -20,28 +24,13 @@ export default class UserService {
 
   static getUserByTypeNMode = ({ id, type, mode }) =>
     axios
-      .all([
-        axios.get(`${config.url}/brawlian/${id}/battles/summary`, {
-          params: {
-            type: type,
-            mode: mode,
-          },
-        }),
-        axios.get(`${config.url}/brawlian/${id}/battles/logs`, {
-          params: {
-            type: type,
-            mode: mode,
-          },
-        }),
-      ])
-      .then(
-        axios.spread((summary, logs) => {
-          return {
-            battlesSummary: summary.data,
-            battleLogs: logs.data,
-          };
-        }),
-      );
+      .get(`${config.url}/brawlian/${id}/battles`, {
+        params: {
+          type: type,
+          mode: mode,
+        },
+      })
+      .then((result) => result.data);
 
   static getBlossomMemberDetail = ({ id }) =>
     axios

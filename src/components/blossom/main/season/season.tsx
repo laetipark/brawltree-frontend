@@ -13,7 +13,7 @@ const SeasonSummary = ({ season }) => {
         <div className={styles.seasonSummaryInfo}>
           <span>• 시즌 매치 수</span>
           <span style={{ fontWeight: 600 }}>
-            {season.MATCH_CNT?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            {season.matchCount?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
           <span>회</span>
         </div>

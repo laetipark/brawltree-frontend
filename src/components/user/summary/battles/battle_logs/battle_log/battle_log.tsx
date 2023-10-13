@@ -29,15 +29,15 @@ const BattleLog = ({ BATTLE_INFO, BATTLE_PLAYERS }) => {
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const dateDiff = moment.duration(moment().diff(moment(BATTLE_INFO.MATCH_DT))).days();
-  const hourDiff = moment.duration(moment().diff(moment(BATTLE_INFO.MATCH_DT))).hours();
-  const minuteDiff = moment.duration(moment().diff(moment(BATTLE_INFO.MATCH_DT))).minutes();
+  const dateDiff = moment.duration(moment().diff(moment(BATTLE_INFO.matchDate))).days();
+  const hourDiff = moment.duration(moment().diff(moment(BATTLE_INFO.matchDate))).hours();
+  const minuteDiff = moment.duration(moment().diff(moment(BATTLE_INFO.matchDate))).minutes();
   const matchTeams = BATTLE_PLAYERS.reduce(
     (result: any[], current: {
-      PLAYER_TM_NO: number;
+      teamNumber: number;
     }) => {
-      result[current.PLAYER_TM_NO] = result[current.PLAYER_TM_NO] || [];
-      result[current.PLAYER_TM_NO].push(current);
+      result[current.teamNumber] = result[current.teamNumber] || [];
+      result[current.teamNumber].push(current);
       return result;
     }, []);
 
@@ -50,28 +50,28 @@ const BattleLog = ({ BATTLE_INFO, BATTLE_PLAYERS }) => {
       <div>
         <input className={styles.battleSummaryButton}
                type={'checkbox'}
-               id={BATTLE_INFO.MATCH_DT}
-               name={BATTLE_INFO.MATCH_DT}
+               id={BATTLE_INFO.matchDate}
+               name={BATTLE_INFO.matchDate}
                checked={isChecked}
                onChange={checkHandler} />
-        <label htmlFor={BATTLE_INFO.MATCH_DT}
+        <label htmlFor={BATTLE_INFO.matchDate}
                className={styles.battleSummary}
                style={{
-                 backgroundColor: matchResultColors[BATTLE_INFO.MATCH_RES + 1],
+                 backgroundColor: matchResultColors[BATTLE_INFO.matchResult + 1],
                }}>
           <div className={styles.matchInfo}>
             <img className={styles.brawlerImage}
-                 src={`${config.assets}/brawlers/profiles/${BATTLE_INFO.BRAWLER_ID}.webp`}
-                 alt={'브롤러'} />
+                 src={`${config.assets}/brawlers/profiles/${BATTLE_INFO.brawlerID}.webp`}
+                 alt={BATTLE_INFO.brawlerID} />
             <div className={styles.gameModeImage}>
-              <img src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
-                   alt={'게임모드'} />
-              <img src={`${config.assets}/modes/icon/${BATTLE_INFO.MAP_MD}.webp`}
-                   alt={'게임모드'} />
+              <img src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.matchType]}.webp`}
+                   alt={BATTLE_INFO.matchType} />
+              <img src={`${config.assets}/modes/icon/${BATTLE_INFO.mode}.webp`}
+                   alt={BATTLE_INFO.mode} />
             </div>
             <div>
               <div className={styles.battleSummaryTitle}>
-                {BATTLE_INFO.MAP_NM}
+                {BATTLE_INFO.mapName}
               </div>
               <div className={styles.battleSummarySubTitle}>
                 {
@@ -84,14 +84,14 @@ const BattleLog = ({ BATTLE_INFO, BATTLE_PLAYERS }) => {
           </div>
           <div className={styles.matchResult}>
             <div>
-              {BATTLE_INFO.MATCH_DUR} seconds
+              {BATTLE_INFO.duration} seconds
             </div>
             <div>
               <div>
-                {matchResults[BATTLE_INFO.MATCH_RES + 1]}
+                {matchResults[BATTLE_INFO.matchResult + 1]}
               </div>
               <div>
-                {BATTLE_INFO.MATCH_CHG > 0 ? `+${BATTLE_INFO.MATCH_CHG}` : BATTLE_INFO.MATCH_CHG}
+                {BATTLE_INFO.matchChange > 0 ? `+${BATTLE_INFO.matchChange}` : BATTLE_INFO.matchChange}
               </div>
             </div>
           </div>
@@ -110,43 +110,43 @@ const BattleLog = ({ BATTLE_INFO, BATTLE_PLAYERS }) => {
            style={{ display: isChecked ? 'flex' : 'none' }}>
         {
           matchTeams?.map((team: any[], index: number) => {
-            const teamMatchResult = BATTLE_INFO.MAP_MD_CD === 3 ?
-              (team.find(item => item.PLAYER_ID === BATTLE_INFO.USER_ID) !== undefined ?
-                BATTLE_INFO.MATCH_RES + 1 :
-                BATTLE_INFO.MATCH_RES * -1 + 1) :
-              matchTeams[index][0].MATCH_RES + 1;
+            const teamMatchResult = BATTLE_INFO.modeCode === 3 ?
+              (team.find(item => item.playerID === BATTLE_INFO.userID) !== undefined ?
+                BATTLE_INFO.matchResult + 1 :
+                BATTLE_INFO.matchResult * -1 + 1) :
+              matchTeams[index][0].matchResult + 1;
 
             return (
-              <React.Fragment key={`${BATTLE_INFO.MATCH_DT}_${index}`}>
+              <React.Fragment key={`${BATTLE_INFO.matchDate}_${index}`}>
                 <div className={styles.battleLogsDetailTitle}>
-                  {matchResults[teamMatchResult]}({BATTLE_INFO.MAP_MD_CD === 3 ? (index === 0 ? '블루' : '레드') : `${index + 1}등`})
+                  {matchResults[teamMatchResult]}({BATTLE_INFO.modeCode === 3 ? (index === 0 ? '블루' : '레드') : `${index + 1}등`})
                 </div>
                 <div className={styles.battleLogsDetailContent}
                      style={{ backgroundColor: matchResultColors[teamMatchResult] }}>
                   {
-                    team?.map(({ BRAWLER_ID, BRAWLER_PWR, BRAWLER_TRP, PLAYER_ID, PLAYER_NM, PLAYER_SP_BOOL }) => {
+                    team?.map(({ brawlerID, brawlerPower, brawlerTrophies, playerID, playerName, isStarPlayer }) => {
                       return (
-                        <Link key={`${BATTLE_INFO.MATCH_DT}_${index}_${PLAYER_ID}`}
-                              to={`/brawlian/${PLAYER_ID.replace('#', '')}`}
+                        <Link key={`${BATTLE_INFO.matchDate}_${index}_${playerID}`}
+                              to={`/brawlian/${playerID.replace('#', '')}`}
                               onClick={() => {
                                 setUser({
-                                  USER_ID: '', USER_NM: '', USER_PRFL: '',
-                                  USER_LST_BT: undefined, USER_LST_CK: undefined,
-                                  USER_CR: '', USER_CR_NM: '',
+                                  userID: '', name: '', profile: '',
+                                  lastBattleAt: undefined, updatedAt: undefined,
+                                  crew: '', crewName: '',
                                 });
                                 setRetryCount(0);
                               }}>
                           <div>
                             <img className={styles.matchBrawler}
-                                 src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
+                                 src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
                                  alt={'브롤러'} />
                           </div>
                           <div>
                             <div className={styles.matchTitle}>
-                              {PLAYER_NM}
+                              {playerName}
                             </div>
                             <div className={styles.matchSubTitle}>
-                              {PLAYER_SP_BOOL === 1 && (
+                              {isStarPlayer === 1 && (
                                 <React.Fragment>
                                   <img
                                     src={`${config.assets}/game/icon/logo_star.webp`}
@@ -158,23 +158,23 @@ const BattleLog = ({ BATTLE_INFO, BATTLE_PLAYERS }) => {
                           </div>
                           <div>
                             <div className={styles.matchTitle}>
-                              POWER {BRAWLER_PWR}
+                              POWER {brawlerPower}
                             </div>
                             <div className={styles.matchSubTitle}>
-                              {[2, 3].includes(BATTLE_INFO.MATCH_TYP) ?
+                              {[2, 3].includes(BATTLE_INFO.matchType) ?
                                 (
                                   <React.Fragment>
                                     <img
-                                      src={`${config.assets}/rank/power_league/${Math.floor(BRAWLER_TRP / 3)}.webp`}
-                                      alt={BRAWLER_TRP} />
-                                    <span>{roman[(BRAWLER_TRP % 3)]}</span>
+                                      src={`${config.assets}/rank/power_league/${Math.floor(brawlerTrophies / 3)}.webp`}
+                                      alt={brawlerTrophies} />
+                                    <span>{roman[(brawlerTrophies % 3)]}</span>
                                   </React.Fragment>
                                 ) : (
                                   <React.Fragment>
                                     <img
-                                      src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.MATCH_TYP]}.webp`}
+                                      src={`${config.assets}/modes/icon/${typeArray[BATTLE_INFO.matchType]}.webp`}
                                       alt={'게임모드'} />
-                                    <span>{BRAWLER_TRP}</span>
+                                    <span>{brawlerTrophies}</span>
                                   </React.Fragment>
                                 )
                               }

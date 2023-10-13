@@ -13,10 +13,10 @@ import config from '~/config/config';
 const Main = () => {
   const [members, setMembers] = useState({
     MEMBER_CNT: '0',
-    TROPHY_CUR_TOT: '0',
+    currentTrophies_TOT: '0',
   });
-  const [battles, setBattles] = useState({ MATCH_CNT_TOT: '0' });
-  const [season, setSeason] = useState({ MATCH_CNT: '0' });
+  const [battles, setBattles] = useState({ matchCount: '0' });
+  const [season, setSeason] = useState({ matchCount: '0' });
   const [events, setEvents] = useState([]);
   const [brawlersTL, setBrawlersTL] = useState([]);
   const [brawlersPL, setBrawlersPL] = useState([]);

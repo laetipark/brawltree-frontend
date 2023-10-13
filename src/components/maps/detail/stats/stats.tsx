@@ -11,25 +11,25 @@ const MapStats = ({brawlers}) => {
       {brawlers?.map((brawler) => {
         return (
           <div
-            key={`${brawler.BRAWLER_ID}`}
+            key={`${brawler.brawlerID}`}
             className={styles.brawlerStatsItem}
           >
             <div className={styles.brawlerTitle}>
               <img
-                src={`${config.assets}/brawlers/pins/${brawler.BRAWLER_ID}.webp`}
+                src={`${config.assets}/brawlers/pins/${brawler.brawlerID}.webp`}
                 alt={'브롤러'}
               />
-              <div>{brawler.BRAWLER_NM}</div>
+              <div>{brawler.name}</div>
             </div>
             <div className={styles.brawlerContent}>
               <div>
                 <span>픽률</span>
-                <span className={styles.textRate}>{brawler.MATCH_P_RATE}%</span>
+                <span className={styles.textRate}>{brawler.pickRate}%</span>
               </div>
               <div>
                 <span>승률</span>
                 <span className={styles.textRate}>
-                  {brawler.MATCH_VIC_RATE}%
+                  {brawler.victoryRate}%
                 </span>
               </div>
             </div>

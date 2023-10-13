@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHashtag } from '@fortawesome/free-solid-svg-icons';
+import InputField from '~/components/main/input_field';
+import ResultField from '~/components/main/result_field';
+
+import debounce from '~/utils/debounce';
 
 import styles from './main.module.scss';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Main = () => {
+  const [inputValue, setInputValue] = useState<string>('');
+  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
+
+  const onChangeInput = useCallback(
+    ({ target }) => {
+      const { value } = target;
+      debounce(setInputValue(value), 500);
+    },
+    [inputValue],
+  );
 
   return (
     <div className={styles.app}>
@@ -20,21 +34,35 @@ const Main = () => {
       <form
         className={styles.inputBox}
         onSubmit={(e) => {
-          navigate(`./brawlian/${e.target[0].value.toUpperCase()}`);
+          navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
         }}
       >
-        <FontAwesomeIcon icon={faHashtag} />
-        <input
-          type={'text'}
-          name={'id'}
-          required={true}
-          placeholder={'유저 태그'}
-          maxLength={12}
-          pattern="#?[O0289PYLQGRJCUVopylqgrjcuv]{3,12}"
-          style={{ textTransform: 'uppercase' }}
+        <InputField onChangeInput={onChangeInput} />
+        <ResultField
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          setToggle={setToggle}
         />
-        <button type={'submit'}>TREE</button>
       </form>
+      <div className={styles.findTagToggle}>
+        <h3 onClick={() => setToggle(!toggle)}>
+          <FontAwesomeIcon
+            icon={faAngleRight}
+            style={{
+              transform: toggle ? 'rotate(90deg)' : '',
+              transition: 'transform 0.3s ease',
+            }}
+          />
+          <span>유저 태그 찾는 법</span>
+        </h3>
+        {toggle && (
+          <img
+            className={styles.howToFindTag}
+            src={'/images/help/find_tag_kr.webp'}
+            alt={'find_tag'}
+          />
+        )}
+      </div>
     </div>
   );
 };

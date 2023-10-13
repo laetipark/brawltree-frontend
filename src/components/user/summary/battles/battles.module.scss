@@ -5,7 +5,8 @@
 }
 
 .battlesTitle {
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
 }
 
@@ -35,7 +36,8 @@
   border-bottom-right-radius: 4px;
   padding: 6px 0 8px 0;
   color: #E6E2C3;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
   transition: background-color 0.2s ease-in-out;
 }

@@ -10,21 +10,21 @@ const MapInfo = ({ mapInfo }) => {
       <div className={styles.mapTitle}>
         <div>
           <img
-            src={`${config.assets}/modes/icon/${mapInfo.MAP_MD}.webp`}
-            alt={mapInfo.MAP_MD}
+            src={`${config.assets}/modes/icon/${mapInfo.mode}.webp`}
+            alt={mapInfo.mode}
           />
-        <span>{mapInfo.MAP_NM}</span>
+        <span>{mapInfo.name}</span>
         </div>
         <div>
           {
-            mapInfo.ROTATION_TL_BOOL > 0 &&
+            mapInfo.isTrophyLeague > 0 &&
             <img
               src={`${config.assets}/modes/icon/trophyLeague.webp`}
               alt={`trophyLeague`}
             />
           }
           {
-            mapInfo.ROTATION_PL_BOOL > 0 &&
+            mapInfo.isPowerLeague > 0 &&
             <img
               src={`${config.assets}/modes/icon/powerLeague.webp`}
               alt={`trophyLeague`}
@@ -34,8 +34,8 @@ const MapInfo = ({ mapInfo }) => {
       </div>
       <div className={styles.mapImage}>
         <img
-          src={`${config.assets}/maps/${mapInfo.MAP_ID}.webp`}
-          alt={mapInfo.MAP_ID}
+          src={`${config.assets}/maps/${mapInfo.mapID}.webp`}
+          alt={mapInfo.mapID}
         />
       </div>
     </div>

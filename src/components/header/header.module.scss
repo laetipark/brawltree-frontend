@@ -22,7 +22,6 @@
 
 .menuWrapper {
   height: 60px;
-  padding: 10px;
   background-color: #343A40;
   color: white;
 }
@@ -62,15 +61,15 @@
 }
 
 .menuLogo {
-  margin: 0.8rem 1rem;
-  max-width: 40px;
-  max-height: 40px;
+  padding: 12px;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
 
 .menuToggle {
-  display: block;
-  font-size: 24px;
-  padding: 4px;
+  display: flex;
+  padding: 12px;
 }
 
 @media (min-width: 768px) {
@@ -95,7 +94,7 @@
     align-items: center;
     row-gap: 20px;
     background-color: #343A40;
-    z-index: 2;
+    z-index: 9;
   }
 }
 

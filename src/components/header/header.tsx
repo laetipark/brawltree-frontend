@@ -13,7 +13,7 @@ const Header = ({ dir }) => {
   return (
     <header>
       <div className={styles.titleWrapper}>
-        <Link to="/" onClick={() => setIsToggled(false)}>
+        <Link to={'/'} onClick={() => setIsToggled(false)}>
           <img
             src={`/images/logo/${dir}/logo_horizontal.png`}
             alt={'Logo Horizontal'}
@@ -33,7 +33,7 @@ const Header = ({ dir }) => {
               setIsToggled(!isToggled);
             }}
           >
-            <FontAwesomeIcon icon={!isToggled ? faBars : faTimes} />
+            <FontAwesomeIcon icon={!isToggled ? faBars : faTimes} fontSize={24} />
           </div>
           <ul
             className={styles.menuList}

@@ -15,33 +15,34 @@ const User = () => {
   const location = useLocation();
   const { id } = useParams();
   const [user, setUser] = useState<Users>({
-    USER_ID: '',
-    USER_NM: '',
-    USER_PRFL: '',
-    USER_LST_BT: new Date(0),
-    USER_LST_CK: new Date(0),
-    USER_CR: '',
-    USER_CR_NM: '',
+    userID: '',
+    name: '',
+    profile: '',
+    lastBattleAt: new Date(0),
+    crew: '',
+    crewName: '',
+    updatedAt: new Date(0),
   });
   const [retryCount, setRetryCount] = useState(0);
 
   const [profile, setProfile] = useState<UserProfile>({
-    BRAWLER_RNK_25: 0,
-    BRAWLER_RNK_30: 0,
-    BRAWLER_RNK_35: 0,
-    CLUB_ID: '',
-    CLUB_NM: '',
-    PL_SL_CUR: 0,
-    PL_SL_HGH: 0,
-    PL_TM_CUR: 0,
-    PL_TM_HGH: 0,
-    TROPHY_CUR: 0,
-    TROPHY_HGH: 0,
-    USER_ID: '',
-    USER_NM: '',
-    USER_PRFL: '',
-    VICTORY_DUO: 0,
-    VICTORY_TRP: 0,
+    rank25Brawlers: 0,
+    rank30Brawlers: 0,
+    rank35Brawlers: 0,
+    clubID: '',
+    clubName: '',
+    currentSoloPL: 0,
+    highestSoloPL: 0,
+    currentTeamPL: 0,
+    highestTeamPL: 0,
+    currentTrophies: 0,
+    highestTrophies: 0,
+    trophyChange: 0,
+    userID: '',
+    name: '',
+    profile: '',
+    duoVictories: 0,
+    tripleVictories: 0,
   });
 
   const [type, setType] = useState('7');
@@ -64,18 +65,10 @@ const User = () => {
 
   useEffect(() => {
     const getUser = () => {
-      UserService.getUser({ id, type, mode }).then((data) => {
+      UserService.getUser({ id }).then((data) => {
         if (data !== null) {
           setUser(data.user);
           setProfile(data.profile);
-          setRotationTL(data.rotationTL);
-          setRotationPL(data.rotationPL);
-          setBattlesSummary(data.battlesSummary);
-          setBrawlersSummary(data.brawlersSummary);
-          setRecentBattles(data.recentBattles);
-          setRecentBrawlers(data.recentBrawlers);
-          setBattles(data.battles);
-          setSeason(data.season);
         } else {
           setRetryCount(retryCount + 1);
         }
@@ -89,7 +82,7 @@ const User = () => {
           setFriends(data.friends);
           setSeasonRecords(data.seasonRecords);
         });
-    } else if (retryCount < 3 && !(new Date(user.USER_LST_CK).getTime() > 0)) {
+    } else if (retryCount < 3 && !(new Date(user.updatedAt).getTime() > 0)) {
       const timer = setTimeout(() => {
         getUser();
         /\/blossom.*/g.test(location.pathname) &&
@@ -103,23 +96,23 @@ const User = () => {
         clearTimeout(timer);
       };
     }
-  }, [id, retryCount, user.USER_LST_CK]);
+  }, [id, retryCount, user.updatedAt]);
 
   useEffect(() => {
     UserService.getUserByTypeNMode({ id, type, mode }).then((data) => {
-      setBattlesSummary(data.battlesSummary.battlesSummary);
-      setBrawlersSummary(data.battlesSummary.brawlersSummary);
-      setRotationTL(data.battlesSummary.rotationTL);
-      setRotationPL(data.battlesSummary.rotationPL);
-      setRecentBattles(data.battleLogs.recentBattles);
-      setRecentBrawlers(data.battleLogs.recentBrawlers);
-      setBattles(data.battleLogs.battles);
-      setSeason(data.battlesSummary.season);
+      setBattlesSummary(data.battlesSummary);
+      setBrawlersSummary(data.brawlersSummary);
+      setRotationTL(data.rotationTL);
+      setRotationPL(data.rotationPL);
+      setRecentBattles(data.recentBattles);
+      setRecentBrawlers(data.recentBrawlers);
+      setBattles(data.battles);
+      setSeason(data.season);
     });
-  }, [id, type, mode]);
+  }, [id, type, mode, user.updatedAt]);
 
   return (
-    new Date(user.USER_LST_CK).getTime() > 0 && (
+    new Date(user.updatedAt).getTime() > 0 && (
       <UserContext.Provider
         value={{
           id,

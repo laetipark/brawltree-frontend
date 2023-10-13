@@ -18,7 +18,7 @@ const MemberSummary = ({ members }) => {
         <div>
           <span>• 총 트로피</span>
           <span style={{ fontWeight: 600 }}>
-            {members.TROPHY_CUR_TOT?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            {members.currentTrophies_TOT?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
           <span>개</span>
         </div>

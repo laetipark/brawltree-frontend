@@ -21,21 +21,21 @@ const SeasonTable = ({ members, page, getPage }) => {
         <div className={styles.body}>
           {members.slice(offset, offset + 15).map((member) => {
             const matchChange =
-              member.MATCH_CHG > 0
-                ? `+${member.MATCH_CHG}개`
-                : `${member.MATCH_CHG}개`;
+              member.matchChange > 0
+                ? `+${member.matchChange}개`
+                : `${member.matchChange}개`;
 
             return (
               <TableBody
-                key={member.USER_ID}
-                col={member.USER_NM}
+                key={member.userID}
+                col={member.name}
                 colArray={[
-                  `${member.MATCH_CNT || 0}회`,
+                  `${member.matchCount || 0}회`,
                   matchChange,
-                  `${member.FRIEND_PT || 0}점`,
+                  `${member.friendPoints || 0}점`,
                 ]}
                 colImage={[null, null, null]}
-                id={member.USER_ID}
+                id={member.userID}
               />
             );
           })}

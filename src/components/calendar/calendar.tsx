@@ -50,7 +50,7 @@ const CalendarView = ({ date, beginDate, setDate }) => {
           minDate={beginDate}
           maxDate={new Date()}
           formatDay={(locale, date) => moment(date).format('D')}
-          onChange={(element) => {
+          onChange={(element: Date) => {
             setDate(
               new Date(new Date(element).getTime()),
               new Date(

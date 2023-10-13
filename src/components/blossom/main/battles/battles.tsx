@@ -12,7 +12,7 @@ const BattleSummary = ({ battles }) => {
       <div className={styles.battlesSummaryInfo}>
         <span>• 오늘 매치 수 </span>
         <span style={{ fontWeight: 600 }}>
-          {battles.MATCH_CNT_TOT?.toString().replace(
+          {battles.matchCount?.toString().replace(
             /\B(?=(\d{3})+(?!\d))/g,
             ',',
           )}

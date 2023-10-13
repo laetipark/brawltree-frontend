@@ -14,8 +14,8 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
         {battlesSummary && (
           <TimeRange
             data={battlesSummary[0]}
-            from={season.SEASON_BGN_DT?.slice(0, 10) || '2023-09-09'}
-            to={season.SEASON_END_DT?.slice(0, 10) || '2023-09-09'}
+            from={season.beginDate?.slice(0, 10) || '2023-09-09'}
+            to={season.endDate?.slice(0, 10) || '2023-09-10'}
             width={320}
             height={200}
             emptyColor={'#DDDDDD'}
@@ -52,29 +52,29 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
         <div className={styles.brawlerPicksWrapper}>
           {brawlersSummary?.map(
             ({
-              BRAWLER_ID,
-              BRAWLER_NM,
-              MATCH_CNT,
-              MATCH_PCK_R,
-              MATCH_VIC_R,
+              brawlerID,
+              name,
+              matchCount,
+              pickRate,
+              victoryRate,
             }) => {
               return (
-                <div key={BRAWLER_ID}>
+                <div key={brawlerID}>
                   <img
-                    src={`${config.assets}/brawlers/pins/${BRAWLER_ID}.webp`}
+                    src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
                     alt={'브롤러 프로필'}
                   />
                   <div className={styles.brawlerPicksContent}>
-                    <div>{BRAWLER_NM}</div>
-                    <div>{MATCH_CNT} 게임</div>
+                    <div>{name}</div>
+                    <div>{matchCount} 게임</div>
                   </div>
                   <div className={styles.brawlerPicksContent}>
                     <div>Pick</div>
-                    <div>{MATCH_PCK_R}%</div>
+                    <div>{pickRate}%</div>
                   </div>
                   <div className={styles.brawlerPicksContent}>
                     <div>Win</div>
-                    <div>{MATCH_VIC_R}%</div>
+                    <div>{victoryRate}%</div>
                   </div>
                 </div>
               );

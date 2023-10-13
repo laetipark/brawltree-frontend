@@ -8,7 +8,8 @@
   justify-content: space-around;
   background-color: #A8D1D1;
   padding: 12px;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .mapImage > img {
-  width: 60%;
+  width: 50%;
   object-fit: cover;
   object-position: center;
 }

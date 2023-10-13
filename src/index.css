@@ -29,7 +29,8 @@ p {
 
 h1, h2, h3,
 h4, h5, h6 {
-    font-family: "Main Bold", serif;
+    font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     margin: 0;
     padding: 0;
     white-space: nowrap;

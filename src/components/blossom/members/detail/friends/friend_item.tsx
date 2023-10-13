@@ -17,34 +17,34 @@ const UserFriendItem = ({ friend }) => {
         {friendDetail?.map((match) => {
           return (
             <div
-              key={`${match.USER_ID}_${match.FRIEND_ID}_${match.MAP_MD}_${match.MATCH_TYP}_${match.MATCH_GRD}`}
+              key={`${match.userID}_${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}
             >
               <div>
-                {match.MATCH_TYP === 0 ? (
+                {match.matchType === 0 ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/trophyLeague.webp`}
                     alt={'게임방식'}
                   />
-                ) : match.MATCH_TYP === 2 ? (
+                ) : match.matchType === 2 ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/powerLeagueSolo.webp`}
                     alt={'게임방식'}
                   />
-                ) : match.MATCH_TYP === 3 ? (
+                ) : match.matchType === 3 ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/powerLeagueTeam.webp`}
                     alt={'게임방식'}
                   />
-                ) : match.MATCH_TYP === '4' ? (
+                ) : match.matchType === '4' ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/challenge.webp`}
                     alt={'게임방식'}
                   />
-                ) : match.MATCH_TYP === '5' ? (
+                ) : match.matchType === '5' ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/challenge.webp`}
@@ -57,42 +57,42 @@ const UserFriendItem = ({ friend }) => {
                     alt={'게임방식'}
                   />
                 )}
-                <span style={{ fontWeight: 600 }}>{match.MATCH_CNT}</span>
+                <span style={{ fontWeight: 600 }}>{match.matchCount}</span>
                 <span>회</span>
                 <span>(</span>
                 <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                  {match.MATCH_CNT_VIC}
+                  {match.victoryCount}
                 </span>
                 <span>/</span>
                 <span style={{ color: '#556FB5', fontWeight: 600 }}>
                   {drwCount(
-                    match.MATCH_CNT,
-                    match.MATCH_CNT_VIC,
-                    match.MATCH_CNT_DEF,
+                    match.matchCount,
+                    match.victoryCount,
+                    match.defeatCount,
                   )}
                 </span>
                 <span>/</span>
                 <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                  {match.MATCH_CNT_DEF}
+                  {match.defeatCount}
                 </span>
                 <span>)</span>
               </div>
               <div>
-                {match.MATCH_TYP === 0 ? (
+                {match.matchType === 0 ? (
                   <img
                     className={styles.image}
-                    src={`${config.assets}/rank/trophy_league/${match.MATCH_GRD}.webp`}
+                    src={`${config.assets}/rank/trophy_league/${match.matchGrade}.webp`}
                     alt={'트로피 리그 랭크'}
                   />
-                ) : [2, 3].includes(match.MATCH_TYP) ? (
+                ) : [2, 3].includes(match.matchType) ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/rank/power_league/${Math.floor(
-                      (match.MATCH_GRD - 1) / 3,
+                      (match.matchGrade - 1) / 3,
                     )}.webp`}
                     alt={'파워 리그 랭크'}
                   />
-                ) : match.MATCH_TYP === 6 ? (
+                ) : match.matchType === 6 ? (
                   <img
                     className={styles.image}
                     src={`${config.assets}/modes/icon/clubLeague.webp`}
@@ -107,11 +107,11 @@ const UserFriendItem = ({ friend }) => {
                 )}
                 <span>승률</span>
                 <span style={{ fontWeight: 600 }}>
-                  {match.MATCH_CNT_VIC > 0
+                  {match.victoryCount > 0
                     ? Math.round(
-                        (match.MATCH_CNT_VIC /
-                          (parseInt(match.MATCH_CNT_VIC) +
-                            parseInt(match.MATCH_CNT_DEF))) *
+                        (match.victoryCount /
+                          (parseInt(match.victoryCount) +
+                            parseInt(match.defeatCount))) *
                           100,
                       )
                     : 0}
@@ -127,8 +127,8 @@ const UserFriendItem = ({ friend }) => {
 
   return (
     <Link
-      key={`${friend.USER_ID}_${friend.FRIEND_ID}`}
-      to={`/blossom/members/${friend.FRIEND_ID.replace('#', '')}`}
+      key={`${friend.userID}_${friend.friendID}`}
+      to={`/blossom/members/${friend.friendID.replace('#', '')}`}
       className={styles.friendWrapper}
     >
       <div
@@ -137,20 +137,20 @@ const UserFriendItem = ({ friend }) => {
         onMouseLeave={() => setHover(false)}
       >
         <h4>
-          {friend.FRIEND_NM}({Math.round(friend.FRIEND_PT * 100) / 100.0}점)
+          {friend.name}({Math.round(friend.friendPoints * 100) / 100.0}점)
         </h4>
         <div>
           <span>매치</span>
-          <span style={{ fontWeight: 600 }}>{friend.MATCH_CNT}</span>
+          <span style={{ fontWeight: 600 }}>{friend.matchCount}</span>
           <span>회</span>
           <span>/</span>
           <span>승률</span>
           <span style={{ fontWeight: 600 }}>
-            {friend.MATCH_CNT_VIC > 0
+            {friend.victoryCount > 0
               ? Math.round(
-                  (friend.MATCH_CNT_VIC /
-                    (parseInt(friend.MATCH_CNT_VIC) +
-                      parseInt(friend.MATCH_CNT_DEF))) *
+                  (friend.victoryCount /
+                    (parseInt(friend.victoryCount) +
+                      parseInt(friend.defeatCount))) *
                     100,
                 )
               : 0}
@@ -160,21 +160,21 @@ const UserFriendItem = ({ friend }) => {
         <div>
           <span style={{ color: '#5AA469' }}>승</span>
           <span style={{ color: '#5AA469', fontWeight: 600 }}>
-            {friend.MATCH_CNT_VIC}
+            {friend.victoryCount}
           </span>
           <span style={{ color: '#5AA469' }}>회</span>
           <span style={{ color: '#556FB5' }}>무</span>
           <span style={{ color: '#556FB5', fontWeight: 600 }}>
             {drwCount(
-              friend.MATCH_CNT,
-              friend.MATCH_CNT_VIC,
-              friend.MATCH_CNT_DEF,
+              friend.matchCount,
+              friend.victoryCount,
+              friend.defeatCount,
             )}
           </span>
           <span style={{ color: '#556FB5' }}>회</span>
           <span style={{ color: '#D35D6E' }}>패</span>
           <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-            {friend.MATCH_CNT_DEF}
+            {friend.defeatCount}
           </span>
           <span style={{ color: '#D35D6E' }}>회</span>
         </div>
@@ -188,7 +188,7 @@ const UserFriendItem = ({ friend }) => {
           padding: hover ? '10px' : 0,
         }}
       >
-        {getFriendInfo(friend.MATCH_L)}
+        {getFriendInfo(friend.matchList)}
       </div>
     </Link>
   );

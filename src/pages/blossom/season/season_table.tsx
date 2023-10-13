@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import UserMenuType from '~/components/menu/menu_type/menu_type';
 import UserMenuMode from '~/components/menu/menu_mode/menu_mode';
 import Pagination from '~/components/pagination/pagination';
-import Search from '~/components/search/search';
+import SearchMembers from '~/components/search/search_members';
 import TableHead from '~/components/table/members/head';
 import TableBody from '~/components/table/members/body';
 
@@ -45,8 +45,6 @@ const BattleTable = () => {
     });
   }, [type, mode]);
 
-  console.log(rotationTL);
-
   return (
     <div className={styles.app}>
       <div className={styles.battlesMenus}>
@@ -61,24 +59,24 @@ const BattleTable = () => {
       </div>
       <div className={styles.filter}>
         <Pagination page={page} total={total} setPage={setPage} />
-        <Search members={members} setFilterMembers={setFilterMembers} />
+        <SearchMembers members={members} setFilterMembers={setFilterMembers} />
       </div>
       <div className={styles.table}>
         <TableHead col={'닉네임'} colArray={['매치', '변화량']} />
         <div className={styles.body}>
           {filterMembers.slice(offset, offset + 15)?.map((member) => {
             const matchChange =
-              member.MATCH_CHG > 0
-                ? `+${member.MATCH_CHG}개`
-                : `${member.MATCH_CHG}개`;
+              member.matchChange > 0
+                ? `+${member.matchChange}개`
+                : `${member.matchChange}개`;
 
             return (
               <TableBody
-                key={member.USER_ID}
-                col={member.USER_NM}
-                colArray={[`${member.MATCH_CNT || 0}회`, matchChange]}
+                key={member.userID}
+                col={member.name}
+                colArray={[`${member.matchCount || 0}회`, matchChange]}
                 colImage={[null, null]}
-                id={member.USER_ID}
+                id={member.userID}
               />
             );
           })}

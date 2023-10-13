@@ -7,19 +7,19 @@ import styles from './brawler_stats.module.scss';
 const BrawlerStats = ({ brawler, brawlerStats }) => {
   const brawlerTL = brawlerStats.find((item) => {
     return (
-      item.BRAWLER_ID === brawler.BRAWLER_ID.toString() && item.MATCH_TYP === 0
+      item.brawlerID === brawler.brawlerID.toString() && item.matchType === 0
     );
   });
 
   const brawlerPLSolo = brawlerStats.find((item) => {
     return (
-      item.BRAWLER_ID === brawler.BRAWLER_ID.toString() && item.MATCH_TYP === 2
+      item.brawlerID === brawler.brawlerID.toString() && item.matchType === 2
     );
   });
 
   const brawlerPLTeam = brawlerStats.find((item) => {
     return (
-      item.BRAWLER_ID === brawler.BRAWLER_ID.toString() && item.MATCH_TYP === 3
+      item.brawlerID === brawler.brawlerID.toString() && item.matchType === 3
     );
   });
 
@@ -27,13 +27,13 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
     <div className={styles.brawlerStatsWrapper}>
       <div className={styles.brawlerTitle}>
         <img
-          src={`${config.assets}/brawlers/profiles/${brawler.BRAWLER_ID}.webp`}
-          alt={brawler.BRAWLER_ID}
+          src={`${config.assets}/brawlers/profiles/${brawler.brawlerID}.webp`}
+          alt={brawler.brawlerID}
         />
         <div>
-          <h3>{brawler.BRAWLER_NM}</h3>
+          <h3>{brawler.name}</h3>
           <span>
-            {brawler.BRAWLER_RRT}-{brawler.BRAWLER_CL}
+            {brawler.rarity}-{brawler.role}
           </span>
         </div>
       </div>
@@ -48,7 +48,7 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>트로피 리그 픽률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerTL?.MATCH_CNT_RATE * 100) / 100.0 || 0}
+                  {Math.round(brawlerTL?.pickRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -63,7 +63,7 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>트로피 리그 승률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerTL?.MATCH_CNT_VIC_RATE * 100) / 100.0 || 0}
+                  {Math.round(brawlerTL?.victoryRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -80,12 +80,12 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>파워 리그 픽률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerPLSolo?.MATCH_CNT_RATE * 100) / 100.0 || 0}
+                  {Math.round(brawlerPLSolo?.pickRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
                 <span>/</span>
                 <span>
-                  {Math.round(brawlerPLTeam?.MATCH_CNT_RATE * 100) / 100.0 || 0}
+                  {Math.round(brawlerPLTeam?.pickRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -100,13 +100,13 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               <div className={styles.rateTitle}>파워 리그 승률</div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerPLSolo?.MATCH_CNT_VIC_RATE * 100) /
+                  {Math.round(brawlerPLSolo?.victoryRate * 100) /
                     100.0 || 0}
                 </span>
                 <span>%</span>
                 <span>/</span>
                 <span>
-                  {Math.round(brawlerPLTeam?.MATCH_CNT_VIC_RATE * 100) /
+                  {Math.round(brawlerPLTeam?.victoryRate * 100) /
                     100.0 || 0}
                 </span>
                 <span>%</span>

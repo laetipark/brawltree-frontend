@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import TableHead from '~/components/table/members/head';
 import TableBody from '~/components/table/members/body';
 import Pagination from '~/components/pagination/pagination';
-import Search from '~/components/search/search';
+import SearchMembers from '~/components/search/search_members';
 
 import styles from './brawlers_table.module.scss';
 import BrawlerStats from '~/components/brawlers/brawler_stats';
@@ -14,11 +14,11 @@ const BrawlersTable = () => {
   const [brawlers, setBrawlers] = useState([]);
   const [brawlerStats, setBrawlerStats] = useState([]);
   const [brawler, setBrawler] = useState({
-    BRAWLER_ID: '16000000',
-    BRAWLER_NM: '쉘리',
-    BRAWLER_RRT: '기본',
-    BRAWLER_CL: '대미지 딜러',
-    BRAWLER_GNDR: '여성',
+    brawlerID: '16000000',
+    name: '쉘리',
+    rarity: '기본',
+    role: '대미지 딜러',
+    gender: '여성',
   });
 
   const [members, setMembers] = useState([]);
@@ -33,7 +33,7 @@ const BrawlersTable = () => {
       setBrawlerStats(data.stats);
     });
     BrawlerService.getBlossomMember({
-      brawlerID: brawler.BRAWLER_ID,
+      brawlerID: brawler.brawlerID,
     }).then((data) => {
       setMembers(data);
     });
@@ -41,11 +41,11 @@ const BrawlersTable = () => {
 
   useEffect(() => {
     BrawlerService.getBlossomMember({
-      brawlerID: brawler.BRAWLER_ID,
+      brawlerID: brawler.brawlerID,
     }).then((data) => {
       setMembers(data);
     });
-  }, [brawler.BRAWLER_ID]);
+  }, [brawler.brawlerID]);
 
   return (
     <div className={styles.app}>
@@ -53,7 +53,7 @@ const BrawlersTable = () => {
       <div>
         <div className={styles.filter}>
           <Pagination page={page} total={total} setPage={setPage} />
-          <Search members={members} setFilterMembers={setFilterMembers} />
+          <SearchMembers members={members} setFilterMembers={setFilterMembers} />
         </div>
         <BrawlerStats brawler={brawler} brawlerStats={brawlerStats} />
         <div className={styles.table}>
@@ -62,14 +62,14 @@ const BrawlersTable = () => {
             {filterMembers.slice(offset, offset + 10).map((member) => {
               return (
                 <TableBody
-                  key={`${member.USER_ID}_${member.BRAWLER_ID}`}
-                  col={member.USER_NM}
+                  key={`${member.userID}_${member.brawlerID}`}
+                  col={member.name}
                   colArray={[
-                    `${member.TROPHY_CUR}개`,
-                    `${member.TROPHY_HGH}개`,
+                    `${member.currentTrophies}개`,
+                    `${member.highestTrophies}개`,
                   ]}
                   colImage={[null, null]}
-                  id={member.USER_ID}
+                  id={member.userID}
                 />
               );
             })}

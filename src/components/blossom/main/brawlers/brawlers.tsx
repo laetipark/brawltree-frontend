@@ -18,22 +18,22 @@ const BrawlerSummary = ({ brawlersTL, brawlersPL }) => {
             {brawlersTL &&
               brawlersTL?.map((brawler) => {
                 return (
-                  <div key={brawler.BRAWLER_ID}>
+                  <div key={brawler.brawlerID}>
                     <img
-                      src={`${config.assets}/brawlers/pins/${brawler.BRAWLER_ID}.webp`}
-                      alt={brawler.BRAWLER_ID}
+                      src={`${config.assets}/brawlers/pins/${brawler.brawlerID}.webp`}
+                      alt={brawler.brawlerID}
                     />
                     <div>
                       <div>
                         <span>픽률</span>
                         <span style={{ fontFamily: '"Main Bold", serif' }}>
-                          {Math.round(brawler.MATCH_CNT_TL_RATE * 100) / 100}%
+                          {Math.round(brawler.trophyLeaguePickRate * 100) / 100}%
                         </span>
                       </div>
                       <div>
                         <span>승률</span>
                         <span style={{ fontFamily: '"Main Bold", serif' }}>
-                          {Math.round(brawler.MATCH_CNT_VIC_TL_RATE * 100) /
+                          {Math.round(brawler.trophyLeagueVictoryRate * 100) /
                             100}
                           %
                         </span>
@@ -50,22 +50,22 @@ const BrawlerSummary = ({ brawlersTL, brawlersPL }) => {
             {brawlersPL &&
               brawlersPL?.map((brawler) => {
                 return (
-                  <div key={brawler.BRAWLER_ID}>
+                  <div key={brawler.brawlerID}>
                     <img
-                      src={`${config.assets}/brawlers/pins/${brawler.BRAWLER_ID}.webp`}
-                      alt={brawler.BRAWLER_ID}
+                      src={`${config.assets}/brawlers/pins/${brawler.brawlerID}.webp`}
+                      alt={brawler.brawlerID}
                     />
                     <div>
                       <div>
                         <span>픽률</span>
                         <span style={{ fontFamily: '"Main Bold", serif' }}>
-                          {Math.round(brawler.MATCH_CNT_PL_RATE * 100) / 100}%
+                          {Math.round(brawler.matchCount_PL_RATE * 100) / 100}%
                         </span>
                       </div>
                       <div>
                         <span>승률</span>
                         <span style={{ fontFamily: '"Main Bold", serif' }}>
-                          {Math.round(brawler.MATCH_CNT_VIC_PL_RATE * 100) /
+                          {Math.round(brawler.powerLeagueVictoryRatePL_RATE * 100) /
                             100}
                           %
                         </span>

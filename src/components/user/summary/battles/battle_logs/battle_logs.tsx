@@ -10,32 +10,32 @@ import styles from './battle_logs.module.scss';
 const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
   const matchCount = recentBattles?.length || 0;
   const vicCount =
-    recentBattles?.filter(({ MATCH_RES }) => MATCH_RES === -1).length || 0;
+    recentBattles?.filter(({ matchResult }) => matchResult === -1).length || 0;
   const drwCount =
-    recentBattles?.filter(({ MATCH_RES }) => MATCH_RES === 0).length || 0;
+    recentBattles?.filter(({ matchResult }) => matchResult === 0).length || 0;
   const defCount =
-    recentBattles?.filter(({ MATCH_RES }) => MATCH_RES === 1).length || 0;
+    recentBattles?.filter(({ matchResult }) => matchResult === 1).length || 0;
 
   const artCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Artillery')
+    recentBattles?.filter(({ role }) => role === 'Artillery')
       .length || 0;
   const sinCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Assassin')
+    recentBattles?.filter(({ role }) => role === 'Assassin')
       .length || 0;
   const cntCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Controller')
+    recentBattles?.filter(({ role }) => role === 'Controller')
       .length || 0;
   const dmgCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Damage Dealer')
+    recentBattles?.filter(({ role }) => role === 'Damage Dealer')
       .length || 0;
   const mrkCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Marksman')
+    recentBattles?.filter(({ role }) => role === 'Marksman')
       .length || 0;
   const supCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Support')
+    recentBattles?.filter(({ role }) => role === 'Support')
       .length || 0;
   const tnkCount =
-    recentBattles?.filter(({ BRAWLER_CL }) => BRAWLER_CL === 'Tank').length ||
+    recentBattles?.filter(({ role }) => role === 'Tank').length ||
     0;
 
   const battleData = [
@@ -184,26 +184,26 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
               <span>사용한 브롤러 전투 기록</span>
             </div>
             {recentBrawlers?.map(
-              ({ BRAWLER_ID, BRAWLER_NM, MATCH_CNT_TOT, MATCH_CNT_RES }) => (
-                <div key={BRAWLER_ID} className={styles.battleLogsBrawlers}>
+              ({ brawlerID, name, matchCount, resultCount }) => (
+                <div key={brawlerID} className={styles.battleLogsBrawlers}>
                   <img
-                    src={`${config.assets}/brawlers/pins/${BRAWLER_ID}.webp`}
+                    src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
                     alt={'브롤러'}
                   />
                   <div>
-                    <div className={styles.brawlerName}>{BRAWLER_NM}</div>
+                    <div className={styles.brawlerName}>{name}</div>
                     <div className={styles.brawlerGame}>
-                      {MATCH_CNT_TOT} 게임
+                      {matchCount} 게임
                     </div>
                   </div>
                   <span style={{ color: '#5AA469' }}>
-                    {MATCH_CNT_RES['-1']}승
+                    {resultCount['-1']}승
                   </span>
                   <span style={{ color: '#556FB5' }}>
-                    {MATCH_CNT_RES['0'] || 0}무
+                    {resultCount['0'] || 0}무
                   </span>
                   <span style={{ color: '#D35D6E' }}>
-                    {MATCH_CNT_RES['1'] || 0}패
+                    {resultCount['1'] || 0}패
                   </span>
                 </div>
               ),
@@ -214,7 +214,7 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
           {battles?.map(({ BATTLE_INFO, BATTLE_PLAYERS }) => {
             return (
               <BattleLog
-                key={BATTLE_INFO.MATCH_DT}
+                key={BATTLE_INFO.matchDate}
                 BATTLE_INFO={BATTLE_INFO}
                 BATTLE_PLAYERS={BATTLE_PLAYERS}
               />

@@ -7,32 +7,32 @@ import config from '~/config/config';
 import styles from './brawler_detail.module.scss';
 
 const BrawlerDetail = ({
-  BRAWLER_ID,
-  BRAWLER_NM,
-  MATCH_PCK_R_PL,
-  MATCH_PCK_R_TL,
-  MATCH_VIC_R_PL,
-  MATCH_VIC_R_TL,
-  TROPHY_RNK,
+  brawlerID,
+  name,
+  powerLeaguePickRate,
+  trophyLeaguePickRate,
+  powerLeagueVictoryRate,
+  trophyLeagueVictoryRate,
+  brawlerRank,
   userBrawlerItems,
 }) => {
   const brawlerGadgets = userBrawlerItems?.filter(
-    ({ BRAWLER_ID: item, ITEM_K }) =>
-      item === BRAWLER_ID && ITEM_K === 'gadget',
+    ({ brawlerID: item, itemKind }) =>
+      item === brawlerID && itemKind === 'gadget',
   );
   const brawlerStarPowers = userBrawlerItems?.filter(
-    ({ BRAWLER_ID: item, ITEM_K }) =>
-      item === BRAWLER_ID && ITEM_K === 'starPower',
+    ({ brawlerID: item, itemKind }) =>
+      item === brawlerID && itemKind === 'starPower',
   );
   const brawlerGears = userBrawlerItems?.filter(
-    ({ BRAWLER_ID: item, ITEM_K }) => item === BRAWLER_ID && ITEM_K === 'gear',
+    ({ brawlerID: item, itemKind }) => item === brawlerID && itemKind === 'gear',
   );
 
   return (
     <div className={styles.brawlerDetailInfo}>
       <div>
         <img
-          src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
+          src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
           alt={'브롤러'}
         />
         <div>
@@ -42,7 +42,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Pick</span>
-          <span>{MATCH_PCK_R_TL}%</span>
+          <span>{trophyLeaguePickRate}%</span>
         </div>
         <div>
           <img
@@ -51,7 +51,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Win</span>
-          <span>{MATCH_VIC_R_TL}%</span>
+          <span>{trophyLeagueVictoryRate}%</span>
         </div>
         <div>
           <img
@@ -60,7 +60,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Pick</span>
-          <span>{MATCH_PCK_R_PL}%</span>
+          <span>{powerLeaguePickRate}%</span>
         </div>
         <div>
           <img
@@ -69,50 +69,50 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Win</span>
-          <span>{MATCH_VIC_R_PL}%</span>
+          <span>{powerLeagueVictoryRate}%</span>
         </div>
       </div>
       <div>
         <div>
           <img
             className={styles.brawlerRankImage}
-            src={`${config.assets}/rank/trophy_league/${TROPHY_RNK}.webp`}
+            src={`${config.assets}/rank/trophy_league/${brawlerRank}.webp`}
             alt={'브롤러'}
           />
-          <span className={styles.brawlerName}>{BRAWLER_NM}</span>
+          <span className={styles.brawlerName}>{name}</span>
         </div>
         {brawlerGadgets && (
           <div>
-            {brawlerGadgets?.map(({ ITEM_ID, ITEM_NM }) => (
+            {brawlerGadgets?.map(({ itemID, itemName }) => (
               <ItemTooltip
-                key={ITEM_ID}
-                ITEM_ID={ITEM_ID}
-                ITEM_NM={ITEM_NM}
-                ITEM_K={'gadget'}
+                key={itemID}
+                itemID={itemID}
+                itemName={itemName}
+                itemKind={'gadget'}
               />
             ))}
           </div>
         )}
         {brawlerStarPowers && (
           <div>
-            {brawlerStarPowers?.map(({ ITEM_ID, ITEM_NM }) => (
+            {brawlerStarPowers?.map(({ itemID, itemName }) => (
               <ItemTooltip
-                key={ITEM_ID}
-                ITEM_ID={ITEM_ID}
-                ITEM_NM={ITEM_NM}
-                ITEM_K={'starPower'}
+                key={itemID}
+                itemID={itemID}
+                itemName={itemName}
+                itemKind={'starPower'}
               />
             ))}
           </div>
         )}
         {brawlerGears && (
           <div>
-            {brawlerGears?.map(({ ITEM_ID, ITEM_NM }) => (
+            {brawlerGears?.map(({ itemID, itemName }) => (
               <ItemTooltip
-                key={ITEM_ID}
-                ITEM_ID={ITEM_ID}
-                ITEM_NM={ITEM_NM}
-                ITEM_K={'gear'}
+                key={itemID}
+                itemID={itemID}
+                itemName={itemName}
+                itemKind={'gear'}
               />
             ))}
           </div>

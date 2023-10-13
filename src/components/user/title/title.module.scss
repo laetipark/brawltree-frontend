@@ -39,7 +39,8 @@
 
 .realNameBox {
   font-size: 28px;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .codeNameBox {
@@ -64,7 +65,8 @@
   border: none;
   border-radius: 0.25rem;
   padding: 8px;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
 }
@@ -88,7 +90,8 @@
   border: none;
   border-radius: 0.25rem;
   padding: 8px;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
 }

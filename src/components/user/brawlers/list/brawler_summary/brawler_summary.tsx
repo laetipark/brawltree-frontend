@@ -8,38 +8,38 @@ import config from '~/config/config';
 import styles from './brawler_summary.module.scss';
 
 const BrawlerSummary = ({
-  BRAWLER_ID,
-  BRAWLER_NM,
-  TROPHY_BGN,
-  TROPHY_CUR,
-  TROPHY_HGH,
+  brawlerID,
+  name,
+  beginTrophies,
+  currentTrophies,
+  highestTrophies,
   checkedList,
   checkHandler,
 }) => {
   const trophyChange =
-    TROPHY_CUR - TROPHY_BGN > 0
-      ? `+${TROPHY_CUR - TROPHY_BGN}`
-      : TROPHY_CUR - TROPHY_BGN;
+    currentTrophies - beginTrophies > 0
+      ? `+${currentTrophies - beginTrophies}`
+      : currentTrophies - beginTrophies;
 
   return (
-    <div key={BRAWLER_ID}>
+    <div key={brawlerID}>
       <input
         className={styles.brawlerSummaryButton}
         type={'checkbox'}
-        id={`brawler_${BRAWLER_ID}`}
-        name={`brawler_${BRAWLER_ID}`}
-        checked={checkedList.includes(BRAWLER_ID)}
-        onChange={(e) => checkHandler(e, BRAWLER_ID)}
+        id={`brawler_${brawlerID}`}
+        name={`brawler_${brawlerID}`}
+        checked={checkedList.includes(brawlerID)}
+        onChange={(e) => checkHandler(e, brawlerID)}
       />
       <label
-        htmlFor={`brawler_${BRAWLER_ID}`}
+        htmlFor={`brawler_${brawlerID}`}
         className={styles.brawlerSummary}
       >
         <img
-          src={`${config.assets}/brawlers/profiles/${BRAWLER_ID}.webp`}
-          alt={BRAWLER_ID}
+          src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
+          alt={brawlerID}
         />
-        <h4>{BRAWLER_NM}</h4>
+        <h4>{name}</h4>
         <div>
           <img
             src={`${config.assets}/modes/icon/trophyLeague.webp`}
@@ -47,18 +47,18 @@ const BrawlerSummary = ({
           />
           <div className={styles.brawlerTrophy}>
             <div>현재</div>
-            <div>{TROPHY_CUR}개</div>
+            <div>{currentTrophies}개</div>
           </div>
           <div className={styles.brawlerTrophy}>
             <div>최고</div>
-            <div>{TROPHY_HGH}개</div>
+            <div>{highestTrophies}개</div>
           </div>
           <div className={styles.brawlerTrophy}>
             <div>변화량</div>
             <div>{trophyChange}개</div>
           </div>
         </div>
-        {checkedList.includes(BRAWLER_ID) ? (
+        {checkedList.includes(brawlerID) ? (
           <FontAwesomeIcon fontSize={10} icon={faArrowDown} />
         ) : (
           <FontAwesomeIcon fontSize={10} icon={faArrowUp} />
@@ -66,7 +66,7 @@ const BrawlerSummary = ({
       </label>
       <div
         className={styles.brawlerDetail}
-        style={{ display: checkedList.includes(BRAWLER_ID) ? 'flex' : 'none' }}
+        style={{ display: checkedList.includes(brawlerID) ? 'flex' : 'none' }}
       ></div>
     </div>
   );

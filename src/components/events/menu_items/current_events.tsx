@@ -21,7 +21,7 @@ const CurrentEvents = () => {
     (events?.length || 0 > 0) && (
       <div className={styles.eventsWrapper}>
         {events.map((event: Events) => {
-          return <EventItem key={event.MAP_ID} event={event} type={'end'} />;
+          return <EventItem key={event.mapID} event={event} type={'end'} />;
         })}
       </div>
     )

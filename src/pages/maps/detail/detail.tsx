@@ -14,21 +14,21 @@ const MapDetail = () => {
   const [type, setType] = useState('0');
   const [grade, setGrade] = useState(['0', '1', '2', '3', '4', '5', '6', '7']);
   const [mapInfo, setMapInfo] = useState({
-    MAP_ID: undefined,
-    ROTATION_TL_BOOL: false,
-    ROTATION_PL_BOOL: false,
+    mapID: undefined,
+    isTrophyLeague: false,
+    isPowerLeague: false,
   });
   const [brawlerStats, setBrawlerStats] = useState([]);
 
   useEffect(() => {
     MapService.getMap({ id, type, grade }).then((data) => {
       setMapInfo(data.map);
-      setBrawlerStats(data.map);
+      setBrawlerStats(data.stats);
     });
   }, [id, type, grade]);
 
   return (
-    mapInfo.MAP_ID && (
+    mapInfo.mapID && (
       <div className={styles.app}>
         <MapInfo mapInfo={mapInfo} />
         <MapMenu
@@ -36,8 +36,8 @@ const MapDetail = () => {
           grade={grade}
           setType={setType}
           setGrade={setGrade}
-          rotationTL={mapInfo.ROTATION_TL_BOOL}
-          rotationPL={mapInfo.ROTATION_PL_BOOL}
+          rotationTL={mapInfo.isTrophyLeague}
+          rotationPL={mapInfo.isPowerLeague}
         />
         <MapStats brawlers={brawlerStats} />
       </div>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import styles from './search.module.scss';
+import styles from './search_members.module.scss';
 
 interface InputData {
-  USER_NM?: string;
+  name?: string;
 }
 
-const Search = ({ members, setFilterMembers }) => {
+const SearchMembers = ({ members, setFilterMembers }) => {
   const [keyword, setKeyword] = useState<string>('');
 
   const onChangeData = (e: React.FormEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ const Search = ({ members, setFilterMembers }) => {
   const updateData = () => {
     const filter = keyword
       ? members.filter((list: InputData) =>
-          new RegExp(`${keyword}.*`, `g`).test(list.USER_NM.toLowerCase()),
+          new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase()),
         )
       : members;
     setFilterMembers(filter);
@@ -43,4 +43,4 @@ const Search = ({ members, setFilterMembers }) => {
   );
 };
 
-export default Search;
+export default SearchMembers;

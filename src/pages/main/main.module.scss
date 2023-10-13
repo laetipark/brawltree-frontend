@@ -4,9 +4,10 @@
   flex-direction: column;
   justify-content: flex-start;
   align-content: center;
+  align-items: center;
   flex: 1;
   padding: 12px;
-  gap: 8px;
+  gap: 12px;
 }
 
 @media (min-width: 576px) {
@@ -33,6 +34,8 @@
 .titleBox {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 360px;
   font-family: 'Logo Font', serif;
 }
 
@@ -43,7 +46,8 @@
 }
 
 .titleBox > div > img {
-  width: 40px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
 }
 
@@ -56,29 +60,33 @@
 .inputBox {
   display: flex;
   align-items: center;
-  width: 320px;
+  justify-content: center;
+  position: relative;
+  width: 360px;
   font-size: 24px;
 }
 
-.inputBox > svg {
-  padding: 10px;
+.inputBox > img {
+  height: 28px;
+  padding: 8px;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   background-color: #76BA99;
-  color: white;
 }
 
 .inputBox > input {
+  width: 240px;
+  height: 28px;
+  z-index: 2;
   border: none;
-  padding: 10px;
-  width: 178px;
-  height: 24px;
+  border-radius: 0;
+  padding: 8px;
   font-size: 16px;
 }
 
-
 .inputBox > button {
-  padding: 10px;
+  padding: 8px;
+  width: 80px;
   height: 44px;
   background-color: #CA955C;
   border: none;
@@ -91,4 +99,25 @@
 
 .inputBox > button:hover {
   background-color: #876445;
+}
+
+.findTagToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 360px;
+  gap: 4px;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  & > h3 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.howToFindTag {
+  width: 360px;
+  object-fit: contain;
 }

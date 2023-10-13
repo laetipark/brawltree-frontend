@@ -12,7 +12,7 @@ const EventItem = ({ event, type }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const nextTime = moment(
-    type === 'end' ? event.ROTATION_END_DT : event.ROTATION_BGN_DT,
+    type === 'end' ? event.endDate : event.beginDate,
   );
   const diffTime = {
     day: type === 'end' ? moment.duration(nextTime.diff(moment())).days() : 0,
@@ -41,12 +41,12 @@ const EventItem = ({ event, type }) => {
 
   return (
     <div
-      key={event.ROTATION_BGN_DT?.toString()}
+      key={event.beginDate?.toString()}
       className={styles.eventWrapper}
       onClick={() => {
         navigate(
           `${!/\/blossom.*/g.test(location.pathname) ? '' : '/blossom'}/maps/${
-            event.MAP_ID
+            event.mapID
           }`,
         );
       }}
@@ -54,12 +54,12 @@ const EventItem = ({ event, type }) => {
       <div>
         <div className={styles.eventTitle}>
           <img
-            src={`${config.assets}/modes/icon/${event.MAP_MD}.webp`}
-            alt={event.MAP_MD}
+            src={`${config.assets}/modes/icon/${event.mode}.webp`}
+            alt={event.mode}
           />
           <div>
             <div>
-              <span className={styles.content}>{event.MAP_NM}</span>
+              <span className={styles.content}>{event.name}</span>
             </div>
             {type && (
               <div>
@@ -75,8 +75,8 @@ const EventItem = ({ event, type }) => {
         <div>
           <img
             className={styles.eventBanner}
-            src={`${config.assets}/modes/banner/${event.MAP_MD}.webp`}
-            alt={event.MAP_MD}
+            src={`${config.assets}/modes/banner/${event.mode}.webp`}
+            alt={event.mode}
           />
         </div>
       </div>

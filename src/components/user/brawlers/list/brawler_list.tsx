@@ -55,73 +55,73 @@ const UserBrawlerList = () => {
       <div className={styles.brawlerListContent}>
         {brawlers?.map(
           ({
-            BRAWLER_ID,
-            BRAWLER_NM,
-            BRAWLER_RRT,
-            MATCH_PCK_R_PL,
-            MATCH_PCK_R_TL,
-            MATCH_VIC_R_PL,
-            MATCH_VIC_R_TL,
-            TROPHY_BGN,
-            TROPHY_CUR,
-            TROPHY_HGH,
-            TROPHY_RNK,
+            brawlerID,
+            name,
+            rarity,
+            powerLeaguePickRate,
+            trophyLeaguePickRate,
+            powerLeagueVictoryRate,
+            trophyLeagueVictoryRate,
+            beginTrophies,
+            currentTrophies,
+            highestTrophies,
+            brawlerRank,
           }) => {
             const brawlerData = brawlerGraphs?.filter(
-              (item) => item.BRAWLER_ID === BRAWLER_ID,
+              (item) => item.brawlerID === brawlerID,
             );
             const brawlerGraphData = [
               {
-                id: BRAWLER_ID,
+                id: brawlerID,
                 color: 'hsl(137, 70%, 50%)',
                 data: brawlerData,
               },
             ];
 
             return (
-              <div key={BRAWLER_ID}>
+              <div key={brawlerID}>
                 <BrawlerSummary
-                  BRAWLER_ID={BRAWLER_ID}
-                  BRAWLER_NM={BRAWLER_NM}
-                  TROPHY_BGN={TROPHY_BGN}
-                  TROPHY_CUR={TROPHY_CUR}
-                  TROPHY_HGH={TROPHY_HGH}
+                  brawlerID={brawlerID}
+                  name={name}
+                  beginTrophies={beginTrophies}
+                  currentTrophies={currentTrophies}
+                  highestTrophies={highestTrophies}
                   checkedList={checkedList}
                   checkHandler={checkHandler}
                 />
                 <div
                   className={styles.brawlerDetail}
                   style={{
-                    display: checkedList.includes(BRAWLER_ID) ? 'flex' : 'none',
+                    display: checkedList.includes(brawlerID) ? 'flex' : 'none',
                     backgroundColor:
-                      BRAWLER_RRT === 'Trophy Road'
+                      rarity === 'Trophy Road'
                         ? '#CDFCF6'
-                        : BRAWLER_RRT === 'Rare'
+                        : rarity === 'Rare'
                         ? '#C3EDC0'
-                        : BRAWLER_RRT === 'Super Rare'
+                        : rarity === 'Super Rare'
                         ? '#BCCEF8'
-                        : BRAWLER_RRT === 'Epic'
+                        : rarity === 'Epic'
                         ? '#B2A4FF'
-                        : BRAWLER_RRT === 'Mythic'
+                        : rarity === 'Mythic'
                         ? '#FFB4B4'
-                        : BRAWLER_RRT === 'Legendary'
+                        : rarity === 'Legendary'
                         ? '#FDF7C3'
                         : '',
                     backgroundImage: `linear-gradient(${
-                      BRAWLER_RRT === 'Chromatic'
+                      rarity === 'Chromatic'
                         ? '45deg, #B2A4FF 20%, #FFB4B4 50%, #FDF7C3 80%'
                         : ''
                     })`,
                   }}
                 >
                   <BrawlerDetail
-                    BRAWLER_ID={BRAWLER_ID}
-                    BRAWLER_NM={BRAWLER_NM}
-                    MATCH_PCK_R_PL={MATCH_PCK_R_PL}
-                    MATCH_PCK_R_TL={MATCH_PCK_R_TL}
-                    MATCH_VIC_R_PL={MATCH_VIC_R_PL}
-                    MATCH_VIC_R_TL={MATCH_VIC_R_TL}
-                    TROPHY_RNK={TROPHY_RNK}
+                    brawlerID={brawlerID}
+                    name={name}
+                    powerLeaguePickRate={powerLeaguePickRate}
+                    trophyLeaguePickRate={trophyLeaguePickRate}
+                    powerLeagueVictoryRate={powerLeagueVictoryRate}
+                    trophyLeagueVictoryRate={trophyLeagueVictoryRate}
+                    brawlerRank={brawlerRank}
                     userBrawlerItems={brawlerItems}
                   />
                   {brawlerGraphData[0].data.length > 1 && (

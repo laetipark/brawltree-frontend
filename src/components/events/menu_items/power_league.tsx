@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import config from '~/config/config';
 
@@ -8,7 +7,6 @@ import styles from '~/components/events/menu_items/menu_items.module.scss';
 import EventItem from '~/components/events/menu_items/event_item/event_item';
 
 const TomorrowEvents = () => {
-  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -21,7 +19,7 @@ const TomorrowEvents = () => {
     (events?.length || 0 > 0) && (
       <div className={styles.eventsWrapper}>
         {events.map((event) => {
-          return <EventItem key={event.MAP_ID} event={event} type={null} />;
+          return <EventItem key={event.mapID} event={event} type={null} />;
         })}
       </div>
     )

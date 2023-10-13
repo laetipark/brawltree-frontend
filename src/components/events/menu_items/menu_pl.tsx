@@ -16,7 +16,7 @@ const PLEvents = () => {
     (events?.length || 0 > 0) && (
       <div className={styles.eventsWrapper}>
         {events.map((event) => {
-          return <EventItem key={event.MAP_ID} event={event} type={null} />;
+          return <EventItem key={event.mapID} event={event} type={null} />;
         })}
       </div>
     )

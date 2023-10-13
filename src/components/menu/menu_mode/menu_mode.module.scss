@@ -15,7 +15,8 @@
   background-color: #A8DE8E;
   border: none;
   border-radius: 4px;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   gap: 4px;
 }
@@ -53,7 +54,8 @@
   padding: 8px 0 8px 0;
   border: none;
   background-color: #A8DE8E;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   gap: 4px;
   transition: background-color 0.2s ease-in-out;

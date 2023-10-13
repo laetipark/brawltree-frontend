@@ -19,22 +19,22 @@ const EventsSummary = ({ events }) => {
           events.map((event) => {
             return (
               <div
-                key={event.MAP_ID}
+                key={event.mapID}
                 className={styles.mapItem}
                 onClick={() => {
-                  navigate(`./maps/${event.MAP_ID}`);
+                  navigate(`./maps/${event.mapID}`);
                 }}
               >
                 <img
-                  src={`${config.assets}/modes/icon/${event.MAP_MD}.webp`}
-                  alt={event.MAP_MD}
+                  src={`${config.assets}/modes/icon/${event.mode}.webp`}
+                  alt={event.mode}
                 />
                 <div>
-                  <div style={{ fontFamily: '"Main Bold", serif' }}>{event.MAP_NM}</div>
+                  <div style={{ fontFamily: '"Main Bold", serif' }}>{event.name}</div>
                   <div>
                     <span>종료</span>
                     <span style={{ fontWeight: 600 }}>
-                      {moment(event.ROTATION_END_DT).format('YYYY-MM-DD HH')}
+                      {moment(event.endDate).format('YYYY-MM-DD HH')}
                     </span>
                     <span>시</span>
                   </div>

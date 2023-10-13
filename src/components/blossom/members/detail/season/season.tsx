@@ -17,11 +17,11 @@ const UserSeasonRecords = () => {
   const [soloPLToggle, setSoloPLToggle] = useState(false);
   const [teamPLToggle, setTeamPLToggle] = useState(false);
 
-  const totalMatchCount =
+  const matchCount =
     seasonRecords.length !== 0
       ? Math.round(
           seasonRecords.reduce((sum, value) => {
-            return sum + (value.MATCH_CNT || 0);
+            return sum + (value.matchCount || 0);
           }, 0) * 100,
         ) / 100
       : 0;
@@ -29,7 +29,7 @@ const UserSeasonRecords = () => {
     seasonRecords.length !== 0
       ? Math.round(
           seasonRecords.reduce((sum, value) => {
-            return sum + (value.MATCH_CNT_VIC || 0);
+            return sum + (value.victoryCount || 0);
           }, 0) * 100,
         ) / 100
       : 0;
@@ -37,21 +37,21 @@ const UserSeasonRecords = () => {
     seasonRecords.length !== 0
       ? Math.round(
           seasonRecords.reduce((sum, value) => {
-            return sum + (value.MATCH_CNT_DEF || 0);
+            return sum + (value.defeatCount || 0);
           }, 0) * 100,
         ) / 100
       : 0;
 
   const trophyMatches = seasonRecords?.find((item) => {
-    return item.MATCH_TYP === 0;
+    return item.matchType === 0;
   });
 
   const soloPLMatches = seasonRecords?.find((item) => {
-    return item.MATCH_TYP === 2;
+    return item.matchType === 2;
   });
 
   const teamPLMatches = seasonRecords?.find((item) => {
-    return item.MATCH_TYP === 3;
+    return item.matchType === 3;
   });
 
   const drwCount = (matchCount, vicCount, defCount) => {
@@ -68,7 +68,7 @@ const UserSeasonRecords = () => {
   const typeMenu = (matches, toggle, setToggle, typeName) => {
     return (
       matches !== undefined &&
-      matches.MATCH_L.length > 0 && (
+      matches.matchList.length > 0 && (
         <React.Fragment>
           <h3
             className={styles.seasonStatsToggle}
@@ -89,62 +89,62 @@ const UserSeasonRecords = () => {
               <h4 className={styles.seasonStatsSummary}>
                 <span style={{ color: '#5AA469' }}>승</span>
                 <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                  {matches.MATCH_CNT_VIC}
+                  {matches.victoryCount}
                 </span>
                 <span style={{ color: '#5AA469' }}>회</span>
                 <span style={{ color: '#556FB5' }}>무</span>
                 <span style={{ color: '#556FB5', fontWeight: 600 }}>
                   {drwCount(
-                    matches.MATCH_CNT,
-                    matches.MATCH_CNT_VIC,
-                    matches.MATCH_CNT_DEF,
+                    matches.matchCount,
+                    matches.victoryCount,
+                    matches.defeatCount,
                   )}
                 </span>
                 <span style={{ color: '#556FB5' }}>회</span>
                 <span style={{ color: '#D35D6E' }}>패</span>
                 <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                  {matches.MATCH_CNT_DEF}
+                  {matches.defeatCount}
                 </span>
                 <span style={{ color: '#D35D6E' }}>회</span>
                 <span>/</span>
                 <span style={{ fontWeight: 600 }}>
-                  승률 {vicRate(matches.MATCH_CNT_VIC, matches.MATCH_CNT_DEF)}
+                  승률 {vicRate(matches.victoryCount, matches.defeatCount)}
                 </span>
                 <span>%</span>
               </h4>
               <div className={styles.matchList}>
-                {matches.MATCH_L?.map((record) => {
+                {matches.matchList?.map((record) => {
                   return (
                     <div
-                      key={`${record.USER_ID}_${record.MAP_MD}_${record.MATCH_TYP}_${record.MATCH_GRD}`}
+                      key={`${record.userID}_${record.mode}_${record.matchType}_${record.matchGrade}`}
                     >
                       <img
                         className={styles.modeImage}
-                        src={`${config.assets}/modes/icon/${record.MAP_MD}.webp`}
+                        src={`${config.assets}/modes/icon/${record.mode}.webp`}
                         alt={'게임모드'}
                       />
                       <div>
                         <div className={styles.seasonStatsSummary}>
                           <span>매치</span>
                           <span style={{ fontWeight: 600 }}>
-                            {record.MATCH_CNT}
+                            {record.matchCount}
                           </span>
                           <span>회</span>
                           <span>(</span>
                           <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                            {record.MATCH_CNT_VIC}
+                            {record.victoryCount}
                           </span>
                           <span>/</span>
                           <span style={{ color: '#556FB5', fontWeight: 600 }}>
                             {drwCount(
-                              record.MATCH_CNT,
-                              record.MATCH_CNT_VIC,
-                              record.MATCH_CNT_DEF,
+                              record.matchCount,
+                              record.victoryCount,
+                              record.defeatCount,
                             )}
                           </span>
                           <span>/</span>
                           <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                            {record.MATCH_CNT_DEF}
+                            {record.defeatCount}
                           </span>
                           <span>)</span>
                         </div>
@@ -153,9 +153,9 @@ const UserSeasonRecords = () => {
                             className={styles.rankImage}
                             src={`${config.assets}/rank/${
                               typeName === '트로피 리그'
-                                ? `trophy_league/${record.MATCH_GRD}`
+                                ? `trophy_league/${record.matchGrade}`
                                 : `power_league/${Math.floor(
-                                    (record.MATCH_GRD - 1) / 3,
+                                    (record.matchGrade - 1) / 3,
                                   )}`
                             }.webp`}
                             alt={'트로피 리그 랭크'}
@@ -163,8 +163,8 @@ const UserSeasonRecords = () => {
                           <span>승률</span>
                           <span style={{ fontWeight: 600 }}>
                             {vicRate(
-                              record.MATCH_CNT_VIC,
-                              record.MATCH_CNT_DEF,
+                              record.victoryCount,
+                              record.defeatCount,
                             )}
                           </span>
                           <span>%</span>
@@ -185,13 +185,13 @@ const UserSeasonRecords = () => {
     <div className={styles.seasonWrapper}>
       <div>
         <h2>
-          시즌 기록<span>({totalMatchCount}회)</span>
+          시즌 기록<span>({matchCount}회)</span>
         </h2>
         <h4 className={styles.seasonStatsSummary}>
           <span style={{ color: '#5AA469' }}>승 {totalMatchVicCount}회</span>
           <span style={{ color: '#556FB5' }}>무</span>
           <span style={{ color: '#556FB5', fontWeight: 600 }}>
-            {drwCount(totalMatchCount, totalMatchVicCount, totalMatchDefCount)}
+            {drwCount(matchCount, totalMatchVicCount, totalMatchDefCount)}
           </span>
           <span style={{ color: '#556FB5' }}>회</span>
           <span style={{ color: '#D35D6E' }}>패</span>

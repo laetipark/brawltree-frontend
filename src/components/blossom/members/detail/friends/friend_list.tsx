@@ -19,7 +19,7 @@ const UserFriendList = () => {
           {friends.length !== 0
             ? Math.round(
                 friends.reduce((sum, value) => {
-                  return sum + (value.FRIEND_PT || 0);
+                  return sum + (value.friendPoints || 0);
                 }, 0) * 100,
               ) / 100
             : 0}
@@ -28,7 +28,7 @@ const UserFriendList = () => {
       </h2>
       <div>
         {friends?.map((friend) => {
-          return <UserFriendItem key={friend.FRIEND_ID} friend={friend} />;
+          return <UserFriendItem key={friend.friendID} friend={friend} />;
         })}
       </div>
     </div>

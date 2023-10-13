@@ -24,7 +24,8 @@
 .itemName {
   display: flex;
   align-items: center;
-  font-family: "Main Bold", serif;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 20px;
   gap: 8px;
 }
