@@ -184,14 +184,14 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
               <span>사용한 브롤러 전투 기록</span>
             </div>
             {recentBrawlers?.map(
-              ({ brawlerID, name, matchCount, resultCount }) => (
+              ({ brawlerID, brawlerName, matchCount, resultCount }) => (
                 <div key={brawlerID} className={styles.battleLogsBrawlers}>
                   <img
                     src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
                     alt={'브롤러'}
                   />
                   <div>
-                    <div className={styles.brawlerName}>{name}</div>
+                    <div className={styles.brawlerName}>{brawlerName}</div>
                     <div className={styles.brawlerGame}>
                       {matchCount} 게임
                     </div>

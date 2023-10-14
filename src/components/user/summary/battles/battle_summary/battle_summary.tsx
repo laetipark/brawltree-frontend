@@ -13,9 +13,9 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
       <div>
         {battlesSummary && (
           <TimeRange
-            data={battlesSummary[0]}
-            from={season.beginDate?.slice(0, 10) || '2023-09-09'}
-            to={season.endDate?.slice(0, 10) || '2023-09-10'}
+            data={battlesSummary[0] || [{ day: '2023-09-09', value: 0 }]}
+            from={season?.beginDate?.slice(0, 10) || '2023-09-09'}
+            to={season?.endDate?.slice(0, 10) || '2023-09-10'}
             width={320}
             height={200}
             emptyColor={'#DDDDDD'}
@@ -51,13 +51,7 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
       {(brawlersSummary?.length || 0) > 0 && (
         <div className={styles.brawlerPicksWrapper}>
           {brawlersSummary?.map(
-            ({
-              brawlerID,
-              name,
-              matchCount,
-              pickRate,
-              victoryRate,
-            }) => {
+            ({ brawlerID, name, matchCount, pickRate, victoryRate }) => {
               return (
                 <div key={brawlerID}>
                   <img
