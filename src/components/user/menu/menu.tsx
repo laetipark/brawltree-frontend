@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import UserSummary from '~/components/user/summary';
 import UserBrawlers from '~/components/user/brawlers/';
@@ -6,6 +7,7 @@ import UserBrawlers from '~/components/user/brawlers/';
 import styles from './menu.module.scss';
 
 const UserMenu = () => {
+  const { t } = useTranslation();
   const [menu, setMenu] = useState('summary');
 
   const handleRadioButton = ({ target }) => {
@@ -26,7 +28,7 @@ const UserMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'summary'}>
-              <div>Summary</div>
+              <div>{t(`user.menu.summary`)}</div>
             </label>
           </li>
           <li>
@@ -39,7 +41,7 @@ const UserMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'brawlers'}>
-              <div>Brawlers</div>
+              <div>{t(`user.menu.brawlers`)}</div>
             </label>
           </li>
         </ul>

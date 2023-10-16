@@ -82,6 +82,8 @@
 }
 
 .brawlerPicksContent > div:nth-child(2) {
+  display: flex;
   font-size: 9px;
   color: #0B666A;
+  gap: 4px;
 }

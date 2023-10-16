@@ -18,6 +18,7 @@
     "incremental": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "paths": {
       "~/config/*": [
         "./src/config/*"
@@ -42,6 +43,9 @@
       ],
       "~/utils/*": [
         "./src/utils/*"
+      ],
+      "~/locales/*": [
+        "./src/locales/*"
       ]
     }
   },

@@ -16,10 +16,10 @@
     const [brawlerStats, setBrawlerStats] = useState([]);
     const [brawler, setBrawler] = useState({
       brawlerID: '16000000',
-      name: '쉘리',
-      rarity: '기본',
-      role: '대미지 딜러',
-      gender: '여성',
+      name: 'SHELLY',
+      rarity: 'Trophy Road',
+      role: 'Damage Dealer',
+      gender: 'Female',
     });
 
     const [members, setMembers] = useState([]);

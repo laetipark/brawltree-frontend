@@ -5,8 +5,11 @@ import TomorrowEvents from './menu_items/menu_tl_tomorrow';
 import PowerLeagueEvents from './menu_items/menu_pl';
 
 import styles from './index.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const EventMenu = () => {
+  const { t } = useTranslation();
+
   const [menu, setMenu] = useState('curr');
 
   const handleRadioButton = ({ target }) => {
@@ -27,7 +30,7 @@ const EventMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'curr'}>
-              <div>Current</div>
+              <div>{t('map.event.current')}</div>
             </label>
           </li>
           <li>
@@ -40,7 +43,7 @@ const EventMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'next'}>
-              <div>Tomorrow</div>
+              <div>{t('map.event.tomorrow')}</div>
             </label>
           </li>
           <li>
@@ -53,7 +56,7 @@ const EventMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'pl'}>
-              <div>Power League</div>
+              <div>{t('map.event.powerLeague')}</div>
             </label>
           </li>
         </ul>

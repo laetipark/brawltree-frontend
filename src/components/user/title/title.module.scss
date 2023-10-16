@@ -37,48 +37,55 @@
   width: 80px;
 }
 
-.realNameBox {
-  font-size: 28px;
+.realName {
+  font-size: 24px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-.codeNameBox {
-  height: 19px;
-  font-size: 12px;
+.userTag {
+  color: #666666;
+  font-size: 14px;
 }
 
-.tagBox {
-  font-size: 15px;
+.crewName {
+  display: flex;
+  height: 18px;
+  font-size: 12px;
+  gap: 2px;
 }
+
 
 .reloadBox {
   display: flex;
   align-items: center;
-  gap: 1%;
 }
 
 .reloadButton {
-  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 240px;
   text-align: center;
   background-color: #9DC08B;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   padding: 8px;
+  gap: 4px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
-}
 
-.reloadButton:hover {
-  background-color: #609966;
+  &:hover {
+    background-color: #609966;
+  }
 }
 
 .copyBox {
   display: flex;
   justify-content: space-between;
-  gap: 1%;
+  gap: 8px;
 }
 
 .copyButton {
@@ -88,7 +95,7 @@
   text-decoration: none;
   background-color: #9DC08B;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   padding: 8px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;

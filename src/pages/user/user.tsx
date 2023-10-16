@@ -69,6 +69,7 @@ const User = () => {
         if (data !== null) {
           setUser(data.user);
           setProfile(data.profile);
+          setRetryCount(retryCount + 1);
         } else {
           setRetryCount(retryCount + 1);
         }

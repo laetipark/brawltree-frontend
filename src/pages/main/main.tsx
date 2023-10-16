@@ -1,16 +1,19 @@
 import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import InputField from '~/components/main/input_field';
 import ResultField from '~/components/main/result_field';
 
 import debounce from '~/utils/debounce';
 
-import styles from './main.module.scss';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import styles from './main.module.scss';
+
 const Main = () => {
+  const { t } = useTranslation();
   const [inputValue, setInputValue] = useState<string>('');
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
@@ -53,7 +56,7 @@ const Main = () => {
               transition: 'transform 0.3s ease',
             }}
           />
-          <span>유저 태그 찾는 법</span>
+          <span>{t(`main.findTag`)}</span>
         </h3>
         {toggle && (
           <img

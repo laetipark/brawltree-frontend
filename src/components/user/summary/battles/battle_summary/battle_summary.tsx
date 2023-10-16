@@ -4,8 +4,11 @@ import { TimeRange } from '@nivo/calendar';
 import config from '~/config/config';
 
 import styles from './battle_summary.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
+  const { t } = useTranslation();
+
   const colors = ['#9DC08B', '#609966', '#557153', '#40513B'];
 
   return (
@@ -56,11 +59,14 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
                 <div key={brawlerID}>
                   <img
                     src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
-                    alt={'브롤러 프로필'}
+                    alt={brawlerID}
                   />
                   <div className={styles.brawlerPicksContent}>
-                    <div>{name}</div>
-                    <div>{matchCount} 게임</div>
+                    <div>{t(`brawler.brawler.${name}`)}</div>
+                    <div>
+                      <span>{matchCount}</span>
+                      <span>{t('application.game')}</span>
+                    </div>
                   </div>
                   <div className={styles.brawlerPicksContent}>
                     <div>Pick</div>

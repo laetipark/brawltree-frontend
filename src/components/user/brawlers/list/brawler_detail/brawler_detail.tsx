@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ItemTooltip from '~/components/items/item_info/item_info';
 
 import config from '~/config/config';
@@ -42,7 +41,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Pick</span>
-          <span>{trophyLeaguePickRate}%</span>
+          <span style={{fontWeight: 600}}>{trophyLeaguePickRate}%</span>
         </div>
         <div>
           <img
@@ -51,7 +50,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Win</span>
-          <span>{trophyLeagueVictoryRate}%</span>
+          <span style={{fontWeight: 600}}>{trophyLeagueVictoryRate}%</span>
         </div>
         <div>
           <img
@@ -60,7 +59,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Pick</span>
-          <span>{powerLeaguePickRate}%</span>
+          <span style={{fontWeight: 600}}>{powerLeaguePickRate}%</span>
         </div>
         <div>
           <img
@@ -69,7 +68,7 @@ const BrawlerDetail = ({
             alt={'브롤러'}
           />
           <span>Win</span>
-          <span>{powerLeagueVictoryRate}%</span>
+          <span style={{fontWeight: 600}}>{powerLeagueVictoryRate}%</span>
         </div>
       </div>
       <div>

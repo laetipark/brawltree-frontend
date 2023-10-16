@@ -1,5 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from 'react-i18next';
+import moment from 'moment';
+import useInterval from '~/hooks/use_interval';
 
 import UserContext from '~/context/user_context';
 
@@ -8,8 +11,19 @@ import config from '~/config/config';
 import styles from './title.module.scss';
 
 const UserTitle = () => {
+  const { t } = useTranslation();
+
   const context = useContext(UserContext);
-  const { user } = context;
+  const { user, setRetryCount } = context;
+  const [lastUpdatedDiff, setLastUpdatedDiff] = useState(
+    moment.duration(moment().diff(moment(user.updatedAt))).asMinutes(),
+  );
+
+  useInterval(() => {
+    setLastUpdatedDiff(
+      moment.duration(moment().diff(moment(user.updatedAt))).asMinutes(),
+    );
+  }, 1000);
 
   return (
     <div className={styles.titleWrapper}>
@@ -22,24 +36,38 @@ const UserTitle = () => {
           />
         )}
         <div>
-          <div className={styles.realNameBox}>{`${user.name}`}</div>
-          <p className={styles.tagBox}>{user.userID}</p>
+          <div className={styles.realName}>{`${user.name}`}</div>
+          <div className={styles.userTag}>{user.userID}</div>
+          <div className={styles.crewName}>
+            <span>{`${user.crew}`}</span>
+            <span>[{`${user.crewName}`}]</span>
+          </div>
         </div>
       </div>
       <div className={styles.reloadBox}>
-        <button className={styles.reloadButton}>프로필 갱신</button>
-        1분 전
+        <button
+          className={styles.reloadButton}
+          onClick={() => {
+            if (lastUpdatedDiff > 2) {
+              setRetryCount(0);
+            }
+          }}
+        >
+          <span>{t(`user.title.update`)}</span>
+          <span>{Math.floor(lastUpdatedDiff)}</span>
+          <span>{t(`user.title.updateAgo`)}</span>
+        </button>
       </div>
       <div className={styles.copyBox}>
         <CopyToClipboard
           text={user.userID}
-          onCopy={() => alert('태그를 복사했습니다.')}
+          onCopy={() => alert(t(`user.title.copyAlert`))}
         >
-          <span className={styles.copyButton}>태그 복사</span>
+          <span className={styles.copyButton}>{t(`user.title.copyTag`)}</span>
         </CopyToClipboard>
         <CopyToClipboard text={user.userID}>
           <a className={styles.copyButton} href={'brawlstars://'}>
-            태그 복사 + 게임 실행
+            {t(`user.title.copyTagAndRun`)}
           </a>
         </CopyToClipboard>
       </div>

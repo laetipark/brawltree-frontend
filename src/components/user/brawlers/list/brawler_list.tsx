@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Line } from '@nivo/line';
 
 import BrawlerSummary from '~/components/user/brawlers/list/brawler_summary/brawler_summary';
@@ -10,6 +11,8 @@ import UserContext from '~/context/user_context';
 import styles from './brawler_list.module.scss';
 
 const UserBrawlerList = () => {
+  const { t } = useTranslation();
+
   const context = useContext(UserContext);
   const { id } = context;
 
@@ -77,12 +80,13 @@ const UserBrawlerList = () => {
                 data: brawlerData,
               },
             ];
+            const brawlerName = t(`brawler.brawler.${name}`)
 
             return (
               <div key={brawlerID}>
                 <BrawlerSummary
                   brawlerID={brawlerID}
-                  name={name}
+                  name={brawlerName}
                   beginTrophies={beginTrophies}
                   currentTrophies={currentTrophies}
                   highestTrophies={highestTrophies}
@@ -116,7 +120,7 @@ const UserBrawlerList = () => {
                 >
                   <BrawlerDetail
                     brawlerID={brawlerID}
-                    name={name}
+                    name={brawlerName}
                     powerLeaguePickRate={powerLeaguePickRate}
                     trophyLeaguePickRate={trophyLeaguePickRate}
                     powerLeagueVictoryRate={powerLeagueVictoryRate}
@@ -182,7 +186,7 @@ const UserBrawlerList = () => {
                       pointLabelYOffset={-12}
                       useMesh={true}
                       animate={false}
-                    ></Line>
+                    />
                   )}
                 </div>
               </div>

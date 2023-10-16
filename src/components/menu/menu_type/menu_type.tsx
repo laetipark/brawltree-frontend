@@ -1,24 +1,21 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import useWindowClick from '~/hooks/use_window_click';
 
 import config from '~/config/config';
 
 import styles from './menu_type.module.scss';
 
-const image = {
+const typeNumber = {
   7: 'all',
   0: 'trophyLeague',
   2: 'powerLeagueSolo',
   3: 'powerLeagueTeam',
 };
-const content = {
-  7: 'ALL',
-  0: 'Trophy League',
-  2: 'Power League(Solo)',
-  3: 'Power League(Team)',
-};
 
 const MenuType = ({ type, setMatchType }) => {
+  const { t } = useTranslation();
+
   const dropDownRef = useRef();
   const [checked, setChecked] = useWindowClick(dropDownRef, false);
 
@@ -31,10 +28,10 @@ const MenuType = ({ type, setMatchType }) => {
         }}
       >
         <img
-          src={`${config.assets}/modes/icon/${image[type]}.webp`}
+          src={`${config.assets}/modes/icon/${typeNumber[type]}.webp`}
           alt={'type_7'}
         />
-        <div>{content[type]}</div>
+        <div>{t(`battle.type.${typeNumber[type]}`)}</div>
       </button>
       <div
         className={styles.typeMenuList}
@@ -54,7 +51,7 @@ const MenuType = ({ type, setMatchType }) => {
         />
         <label htmlFor={'type_7'}>
           <img src={`${config.assets}/modes/icon/all.webp`} alt={'type_7'} />
-          <div>ALL</div>
+          <div>{t('battle.type.all')}</div>
         </label>
         <input
           className={styles.typeButton}
@@ -73,7 +70,7 @@ const MenuType = ({ type, setMatchType }) => {
             src={`${config.assets}/modes/icon/trophyLeague.webp`}
             alt={'type_0'}
           />
-          <div>트로피 리그</div>
+          <div>{t('battle.type.trophyLeague')}</div>
         </label>
         <input
           className={styles.typeButton}
@@ -92,7 +89,7 @@ const MenuType = ({ type, setMatchType }) => {
             src={`${config.assets}/modes/icon/powerLeagueSolo.webp`}
             alt={'type_2'}
           />
-          <div>파워 리그(솔로)</div>
+          <div>{t('battle.type.powerLeagueSolo')}</div>
         </label>
         <input
           className={styles.typeButton}
@@ -111,7 +108,7 @@ const MenuType = ({ type, setMatchType }) => {
             src={`${config.assets}/modes/icon/powerLeagueTeam.webp`}
             alt={'type_3'}
           />
-          <div>파워 리그(팀)</div>
+          <div>{t('battle.type.powerLeagueTeam')}</div>
         </label>
       </div>
     </div>

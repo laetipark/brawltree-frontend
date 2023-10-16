@@ -7,31 +7,34 @@ import UserContext from '~/context/user_context';
 import config from '~/config/config';
 
 import styles from './record.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const roman = ['I', 'II', 'III'];
 
 const UserRecord = () => {
+  const { t } = useTranslation();
+
   const context = useContext(UserContext);
   const { profile } = context;
 
   return (
     <div className={styles.recordWrapper}>
       <TableHorizontal
-        headRow={'현재 기록'}
+        headRow={t('user.record.currentRecord')}
         bodyRowContents={[
-          ['현재 트로피', `${profile.currentTrophies}개`],
+          [t('user.record.trophies'), `${profile.currentTrophies}개`],
           [
-            '트로피 변화량',
+            t('user.record.trophyChange'),
             `${
               profile.trophyChange > 0
                 ? `+${profile.trophyChange}`
                 : profile.trophyChange
             }개`,
           ],
-          ['솔로 리그 현재 랭크', roman[profile.currentSoloPL % 3]],
-          ['팀 리그 현재 랭크', roman[profile.currentTeamPL % 3]],
+          [t('user.record.soloLeagueRank'), roman[profile.currentSoloPL % 3]],
+          [t('user.record.teamLeagueRank'), roman[profile.currentTeamPL % 3]],
           [
-            '소속 클럽',
+            t('user.record.club'),
             profile?.clubName?.replace(/(<+)([/c]+|c[1-9])(>)/g, '') ||
               'No Club',
           ],
@@ -55,16 +58,16 @@ const UserRecord = () => {
         ]}
       />
       <TableHorizontal
-        headRow={'누적 기록'}
+        headRow={t('user.record.personalRecord')}
         bodyRowContents={[
-          ['최고 트로피', `${profile.highestTrophies}개`],
-          ['3vs3 승리', `${profile.tripleVictories}회`],
-          ['듀오 승리', `${profile.duoVictories}회`],
-          ['25랭크 개수', `${profile.rank25Brawlers}개`],
-          ['30랭크 개수', `${profile.rank30Brawlers}개`],
-          ['35랭크 개수', `${profile.rank35Brawlers}개`],
-          ['솔로 리그 최고 랭크', roman[profile.highestSoloPL % 3]],
-          ['팀 리그 최고 랭크', roman[profile.highestTeamPL % 3]],
+          [t('user.record.highestTrophies'), `${profile.highestTrophies}개`],
+          [t('user.record.tripleVictories'), `${profile.tripleVictories}회`],
+          [t('user.record.duoVictories'), `${profile.duoVictories}회`],
+          [t('user.record.rank25Brawlers'), `${profile.rank25Brawlers}개`],
+          [t('user.record.rank30Brawlers'), `${profile.rank30Brawlers}개`],
+          [t('user.record.rank35Brawlers'), `${profile.rank35Brawlers}개`],
+          [t('user.record.highestSoloPL'), roman[profile.highestSoloPL % 3]],
+          [t('user.record.highestTeamPL'), roman[profile.highestTeamPL % 3]],
         ]}
         bodyRowImages={[
           [null, null],

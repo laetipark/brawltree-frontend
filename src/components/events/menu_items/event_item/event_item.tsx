@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import useInterval from '~/hooks/use_interval';
@@ -9,6 +10,8 @@ import config from '~/config/config';
 import styles from './event_item.module.scss';
 
 const EventItem = ({ event, type }) => {
+  const { t } = useTranslation();
+
   const location = useLocation();
   const navigate = useNavigate();
   const nextTime = moment(
@@ -59,14 +62,26 @@ const EventItem = ({ event, type }) => {
           />
           <div>
             <div>
-              <span className={styles.content}>{event.name}</span>
+              <span className={styles.content}>
+                {t(`map.map.${event.mapID}`) || event.name}
+              </span>
             </div>
             {type && (
               <div>
                 <span className={styles.content}>
-                  {`${type === 'end' ? '종료까지' : '시작까지'} ${
-                    diffTime.day
-                  }일 ${diffTime.hour}시간 ${diffTime.minute}분`}
+                  {`${
+                    type === 'end'
+                      ? t('map.event.endsIn')
+                      : t('map.event.startsIn')
+                  } ${diffTime.day}${
+                    t('map.event.d')
+                  } ${
+                    diffTime.hour
+                  }${
+                    t('map.event.h')
+                  } ${diffTime.minute}${
+                    t('map.event.m')
+                  }`}
                 </span>
               </div>
             )}

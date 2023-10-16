@@ -1,10 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from '~/config/config';
 
 import styles from './brawler_stats.module.scss';
 
 const BrawlerStats = ({ brawler, brawlerStats }) => {
+  const { t } = useTranslation();
+
   const brawlerTL = brawlerStats.find((item) => {
     return (
       item.brawlerID === brawler.brawlerID.toString() && item.matchType === 0
@@ -31,9 +34,13 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
           alt={brawler.brawlerID}
         />
         <div>
-          <h3>{brawler.name}</h3>
+          <h3>{t(`brawler.brawler.${brawler.name}`)}</h3>
           <span>
-            {brawler.rarity}-{brawler.role}
+            {t(`brawler.brawlerRarity.${brawler.rarity}`)}
+          </span>
+          <span>-</span>
+          <span>
+            {t(`brawler.brawlerRole.${brawler.role}`)}
           </span>
         </div>
       </div>
@@ -45,7 +52,9 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               alt={'트로피'}
             />
             <div>
-              <div className={styles.rateTitle}>트로피 리그 픽률</div>
+              <div className={styles.rateTitle}>
+                {t('brawler.stats.trophyLeaguePick')}
+              </div>
               <div className={styles.rateContent}>
                 <span>
                   {Math.round(brawlerTL?.pickRate * 100) / 100.0 || 0}
@@ -60,7 +69,9 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               alt={'트로피'}
             />
             <div>
-              <div className={styles.rateTitle}>트로피 리그 승률</div>
+              <div className={styles.rateTitle}>
+                {t('brawler.stats.trophyLeagueWin')}
+              </div>
               <div className={styles.rateContent}>
                 <span>
                   {Math.round(brawlerTL?.victoryRate * 100) / 100.0 || 0}
@@ -77,7 +88,9 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               alt={'powerLeague'}
             />
             <div>
-              <div className={styles.rateTitle}>파워 리그 픽률</div>
+              <div className={styles.rateTitle}>
+                {t('brawler.stats.powerLeaguePick')}
+              </div>
               <div className={styles.rateContent}>
                 <span>
                   {Math.round(brawlerPLSolo?.pickRate * 100) / 100.0 || 0}
@@ -97,7 +110,9 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               alt={'powerLeague'}
             />
             <div>
-              <div className={styles.rateTitle}>파워 리그 승률</div>
+              <div className={styles.rateTitle}>
+                {t('brawler.stats.powerLeagueWin')}
+              </div>
               <div className={styles.rateContent}>
                 <span>
                   {Math.round(brawlerPLSolo?.victoryRate * 100) /

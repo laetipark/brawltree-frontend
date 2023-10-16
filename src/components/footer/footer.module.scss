@@ -1,22 +1,47 @@
 .footerWrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 60px;
   padding: 20px;
   background-color: #343A40;
-}
-
-.footerWrapper > div {
-  display: flex;
-  justify-content: center;
   color: white;
   gap: 20px;
 }
 
-.footerWrapper > div > a {
+.footerLinks {
   display: flex;
-  color: white;
-  text-decoration: none;
+  justify-content: start;
+  width: 380px;
+  gap: 20px;
+
+  & > a {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.languageMenu {
+  display: flex;
   align-items: center;
-  gap: 8px;
+  position: relative;
+  width: 80px;
+  height: 20px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #9DC08B;
+
+  & > ul {
+    position: absolute;
+    left: -1px;
+    bottom: 40px;
+    width: 80px;
+    list-style: none;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #9DC08B;
+  }
 }

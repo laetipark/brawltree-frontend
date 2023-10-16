@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
+import { useTranslation } from 'react-i18next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +9,7 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from './header.module.scss';
 
 const Header = ({ dir }) => {
+  const { t } = useTranslation();
   const [isToggled, setIsToggled] = useState(false);
 
   return (
@@ -33,7 +35,10 @@ const Header = ({ dir }) => {
               setIsToggled(!isToggled);
             }}
           >
-            <FontAwesomeIcon icon={!isToggled ? faBars : faTimes} fontSize={24} />
+            <FontAwesomeIcon
+              icon={!isToggled ? faBars : faTimes}
+              fontSize={24}
+            />
           </div>
           <ul
             className={styles.menuList}
@@ -47,16 +52,17 @@ const Header = ({ dir }) => {
               <React.Fragment>
                 <li>
                   <Link to={'/'} onClick={() => setIsToggled(false)}>
-                    메인
+                    <span>{t('application.header.main')}</span>
                   </Link>
                 </li>
-                {/*<li>
-              <Link to={'/brawler'}
-                    onClick={() => setIsToggled(false)}>브롤러</Link>
-            </li>*/}
+                <li>
+                  <Link to={'/brawler'} onClick={() => setIsToggled(false)}>
+                    <span>{t('application.header.brawler')}</span>
+                  </Link>
+                </li>
                 <li>
                   <Link to={'/events'} onClick={() => setIsToggled(false)}>
-                    로테이션
+                    <span>{t('application.header.events')}</span>
                   </Link>
                 </li>
                 {/*<li>
