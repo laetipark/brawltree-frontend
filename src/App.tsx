@@ -6,6 +6,7 @@ import Footer from '~/components/footer/footer';
 
 import Main from '~/pages/main/main';
 import User from '~/pages/user/user';
+import Brawlers from '~/pages/brawler/brawlers';
 import Events from '~/pages/events/events';
 import MapDetail from '~/pages/maps/detail/detail';
 import BlossomMain from '~/pages/blossom/main/main';
@@ -32,8 +33,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/brawlian/:id" element={<User />} />
+        <Route path="/brawler" element={<Brawlers />} />
         <Route path="/events" element={<Events />} />
         <Route path="/maps/:id" element={<MapDetail />} />
+
         <Route path="/blossom" element={<BlossomMain />} />
         <Route path="/blossom/members" element={<BlossomMembers />} />
         <Route path="/blossom/members/:id" element={<User />} />

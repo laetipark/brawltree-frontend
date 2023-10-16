@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import UserMenuType from '~/components/menu/menu_type/menu_type';
-import UserMenuMode from '~/components/menu/menu_mode/menu_mode';
+import UserMenuType from '~/components/menu/type_n_mode/menu_type/menu_type';
+import UserMenuMode from '~/components/menu/type_n_mode/menu_mode/menu_mode';
 import Pagination from '~/components/pagination/pagination';
 import SearchMembers from '~/components/search/search_members';
 import CalendarView from '~/components/calendar/calendar';

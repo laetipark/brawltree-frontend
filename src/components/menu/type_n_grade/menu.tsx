@@ -4,7 +4,7 @@ import config from '~/config/config';
 
 import styles from './menu.module.scss';
 
-const MapsMenu = ({
+const MenuTypeNGrade = ({
   type,
   grade,
   setType,
@@ -142,4 +142,4 @@ const MapsMenu = ({
     </div>
   );
 };
-export default MapsMenu;
+export default MenuTypeNGrade;

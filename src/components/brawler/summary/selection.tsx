@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import config from '~/config/config';
 
-import styles from './brawler_selection.module.scss';
+import styles from './selection.module.scss';
 
 const BrawlerSelection = ({ brawlers, setBrawler }) => {
   const [radio, setRadio] = useState('16000000');

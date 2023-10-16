@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import UserMenuType from '~/components/menu/menu_type/menu_type';
-import UserMenuMode from '~/components/menu/menu_mode/menu_mode';
+import UserMenuType from '~/components/menu/type_n_mode/menu_type/menu_type';
+import UserMenuMode from '~/components/menu/type_n_mode/menu_mode/menu_mode';
 import UserBattleSummary from '~/components/user/summary/battles/battle_summary/battle_summary';
 import UserBattleLogs from '~/components/user/summary/battles/battle_logs/battle_logs';
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import MapInfo from '~/components/maps/detail';
-import MapMenu from '~/components/maps/detail/menu/menu';
+import MapMenu from '~/components/menu/type_n_grade/menu';
 import MapStats from '~/components/maps/detail/stats/stats';
 
 import MapService from '~/services/map_service';

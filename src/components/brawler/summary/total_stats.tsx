@@ -3,21 +3,17 @@ import { useTranslation } from 'react-i18next';
 
 import config from '~/config/config';
 
-import styles from './brawler_stats.module.scss';
+import styles from './total_stats.module.scss';
 
-const BrawlerStats = ({ brawler, brawlerStats }) => {
+const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
   const { t } = useTranslation();
 
-  const brawlerTL = brawlerStats.find((item) => {
-    return (
-      item.brawlerID === brawler.brawlerID.toString() && item.matchType === 0
-    );
+  const brawlerTL = brawlerStats.find(({ brawlerID, matchType }) => {
+    return brawlerID === brawler.brawlerID.toString() && matchType === 0;
   });
 
-  const brawlerPLSolo = brawlerStats.find((item) => {
-    return (
-      item.brawlerID === brawler.brawlerID.toString() && item.matchType === 2
-    );
+  const brawlerPLSolo = brawlerStats.find(({ brawlerID, matchType }) => {
+    return brawlerID === brawler.brawlerID.toString() && matchType === 2;
   });
 
   const brawlerPLTeam = brawlerStats.find((item) => {
@@ -35,13 +31,9 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
         />
         <div>
           <h3>{t(`brawler.brawler.${brawler.name}`)}</h3>
-          <span>
-            {t(`brawler.brawlerRarity.${brawler.rarity}`)}
-          </span>
+          <span>{t(`brawler.brawlerRarity.${brawler.rarity}`)}</span>
           <span>-</span>
-          <span>
-            {t(`brawler.brawlerRole.${brawler.role}`)}
-          </span>
+          <span>{t(`brawler.brawlerRole.${brawler.role}`)}</span>
         </div>
       </div>
       <div className={styles.brawlerContent}>
@@ -115,14 +107,12 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
               </div>
               <div className={styles.rateContent}>
                 <span>
-                  {Math.round(brawlerPLSolo?.victoryRate * 100) /
-                    100.0 || 0}
+                  {Math.round(brawlerPLSolo?.victoryRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
                 <span>/</span>
                 <span>
-                  {Math.round(brawlerPLTeam?.victoryRate * 100) /
-                    100.0 || 0}
+                  {Math.round(brawlerPLTeam?.victoryRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
               </div>
@@ -134,4 +124,4 @@ const BrawlerStats = ({ brawler, brawlerStats }) => {
   );
 };
 
-export default BrawlerStats;
+export default BrawlerTotalStats;
