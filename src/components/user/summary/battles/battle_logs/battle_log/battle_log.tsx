@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
 import UserContext from '~/context/user_context';
@@ -10,9 +11,7 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 import config from '~/config/config';
 
 import styles from './battle_log.module.scss';
-import { useTranslation } from 'react-i18next';
 
-const matchResults = ['Victory', 'Draw', 'Defeat'];
 const matchResultColors = ['#9ED2BE', '#9EA1D4', '#FD8A8A'];
 const typeArray = {
   0: 'trophyLeague',

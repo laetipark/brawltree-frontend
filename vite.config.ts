@@ -32,8 +32,16 @@ export default defineConfig({
         replacement: resolve(__dirname, 'src/images'),
       },
       {
+        find: '~/locales',
+        replacement: resolve(__dirname, 'src/locales'),
+      },
+      {
         find: '~/pages',
         replacement: resolve(__dirname, 'src/pages'),
+      },
+      {
+        find: '~/utils',
+        replacement: resolve(__dirname, 'src/utils'),
       },
     ],
   },

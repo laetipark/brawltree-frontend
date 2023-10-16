@@ -23,9 +23,6 @@
       "~/config/*": [
         "./src/config/*"
       ],
-      "~/pages/*": [
-        "./src/pages/*"
-      ],
       "~/components/*": [
         "./src/components/*"
       ],
@@ -38,15 +35,18 @@
       "~/interfaces/*": [
         "./src/interfaces/*"
       ],
+      "~/locales/*": [
+        "./src/locales/*"
+      ],
+      "~/pages/*": [
+        "./src/pages/*"
+      ],
       "~/services/*": [
         "./src/services/*"
       ],
       "~/utils/*": [
         "./src/utils/*"
       ],
-      "~/locales/*": [
-        "./src/locales/*"
-      ]
     }
   },
   "include": [
