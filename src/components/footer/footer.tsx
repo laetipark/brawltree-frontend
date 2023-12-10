@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '~/locales/i18n';
 
 import styles from './footer.module.scss';
-import useWindowClick from '~/hooks/use_window_click';
+import useWindowClick from '~/hooks/use-window-click';
 
 const Footer = () => {
   const { t } = useTranslation();

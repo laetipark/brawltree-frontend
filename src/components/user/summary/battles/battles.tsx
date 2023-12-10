@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
-import UserMenuType from '~/components/menu/type_n_mode/menu_type/menu_type';
-import UserMenuMode from '~/components/menu/type_n_mode/menu_mode/menu_mode';
-import UserBattleSummary from '~/components/user/summary/battles/battle_summary/battle_summary';
-import UserBattleLogs from '~/components/user/summary/battles/battle_logs/battle_logs';
+import UserMenuType from '~/components/menu/type-n-mode/menu-type/menu-type';
+import UserMenuMode from '~/components/menu/type-n-mode/menu-mode/menu-mode';
+import UserBattleSummary from '~/components/user/summary/battles/stats/battle-stats';
+import UserBattleLogs from '~/components/user/summary/battles/logs/battle-logs';
 
-import UserContext from '~/context/user_context';
+import UserContext from '~/context/user-context';
 
 import styles from './battles.module.scss';
 

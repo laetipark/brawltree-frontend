@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import InputField from '~/components/main/input_field';
-import ResultField from '~/components/main/result_field';
+import InputField from '~/components/main/input-field';
+import ResultField from '~/components/main/result-field';
 
 import debounce from '~/utils/debounce';
 

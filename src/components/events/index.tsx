@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import TLCurrentEvents from './menu_items/menu_tl_current';
-import TomorrowEvents from './menu_items/menu_tl_tomorrow';
-import PowerLeagueEvents from './menu_items/menu_pl';
+import TLCurrentEvents from '~/components/events/list/menu-tl-current';
+import TomorrowEvents from '~/components/events/list/menu-tl-tomorrow';
+import PowerLeagueEvents from '~/components/events/list/menu-pl';
 
 import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';

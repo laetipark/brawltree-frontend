@@ -1,6 +1,6 @@
 import React from 'react-router-dom';
 
-import UserBrawlerList from '~/components/user/brawlers/list/brawler_list';
+import UserBrawlerList from '~/components/user/brawlers/list/brawler-list';
 
 import styles from './index.module.scss';
 

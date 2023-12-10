@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import UserContext from '~/context/user_context';
+import UserContext from '~/context/user-context';
 
 import config from '~/config/config';
 
@@ -162,10 +162,7 @@ const UserSeasonRecords = () => {
                           />
                           <span>승률</span>
                           <span style={{ fontWeight: 600 }}>
-                            {vicRate(
-                              record.victoryCount,
-                              record.defeatCount,
-                            )}
+                            {vicRate(record.victoryCount, record.defeatCount)}
                           </span>
                           <span>%</span>
                         </div>

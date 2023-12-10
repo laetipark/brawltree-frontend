@@ -7,7 +7,7 @@ import styles from './selection.module.scss';
 const BrawlerSelection = ({ brawlers, setBrawler }) => {
   const [radio, setRadio] = useState('16000000');
   const handleRadioButton = (brawler) => {
-    setRadio(brawler.brawlerID);
+    setRadio(brawler.id);
     setBrawler(brawler);
   };
 
@@ -16,25 +16,22 @@ const BrawlerSelection = ({ brawlers, setBrawler }) => {
       <div>
         {brawlers?.map((brawler) => {
           return (
-            <React.Fragment key={brawler.brawlerID}>
+            <React.Fragment key={brawler.id}>
               <input
                 type="radio"
                 className={styles.brawlerButton}
-                id={brawler.brawlerID}
-                name={brawler.brawlerID}
-                value={brawler.brawlerID}
-                checked={radio === brawler.brawlerID}
+                id={brawler.id}
+                name={brawler.id}
+                value={brawler.id}
+                checked={radio === brawler.id}
                 onChange={() => {
                   handleRadioButton(brawler);
                 }}
               />
-              <label
-                htmlFor={brawler.brawlerID}
-                className={styles.brawlerImage}
-              >
+              <label htmlFor={brawler.id} className={styles.brawlerImage}>
                 <img
-                  src={`${config.assets}/brawlers/profiles/${brawler.brawlerID}.webp`}
-                  alt={brawler.brawlerID}
+                  src={`${config.assets}/brawlers/profiles/${brawler.id}.webp`}
+                  alt={brawler.id}
                 />
               </label>
             </React.Fragment>

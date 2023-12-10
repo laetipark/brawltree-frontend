@@ -2,9 +2,9 @@ import React, { useContext, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import useInterval from '~/hooks/use_interval';
+import useInterval from '~/hooks/use-interval';
 
-import UserContext from '~/context/user_context';
+import UserContext from '~/context/user-context';
 
 import config from '~/config/config';
 
@@ -28,15 +28,15 @@ const UserTitle = () => {
   return (
     <div className={styles.titleWrapper}>
       <div className={styles.titleBox}>
-        {user.profile !== '' && (
+        {user.profileIcon !== '' && (
           <img
             className={styles.image}
-            src={`${config.assets}/brawlian/profile/${user.profile}.webp`}
-            alt={user.profile}
+            src={`${config.assets}/brawlian/profile/${user.profileIcon}.webp`}
+            alt={user.profileIcon}
           />
         )}
         <div>
-          <div className={styles.realName}>{`${user.name}`}</div>
+          <div className={styles.realName}>{`${user.userName}`}</div>
           <div className={styles.userTag}>{user.userID}</div>
           <div className={styles.crewName}>
             <span>{`${user.crew}`}</span>

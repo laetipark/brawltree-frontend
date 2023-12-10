@@ -10,10 +10,10 @@ import Brawlers from '~/pages/brawler/brawlers';
 import Events from '~/pages/events/events';
 import MapDetail from '~/pages/maps/detail/detail';
 import BlossomMain from '~/pages/blossom/main/main';
-import BlossomMembers from '~/pages/blossom/members/members_table';
-import BlossomBrawlers from '~/pages/blossom/brawlers/brawlers_table';
-import BlossomBattles from '~/pages/blossom/battles/battles_table';
-import BlossomSeason from '~/pages/blossom/season/season_table';
+import BlossomMembers from '~/pages/blossom/members/members-table';
+import BlossomBrawlers from '~/pages/blossom/brawlers/brawlers-table';
+import BlossomBattles from '~/pages/blossom/battles/battles-table';
+import BlossomSeason from '~/pages/blossom/season/season-table';
 
 const App = () => {
   const location = useLocation();

@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "module": "esnext",
+    "noEmitOnError": true,
     "lib": [
       "dom",
       "dom.iterable",
@@ -10,16 +12,17 @@
       "vite/client",
       "vite-plugin-svgr/client"
     ],
-    "module": "esnext",
     "allowJs": true,
     "outDir": "./dist",
-    "noEmitOnError": true,
     "moduleResolution": "node",
     "incremental": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
+      "~/common/*": [
+        "./src/common/*"
+      ],
       "~/config/*": [
         "./src/config/*"
       ],
@@ -46,7 +49,7 @@
       ],
       "~/utils/*": [
         "./src/utils/*"
-      ],
+      ]
     }
   },
   "include": [

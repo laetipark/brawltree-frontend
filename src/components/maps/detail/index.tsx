@@ -16,25 +16,21 @@ const MapInfo = ({ mapInfo }) => {
             src={`${config.assets}/modes/icon/${mapInfo.mode}.webp`}
             alt={mapInfo.mode}
           />
-        <span>
-          {t(`map.map.${mapInfo.mapID}`) || mapInfo.name}
-        </span>
+          <span>{t(`map.map.${mapInfo.mapID}`) || mapInfo.mapName}</span>
         </div>
         <div>
-          {
-            mapInfo.isTrophyLeague > 0 &&
+          {mapInfo.isTrophyLeague > 0 && (
             <img
               src={`${config.assets}/modes/icon/trophyLeague.webp`}
               alt={`trophyLeague`}
             />
-          }
-          {
-            mapInfo.isPowerLeague > 0 &&
+          )}
+          {mapInfo.isPowerLeague > 0 && (
             <img
               src={`${config.assets}/modes/icon/powerLeague.webp`}
               alt={`trophyLeague`}
             />
-          }
+          )}
         </div>
       </div>
       <div className={styles.mapImage}>

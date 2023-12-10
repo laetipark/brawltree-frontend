@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from './report-web-vitals';
 
 import './index.css';
 import './locales/i18n';

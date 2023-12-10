@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import BrawlerTotalStats from '~/components/brawler/summary/total_stats';
+import BrawlerTotalStats from '~/components/brawler/summary/total-stats';
 import BrawlerSelection from '~/components/brawler/summary/selection';
-import BrawlerService from '~/services/brawler_service';
+import BrawlerService from '~/services/brawler.service';
 
 import styles from './brawlers.module.scss';
-import BrawlerStatsSummary from '~/components/brawler/summary/stats_summary';
+import BrawlerStatsSummary from '~/components/brawler/summary/stats-summary';
 
 const Brawlers = () => {
   const [brawlers, setBrawlers] = useState([]);
   const [totalBrawlerStats, setBrawlerTotalStats] = useState([]);
   const [brawler, setBrawler] = useState({
-    brawlerID: '16000000',
+    id: '16000000',
     name: 'SHELLY',
     rarity: 'Trophy Road',
     role: 'Damage Dealer',

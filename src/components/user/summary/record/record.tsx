@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import TableHorizontal from '~/components/table/horizontal/table';
 
-import UserContext from '~/context/user_context';
+import UserContext from '~/context/user-context';
 
 import config from '~/config/config';
 
@@ -61,15 +61,17 @@ const UserRecord = () => {
         headRow={t('user.record.personalRecord')}
         bodyRowContents={[
           [t('user.record.highestTrophies'), `${profile.highestTrophies}개`],
-          [t('user.record.tripleVictories'), `${profile.tripleVictories}회`],
-          [t('user.record.duoVictories'), `${profile.duoVictories}회`],
-          [t('user.record.rank25Brawlers'), `${profile.rank25Brawlers}개`],
-          [t('user.record.rank30Brawlers'), `${profile.rank30Brawlers}개`],
-          [t('user.record.rank35Brawlers'), `${profile.rank35Brawlers}개`],
+          [t('user.record.tripleVictories'), `${profile.trioMatchVictories}회`],
+          [t('user.record.duoVictories'), `${profile.duoMatchVictories}회`],
+          [t('user.record.tripleVictories'), `${profile.soloMatchVictories}회`],
+          [t('user.record.rank25Brawlers'), `${profile.brawlerRank25}개`],
+          [t('user.record.rank30Brawlers'), `${profile.brawlerRank30}개`],
+          [t('user.record.rank35Brawlers'), `${profile.brawlerRank35}개`],
           [t('user.record.highestSoloPL'), roman[profile.highestSoloPL % 3]],
           [t('user.record.highestTeamPL'), roman[profile.highestTeamPL % 3]],
         ]}
         bodyRowImages={[
+          [null, null],
           [null, null],
           [null, null],
           [null, null],
