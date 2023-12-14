@@ -43,7 +43,7 @@ const Header = ({ dir }) => {
           <ul
             className={styles.menuList}
             style={
-              useMediaQuery({ maxWidth: 768 })
+              useMediaQuery({ maxWidth: 576 })
                 ? { display: `${isToggled ? 'flex' : 'none'}` }
                 : {}
             }
@@ -65,18 +65,6 @@ const Header = ({ dir }) => {
                     <span>{t('application.header.events')}</span>
                   </Link>
                 </li>
-                {/*<li>
-              <Link to={'/battle'}
-                    onClick={() => setIsToggled(false)}>게임 맵</Link>
-            </li>*/}
-                {/*<li>
-              <Link to={'/seasons'}
-                    onClick={() => setIsToggled(false)}>통계</Link>
-            </li>
-            <li>
-              <Link to={'/seasons'}
-                    onClick={() => setIsToggled(false)}>랭킹</Link>
-            </li>*/}
               </React.Fragment>
             ) : (
               <React.Fragment>
