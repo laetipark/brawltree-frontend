@@ -9,15 +9,17 @@ const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
   const { t } = useTranslation();
 
   const brawlerTL = brawlerStats.find(({ brawlerID, matchType }) => {
-    return brawlerID === brawler.id.toString() && matchType === 0;
+    return brawlerID === String(brawler.id) && Number(matchType) === 0;
   });
 
   const brawlerPLSolo = brawlerStats.find(({ brawlerID, matchType }) => {
-    return brawlerID === brawler.id.toString() && matchType === 2;
+    return brawlerID === String(brawler.id) && Number(matchType) === 2;
   });
 
   const brawlerPLTeam = brawlerStats.find((item) => {
-    return item.brawlerID === brawler.id.toString() && item.matchType === 3;
+    return (
+      item.brawlerID === String(brawler.id) && Number(item.matchType) === 3
+    );
   });
 
   return (

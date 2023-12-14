@@ -137,7 +137,7 @@ const UserFriendItem = ({ friend }) => {
         onMouseLeave={() => setHover(false)}
       >
         <h4>
-          {friend.name}({Math.round(friend.friendPoints * 100) / 100.0}점)
+          {friend.friendName}({Math.round(friend.friendPoints * 100) / 100.0}점)
         </h4>
         <div>
           <span>매치</span>

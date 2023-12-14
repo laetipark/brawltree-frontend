@@ -10,12 +10,13 @@ import BrawlerSelection from '~/components/brawler/summary/selection';
 import BrawlerService from '~/services/brawler.service';
 
 import styles from './brawlers-table.module.scss';
+import { BrawlerStatsType } from '~/common/type/brawlers.type';
 
 const BrawlersTable = () => {
   const [brawlers, setBrawlers] = useState([]);
-  const [brawlerStats, setBrawlerStats] = useState([]);
+  const [brawlerStats, setBrawlerStats] = useState<BrawlerStatsType[]>([]);
   const [brawler, setBrawler] = useState({
-    brawlerID: '16000000',
+    id: '16000000',
     name: 'SHELLY',
     rarity: 'Trophy Road',
     role: 'Damage Dealer',
@@ -34,7 +35,7 @@ const BrawlersTable = () => {
       setBrawlerStats(data.stats);
     });
     BrawlerService.getBlossomMember({
-      brawlerID: brawler.brawlerID,
+      brawlerID: brawler.id,
     }).then((data) => {
       setMembers(data);
     });
@@ -42,11 +43,11 @@ const BrawlersTable = () => {
 
   useEffect(() => {
     BrawlerService.getBlossomMember({
-      brawlerID: brawler.brawlerID,
+      brawlerID: brawler.id,
     }).then((data) => {
       setMembers(data);
     });
-  }, [brawler.brawlerID]);
+  }, [brawler.id]);
 
   return (
     members && (

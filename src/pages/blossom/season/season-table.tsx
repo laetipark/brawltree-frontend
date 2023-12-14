@@ -65,16 +65,16 @@ const BattleTable = () => {
         <TableHead col={'닉네임'} colArray={['매치', '변화량']} />
         <div className={styles.body}>
           {filterMembers.slice(offset, offset + 15)?.map((member) => {
-            const matchChange =
-              member.matchChange > 0
-                ? `+${member.matchChange}개`
-                : `${member.matchChange}개`;
+            const trophyChange =
+              member.trophyChange > 0
+                ? `+${member.trophyChange}개`
+                : `${member.trophyChange}개`;
 
             return (
               <TableBody
                 key={member.userID}
                 col={member.name}
-                colArray={[`${member.matchCount || 0}회`, matchChange]}
+                colArray={[`${member.matchCount || 0}회`, trophyChange]}
                 colImage={[null, null]}
                 id={member.userID}
               />
