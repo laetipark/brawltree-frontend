@@ -12,5 +12,6 @@ README.md
 start.bat
 
 # env
-.development.env.sample
-.production.env.sample
+.env.development
+.env.development.sample
+.env.sample.production
