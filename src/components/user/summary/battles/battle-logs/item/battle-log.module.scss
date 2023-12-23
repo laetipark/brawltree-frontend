@@ -1,0 +1,124 @@
+.battleSummaryButton {
+  display: none;
+}
+
+.battleSummary {
+  display: grid;
+  grid-template-columns: 70% 26% 4%;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #39375B;
+  border-radius: 10px;
+}
+
+.matchInfo {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.gameResult {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  gap: 6px;
+}
+
+.gameResult > div {
+  display: flex;
+  gap: 6px;
+}
+
+.battleArrow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.gameModeImage {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameModeImage > img {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.brawlerImage {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: left;
+  border-radius: 40%;
+}
+
+.battleSummaryTitle {
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 18px;
+}
+
+.battleSummarySubTitle {
+  font-size: 14px;
+}
+
+.battleLogsDetail {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #83BD75;
+}
+
+.battleLogsDetailTitle {
+  padding: 8px;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+.battleLogsDetailContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.battleLogsDetailContent > a {
+  display: grid;
+  grid-template-columns: 10% 60% 30%;
+  padding: 8px;
+  color: black;
+  text-decoration-line: none;
+}
+
+.matchBrawler {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  object-position: left;
+  border-radius: 40%;
+}
+
+.matchTitle {
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}
+
+.matchSubTitle {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  gap: 2px;
+}
+
+.matchSubTitle > img {
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  object-fit: contain;
+}

@@ -98,7 +98,7 @@ const User = () => {
         clearTimeout(timer);
       };
     }
-  }, [id, retryCount, user.updatedAt]);
+  }, [id, retryCount, user?.updatedAt || new Date()]);
 
   useEffect(() => {
     UserService.getUserByTypeNMode({ id, type, mode }).then((data) => {
@@ -111,10 +111,10 @@ const User = () => {
       setBattles(data.battles);
       setSeason(data.season);
     });
-  }, [id, type, mode, user.updatedAt]);
+  }, [id, type, mode, user?.updatedAt || new Date()]);
 
   return (
-    new Date(user.updatedAt).getTime() > 0 && (
+    new Date(user?.updatedAt).getTime() > 0 && (
       <UserContext.Provider
         value={{
           id,
