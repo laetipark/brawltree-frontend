@@ -16,14 +16,16 @@ const UserBattles = () => {
     rotationPL,
     type,
     mode,
-    setType,
-    setMode,
     battlesSummary,
     brawlersSummary,
     recentBattles,
     recentBrawlers,
     battles,
     season,
+    stack,
+    setType,
+    setMode,
+    setStack,
   } = context;
 
   const setMatchType = ({ target }) => {
@@ -59,6 +61,8 @@ const UserBattles = () => {
         recentBattles={recentBattles}
         recentBrawlers={recentBrawlers}
         battles={battles}
+        stack={stack}
+        setStack={setStack}
       />
     </div>
   );

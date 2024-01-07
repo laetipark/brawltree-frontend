@@ -21,7 +21,8 @@
     "duels": "Duels",
     "wipeout": "Wipeout",
     "takedown": "Takedown",
-    "siege": "Siege"
+    "siege": "Siege",
+    "hunters": "Hunters"
   },
   "result": {
     "starPlayer": "스타 플레이어",

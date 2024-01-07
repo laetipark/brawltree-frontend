@@ -16,12 +16,9 @@ import { SeasonType } from '~/common/type/season.type';
 type UserContext = {
   id: string;
   user: UsersType;
-  setUser: (user: UsersType) => void;
   profile: UserProfileType;
   type: string;
   mode: string;
-  setType: (type: string) => void;
-  setMode: (mode: string) => void;
   rotationTL: rotationModes[];
   rotationPL: rotationModes[];
   battlesSummary: UserBattlesSummaryType[];
@@ -30,9 +27,14 @@ type UserContext = {
   recentBrawlers: UserRecentBrawlersType[];
   battles: UserBattlesType[];
   season: SeasonType;
-  setRetryCount: (retryCount: number) => void;
   friends?: UserFriendsType[];
   seasonRecords?: UserSeasonRecordsType[];
+  stack: number;
+  setUser: (user: UsersType) => void;
+  setType: (type: string) => void;
+  setMode: (mode: string) => void;
+  setRetryCount: (retryCount: number) => void;
+  setStack: (stack: number) => void;
 };
 
 export default createContext<UserContext | null>(null);

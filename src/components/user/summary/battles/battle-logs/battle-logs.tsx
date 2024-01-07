@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Pie } from '@nivo/pie';
 
 import BattleLog from '~/components/user/summary/battles/battle-logs/item/battle-log';
@@ -8,8 +8,52 @@ import config from '~/config/config';
 import styles from './battle-logs.module.scss';
 import { useTranslation } from 'react-i18next';
 
-const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
+const UserBattleLogs = ({
+  recentBattles,
+  recentBrawlers,
+  battles,
+  stack,
+  setStack,
+}) => {
   const { t } = useTranslation();
+
+  const [load, setLoad] = useState(true);
+  const target = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      threshold: 1.0,
+    };
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+          setStack((prevStack: number) => {
+            if (recentBattles.length >= prevStack * 30) {
+              return prevStack + 1;
+            }
+
+            // If condition is met, update load state and unobserve
+            setLoad(false);
+            observer.unobserve(target.current);
+            return prevStack;
+          });
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    if (target.current) {
+      observer.observe(target.current);
+    }
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, []);
 
   const matchCount = recentBattles?.length || 0;
   const vicCount =
@@ -117,7 +161,8 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
                   {t('battle.result.l')}
                 </span>
                 <span>
-                  ({t('application.recent')} 30 {t('application.game')})
+                  ({t('application.recent')} {(stack || 1) * 30}{' '}
+                  {t('application.game')})
                 </span>
               </div>
               <Pie
@@ -209,7 +254,7 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
                     </div>
                   </div>
                   <span style={{ color: '#5AA469' }}>
-                    {resultCount['-1']}
+                    {resultCount['-1'] || 0}
                     {t('battle.result.w')}
                   </span>
                   <span style={{ color: '#556FB5' }}>
@@ -236,6 +281,7 @@ const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
             );
           })}
         </div>
+        {load && <div className={styles.spinner} ref={target} />}
       </div>
     )
   );

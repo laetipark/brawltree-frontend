@@ -20,12 +20,13 @@ export default class UserService {
       .then((result) => result.data);
   };
 
-  static getUserByTypeNMode = ({ id, type, mode }) =>
+  static getUserByTypeNMode = ({ id, type, mode, stack }) =>
     axios
       .get(`${config.url}/brawlian/${id}/battles`, {
         params: {
           type: type,
           mode: mode,
+          stack: stack,
         },
       })
       .then((result) => result.data);

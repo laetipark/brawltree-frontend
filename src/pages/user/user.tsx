@@ -58,6 +58,7 @@ const User = () => {
   const [recentBattles, setRecentBattles] = useState([]);
   const [recentBrawlers, setRecentBrawlers] = useState([]);
   const [battles, setBattles] = useState([]);
+  const [stack, setStack] = useState(0);
 
   const [season, setSeason] = useState();
 
@@ -101,7 +102,7 @@ const User = () => {
   }, [id, retryCount, user?.updatedAt || new Date()]);
 
   useEffect(() => {
-    UserService.getUserByTypeNMode({ id, type, mode }).then((data) => {
+    UserService.getUserByTypeNMode({ id, type, mode, stack }).then((data) => {
       setBattlesSummary(data.battlesSummary);
       setBrawlersSummary(data.brawlersSummary);
       setRotationTL(data.rotationTL);
@@ -111,7 +112,7 @@ const User = () => {
       setBattles(data.battles);
       setSeason(data.season);
     });
-  }, [id, type, mode, user?.updatedAt || new Date()]);
+  }, [id, type, mode, stack, user?.updatedAt || new Date()]);
 
   return (
     new Date(user?.updatedAt).getTime() > 0 && (
@@ -119,23 +120,25 @@ const User = () => {
         value={{
           id,
           user,
-          setUser,
           profile,
           rotationTL,
           rotationPL,
           type,
           mode,
-          setType,
-          setMode,
           battlesSummary,
           brawlersSummary,
           recentBattles,
           recentBrawlers,
           battles,
           season,
-          setRetryCount,
           friends,
           seasonRecords,
+          stack,
+          setUser,
+          setType,
+          setMode,
+          setStack,
+          setRetryCount,
         }}
       >
         <div className={styles.app}>

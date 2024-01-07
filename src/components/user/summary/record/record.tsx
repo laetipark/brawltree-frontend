@@ -61,9 +61,9 @@ const UserRecord = () => {
         headRow={t('user.record.personalRecord')}
         bodyRowContents={[
           [t('user.record.highestTrophies'), `${profile.highestTrophies}개`],
-          [t('user.record.tripleVictories'), `${profile.trioMatchVictories}회`],
+          [t('user.record.trioVictories'), `${profile.trioMatchVictories}회`],
           [t('user.record.duoVictories'), `${profile.duoMatchVictories}회`],
-          [t('user.record.tripleVictories'), `${profile.soloMatchVictories}회`],
+          [t('user.record.soloVictories'), `${profile.soloMatchVictories}회`],
           [t('user.record.rank25Brawlers'), `${profile.brawlerRank25}개`],
           [t('user.record.rank30Brawlers'), `${profile.brawlerRank30}개`],
           [t('user.record.rank35Brawlers'), `${profile.brawlerRank35}개`],
