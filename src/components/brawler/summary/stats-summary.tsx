@@ -14,7 +14,11 @@ const BrawlerStatsSummary = ({ brawler, brawlerStats }) => {
     <div className={styles.statsSummaryWrapper}>
       {filterBrawler.map(({ mapID, mapName, mode, pickRate, victoryRate }) => {
         return (
-          <button key={mapID} className={styles.statsSummaryMapButton}>
+          <a
+            key={mapID}
+            className={styles.statsSummaryMapButton}
+            href={`../maps/${mapID}`}
+          >
             <img src={`${config.assets}/modes/icon/${mode}.webp`} alt={mode} />
             <span style={{ fontWeight: 600 }}>
               {t(`map.map.${mapID}`) || mapName}
@@ -29,7 +33,7 @@ const BrawlerStatsSummary = ({ brawler, brawlerStats }) => {
               <span style={{ fontWeight: 600 }}>{victoryRate}</span>
               <span>%</span>
             </div>
-          </button>
+          </a>
         );
       })}
     </div>
