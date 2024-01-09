@@ -6,9 +6,10 @@ import config from '~/config/config';
 import styles from './friend-item.module.scss';
 
 const UserFriendItem = ({ friend }) => {
+  console.log(friend);
   const [hover, setHover] = useState(false);
-  const drwCount = (matchCount, vicCount, defCount) => {
-    return matchCount - (parseInt(vicCount) + parseInt(defCount));
+  const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
+    return matchCount - (vicCount + defCount);
   };
 
   const getFriendInfo = (friendDetail) => {
@@ -61,19 +62,19 @@ const UserFriendItem = ({ friend }) => {
                 <span>회</span>
                 <span>(</span>
                 <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                  {match.victoryCount}
+                  {match.victoriesCount}
                 </span>
                 <span>/</span>
                 <span style={{ color: '#556FB5', fontWeight: 600 }}>
                   {drwCount(
                     match.matchCount,
-                    match.victoryCount,
-                    match.defeatCount,
+                    match.victoriesCount,
+                    match.defeatsCount,
                   )}
                 </span>
                 <span>/</span>
                 <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                  {match.defeatCount}
+                  {match.defeatsCount}
                 </span>
                 <span>)</span>
               </div>
@@ -107,11 +108,11 @@ const UserFriendItem = ({ friend }) => {
                 )}
                 <span>승률</span>
                 <span style={{ fontWeight: 600 }}>
-                  {match.victoryCount > 0
+                  {match.victoriesCount > 0
                     ? Math.round(
-                        (match.victoryCount /
-                          (parseInt(match.victoryCount) +
-                            parseInt(match.defeatCount))) *
+                        (match.victoriesCount /
+                          (parseInt(match.victoriesCount) +
+                            parseInt(match.defeatsCount))) *
                           100,
                       )
                     : 0}
@@ -146,11 +147,11 @@ const UserFriendItem = ({ friend }) => {
           <span>/</span>
           <span>승률</span>
           <span style={{ fontWeight: 600 }}>
-            {friend.victoryCount > 0
+            {friend.victoriesCount > 0
               ? Math.round(
-                  (friend.victoryCount /
-                    (parseInt(friend.victoryCount) +
-                      parseInt(friend.defeatCount))) *
+                  (friend.victoriesCount /
+                    (parseInt(friend.victoriesCount) +
+                      parseInt(friend.defeatsCount))) *
                     100,
                 )
               : 0}
@@ -160,21 +161,21 @@ const UserFriendItem = ({ friend }) => {
         <div>
           <span style={{ color: '#5AA469' }}>승</span>
           <span style={{ color: '#5AA469', fontWeight: 600 }}>
-            {friend.victoryCount}
+            {friend.victoriesCount}
           </span>
           <span style={{ color: '#5AA469' }}>회</span>
           <span style={{ color: '#556FB5' }}>무</span>
           <span style={{ color: '#556FB5', fontWeight: 600 }}>
             {drwCount(
               friend.matchCount,
-              friend.victoryCount,
-              friend.defeatCount,
+              friend.victoriesCount,
+              friend.defeatsCount,
             )}
           </span>
           <span style={{ color: '#556FB5' }}>회</span>
           <span style={{ color: '#D35D6E' }}>패</span>
           <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-            {friend.defeatCount}
+            {friend.defeatsCount}
           </span>
           <span style={{ color: '#D35D6E' }}>회</span>
         </div>

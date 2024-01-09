@@ -82,6 +82,7 @@ const User = () => {
       getUser();
       /\/blossom.*/g.test(location.pathname) &&
         UserService.getBlossomMemberDetail({ id }).then((data) => {
+          console.log(data);
           setFriends(data.friends);
           setSeasonRecords(data.seasonRecords);
         });

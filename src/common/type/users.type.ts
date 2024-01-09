@@ -124,10 +124,10 @@ export type UserFriendsType = {
   matchType: number;
   matchGrade: number;
   mode: string;
-  name: string;
+  friendName: string;
   matchCount: number;
-  victoryCount: number;
-  defeatCount: number;
+  victoriesCount: number;
+  defeatsCount: number;
   victoryRate: number;
   friendPoints: number;
 };
@@ -137,7 +137,7 @@ export type UserSeasonRecordsType = {
   matchGrade: number;
   mode: string;
   matchCount: number;
-  victoryCount: number;
-  defeatCount: number;
+  victoriesCount: number;
+  defeatsCount: number;
   victoryRate: number;
 };

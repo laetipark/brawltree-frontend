@@ -29,7 +29,7 @@ const UserSeasonRecords = () => {
     seasonRecords.length !== 0
       ? Math.round(
           seasonRecords.reduce((sum, value) => {
-            return sum + (value.victoryCount || 0);
+            return sum + (value.victoriesCount || 0);
           }, 0) * 100,
         ) / 100
       : 0;
@@ -37,7 +37,7 @@ const UserSeasonRecords = () => {
     seasonRecords.length !== 0
       ? Math.round(
           seasonRecords.reduce((sum, value) => {
-            return sum + (value.defeatCount || 0);
+            return sum + (value.defeatsCount || 0);
           }, 0) * 100,
         ) / 100
       : 0;
@@ -54,15 +54,11 @@ const UserSeasonRecords = () => {
     return item.matchType === 3;
   });
 
-  const drwCount = (matchCount, vicCount, defCount) => {
-    return matchCount - (parseInt(vicCount) + parseInt(defCount));
+  const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
+    return matchCount - (vicCount + defCount);
   };
-  const vicRate = (vicCount, defCount) => {
-    return (
-      Math.round(
-        (parseInt(vicCount) / (parseInt(vicCount) + parseInt(defCount))) * 100,
-      ) || 0
-    );
+  const vicRate = (vicCount: number, defCount: number) => {
+    return Math.round((vicCount / (vicCount + defCount)) * 100) || 0;
   };
 
   const typeMenu = (matches, toggle, setToggle, typeName) => {
@@ -89,26 +85,26 @@ const UserSeasonRecords = () => {
               <h4 className={styles.seasonStatsSummary}>
                 <span style={{ color: '#5AA469' }}>승</span>
                 <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                  {matches.victoryCount}
+                  {matches.victoriesCount}
                 </span>
                 <span style={{ color: '#5AA469' }}>회</span>
                 <span style={{ color: '#556FB5' }}>무</span>
                 <span style={{ color: '#556FB5', fontWeight: 600 }}>
                   {drwCount(
                     matches.matchCount,
-                    matches.victoryCount,
-                    matches.defeatCount,
+                    matches.victoriesCount,
+                    matches.defeatsCount,
                   )}
                 </span>
                 <span style={{ color: '#556FB5' }}>회</span>
                 <span style={{ color: '#D35D6E' }}>패</span>
                 <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                  {matches.defeatCount}
+                  {matches.defeatsCount}
                 </span>
                 <span style={{ color: '#D35D6E' }}>회</span>
                 <span>/</span>
                 <span style={{ fontWeight: 600 }}>
-                  승률 {vicRate(matches.victoryCount, matches.defeatCount)}
+                  승률 {vicRate(matches.victoriesCount, matches.defeatsCount)}
                 </span>
                 <span>%</span>
               </h4>
@@ -132,19 +128,19 @@ const UserSeasonRecords = () => {
                           <span>회</span>
                           <span>(</span>
                           <span style={{ color: '#5AA469', fontWeight: 600 }}>
-                            {record.victoryCount}
+                            {record.victoriesCount}
                           </span>
                           <span>/</span>
                           <span style={{ color: '#556FB5', fontWeight: 600 }}>
                             {drwCount(
                               record.matchCount,
-                              record.victoryCount,
-                              record.defeatCount,
+                              record.victoriesCount,
+                              record.defeatsCount,
                             )}
                           </span>
                           <span>/</span>
                           <span style={{ color: '#D35D6E', fontWeight: 600 }}>
-                            {record.defeatCount}
+                            {record.defeatsCount}
                           </span>
                           <span>)</span>
                         </div>
@@ -162,7 +158,10 @@ const UserSeasonRecords = () => {
                           />
                           <span>승률</span>
                           <span style={{ fontWeight: 600 }}>
-                            {vicRate(record.victoryCount, record.defeatCount)}
+                            {vicRate(
+                              record.victoriesCount,
+                              record.defeatsCount,
+                            )}
                           </span>
                           <span>%</span>
                         </div>
