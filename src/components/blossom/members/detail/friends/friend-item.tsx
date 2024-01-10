@@ -6,7 +6,6 @@ import config from '~/config/config';
 import styles from './friend-item.module.scss';
 
 const UserFriendItem = ({ friend }) => {
-  console.log(friend);
   const [hover, setHover] = useState(false);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
@@ -45,16 +44,10 @@ const UserFriendItem = ({ friend }) => {
                     src={`${config.assets}/modes/icon/challenge.webp`}
                     alt={'게임방식'}
                   />
-                ) : match.matchType === '5' ? (
-                  <img
-                    className={styles.image}
-                    src={`${config.assets}/modes/icon/challenge.webp`}
-                    alt={'게임방식'}
-                  />
                 ) : (
                   <img
                     className={styles.image}
-                    src={`${config.assets}/modes/icon/clubLeague.webp`}
+                    src={`${config.assets}/modes/icon/challenge.webp`}
                     alt={'게임방식'}
                   />
                 )}
@@ -82,7 +75,7 @@ const UserFriendItem = ({ friend }) => {
                 {match.matchType === 0 ? (
                   <img
                     className={styles.image}
-                    src={`${config.assets}/rank/trophy_league/${match.matchGrade}.webp`}
+                    src={`${config.assets}/rank/trophy_league/grade/${match.matchGrade}.webp`}
                     alt={'트로피 리그 랭크'}
                   />
                 ) : [2, 3].includes(match.matchType) ? (
@@ -92,12 +85,6 @@ const UserFriendItem = ({ friend }) => {
                       (match.matchGrade - 1) / 3,
                     )}.webp`}
                     alt={'파워 리그 랭크'}
-                  />
-                ) : match.matchType === 6 ? (
-                  <img
-                    className={styles.image}
-                    src={`${config.assets}/modes/icon/clubLeague.webp`}
-                    alt={'클럽 리그'}
                   />
                 ) : (
                   <img

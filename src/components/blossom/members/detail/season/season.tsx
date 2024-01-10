@@ -149,7 +149,7 @@ const UserSeasonRecords = () => {
                             className={styles.rankImage}
                             src={`${config.assets}/rank/${
                               typeName === '트로피 리그'
-                                ? `trophy_league/${record.matchGrade}`
+                                ? `trophy_league/grade/${record.matchGrade}`
                                 : `power_league/${Math.floor(
                                     (record.matchGrade - 1) / 3,
                                   )}`
