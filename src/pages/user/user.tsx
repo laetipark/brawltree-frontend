@@ -81,18 +81,18 @@ const User = () => {
     if (retryCount === 0) {
       getUser();
       /\/blossom.*/g.test(location.pathname) &&
-        UserService.getBlossomMemberDetail({ id }).then((data) => {
-          setFriends(data.friends);
-          setSeasonRecords(data.seasonRecords);
-        });
+      UserService.getBlossomMemberDetail({ id }).then((data) => {
+        setFriends(data.friends);
+        setSeasonRecords(data.seasonRecords);
+      });
     } else if (retryCount < 3 && !(new Date(user.updatedAt).getTime() > 0)) {
       const timer = setTimeout(() => {
         getUser();
         /\/blossom.*/g.test(location.pathname) &&
-          UserService.getBlossomMemberDetail({ id }).then((data) => {
-            setFriends(data.friends);
-            setSeasonRecords(data.seasonRecords);
-          });
+        UserService.getBlossomMemberDetail({ id }).then((data) => {
+          setFriends(data.friends);
+          setSeasonRecords(data.seasonRecords);
+        });
       }, 1000);
 
       return () => {

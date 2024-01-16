@@ -47,7 +47,7 @@
 
 .brawlerPicksWrapper > div {
   display: grid;
-  grid-template-columns: 10% 40% 15% 15%;
+  grid-template-columns: 10% 30% 20% 20%;
   justify-content: space-around;
   align-items: center;
   width: 90%;
@@ -77,7 +77,7 @@
 
 .brawlerPicksContent > div:first-child {
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 12px;
 }
 

@@ -5,7 +5,6 @@ import svgrPlugin from 'vite-plugin-svgr';
 import { resolve } from 'path';
 
 export default ({ mode }) => {
-  console.log(mode, process.cwd());
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
@@ -50,7 +49,6 @@ export default ({ mode }) => {
       ],
     },
     plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
-    envDir: `.${process.env.NODE_ENV}.env`,
     server: {
       host: '0.0.0.0',
       port: parseInt(process.env.VITE_PORT),

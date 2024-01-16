@@ -39,8 +39,8 @@ const UserTitle = () => {
           <div className={styles.realName}>{`${user.userName}`}</div>
           <div className={styles.userTag}>{user.userID}</div>
           <div className={styles.crewName}>
-            <span>{`${user.crew}`}</span>
-            <span>[{`${user.crewName}`}]</span>
+            <span>{`${user.crew || ''}`}</span>
+            <span>{user.crewName ? `[${user.crewName}]` : ''}</span>
           </div>
         </div>
       </div>

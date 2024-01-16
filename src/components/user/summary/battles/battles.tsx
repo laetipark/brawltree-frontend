@@ -28,6 +28,7 @@ const UserBattles = () => {
     setStack,
   } = context;
 
+
   const setMatchType = ({ target }) => {
     setType(target.value);
     setMode('all');

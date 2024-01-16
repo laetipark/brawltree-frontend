@@ -51,14 +51,4 @@ export default class UserService {
         },
       })
       .then(async (result) => result.data);
-
-  static getBlossomSeason = ({ type, mode }) =>
-    axios
-      .get(`${config.url}/blossom/season`, {
-        params: {
-          type: type,
-          mode: mode,
-        },
-      })
-      .then(async (result) => result.data);
 }

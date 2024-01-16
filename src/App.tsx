@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import Header from '~/components/header/header';
 import Footer from '~/components/footer/footer';
@@ -13,7 +13,6 @@ import BlossomMain from '~/pages/blossom/main/main';
 import BlossomMembers from '~/pages/blossom/members/members-table';
 import BlossomBrawlers from '~/pages/blossom/brawlers/brawlers-table';
 import BlossomBattles from '~/pages/blossom/battles/battles-table';
-import BlossomSeason from '~/pages/blossom/season/season-table';
 
 const App = () => {
   const location = useLocation();
@@ -42,7 +41,6 @@ const App = () => {
         <Route path="/blossom/members/:id" element={<User />} />
         <Route path="/blossom/brawlers" element={<BlossomBrawlers />} />
         <Route path="/blossom/battles" element={<BlossomBattles />} />
-        <Route path="/blossom/season" element={<BlossomSeason />} />
         <Route path="/blossom/events" element={<Events />} />
         <Route path="/blossom/maps/:id" element={<MapDetail />} />
       </Routes>

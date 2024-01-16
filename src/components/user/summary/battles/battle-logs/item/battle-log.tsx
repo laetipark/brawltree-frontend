@@ -102,8 +102,8 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
                 {dateDiff > 0
                   ? `${dateDiff} ${t('user.battle.daysAgo')}`
                   : hourDiff > 0
-                  ? `${hourDiff} ${t('user.battle.hoursAgo')}`
-                  : `${minuteDiff} ${t('user.battle.minutesAgo')}`}
+                    ? `${hourDiff} ${t('user.battle.hoursAgo')}`
+                    : `${minuteDiff} ${t('user.battle.minutesAgo')}`}
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
           const teamGameResult =
             battleInfo.modeCode === 3
               ? team.find((item) => item.playerID === battleInfo.userID) !==
-                undefined
+              undefined
                 ? battleInfo.gameResult + 1
                 : battleInfo.gameResult * -1 + 1
               : matchTeams[index][0].gameResult + 1;
@@ -157,13 +157,13 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
               >
                 {team?.map(
                   ({
-                    brawlerID,
-                    brawlerPower,
-                    brawlerTrophies,
-                    playerID,
-                    playerName,
-                    isStarPlayer,
-                  }) => {
+                     brawlerID,
+                     brawlerPower,
+                     brawlerTrophies,
+                     playerID,
+                     playerName,
+                     isStarPlayer,
+                   }) => {
                     return (
                       <Link
                         key={`${battleInfo.battleTime}_${index}_${playerID}`}

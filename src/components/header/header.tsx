@@ -105,14 +105,6 @@ const Header = ({ dir }) => {
                     일일 전투
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to={'/blossom/season'}
-                    onClick={() => setIsToggled(false)}
-                  >
-                    시즌
-                  </Link>
-                </li>
               </React.Fragment>
             )}
           </ul>

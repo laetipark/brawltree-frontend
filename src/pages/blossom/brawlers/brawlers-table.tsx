@@ -32,7 +32,7 @@ const BrawlersTable = () => {
   useEffect(() => {
     BrawlerService.getBrawlers().then((data) => {
       setBrawlers(data.brawlers);
-      setBrawlerStats(data.stats);
+      setBrawlerStats(data.totalStats);
     });
     BrawlerService.getBlossomMember({
       brawlerID: brawler.id,

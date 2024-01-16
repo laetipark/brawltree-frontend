@@ -9,12 +9,12 @@ import styles from './battle-logs.module.scss';
 import { useTranslation } from 'react-i18next';
 
 const UserBattleLogs = ({
-  recentBattles,
-  recentBrawlers,
-  battles,
-  stack,
-  setStack,
-}) => {
+                          recentBattles,
+                          recentBrawlers,
+                          battles,
+                          stack,
+                          setStack,
+                        }) => {
   const { t } = useTranslation();
 
   const [load, setLoad] = useState(true);
@@ -29,13 +29,13 @@ const UserBattleLogs = ({
       entries.forEach((entry: IntersectionObserverEntry) => {
         if (entry.isIntersecting) {
           setStack((prevStack: number) => {
-            if (recentBattles.length >= prevStack * 30) {
+            if (recentBattles.length === prevStack * 30) {
               return prevStack + 1;
+            } else {
+              setLoad(false);
+              observer.unobserve(target.current);
             }
 
-            // If condition is met, update load state and unobserve
-            setLoad(false);
-            observer.unobserve(target.current);
             return prevStack;
           });
         }
