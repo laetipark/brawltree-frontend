@@ -12,8 +12,8 @@ import config from '~/config/config';
 
 const Main = () => {
   const [members, setMembers] = useState({
-    MEMBER_CNT: '0',
-    currentTrophies_TOT: '0',
+    memberCount: '0',
+    currentTotalTrophies: '0',
   });
   const [battles, setBattles] = useState({ matchCount: '0' });
   const [season, setSeason] = useState({ matchCount: '0' });
@@ -33,7 +33,7 @@ const Main = () => {
   }, []);
 
   return (
-    members.MEMBER_CNT && (
+    members.memberCount && (
       <div className={styles.app}>
         <MemberSummary members={members} />
         <div className={styles.summaryWrapper}>

@@ -12,13 +12,13 @@ const MemberSummary = ({ members }) => {
       <div className={styles.membersSummaryInfo}>
         <div>
           <span>• 총 멤버</span>
-          <span style={{ fontWeight: 600 }}>{members.MEMBER_CNT}</span>
+          <span style={{ fontWeight: 600 }}>{members.memberCount}</span>
           <span>명</span>
         </div>
         <div>
           <span>• 총 트로피</span>
           <span style={{ fontWeight: 600 }}>
-            {members.currentTrophies_TOT?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            {members.currentTotalTrophies?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </span>
           <span>개</span>
         </div>
