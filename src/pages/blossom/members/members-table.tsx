@@ -9,6 +9,7 @@ import SearchMembers from '~/components/search/search-members';
 
 import styles from './members-table.module.scss';
 import UserService from '~/services/user.service';
+import { Spinner } from '~/components/spinner/spinner';
 
 const roman = ['Ⅰ', 'Ⅱ', 'Ⅲ'];
 
@@ -28,7 +29,7 @@ const MemberTable = () => {
   }, []);
 
   return (
-    <div className={styles.app}>
+    members.length > 0 ? (<div className={styles.app}>
       <div className={styles.filter}>
         <Pagination page={page} total={total} setPage={setPage} />
         <SearchMembers members={members} setFilterMembers={setFilterMembers} />
@@ -61,7 +62,7 @@ const MemberTable = () => {
           })}
         </div>
       </div>
-    </div>
+    </div>) : <Spinner />
   );
 };
 

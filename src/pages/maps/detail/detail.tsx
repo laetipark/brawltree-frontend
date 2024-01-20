@@ -8,6 +8,7 @@ import MapStats from '~/components/maps/detail/stats/stats';
 import MapService from '~/services/map.service';
 
 import styles from './detail.module.scss';
+import { Spinner } from '~/components/spinner/spinner';
 
 const MapDetail = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const MapDetail = () => {
   const [grade, setGrade] = useState(['0', '1', '2', '3', '4', '5', '6', '7']);
   const [mapInfo, setMapInfo] = useState({
     mapID: undefined,
+    mode: undefined,
     isTrophyLeague: false,
     isPowerLeague: false,
   });
@@ -28,20 +30,32 @@ const MapDetail = () => {
   }, [id, type, grade]);
 
   return (
-    mapInfo.mapID && (
+    mapInfo.mapID ? (
       <div className={styles.app}>
         <MapInfo mapInfo={mapInfo} />
-        <MapMenu
-          type={type}
-          grade={grade}
-          setType={setType}
-          setGrade={setGrade}
-          rotationTL={mapInfo.isTrophyLeague}
-          rotationPL={mapInfo.isPowerLeague}
-        />
+        {
+          ![
+            'soloShowdown',
+            'duoShowdown',
+            'duels',
+            'hunters',
+            'roboRumble',
+            'bigGame',
+            'bossFight',
+          ].includes(mapInfo.mode) && (
+            <MapMenu
+              type={type}
+              grade={grade}
+              setType={setType}
+              setGrade={setGrade}
+              rotationTL={mapInfo.isTrophyLeague}
+              rotationPL={mapInfo.isPowerLeague}
+            />
+          )
+        }
         <MapStats brawlers={brawlerStats} />
       </div>
-    )
+    ) : <Spinner />
   );
 };
 

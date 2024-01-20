@@ -27,6 +27,7 @@
 .languageMenu {
   display: flex;
   align-items: center;
+  text-align: center;
   position: relative;
   width: 80px;
   height: 20px;
@@ -43,5 +44,9 @@
     padding: 8px;
     border-radius: 4px;
     background-color: #9DC08B;
+  }
+
+  & > ul span {
+    width: 100%;
   }
 }

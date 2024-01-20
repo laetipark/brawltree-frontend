@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import TLCurrentEvents from '~/components/events/list/menu-tl-current';
-import TomorrowEvents from '~/components/events/list/menu-tl-tomorrow';
-import PowerLeagueEvents from '~/components/events/list/menu-pl';
+import { TLCurrentEvents } from '~/components/events/list/menu-tl-current';
+import { TLTomorrowEvents } from '~/components/events/list/menu-tl-tomorrow';
+import { PLEvents } from '~/components/events/list/menu-pl';
 
 import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -64,9 +64,9 @@ const EventMenu = () => {
       {menu === 'curr' ? (
         <TLCurrentEvents />
       ) : menu === 'next' ? (
-        <TomorrowEvents />
+        <TLTomorrowEvents />
       ) : (
-        <PowerLeagueEvents />
+        <PLEvents />
       )}
     </div>
   );

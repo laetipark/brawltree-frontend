@@ -9,7 +9,7 @@ import UserContext from '~/context/user-context';
 
 import styles from './battles.module.scss';
 
-const UserBattles = () => {
+export const UserBattles = () => {
   const context = useContext(UserContext);
   const {
     rotationTL,
@@ -22,10 +22,8 @@ const UserBattles = () => {
     recentBrawlers,
     battles,
     season,
-    stack,
     setType,
     setMode,
-    setStack,
   } = context;
 
 
@@ -62,11 +60,7 @@ const UserBattles = () => {
         recentBattles={recentBattles}
         recentBrawlers={recentBrawlers}
         battles={battles}
-        stack={stack}
-        setStack={setStack}
       />
     </div>
   );
 };
-
-export default UserBattles;

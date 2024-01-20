@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import useResults from '~/utils/search-items';
+import { searchItems } from '~/utils/search-items';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +12,7 @@ import styles from './result-field.module.scss';
 const roman = ['I', 'II', 'III'];
 
 const ResultField = ({ inputValue, setInputValue, setToggle }) => {
-  const { status, data } = useResults(inputValue);
+  const { status, data } = searchItems(inputValue);
 
   const getDataByStatus = () => {
     switch (status) {
@@ -105,6 +105,7 @@ const ResultField = ({ inputValue, setInputValue, setToggle }) => {
         );
     }
   };
+
 
   return data ? (
     <div className={styles.resultFieldWrapper}>{getDataByStatus()}</div>

@@ -8,7 +8,7 @@ import styles from './brawlers.module.scss';
 const BrawlerSummary = ({ brawlersTL, brawlersPL }) => {
   return (
     <div className={styles.brawlersSummaryWrapper}>
-      <Link to={'/brawler'}>
+      <Link to={'./brawlers'}>
         <span>브롤러</span>
       </Link>
       <div className={styles.brawlersTypeMenu}>
@@ -18,10 +18,10 @@ const BrawlerSummary = ({ brawlersTL, brawlersPL }) => {
             {brawlersTL &&
               brawlersTL?.map(
                 ({
-                  brawlerID,
-                  trophyLeaguePickRate,
-                  trophyLeagueVictoryRate,
-                }) => {
+                   brawlerID,
+                   trophyLeaguePickRate,
+                   trophyLeagueVictoryRate,
+                 }) => {
                   return (
                     <div key={brawlerID}>
                       <img
@@ -54,10 +54,10 @@ const BrawlerSummary = ({ brawlersTL, brawlersPL }) => {
             {brawlersPL &&
               brawlersPL?.map(
                 ({
-                  brawlerID,
-                  powerLeaguePickRate,
-                  powerLeagueVictoryRate,
-                }) => {
+                   brawlerID,
+                   powerLeaguePickRate,
+                   powerLeagueVictoryRate,
+                 }) => {
                   return (
                     <div key={brawlerID}>
                       <img

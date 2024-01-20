@@ -1,17 +1,13 @@
 import React, { useRef } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGamepad,
-  faTasks,
-  faComputer,
-} from '@fortawesome/free-solid-svg-icons';
+import { faComputer, faGamepad, faTasks } from '@fortawesome/free-solid-svg-icons';
 
 import { useTranslation } from 'react-i18next';
 import i18n from '~/locales/i18n';
 
 import styles from './footer.module.scss';
-import useWindowClick from '~/hooks/use-window-click';
+import useWindowClick from '~/hooks/use-window-click.hook';
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -63,15 +59,13 @@ const Footer = () => {
       >
         <span>{t('application.footer.language')}</span>
         {isLanguageMenuOpen && (
-          <ul className="header-gnb-nav-link-dropDown">
+          <ul>
             <li
-              className="header-gnb-nav-link-dropDown-item"
               onClick={() => changeLanguage('ko')}
             >
               <span>한국어</span>
             </li>
             <li
-              className="header-gnb-nav-link-dropDown-item"
               onClick={() => changeLanguage('en')}
             >
               <span>English</span>

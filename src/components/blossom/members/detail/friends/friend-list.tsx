@@ -6,7 +6,7 @@ import UserContext from '~/context/user-context';
 
 import styles from './friend-list.module.scss';
 
-const UserFriendList = () => {
+export const UserFriendList = () => {
   const context = useContext(UserContext);
   const { friends } = context;
 
@@ -18,10 +18,10 @@ const UserFriendList = () => {
           (
           {friends.length !== 0
             ? Math.round(
-                friends.reduce((sum, value) => {
-                  return sum + (value.friendPoints || 0);
-                }, 0) * 100,
-              ) / 100
+            friends.reduce((sum, value) => {
+              return sum + (value.friendPoints || 0);
+            }, 0) * 100,
+          ) / 100
             : 0}
           점)
         </span>
@@ -34,5 +34,3 @@ const UserFriendList = () => {
     </div>
   );
 };
-
-export default UserFriendList;

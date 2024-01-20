@@ -4,8 +4,9 @@ import EventItem from '~/components/events/list/item/event';
 import EventService from '~/services/event.service';
 
 import styles from './menu-items.module.scss';
+import { Spinner } from '~/components/spinner/spinner';
 
-const TLCurrentEvents = () => {
+export const TLCurrentEvents = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -13,14 +14,12 @@ const TLCurrentEvents = () => {
   }, []);
 
   return (
-    (events?.length || 0 > 0) && (
+    (events?.length || 0 > 0) ? (
       <div className={styles.eventsWrapper}>
         {events.map((event) => {
           return <EventItem key={event.mapID} event={event} type={'end'} />;
         })}
       </div>
-    )
+    ) : <Spinner />
   );
 };
-
-export default TLCurrentEvents;

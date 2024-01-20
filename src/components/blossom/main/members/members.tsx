@@ -6,7 +6,7 @@ import styles from './members.module.scss';
 const MemberSummary = ({ members }) => {
   return (
     <div className={styles.membersSummaryWrapper}>
-      <Link to={'/member'}>
+      <Link to={'./members'}>
         <span>멤버</span>
       </Link>
       <div className={styles.membersSummaryInfo}>

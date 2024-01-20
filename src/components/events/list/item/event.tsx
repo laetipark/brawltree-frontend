@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
-import useInterval from '~/hooks/use-interval';
+import useInterval from '~/hooks/use-interval.hook';
 
 import config from '~/config/config';
 

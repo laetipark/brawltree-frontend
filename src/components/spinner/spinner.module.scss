@@ -1,0 +1,25 @@
+.spinnerWrapper {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 120px;
+  height: 120px;
+  border: 8px solid #9DC08B;
+  box-sizing: border-box;
+
+  border-top-color: #4E944F;
+  border-bottom-color: #4E944F;
+
+  border-radius: 100%;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(180deg);
+  }
+}

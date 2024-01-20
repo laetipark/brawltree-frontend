@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
-import useInterval from '~/hooks/use-interval';
+import useInterval from '~/hooks/use-interval.hook';
 
 import UserContext from '~/context/user-context';
 

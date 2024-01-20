@@ -28,6 +28,7 @@
   padding: 12px;
   border-radius: 4px;
   background-color: #E6E5A3;
+  text-decoration: none !important;
 
   &::before {
     content: '';
@@ -42,20 +43,23 @@
   &:hover::before {
     background-color: #557153;
   }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    font-size: 16px;
+    font-family: "Main Medium", serif;
+  }
+
+  & > div > div {
+    display: flex;
+    gap: 4px;
+    font-size: 12px;
+  }
 }
 
 .mapList:hover {
   background-color: #FF8989;
-}
-
-.mapItem > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-}
-
-.mapItem > div > div {
-  display: flex;
-  gap: 4px;
 }

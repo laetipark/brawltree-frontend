@@ -10,6 +10,7 @@ import { rotationModes } from '~/common/type/events.type';
 import UserContext from '~/context/user-context';
 
 import styles from './user.module.scss';
+import { Spinner } from '~/components/spinner/spinner';
 
 const User = () => {
   const location = useLocation();
@@ -58,7 +59,7 @@ const User = () => {
   const [recentBattles, setRecentBattles] = useState([]);
   const [recentBrawlers, setRecentBrawlers] = useState([]);
   const [battles, setBattles] = useState([]);
-  const [stack, setStack] = useState(0);
+  const [stack, setStack] = useState(1);
 
   const [season, setSeason] = useState();
 
@@ -66,6 +67,8 @@ const User = () => {
   const [seasonRecords, setSeasonRecords] = useState();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const getUser = () => {
       UserService.getUser({ id }).then((data) => {
         if (data !== null) {
@@ -115,38 +118,38 @@ const User = () => {
   }, [id, type, mode, stack, user?.updatedAt || new Date()]);
 
   return (
-    new Date(user?.updatedAt).getTime() > 0 && (
-      <UserContext.Provider
-        value={{
-          id,
-          user,
-          profile,
-          rotationTL,
-          rotationPL,
-          type,
-          mode,
-          battlesSummary,
-          brawlersSummary,
-          recentBattles,
-          recentBrawlers,
-          battles,
-          season,
-          friends,
-          seasonRecords,
-          stack,
-          setUser,
-          setType,
-          setMode,
-          setStack,
-          setRetryCount,
-        }}
-      >
-        <div className={styles.app}>
-          <UserTitle />
-          <UserMenu />
-        </div>
-      </UserContext.Provider>
-    )
+    new Date(user?.updatedAt).getTime() > 0 ? (
+        <UserContext.Provider
+          value={{
+            id,
+            user,
+            profile,
+            rotationTL,
+            rotationPL,
+            type,
+            mode,
+            battlesSummary,
+            brawlersSummary,
+            recentBattles,
+            recentBrawlers,
+            battles,
+            season,
+            friends,
+            seasonRecords,
+            setUser,
+            setType,
+            setMode,
+            setStack,
+            setRetryCount,
+          }}
+        >
+          <div className={styles.app}>
+            <UserTitle />
+            <UserMenu />
+          </div>
+        </UserContext.Provider>
+      ) :
+      <Spinner />
   );
 };
 

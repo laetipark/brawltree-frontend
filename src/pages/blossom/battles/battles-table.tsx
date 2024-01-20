@@ -11,6 +11,7 @@ import TableBody from '~/components/table/members/body';
 import UserService from '~/services/user.service';
 
 import styles from './battles-table.module.scss';
+import { Spinner } from '~/components/spinner/spinner';
 
 const BattleTable = () => {
   const [date, setDate] = useState(
@@ -61,7 +62,7 @@ const BattleTable = () => {
   }, [date, type, mode]);
 
   return (
-    <div className={styles.app}>
+    members.length > 0 ? (<div className={styles.app}>
       <div className={styles.menuWrapper}>
         <div className={styles.battlesMenus}>
           <UserMenuType type={type} setMatchType={setMatchType} />
@@ -104,7 +105,7 @@ const BattleTable = () => {
           })}
         </div>
       </div>
-    </div>
+    </div>) : <Spinner />
   );
 };
 

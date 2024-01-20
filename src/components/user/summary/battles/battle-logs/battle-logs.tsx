@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { Pie } from '@nivo/pie';
 
 import BattleLog from '~/components/user/summary/battles/battle-logs/item/battle-log';
@@ -12,48 +12,8 @@ const UserBattleLogs = ({
                           recentBattles,
                           recentBrawlers,
                           battles,
-                          stack,
-                          setStack,
                         }) => {
   const { t } = useTranslation();
-
-  const [load, setLoad] = useState(true);
-  const target = useRef(null);
-
-  useEffect(() => {
-    const options = {
-      threshold: 1.0,
-    };
-
-    const callback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry: IntersectionObserverEntry) => {
-        if (entry.isIntersecting) {
-          setStack((prevStack: number) => {
-            if (recentBattles.length === prevStack * 30) {
-              return prevStack + 1;
-            } else {
-              setLoad(false);
-              observer.unobserve(target.current);
-            }
-
-            return prevStack;
-          });
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(callback, options);
-
-    if (target.current) {
-      observer.observe(target.current);
-    }
-
-    return () => {
-      if (observer) {
-        observer.disconnect();
-      }
-    };
-  }, []);
 
   const matchCount = recentBattles?.length || 0;
   const vicCount =
@@ -161,7 +121,7 @@ const UserBattleLogs = ({
                   {t('battle.result.l')}
                 </span>
                 <span>
-                  ({t('application.recent')} {(stack || 1) * 30}{' '}
+                  ({t('application.recent')} {battles.length}{' '}
                   {t('application.game')})
                 </span>
               </div>
@@ -281,7 +241,6 @@ const UserBattleLogs = ({
             );
           })}
         </div>
-        {load && <div className={styles.spinner} ref={target} />}
       </div>
     )
   );

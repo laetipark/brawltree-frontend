@@ -11,6 +11,7 @@ import BrawlerService from '~/services/brawler.service';
 
 import styles from './brawlers-table.module.scss';
 import { BrawlerStatsType } from '~/common/type/brawlers.type';
+import { Spinner } from '~/components/spinner/spinner';
 
 const BrawlersTable = () => {
   const [brawlers, setBrawlers] = useState([]);
@@ -50,7 +51,7 @@ const BrawlersTable = () => {
   }, [brawler.id]);
 
   return (
-    members && (
+    members.length > 0 ? (
       <div className={styles.app}>
         <BrawlerSelection brawlers={brawlers} setBrawler={setBrawler} />
         <div>
@@ -83,7 +84,7 @@ const BrawlersTable = () => {
           </div>
         </div>
       </div>
-    )
+    ) : <Spinner />
   );
 };
 

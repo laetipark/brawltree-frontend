@@ -6,7 +6,7 @@ import styles from './battles.module.scss';
 const BattleSummary = ({ battles }) => {
   return (
     <React.Fragment>
-      <Link to={'/battle'}>
+      <Link to={'./battles'}>
         <span>일일기록</span>
       </Link>
       <div className={styles.battlesSummaryInfo}>

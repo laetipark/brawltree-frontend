@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import useWindowClick from '~/hooks/use-window-click';
+import useWindowClick from '~/hooks/use-window-click.hook';
 
 import config from '~/config/config';
 

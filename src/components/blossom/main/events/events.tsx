@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 import { RotationType } from '~/common/type/maps.type';
@@ -10,7 +10,6 @@ import styles from './events.module.scss';
 
 const EventsSummary = ({ events }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   return (
     <div className={styles.eventsSummaryWrapper}>
@@ -21,12 +20,10 @@ const EventsSummary = ({ events }) => {
         {(events.length || 0) > 0 &&
           events.map((event: RotationType) => {
             return (
-              <div
+              <a
                 key={event.mapID}
                 className={styles.mapItem}
-                onClick={() => {
-                  navigate(`./maps/${event.mapID}`);
-                }}
+                href={`./maps/${event.mapID}`}
               >
                 <img
                   src={`${config.assets}/modes/icon/${event.mode}.webp`}
@@ -44,7 +41,7 @@ const EventsSummary = ({ events }) => {
                     </span>
                   </div>
                 </div>
-              </div>
+              </a>
             );
           })}
       </div>

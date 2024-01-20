@@ -9,7 +9,7 @@ import config from '~/config/config';
 
 import styles from './season.module.scss';
 
-const UserSeasonRecords = () => {
+export const UserSeasonRecords = () => {
   const context = useContext(UserContext);
   const { seasonRecords } = context;
 
@@ -20,26 +20,26 @@ const UserSeasonRecords = () => {
   const matchCount =
     seasonRecords.length !== 0
       ? Math.round(
-          seasonRecords.reduce((sum, value) => {
-            return sum + (value.matchCount || 0);
-          }, 0) * 100,
-        ) / 100
+      seasonRecords.reduce((sum, value) => {
+        return sum + (value.matchCount || 0);
+      }, 0) * 100,
+    ) / 100
       : 0;
   const totalMatchVicCount =
     seasonRecords.length !== 0
       ? Math.round(
-          seasonRecords.reduce((sum, value) => {
-            return sum + (value.victoriesCount || 0);
-          }, 0) * 100,
-        ) / 100
+      seasonRecords.reduce((sum, value) => {
+        return sum + (value.victoriesCount || 0);
+      }, 0) * 100,
+    ) / 100
       : 0;
   const totalMatchDefCount =
     seasonRecords.length !== 0
       ? Math.round(
-          seasonRecords.reduce((sum, value) => {
-            return sum + (value.defeatsCount || 0);
-          }, 0) * 100,
-        ) / 100
+      seasonRecords.reduce((sum, value) => {
+        return sum + (value.defeatsCount || 0);
+      }, 0) * 100,
+    ) / 100
       : 0;
 
   const trophyMatches = seasonRecords?.find((item) => {
@@ -151,8 +151,8 @@ const UserSeasonRecords = () => {
                               typeName === '트로피 리그'
                                 ? `trophy_league/grade/${record.matchGrade}`
                                 : `power_league/${Math.floor(
-                                    (record.matchGrade - 1) / 3,
-                                  )}`
+                                  (record.matchGrade - 1) / 3,
+                                )}`
                             }.webp`}
                             alt={'트로피 리그 랭크'}
                           />
@@ -209,5 +209,3 @@ const UserSeasonRecords = () => {
     </div>
   );
 };
-
-export default UserSeasonRecords;

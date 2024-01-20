@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import useWindowClick from '~/hooks/use-window-click';
+import useWindowClick from '~/hooks/use-window-click.hook';
 
 import config from '~/config/config';
 
@@ -29,51 +29,51 @@ const TypeMode = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
       >
         {type === '0' || type === '7'
           ? rotationTL?.map((modeName: string) => (
-              <React.Fragment key={`${modeName}`}>
-                <input
-                  className={styles.typeButton}
-                  type={'radio'}
-                  id={modeName}
-                  name={modeName}
-                  value={modeName}
-                  checked={modeName === mode}
-                  onChange={(e) => {
-                    setMatchMode(e);
-                    setChecked(!checked);
-                  }}
+            <React.Fragment key={`${modeName}`}>
+              <input
+                className={styles.typeButton}
+                type={'radio'}
+                id={modeName}
+                name={modeName}
+                value={modeName}
+                checked={modeName === mode}
+                onChange={(e) => {
+                  setMatchMode(e);
+                  setChecked(!checked);
+                }}
+              />
+              <label htmlFor={modeName}>
+                <img
+                  src={`${config.assets}/modes/icon/${modeName}.webp`}
+                  alt={modeName}
                 />
-                <label htmlFor={modeName}>
-                  <img
-                    src={`${config.assets}/modes/icon/${modeName}.webp`}
-                    alt={modeName}
-                  />
-                  <div>{t(`battle.mode.${modeName}`)}</div>
-                </label>
-              </React.Fragment>
-            ))
+                <div>{t(`battle.mode.${modeName}`)}</div>
+              </label>
+            </React.Fragment>
+          ))
           : rotationPL?.map((modeName: string) => (
-              <React.Fragment key={`${modeName}`}>
-                <input
-                  className={styles.typeButton}
-                  type={'radio'}
-                  id={modeName}
-                  name={modeName}
-                  value={modeName}
-                  checked={modeName === mode}
-                  onChange={(e) => {
-                    setMatchMode(e);
-                    setChecked(!checked);
-                  }}
+            <React.Fragment key={`${modeName}`}>
+              <input
+                className={styles.typeButton}
+                type={'radio'}
+                id={modeName}
+                name={modeName}
+                value={modeName}
+                checked={modeName === mode}
+                onChange={(e) => {
+                  setMatchMode(e);
+                  setChecked(!checked);
+                }}
+              />
+              <label htmlFor={modeName}>
+                <img
+                  src={`${config.assets}/modes/icon/${modeName}.webp`}
+                  alt={modeName}
                 />
-                <label htmlFor={modeName}>
-                  <img
-                    src={`${config.assets}/modes/icon/${modeName}.webp`}
-                    alt={modeName}
-                  />
-                  <div>{t(`battle.mode.${modeName}`)}</div>
-                </label>
-              </React.Fragment>
-            ))}
+                <div>{t(`battle.mode.${modeName}`)}</div>
+              </label>
+            </React.Fragment>
+          ))}
       </div>
     </div>
   );

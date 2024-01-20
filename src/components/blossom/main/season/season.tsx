@@ -6,7 +6,7 @@ import styles from './season.module.scss';
 const SeasonSummary = ({ season }) => {
   return (
     <React.Fragment>
-      <Link to={'/season'}>
+      <Link to={'./battles'}>
         <span>시즌기록</span>
       </Link>
       <div>

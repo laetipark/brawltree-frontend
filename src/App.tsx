@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from '~/components/header/header';
 import Footer from '~/components/footer/footer';
 
-import Main from '~/pages/main/main';
+import { Main } from '~/pages/main/main';
 import User from '~/pages/user/user';
 import Brawlers from '~/pages/brawler/brawlers';
 import Events from '~/pages/events/events';

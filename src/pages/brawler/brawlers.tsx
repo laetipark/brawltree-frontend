@@ -6,6 +6,7 @@ import BrawlerService from '~/services/brawler.service';
 
 import styles from './brawlers.module.scss';
 import BrawlerStatsSummary from '~/components/brawler/summary/stats-summary';
+import { Spinner } from '~/components/spinner/spinner';
 
 const Brawlers = () => {
   const [brawlers, setBrawlers] = useState([]);
@@ -27,8 +28,9 @@ const Brawlers = () => {
     });
   }, []);
 
+  console.log(brawlers);
   return (
-    brawlers && (
+    brawlers.length > 0 ? (
       <div className={styles.app}>
         <BrawlerSelection brawlers={brawlers} setBrawler={setBrawler} />
         <div>
@@ -39,7 +41,7 @@ const Brawlers = () => {
           <BrawlerStatsSummary brawler={brawler} brawlerStats={brawlerStats} />
         </div>
       </div>
-    )
+    ) : <Spinner />
   );
 };
 

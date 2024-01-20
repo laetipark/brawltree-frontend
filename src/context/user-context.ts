@@ -29,12 +29,11 @@ type UserContext = {
   season: SeasonType;
   friends?: UserFriendsType[];
   seasonRecords?: UserSeasonRecordsType[];
-  stack: number;
   setUser: (user: UsersType) => void;
   setType: (type: string) => void;
   setMode: (mode: string) => void;
+  setStack: (prevStack: (stack: number) => (number)) => void;
   setRetryCount: (retryCount: number) => void;
-  setStack: (stack: number) => void;
 };
 
 export default createContext<UserContext | null>(null);

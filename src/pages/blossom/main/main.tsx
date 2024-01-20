@@ -9,11 +9,12 @@ import SeasonSummary from '~/components/blossom/main/season/season';
 import styles from './main.module.scss';
 import axios from 'axios';
 import config from '~/config/config';
+import { Spinner } from '~/components/spinner/spinner';
 
 const Main = () => {
   const [members, setMembers] = useState({
-    memberCount: '0',
-    currentTotalTrophies: '0',
+    memberCount: 0,
+    currentTotalTrophies: 0,
   });
   const [battles, setBattles] = useState({ matchCount: '0' });
   const [season, setSeason] = useState({ matchCount: '0' });
@@ -33,7 +34,7 @@ const Main = () => {
   }, []);
 
   return (
-    members.memberCount && (
+    members.memberCount > 0 ? (
       <div className={styles.app}>
         <MemberSummary members={members} />
         <div className={styles.summaryWrapper}>
@@ -43,7 +44,7 @@ const Main = () => {
         <EventsSummary events={events} />
         <BrawlerSummary brawlersTL={brawlersTL} brawlersPL={brawlersPL} />
       </div>
-    )
+    ) : <Spinner />
   );
 };
 
