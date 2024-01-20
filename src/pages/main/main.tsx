@@ -1,30 +1,31 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import InputField from '~/components/main/input-field';
 import ResultField from '~/components/main/result-field';
 
-import debounce from '~/utils/debounce';
-
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './main.module.scss';
+import { debounce } from '~/utils/debounce';
 
-const Main = () => {
+export const Main = () => {
   const { t } = useTranslation();
   const [inputValue, setInputValue] = useState<string>('');
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
 
-  const onChangeInput = useCallback(
-    ({ target }) => {
-      const { value } = target;
-      debounce(setInputValue(value), 500);
-    },
-    [inputValue],
-  );
+  const setInput = debounce((value: string) => {
+    if (value.length > 1) {
+      setInputValue(value);
+    }
+  }, 500);
+
+  const onChangeInput = (e) => {
+    setInput(e.target.value);
+  };
 
   return (
     <div className={styles.app}>
@@ -69,5 +70,3 @@ const Main = () => {
     </div>
   );
 };
-
-export default Main;

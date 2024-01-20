@@ -5,11 +5,9 @@ const getResultByKeyword = async (keyword: string) => {
   return UserService.getUsers(keyword);
 };
 
-const useResults = (keyword: string) => {
+export const searchItems = (keyword: string) => {
   return useQuery(['keyword', keyword], () => getResultByKeyword(keyword), {
     enabled: !!keyword,
     select: (data) => data,
   });
 };
-
-export default useResults;
