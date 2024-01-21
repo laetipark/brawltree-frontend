@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import config from '~/config/config';
 
 import styles from './item-info.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const ItemTooltip = ({ itemID, itemName, itemKind }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+
+  const { t } = useTranslation();
 
   const handleMouseOver = ({ clientY, target }) => {
     const rect =
@@ -65,7 +68,9 @@ const ItemTooltip = ({ itemID, itemName, itemKind }) => {
             />
             <span>{itemName}</span>
           </div>
-          <div>아이템 설명</div>
+          {
+            <div>{t(`brawler.brawlerItem.description.${itemID}`)}</div>
+          }
         </div>
       )}
     </React.Fragment>
