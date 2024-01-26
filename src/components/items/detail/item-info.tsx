@@ -5,7 +5,15 @@ import config from '~/config/config';
 import styles from './item-info.module.scss';
 import { useTranslation } from 'react-i18next';
 
-const ItemTooltip = ({ itemID, itemName, itemKind }) => {
+interface ItemTooltipProps {
+  brawlerPower: null;
+}
+
+interface ItemTooltipProps {
+  brawlerValues: null;
+}
+
+const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawlerValues }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
@@ -46,6 +54,29 @@ const ItemTooltip = ({ itemID, itemName, itemKind }) => {
     };
   }, [mouseOver]);
 
+  let description = t(`brawler.brawlerItem.description.${itemID}`);
+  const patternWithBracket = /\{(\d+)}/g;
+  const pattern = /(\d+)/g;
+  const matches = (description.match(patternWithBracket))?.map(item => item.match(pattern)).map(Number);
+
+  matches?.map(number => {
+    let value = undefined;
+    if (values) {
+      if (typeof values[number] === 'string') {
+        const [first, second] = values[number].split('*');
+        if (first.includes('.')) {
+          const [firstChild, secondChild] = first.split('.');
+          value = brawlerValues && `${second * 100}%(${(brawlerValues[firstChild][secondChild] + (brawlerValues[firstChild][secondChild] * (brawlerPower - 1) * 0.1)) * second})`;
+        } else {
+          value = brawlerValues && `${second * 100}%(${(brawlerValues[first] + (brawlerValues[first] * (brawlerPower - 1) * 0.1)) * second})`;
+        }
+      } else {
+        value = values[number];
+      }
+    }
+    description = description.replace(`{${number}}`, `${value && value}`);
+  });
+
   return (
     <React.Fragment>
       <div onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
@@ -69,7 +100,7 @@ const ItemTooltip = ({ itemID, itemName, itemKind }) => {
             <span>{itemName}</span>
           </div>
           {
-            <div>{t(`brawler.brawlerItem.description.${itemID}`)}</div>
+            <div>{description}</div>
           }
         </div>
       )}

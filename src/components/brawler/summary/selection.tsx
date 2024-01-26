@@ -18,11 +18,10 @@ const BrawlerSelection = ({ brawlers, setBrawler }) => {
           return (
             <React.Fragment key={brawler.id}>
               <input
-                type="radio"
                 className={styles.brawlerButton}
+                type="radio"
                 id={brawler.id}
-                name={brawler.id}
-                value={brawler.id}
+                name={'brawler'}
                 checked={radio === brawler.id}
                 onChange={() => {
                   handleRadioButton(brawler);

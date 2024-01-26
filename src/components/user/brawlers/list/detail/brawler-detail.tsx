@@ -6,15 +6,17 @@ import config from '~/config/config';
 import styles from './brawler-detail.module.scss';
 
 const BrawlerDetail = ({
-  brawlerID,
-  name,
-  powerLeaguePickRate,
-  trophyLeaguePickRate,
-  powerLeagueVictoryRate,
-  trophyLeagueVictoryRate,
-  brawlerRank,
-  userBrawlerItems,
-}) => {
+                         brawlerID,
+                         name,
+                         powerLeaguePickRate,
+                         trophyLeaguePickRate,
+                         powerLeagueVictoryRate,
+                         trophyLeagueVictoryRate,
+                         brawlerRank,
+                         userBrawlerItems,
+                         brawlerPower,
+                         brawlerValues,
+                       }) => {
   const brawlerGadgets = userBrawlerItems?.filter(
     ({ brawlerID: item, itemKind }) =>
       item === brawlerID && itemKind === 'gadget',
@@ -83,36 +85,45 @@ const BrawlerDetail = ({
         </div>
         {brawlerGadgets && (
           <div>
-            {brawlerGadgets?.map(({ itemID, itemName }) => (
+            {brawlerGadgets?.map(({ itemID, itemName, values }) => (
               <ItemTooltip
                 key={itemID}
                 itemID={itemID}
                 itemName={itemName}
                 itemKind={'gadget'}
+                values={values}
+                brawlerPower={brawlerPower}
+                brawlerValues={brawlerValues}
               />
             ))}
           </div>
         )}
         {brawlerStarPowers && (
           <div>
-            {brawlerStarPowers?.map(({ itemID, itemName }) => (
+            {brawlerStarPowers?.map(({ itemID, itemName, values }) => (
               <ItemTooltip
                 key={itemID}
                 itemID={itemID}
                 itemName={itemName}
                 itemKind={'starPower'}
+                values={values}
+                brawlerPower={brawlerPower}
+                brawlerValues={brawlerValues}
               />
             ))}
           </div>
         )}
         {brawlerGears && (
           <div>
-            {brawlerGears?.map(({ itemID, itemName }) => (
+            {brawlerGears?.map(({ itemID, itemName, values }) => (
               <ItemTooltip
                 key={itemID}
                 itemID={itemID}
                 itemName={itemName}
                 itemKind={'gear'}
+                values={values}
+                brawlerPower={brawlerPower}
+                brawlerValues={brawlerValues}
               />
             ))}
           </div>

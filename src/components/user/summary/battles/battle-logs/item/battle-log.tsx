@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
@@ -165,9 +164,9 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
                      isStarPlayer,
                    }) => {
                     return (
-                      <Link
+                      <a
                         key={`${battleInfo.battleTime}_${index}_${playerID}`}
-                        to={`/brawlian/${playerID.replace('#', '')}`}
+                        href={`./${playerID.replace('#', '')}`}
                         onClick={() => {
                           setUser({
                             userID: '',
@@ -232,7 +231,7 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
                             )}
                           </div>
                         </div>
-                      </Link>
+                      </a>
                     );
                   },
                 )}

@@ -50,6 +50,7 @@ const UserBrawlerList = () => {
     checkedItemHandler(value, e.target.checked);
   };
 
+  console.log(brawlers);
   return (
     brawlers?.length > 0 ?
       <div className={styles.brawlerListWrapper}>
@@ -71,6 +72,8 @@ const UserBrawlerList = () => {
                currentTrophies,
                highestTrophies,
                brawlerRank,
+               brawlerPower,
+               values,
              }) => {
               const brawlerData = brawlerGraphs?.filter(
                 (item) => item.brawlerID === brawlerID,
@@ -129,6 +132,8 @@ const UserBrawlerList = () => {
                       trophyLeagueVictoryRate={trophyLeagueVictoryRate}
                       brawlerRank={brawlerRank}
                       userBrawlerItems={brawlerItems}
+                      brawlerPower={brawlerPower}
+                      brawlerValues={values}
                     />
                     {brawlerGraphData[0].data.length > 1 && (
                       <Line
