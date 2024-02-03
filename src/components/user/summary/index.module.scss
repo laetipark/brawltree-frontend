@@ -2,15 +2,8 @@
   display: flex;
   flex-direction: column;
   width: calc(100% - 20px);
-  padding: 10px;
-  gap: 10px;
-}
-
-@media (min-width: 576px) {
-  .recordsWrapper {
-    max-width: 536px;
-    margin: 0 auto;
-  }
+  padding: 8px;
+  gap: 8px;
 }
 
 @media (min-width: 768px) {
@@ -23,11 +16,5 @@
 @media (min-width: 1024px) {
   .recordsWrapper {
     max-width: 924px;
-    margin: 0 auto;
   }
-}
-
-.breakLine {
-  margin: 4px auto;
-  color: #425F57;
 }

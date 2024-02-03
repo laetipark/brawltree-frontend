@@ -15,8 +15,17 @@ const EventItem = ({ event, type }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const nextTime = moment(type === 'end' ? event.endTime : event.startTime);
+  if (type !== 'end') {
+    nextTime.set('date', new Date().getDate());
+    if (moment.duration(nextTime.diff(moment())).asSeconds() < 0) {
+      nextTime.set('date', new Date().getDate() + 1);
+    }
+  }
+  
   const diffTime = {
-    day: type === 'end' ? moment.duration(nextTime.diff(moment())).days() : 0,
+    day: type === 'end' ? moment.duration(nextTime.diff(moment())).days() :
+      moment.duration(nextTime.diff(moment())).days() > 0 ?
+        moment.duration(nextTime.diff(moment())).days() : 0,
     hour:
       type === 'end'
         ? moment.duration(nextTime.diff(moment())).hours()

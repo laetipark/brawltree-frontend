@@ -14,10 +14,6 @@ import BlossomMembers from '~/pages/blossom/members/members-table';
 import BlossomBrawlers from '~/pages/blossom/brawlers/brawlers-table';
 import BlossomBattles from '~/pages/blossom/battles/battles-table';
 
-// TODO : 친밀도 업데이트
-// TODO : 친밀도 crew name으로 표기
-// TODO : 브롤러 만들기
-
 const App = () => {
   const location = useLocation();
   const [titleDir, setTitleDir] = useState('brawltree');

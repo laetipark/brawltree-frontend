@@ -6,29 +6,33 @@
 
 .brawlerSummary {
   display: grid;
-  grid-template-columns: 10% 35% 52% 3%;
+  grid-template-columns: 10% 32% 54% 4%;
   justify-content: space-between;
   align-items: center;
   justify-items: center;
-  border: 2px solid #A8DE8E;
-  border-radius: 4px;
-  background-color: #EAE7B1;
-  padding: 1%;
-}
+  border: 1px solid rgba(97, 130, 100, 0.8);
+  background-color: rgba(208, 231, 210, 0.8);
+  padding: 4px 8px;
+  transition: background-color 0.2s ease-in;
 
-.brawlerSummary > img {
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  object-position: left;
-  border-radius: 40%;
-}
+  &:hover {
+    background-color: rgba(176, 217, 177, 0.8);
+  }
 
-.brawlerSummary > div {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
+  & > img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: left;
+    border-radius: 50px;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
 }
 
 .brawlerSummary > div > img {
@@ -37,7 +41,7 @@
   object-fit: contain;
 }
 
-.brawlerSummary > div > div  {
+.brawlerSummary > div > div {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,7 +49,7 @@
 
 .brawlerTrophy > div:first-child {
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
 }
 

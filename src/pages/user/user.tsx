@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
 import UserTitle from '~/components/user/title/title';
@@ -11,6 +11,8 @@ import UserContext from '~/context/user-context';
 
 import styles from './user.module.scss';
 import { Spinner } from '~/components/spinner/spinner';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
 const User = () => {
   const location = useLocation();
@@ -66,6 +68,10 @@ const User = () => {
   const [friends, setFriends] = useState();
   const [seasonRecords, setSeasonRecords] = useState();
 
+  const [load, setLoad] = useState(true);
+  const target = useRef(null);
+  const [scrollStack, setScrollerStack] = useState(0);
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -117,6 +123,52 @@ const User = () => {
     });
   }, [id, type, mode, stack, user?.updatedAt || new Date()]);
 
+  useEffect(() => {
+    const options = {
+      threshold: 1.0,
+    };
+
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+          setStack((prevStack: number) => {
+            if (recentBattles.length % 30 === 0 && scrollStack < 3) {
+
+              return prevStack + 1;
+            } else {
+              setLoad(false);
+            }
+
+            return prevStack;
+          });
+          if (recentBattles.length === 0) {
+            setScrollerStack((prevStack) => prevStack + 1);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(callback, options);
+
+    if (target.current) {
+      observer.observe(target.current);
+    }
+
+    return () => {
+      if (observer) {
+        observer.disconnect();
+      }
+    };
+  }, [recentBattles]);
+
+  useEffect(() => {
+    if (!load) {
+      setScrollerStack(0);
+      setLoad(true);
+    }
+  }, [mode, type]);
+
+
   return (
     new Date(user?.updatedAt).getTime() > 0 ? (
         <UserContext.Provider
@@ -146,6 +198,11 @@ const User = () => {
           <div className={styles.app}>
             <UserTitle />
             <UserMenu />
+
+            <div ref={target} className={styles.breakLine} style={{ display: load ? 'flex' : 'none' }}>
+              <FontAwesomeIcon icon={faEllipsis}
+                               fontSize={28} />
+            </div>
           </div>
         </UserContext.Provider>
       ) :

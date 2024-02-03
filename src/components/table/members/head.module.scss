@@ -1,19 +1,11 @@
 .head {
   display: table-header-group;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .headRow {
   display: table-row;
-}
-
-.headRow > div:first-child {
-  border-top-left-radius: 6px;
-}
-
-.headRow > div:nth-child(n+2) {
-  border-top-right-radius: 6px;
 }
 
 .headRow > div {
@@ -66,5 +58,5 @@
 }
 
 .lastColumn {
-  border-top-right-radius: 6px !important;
+  border-top-right-radius: 4px !important;
 }

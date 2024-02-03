@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Line } from '@nivo/line';
 
-import BrawlerSummary from '~/components/user/brawlers/list/summary/brawler-summary';
-import BrawlerDetail from '~/components/user/brawlers/list/detail/brawler-detail';
+import { BrawlerSummary } from '~/components/user/brawlers/list/summary/brawler-summary';
+import { BrawlerDetail } from '~/components/user/brawlers/list/detail/brawler-detail';
 
 import UserService from '~/services/user.service';
 import UserContext from '~/context/user-context';
@@ -50,7 +50,6 @@ const UserBrawlerList = () => {
     checkedItemHandler(value, e.target.checked);
   };
 
-  console.log(brawlers);
   return (
     brawlers?.length > 0 ?
       <div className={styles.brawlerListWrapper}>
@@ -86,6 +85,28 @@ const UserBrawlerList = () => {
                 },
               ];
               const brawlerName = t(`brawler.brawler.${name}`);
+              const brawlerDetail = {
+                display: checkedList.includes(brawlerID) ? 'flex' : 'none',
+                backgroundColor:
+                  rarity === 'Trophy Road'
+                    ? '#CDFCF6'
+                    : rarity === 'Rare'
+                      ? '#C3EDC0'
+                      : rarity === 'Super Rare'
+                        ? '#BCCEF8'
+                        : rarity === 'Epic'
+                          ? '#B2A4FF'
+                          : rarity === 'Mythic'
+                            ? '#FFB4B4'
+                            : rarity === 'Legendary'
+                              ? '#FDF7C3'
+                              : '',
+                backgroundImage: `linear-gradient(${
+                  rarity === 'Chromatic'
+                    ? '45deg, #B2A4FF 20%, #FFB4B4 50%, #FDF7C3 80%'
+                    : ''
+                })`,
+              };
 
               return (
                 <div key={brawlerID}>
@@ -100,28 +121,7 @@ const UserBrawlerList = () => {
                   />
                   <div
                     className={styles.brawlerDetail}
-                    style={{
-                      display: checkedList.includes(brawlerID) ? 'flex' : 'none',
-                      backgroundColor:
-                        rarity === 'Trophy Road'
-                          ? '#CDFCF6'
-                          : rarity === 'Rare'
-                            ? '#C3EDC0'
-                            : rarity === 'Super Rare'
-                              ? '#BCCEF8'
-                              : rarity === 'Epic'
-                                ? '#B2A4FF'
-                                : rarity === 'Mythic'
-                                  ? '#FFB4B4'
-                                  : rarity === 'Legendary'
-                                    ? '#FDF7C3'
-                                    : '',
-                      backgroundImage: `linear-gradient(${
-                        rarity === 'Chromatic'
-                          ? '45deg, #B2A4FF 20%, #FFB4B4 50%, #FDF7C3 80%'
-                          : ''
-                      })`,
-                    }}
+                    style={brawlerDetail}
                   >
                     <BrawlerDetail
                       brawlerID={brawlerID}
@@ -134,11 +134,13 @@ const UserBrawlerList = () => {
                       userBrawlerItems={brawlerItems}
                       brawlerPower={brawlerPower}
                       brawlerValues={values}
+                      currentTrophies={currentTrophies}
+                      highestTrophies={highestTrophies}
                     />
                     {brawlerGraphData[0].data.length > 1 && (
                       <Line
                         data={brawlerGraphData}
-                        width={360}
+                        width={340}
                         height={280}
                         margin={{ top: 20, right: 30, bottom: 48, left: 50 }}
                         yFormat=" >-.0f"

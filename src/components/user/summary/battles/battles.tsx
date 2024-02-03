@@ -24,16 +24,19 @@ export const UserBattles = () => {
     season,
     setType,
     setMode,
+    setStack,
   } = context;
 
 
   const setMatchType = ({ target }) => {
     setType(target.value);
     setMode('all');
+    setStack(() => 0);
   };
 
   const setMatchMode = ({ target }) => {
     setMode(target.value);
+    setStack(() => 0);
   };
 
   return (

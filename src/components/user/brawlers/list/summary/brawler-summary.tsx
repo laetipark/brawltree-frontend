@@ -1,25 +1,29 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import config from '~/config/config';
 
 import styles from './brawler-summary.module.scss';
 
-const BrawlerSummary = ({
-  brawlerID,
-  name,
-  beginTrophies,
-  currentTrophies,
-  highestTrophies,
-  checkedList,
-  checkHandler,
-}) => {
+export const BrawlerSummary = ({
+                                 brawlerID,
+                                 name,
+                                 beginTrophies,
+                                 currentTrophies,
+                                 highestTrophies,
+                                 checkedList,
+                                 checkHandler,
+                               }) => {
   const trophyChange =
     currentTrophies - beginTrophies > 0
       ? `+${currentTrophies - beginTrophies}`
       : currentTrophies - beginTrophies;
+  const arrowRotate = {
+    transform: checkedList.includes(brawlerID) ? 'rotate(180deg)' : '',
+    transition: 'transform 0.3s ease',
+  };
 
   return (
     <div key={brawlerID}>
@@ -55,11 +59,7 @@ const BrawlerSummary = ({
             <div>{trophyChange}개</div>
           </div>
         </div>
-        {checkedList.includes(brawlerID) ? (
-          <FontAwesomeIcon fontSize={10} icon={faArrowDown} />
-        ) : (
-          <FontAwesomeIcon fontSize={10} icon={faArrowUp} />
-        )}
+        <FontAwesomeIcon style={arrowRotate} fontSize={10} icon={faArrowUp} />
       </label>
       <div
         className={styles.brawlerDetail}
@@ -68,5 +68,3 @@ const BrawlerSummary = ({
     </div>
   );
 };
-
-export default BrawlerSummary;

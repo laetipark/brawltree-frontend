@@ -28,7 +28,7 @@ const UserRecord = () => {
             `${
               profile.trophyChange > 0
                 ? `+${profile.trophyChange}`
-                : profile.trophyChange
+                : profile.trophyChange || 0
             }개`,
           ],
           [t('user.record.soloLeagueRank'), roman[profile.currentSoloPL % 3]],
@@ -36,7 +36,7 @@ const UserRecord = () => {
           [
             t('user.record.club'),
             profile?.clubName?.replace(/(<+)([/c]+|c[1-9])(>)/g, '') ||
-              'No Club',
+            'No Club',
           ],
         ]}
         bodyRowImages={[

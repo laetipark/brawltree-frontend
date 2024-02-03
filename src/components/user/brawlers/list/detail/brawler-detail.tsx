@@ -5,18 +5,20 @@ import config from '~/config/config';
 
 import styles from './brawler-detail.module.scss';
 
-const BrawlerDetail = ({
-                         brawlerID,
-                         name,
-                         powerLeaguePickRate,
-                         trophyLeaguePickRate,
-                         powerLeagueVictoryRate,
-                         trophyLeagueVictoryRate,
-                         brawlerRank,
-                         userBrawlerItems,
-                         brawlerPower,
-                         brawlerValues,
-                       }) => {
+export const BrawlerDetail = ({
+                                brawlerID,
+                                name,
+                                powerLeaguePickRate,
+                                trophyLeaguePickRate,
+                                powerLeagueVictoryRate,
+                                trophyLeagueVictoryRate,
+                                brawlerRank,
+                                userBrawlerItems,
+                                brawlerPower,
+                                brawlerValues,
+                                currentTrophies,
+                                highestTrophies,
+                              }) => {
   const brawlerGadgets = userBrawlerItems?.filter(
     ({ brawlerID: item, itemKind }) =>
       item === brawlerID && itemKind === 'gadget',
@@ -31,51 +33,51 @@ const BrawlerDetail = ({
   );
 
   return (
-    <div className={styles.brawlerDetailInfo}>
+    <div className={styles.userBrawlerDetailWrapper}>
       <div>
-        <img
-          src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
-          alt={'브롤러'}
+        <img className={styles.brawlerProfile}
+             src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
+             alt={'브롤러'}
         />
-        <div>
-          <img
-            className={styles.brawlerModeImage}
-            src={`${config.assets}/modes/icon/trophyLeague.webp`}
-            alt={'브롤러'}
-          />
-          <span>Pick</span>
-          <span style={{ fontWeight: 600 }}>{trophyLeaguePickRate}%</span>
+        <div className={styles.gameType}>
+          <div className={styles.gameTypeTitle}>
+            <img
+              className={styles.gameTypeImage}
+              src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              alt={'trophyLeague'}
+            />
+            <span>트로피 리그</span>
+          </div>
+          <div>
+            <span>Pick</span>
+            <span style={{ fontWeight: 600 }}>{trophyLeaguePickRate}%</span>
+          </div>
+          <div>
+            <span>Win</span>
+            <span style={{ fontWeight: 600 }}>{trophyLeagueVictoryRate}%</span>
+          </div>
         </div>
-        <div>
-          <img
-            className={styles.brawlerModeImage}
-            src={`${config.assets}/modes/icon/trophyLeague.webp`}
-            alt={'브롤러'}
-          />
-          <span>Win</span>
-          <span style={{ fontWeight: 600 }}>{trophyLeagueVictoryRate}%</span>
-        </div>
-        <div>
-          <img
-            className={styles.brawlerModeImage}
-            src={`${config.assets}/modes/icon/powerLeague.webp`}
-            alt={'브롤러'}
-          />
-          <span>Pick</span>
-          <span style={{ fontWeight: 600 }}>{powerLeaguePickRate}%</span>
-        </div>
-        <div>
-          <img
-            className={styles.brawlerModeImage}
-            src={`${config.assets}/modes/icon/powerLeague.webp`}
-            alt={'브롤러'}
-          />
-          <span>Win</span>
-          <span style={{ fontWeight: 600 }}>{powerLeagueVictoryRate}%</span>
+        <div className={styles.gameType}>
+          <div className={styles.gameTypeTitle}>
+            <img
+              className={styles.gameTypeImage}
+              src={`${config.assets}/modes/icon/powerLeague.webp`}
+              alt={'브롤러'}
+            />
+            <span>파워 리그</span>
+          </div>
+          <div>
+            <span>Pick</span>
+            <span style={{ fontWeight: 600 }}>{powerLeaguePickRate}%</span>
+          </div>
+          <div>
+            <span>Win</span>
+            <span style={{ fontWeight: 600 }}>{powerLeagueVictoryRate}%</span>
+          </div>
         </div>
       </div>
       <div>
-        <div>
+        <div className={styles.brawlerTitle}>
           <img
             className={styles.brawlerRankImage}
             src={`${config.assets}/rank/trophy_league/${brawlerRank}.webp`}
@@ -83,54 +85,68 @@ const BrawlerDetail = ({
           />
           <span className={styles.brawlerName}>{name}</span>
         </div>
-        {brawlerGadgets && (
+        <div className={styles.brawlerSubTitle}>
           <div>
-            {brawlerGadgets?.map(({ itemID, itemName, values }) => (
-              <ItemTooltip
-                key={itemID}
-                itemID={itemID}
-                itemName={itemName}
-                itemKind={'gadget'}
-                values={values}
-                brawlerPower={brawlerPower}
-                brawlerValues={brawlerValues}
-              />
-            ))}
+            <span>파워 레벨:</span>
+            <span style={{ fontWeight: 600 }}>{brawlerPower}</span>
           </div>
-        )}
-        {brawlerStarPowers && (
           <div>
-            {brawlerStarPowers?.map(({ itemID, itemName, values }) => (
-              <ItemTooltip
-                key={itemID}
-                itemID={itemID}
-                itemName={itemName}
-                itemKind={'starPower'}
-                values={values}
-                brawlerPower={brawlerPower}
-                brawlerValues={brawlerValues}
-              />
-            ))}
+            <span>현재 트로피:</span>
+            <span style={{ fontWeight: 600 }}>{currentTrophies}</span>
           </div>
-        )}
-        {brawlerGears && (
           <div>
-            {brawlerGears?.map(({ itemID, itemName, values }) => (
-              <ItemTooltip
-                key={itemID}
-                itemID={itemID}
-                itemName={itemName}
-                itemKind={'gear'}
-                values={values}
-                brawlerPower={brawlerPower}
-                brawlerValues={brawlerValues}
-              />
-            ))}
+            <span>최고 트로피:</span>
+            <span style={{ fontWeight: 600 }}>{highestTrophies}</span>
           </div>
-        )}
+        </div>
+        <div className={styles.userBrawlerStats}>
+          {brawlerGadgets && (
+            <div>
+              {brawlerGadgets?.map(({ itemID, itemName, values }) => (
+                <ItemTooltip
+                  key={itemID}
+                  itemID={itemID}
+                  itemName={itemName}
+                  itemKind={'gadget'}
+                  values={values}
+                  brawlerPower={brawlerPower}
+                  brawlerValues={brawlerValues}
+                />
+              ))}
+            </div>
+          )}
+          {brawlerStarPowers && (
+            <div>
+              {brawlerStarPowers?.map(({ itemID, itemName, values }) => (
+                <ItemTooltip
+                  key={itemID}
+                  itemID={itemID}
+                  itemName={itemName}
+                  itemKind={'starPower'}
+                  values={values}
+                  brawlerPower={brawlerPower}
+                  brawlerValues={brawlerValues}
+                />
+              ))}
+            </div>
+          )}
+          {brawlerGears && (
+            <div>
+              {brawlerGears?.map(({ itemID, itemName, values }) => (
+                <ItemTooltip
+                  key={itemID}
+                  itemID={itemID}
+                  itemName={itemName}
+                  itemKind={'gear'}
+                  values={values}
+                  brawlerPower={brawlerPower}
+                  brawlerValues={brawlerValues}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 };
-
-export default BrawlerDetail;

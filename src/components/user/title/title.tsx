@@ -44,9 +44,9 @@ const UserTitle = () => {
           </div>
         </div>
       </div>
-      <div className={styles.reloadBox}>
-        <button
-          className={styles.reloadButton}
+      <div className={styles.buttonBox}>
+        <span
+          className={styles.titleButton}
           onClick={() => {
             if (lastUpdatedDiff > 2) {
               setRetryCount(0);
@@ -54,19 +54,19 @@ const UserTitle = () => {
           }}
         >
           <span>{t(`user.title.update`)}</span>
-          <span>{Math.floor(lastUpdatedDiff)}</span>
-          <span>{t(`user.title.updateAgo`)}</span>
-        </button>
-      </div>
-      <div className={styles.copyBox}>
+          <span>
+            <span>{Math.floor(lastUpdatedDiff)}</span>
+            <span>{t(`user.title.updateAgo`)}</span>
+          </span>
+        </span>
         <CopyToClipboard
           text={user.userID}
           onCopy={() => alert(t(`user.title.copyAlert`))}
         >
-          <span className={styles.copyButton}>{t(`user.title.copyTag`)}</span>
+          <span className={styles.titleButton}>{t(`user.title.copyTag`)}</span>
         </CopyToClipboard>
         <CopyToClipboard text={user.userID}>
-          <a className={styles.copyButton} href={'brawlstars://'}>
+          <a className={styles.titleButton} href={'brawlstars://'}>
             {t(`user.title.copyTagAndRun`)}
           </a>
         </CopyToClipboard>

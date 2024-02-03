@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center;
   width: 100%;
 }
 
@@ -11,25 +10,29 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 6px;
-  background-color: #A8DE8E;
-  border: none;
-  border-radius: 4px;
+  padding: 8px;
+  background-color: #E1ECC8;
+  border-top: 1px solid #83BD75;
+  border-left: 1px solid #83BD75;
+  border-right: 1px solid #83BD75;
+  border-bottom: none;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   gap: 4px;
-}
+  transition: background-color 0.2s ease-in;
+  cursor: pointer;
 
-.typeMenuButton:hover {
-  background-color: #609966;
-}
+  &:hover {
+    background-color: #A0C49D;
+  }
 
-.typeMenuButton > img {
-  height: 20px;
-  object-fit: contain;
-  object-position: center;
-  align-self: center;
+  & > img {
+    height: 20px;
+    object-fit: contain;
+    object-position: center;
+    align-self: center;
+  }
 }
 
 .typeMenuList {
@@ -42,26 +45,39 @@
   z-index: 2;
 }
 
+@media (min-width: 576px) {
+  .typeMenuList {
+    width: 160px;
+  }
+}
+
 .typeButton {
   display: none;
 }
 
 .typeButton + label {
   display: flex;
-  justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 8px 0 8px 0;
-  border: none;
-  background-color: #A8DE8E;
+  padding: 8px 0 8px 8px;
+  border-bottom: 1px solid #83BD75;
+  border-left: 1px solid #83BD75;
+  border-right: 1px solid #83BD75;
+  background-color: #E1ECC8;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   gap: 4px;
   transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.typeButton:first-child + label {
+  border-top: 1px solid #83BD75;
 }
 
 .typeButton + label > img {
+  width: 40px;
   height: 20px;
   object-fit: contain;
   object-position: center;
@@ -70,11 +86,5 @@
 
 .typeButton:checked + label,
 .typeButton + label:hover {
-  background-color: #609966;
-}
-
-@media (min-width: 576px) {
-  .typeButton + label {
-    width: 100%;
-  }
+  background-color: #A0C49D;
 }

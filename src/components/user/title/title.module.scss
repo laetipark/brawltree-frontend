@@ -4,32 +4,27 @@
   justify-content: flex-start;
   width: calc(100% - 20px);
   padding: 10px;
+  background-color: #C7E9B0;
   gap: 12px;
-}
-
-@media (min-width: 576px) {
-  .titleWrapper {
-    max-width: 536px;
-    margin: 0 auto;
-  }
 }
 
 @media (min-width: 768px) {
   .titleWrapper {
     max-width: 728px;
+    margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
   .titleWrapper {
-    max-width: 924px;
+    max-width: 944px;
     margin: 0 auto;
   }
 }
 
 .titleBox {
   display: flex;
-  gap: 1%;
+  gap: 8px;
   align-items: flex-start
 }
 
@@ -40,7 +35,7 @@
 .realName {
   font-size: 24px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .userTag {
@@ -56,53 +51,38 @@
 }
 
 
-.reloadBox {
-  display: flex;
+.buttonBox {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.reloadButton {
+.titleButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 240px;
-  text-align: center;
-  background-color: #9DC08B;
-  border: none;
-  border-radius: 4px;
-  padding: 8px;
   gap: 4px;
+  color: black;
+  text-decoration: none;
+  border: 1px solid #C4D7B2;
+  background-color: #E1ECC8;
+  padding: 8px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
+  cursor: Pointer;
 
   &:hover {
-    background-color: #609966;
+    background-color: #A0C49D;
   }
 }
 
-.copyBox {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.copyButton {
-  width: 100%;
-  color: black;
-  text-align: center;
-  text-decoration: none;
-  background-color: #9DC08B;
-  border: none;
-  border-radius: 4px;
-  padding: 8px;
-  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-size: 14px;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.copyButton:hover {
-  background-color: #609966;
+@media (max-width: 576px) {
+  .buttonBox {
+    grid-template-columns: 100%;
+    gap: 4px;
+  }
 }

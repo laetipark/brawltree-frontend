@@ -8,8 +8,13 @@ import { useTranslation } from 'react-i18next';
 
 const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
   const { t } = useTranslation();
-
   const colors = ['#9DC08B', '#609966', '#557153', '#40513B'];
+  const beginDate = new Date(new Date(season?.beginDate).getTime() - 1000 * 60 * 60 * 24);
+  const fromDateYear = beginDate.getFullYear();
+  const fromDateMonth = ('0' + (beginDate.getMonth() + 1)).slice(-2);
+  const fromDateDay = ('0' + beginDate.getDate()).slice(-2);
+
+  const fromDate = `${fromDateYear}-${fromDateMonth}-${fromDateDay}`;
 
   return (
     <div className={styles.battleSummaryWrapper}>
@@ -17,16 +22,16 @@ const UserBattleSummary = ({ battlesSummary, brawlersSummary, season }) => {
         {battlesSummary && (
           <TimeRange
             data={battlesSummary[0] || [{ day: '2023-09-09', value: 0 }]}
-            from={season?.beginDate?.slice(0, 10) || '2023-09-09'}
+            from={fromDate || '2023-09-09'}
             to={season?.endDate?.slice(0, 10) || '2023-09-10'}
             width={320}
-            height={200}
+            height={260}
             emptyColor={'#DDDDDD'}
             align={'center'}
             minValue={1}
             maxValue={80}
             colors={colors}
-            margin={{ top: 36, bottom: 16, left: 32 }}
+            margin={{ top: 36, bottom: 16, left: 48 }}
             weekdayTicks={[1, 5]}
             weekdayLegendOffset={44}
             dayBorderWidth={2}
