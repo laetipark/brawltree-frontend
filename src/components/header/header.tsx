@@ -57,7 +57,7 @@ const Header = ({ dir }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={'/brawler'} onClick={() => setIsToggled(false)}>
+                  <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
                     <span>{t('application.header.brawler')}</span>
                   </Link>
                 </li>

@@ -1,43 +1,68 @@
 .brawlerSelectionWrapper {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: calc(100% - 2px);
   height: 200px;
-  overflow-y: scroll;
+  background-color: #E9EFC0;
+  border: 1px solid #B4E197;
 
-
-  &::-webkit-scrollbar {
-    display: none;
+  & > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 16px);
+    padding: 8px;
+    border-bottom: 1px solid #4E944F;
+    background-color: #83BD75;
+    font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
   }
-}
 
-@media (min-width: 768px) {
-  .brawlerSelectionWrapper {
-    height: 100%;
+  & > div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    justify-items: center;
+    width: 100%;
+    gap: 1.8%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      height: 20%;
+      background: #4E944F;
+
+      border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(34, 124, 112, 0.2);
+    }
   }
-}
-
-.brawlerSelectionWrapper > div {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 8px;
 }
 
 .brawlerButton {
   display: none;
 
   & + label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 4px;
-    border-radius: 4px;
-    background-color: #C3AED6;
     transition: background-color 0.3s;
+    width: 60px;
+    height: 80px;
   }
 
   &:checked + label {
-    background-color: #8675A9;
+    background-color: #A0C49D;
   }
 
   &:hover + label {
-    background-color: #8675A9;
+    background-color: #A0C49D;
   }
 
   &:disabled + label {
@@ -47,13 +72,76 @@
   }
 }
 
-.brawlerImage > img {
-  width: 52px;
-  height: 52px;
-  object-fit: cover;
-  object-position: left;
-  color: #212529;
-  vertical-align: middle;
-  cursor: pointer;
-  border-radius: 4px;
+.brawlerImage {
+  white-space: nowrap;
+
+  & > img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    object-position: left;
+    color: #212529;
+    vertical-align: middle;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    width: 60px;
+
+    & > span {
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .brawlerSelectionWrapper {
+    height: 380px;
+
+    & > div:last-child {
+      display: grid;
+      grid-template-columns: 11% 11% 11% 11% 11% 11% 11% 11%;
+      gap: 1.6%;
+    }
+  }
+
+  .brawlerButton + label {
+    width: 76px;
+    height: 100px;
+  }
+
+  .brawlerImage {
+    & > img {
+      width: 76px;
+      height: 76px;
+    }
+
+    & > div {
+      width: 76px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .brawlerSelectionWrapper {
+    height: 340px;
+
+    & > div:last-child {
+      display: grid;
+      grid-template-columns: 9% 9% 9% 9% 9% 9% 9% 9% 9% 9%;
+      gap: 1%;
+    }
+  }
+}
+
+.searchBrawlers {
+  height: 22px;
+  font-size: 16px;
+  background-color: #E5F9DB;
+  border: 1px solid #4E944F;
 }

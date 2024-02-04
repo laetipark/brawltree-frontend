@@ -7,15 +7,12 @@ import styles from './total-stats.module.scss';
 
 const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
   const { t } = useTranslation();
-
   const brawlerTL = brawlerStats.find(({ brawlerID, matchType }) => {
     return brawlerID === String(brawler.id) && Number(matchType) === 0;
   });
-
   const brawlerPLSolo = brawlerStats.find(({ brawlerID, matchType }) => {
     return brawlerID === String(brawler.id) && Number(matchType) === 2;
   });
-
   const brawlerPLTeam = brawlerStats.find((item) => {
     return (
       item.brawlerID === String(brawler.id) && Number(item.matchType) === 3

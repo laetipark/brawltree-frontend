@@ -6,7 +6,7 @@ import Pagination from '~/components/pagination/pagination';
 import SearchMembers from '~/components/search/search-members';
 
 import BrawlerTotalStats from '~/components/brawler/summary/total-stats';
-import BrawlerSelection from '~/components/brawler/summary/selection';
+import { BrawlerSelection } from '~/components/brawler/summary/selection';
 import BrawlerService from '~/services/brawler.service';
 
 import styles from './brawlers-table.module.scss';
@@ -51,9 +51,11 @@ const BrawlersTable = () => {
   }, [brawler.id]);
 
   return (
-    members.length > 0 ? (
+    brawlers.length > 0 ? (
       <div className={styles.app}>
-        <BrawlerSelection brawlers={brawlers} setBrawler={setBrawler} />
+        <BrawlerSelection brawlers={brawlers}
+                          brawler={brawler}
+                          setBrawler={setBrawler} />
         <div>
           <div className={styles.filter}>
             <Pagination page={page} total={total} setPage={setPage} />
