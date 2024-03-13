@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { TLCurrentEvents } from '~/components/events/list/menu-tl-current';
 import { TLTomorrowEvents } from '~/components/events/list/menu-tl-tomorrow';
@@ -6,15 +6,19 @@ import { PLEvents } from '~/components/events/list/menu-pl';
 
 import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const EventMenu = () => {
+export const EventMenu = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { mode } = useParams();
   const { t } = useTranslation();
 
-  const [menu, setMenu] = useState('curr');
+  const [menu, setMenu] = useState('');
 
-  const handleRadioButton = ({ target }) => {
-    setMenu(target.name);
-  };
+  useEffect(() => {
+    setMenu(mode);
+  }, [mode]);
 
   return (
     <div className={styles.menuWrapper}>
@@ -25,9 +29,15 @@ const EventMenu = () => {
               className={styles.typeButton}
               type={'radio'}
               id={'curr'}
-              name={'curr'}
+              name={'event'}
               checked={menu === 'curr'}
-              onChange={handleRadioButton}
+              onChange={(e) => {
+                const { target } = e;
+                setMenu(target.id);
+                const baseURL = location.pathname.split('/');
+                navigate(!/\/blossom.*/g.test(location.pathname) ?
+                  `../${baseURL[1]}/${target.id}` : `../${baseURL[1]}/${baseURL[2]}/${target.id}`);
+              }}
             />
             <label htmlFor={'curr'}>
               <div>{t('map.event.current')}</div>
@@ -38,9 +48,15 @@ const EventMenu = () => {
               className={styles.typeButton}
               type={'radio'}
               id={'next'}
-              name={'next'}
+              name={'event'}
               checked={menu === 'next'}
-              onChange={handleRadioButton}
+              onChange={(e) => {
+                const { target } = e;
+                setMenu(target.id);
+                const baseURL = location.pathname.split('/');
+                navigate(!/\/blossom.*/g.test(location.pathname) ?
+                  `../${baseURL[1]}/${target.id}` : `../${baseURL[1]}/${baseURL[2]}/${target.id}`);
+              }}
             />
             <label htmlFor={'next'}>
               <div>{t('map.event.tomorrow')}</div>
@@ -51,9 +67,15 @@ const EventMenu = () => {
               className={styles.typeButton}
               type={'radio'}
               id={'pl'}
-              name={'pl'}
+              name={'event'}
               checked={menu === 'pl'}
-              onChange={handleRadioButton}
+              onChange={(e) => {
+                const { target } = e;
+                setMenu(target.id);
+                const baseURL = location.pathname.split('/');
+                navigate(!/\/blossom.*/g.test(location.pathname) ?
+                  `../${baseURL[1]}/${target.id}` : `../${baseURL[1]}/${baseURL[2]}/${target.id}`);
+              }}
             />
             <label htmlFor={'pl'}>
               <div>{t('map.event.powerLeague')}</div>
@@ -65,11 +87,9 @@ const EventMenu = () => {
         <TLCurrentEvents />
       ) : menu === 'next' ? (
         <TLTomorrowEvents />
-      ) : (
+      ) : menu === 'pl' ? (
         <PLEvents />
-      )}
+      ) : <div></div>}
     </div>
   );
 };
-
-export default EventMenu;

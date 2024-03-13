@@ -212,11 +212,11 @@ const BattleLog = ({ battleInfo, battlePlayers }) => {
                                   src={`${
                                     config.assets
                                   }/rank/power_league/${Math.floor(
-                                    brawlerTrophies / 3,
+                                    (brawlerTrophies - 1) / 3,
                                   )}.webp`}
                                   alt={brawlerTrophies}
                                 />
-                                <span>{roman[brawlerTrophies % 3]}</span>
+                                <span>{roman[(brawlerTrophies - 1) % 3]}</span>
                               </React.Fragment>
                             ) : (
                               <React.Fragment>

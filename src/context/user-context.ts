@@ -34,6 +34,7 @@ type UserContext = {
   setMode: (mode: string) => void;
   setStack: (prevStack: (stack: number) => (number)) => void;
   setRetryCount: (retryCount: number) => void;
+  setLoad: (bool: boolean) => void;
 };
 
 export default createContext<UserContext | null>(null);

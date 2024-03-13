@@ -26,7 +26,7 @@ const Footer = () => {
     <footer className={styles.footerWrapper}>
       <div className={styles.footerLinks}>
         <a
-          href={'https://github.com/laeti-park/blossom-stats-frontend'}
+          href={'https://github.com/laetipark/brawltree-frontend'}
           target={'_blank'}
           rel="noreferrer"
         >

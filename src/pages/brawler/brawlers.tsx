@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-
-import BrawlerTotalStats from '~/components/brawler/summary/total-stats';
-import { BrawlerSelection } from '~/components/brawler/summary/selection';
-import BrawlerService from '~/services/brawler.service';
-
-import styles from './brawlers.module.scss';
-import BrawlerStatsSummary from '~/components/brawler/summary/stats-summary';
-import { Spinner } from '~/components/spinner/spinner';
 import { useParams } from 'react-router-dom';
 
-const Brawlers = () => {
+import { BrawlerTotalStats } from '~/components/brawler/summary/total-stats';
+import { BrawlerSelection } from '~/components/brawler/summary/selection';
+import { BrawlerStatsSummary } from '~/components/brawler/summary/stats-summary';
+import { Spinner } from '~/components/spinner/spinner';
+import { BrawlerService } from '~/services/brawler.service';
+
+import styles from './brawlers.module.scss';
+
+export const Brawlers = () => {
   const { name } = useParams();
   const [brawlers, setBrawlers] = useState([]);
   const [totalBrawlerStats, setBrawlerTotalStats] = useState([]);
@@ -56,5 +56,3 @@ const Brawlers = () => {
     ) : <Spinner />
   );
 };
-
-export default Brawlers;

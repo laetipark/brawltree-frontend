@@ -62,7 +62,7 @@ const Header = ({ dir }) => {
                   </Link>
                 </li>
                 <li>
-                  <Link to={'/events'} onClick={() => setIsToggled(false)}>
+                  <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
                     <span>{t('application.header.events')}</span>
                   </Link>
                 </li>
@@ -92,7 +92,7 @@ const Header = ({ dir }) => {
                 </li>
                 <li>
                   <Link
-                    to={'/blossom/events'}
+                    to={'/blossom/events/curr'}
                     onClick={() => setIsToggled(false)}
                   >
                     로테이션

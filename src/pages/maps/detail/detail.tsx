@@ -13,7 +13,7 @@ import { Spinner } from '~/components/spinner/spinner';
 const MapDetail = () => {
   const { id } = useParams();
   const [type, setType] = useState('0');
-  const [grade, setGrade] = useState(['0', '1', '2', '3', '4', '5', '6', '7']);
+  const [grade, setGrade] = useState(['4', '5', '6', '7']);
   const [mapInfo, setMapInfo] = useState({
     mapID: undefined,
     mode: undefined,

@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import UserSummary from '~/components/user/summary';
 import UserBrawlers from '~/components/user/brawlers/';
 
 import styles from './menu.module.scss';
+import UserContext from '~/context/user-context';
 
 const UserMenu = () => {
+  const context = useContext(UserContext);
   const { t } = useTranslation();
   const [menu, setMenu] = useState('summary');
+  const { setLoad } = context;
 
   const handleRadioButton = ({ target }) => {
     setMenu(target.name);
+    setLoad(target === 'summary');
   };
 
   return (

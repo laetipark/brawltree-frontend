@@ -50,10 +50,6 @@ export const UserSeasonRecords = () => {
     return item.matchType === 2;
   });
 
-  const teamPLMatches = seasonRecords?.find((item) => {
-    return item.matchType === 3;
-  });
-
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
   };
@@ -205,7 +201,6 @@ export const UserSeasonRecords = () => {
       </div>
       {typeMenu(trophyMatches, trophyToggle, setTrophyToggle, '트로피 리그')}
       {typeMenu(soloPLMatches, soloPLToggle, setSoloPLToggle, '솔로 파워 리그')}
-      {typeMenu(teamPLMatches, teamPLToggle, setTeamPLToggle, '팀 파워 리그')}
     </div>
   );
 };

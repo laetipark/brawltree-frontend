@@ -5,18 +5,13 @@ import config from '~/config/config';
 
 import styles from './total-stats.module.scss';
 
-const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
+export const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
   const { t } = useTranslation();
   const brawlerTL = brawlerStats.find(({ brawlerID, matchType }) => {
     return brawlerID === String(brawler.id) && Number(matchType) === 0;
   });
   const brawlerPLSolo = brawlerStats.find(({ brawlerID, matchType }) => {
     return brawlerID === String(brawler.id) && Number(matchType) === 2;
-  });
-  const brawlerPLTeam = brawlerStats.find((item) => {
-    return (
-      item.brawlerID === String(brawler.id) && Number(item.matchType) === 3
-    );
   });
 
   return (
@@ -85,11 +80,6 @@ const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
                   {Math.round(brawlerPLSolo?.pickRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
-                <span>/</span>
-                <span>
-                  {Math.round(brawlerPLTeam?.pickRate * 100) / 100.0 || 0}
-                </span>
-                <span>%</span>
               </div>
             </div>
           </div>
@@ -107,11 +97,6 @@ const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
                   {Math.round(brawlerPLSolo?.victoryRate * 100) / 100.0 || 0}
                 </span>
                 <span>%</span>
-                <span>/</span>
-                <span>
-                  {Math.round(brawlerPLTeam?.victoryRate * 100) / 100.0 || 0}
-                </span>
-                <span>%</span>
               </div>
             </div>
           </div>
@@ -120,5 +105,3 @@ const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
     </div>
   );
 };
-
-export default BrawlerTotalStats;

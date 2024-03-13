@@ -32,7 +32,6 @@ const UserRecord = () => {
             }개`,
           ],
           [t('user.record.soloLeagueRank'), roman[profile.currentSoloPL % 3]],
-          [t('user.record.teamLeagueRank'), roman[profile.currentTeamPL % 3]],
           [
             t('user.record.club'),
             profile?.clubName?.replace(/(<+)([/c]+|c[1-9])(>)/g, '') ||
@@ -46,12 +45,6 @@ const UserRecord = () => {
             null,
             `${config.assets}/rank/power_league/${Math.floor(
               profile.currentSoloPL / 3,
-            )}.webp`,
-          ],
-          [
-            null,
-            `${config.assets}/rank/power_league/${Math.floor(
-              profile.currentTeamPL / 3,
             )}.webp`,
           ],
           [null, null],
@@ -68,7 +61,6 @@ const UserRecord = () => {
           [t('user.record.rank30Brawlers'), `${profile.brawlerRank30}개`],
           [t('user.record.rank35Brawlers'), `${profile.brawlerRank35}개`],
           [t('user.record.highestSoloPL'), roman[profile.highestSoloPL % 3]],
-          [t('user.record.highestTeamPL'), roman[profile.highestTeamPL % 3]],
         ]}
         bodyRowImages={[
           [null, null],
@@ -82,12 +74,6 @@ const UserRecord = () => {
             null,
             `${config.assets}/rank/power_league/${Math.floor(
               profile.highestSoloPL / 3,
-            )}.webp`,
-          ],
-          [
-            null,
-            `${config.assets}/rank/power_league/${Math.floor(
-              profile.highestTeamPL / 3,
             )}.webp`,
           ],
         ]}

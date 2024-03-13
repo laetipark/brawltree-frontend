@@ -4,7 +4,7 @@ import styles from './stats-summary.module.scss';
 import config from '~/config/config';
 import { useTranslation } from 'react-i18next';
 
-const BrawlerStatsSummary = ({ brawler, brawlerStats }) => {
+export const BrawlerStatsSummary = ({ brawler, brawlerStats }) => {
   const { t } = useTranslation();
   const filterBrawler = brawlerStats
     .filter(({ brawlerID }) => brawlerID === brawler.id)
@@ -39,5 +39,3 @@ const BrawlerStatsSummary = ({ brawler, brawlerStats }) => {
     </div>
   );
 };
-
-export default BrawlerStatsSummary;

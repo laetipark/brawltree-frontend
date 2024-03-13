@@ -6,12 +6,11 @@
 .eventTitle {
   display: grid;
   align-items: center;
-  justify-content: center;
-  grid-template-columns: 12% 80%;
+  justify-content: space-between;
+  grid-template-columns: 16% 82%;
   gap: 8px;
   padding: 8px;
   background-color: #393646;
-  border-radius: 10px 10px 0 0;
   color: white;
 }
 
@@ -36,7 +35,7 @@
 
 .content {
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .eventBanner {

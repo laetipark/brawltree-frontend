@@ -6,8 +6,8 @@ import Footer from '~/components/footer/footer';
 
 import { Main } from '~/pages/main/main';
 import User from '~/pages/user/user';
-import Brawlers from '~/pages/brawler/brawlers';
-import Events from '~/pages/events/events';
+import { Brawlers } from '~/pages/brawler/brawlers';
+import { Events } from '~/pages/events/events';
 import MapDetail from '~/pages/maps/detail/detail';
 import BlossomMain from '~/pages/blossom/main/main';
 import BlossomMembers from '~/pages/blossom/members/members-table';
@@ -33,7 +33,7 @@ const App = () => {
         <Route path="/" element={<Main />} />
         <Route path="/brawlian/:id" element={<User />} />
         <Route path="/brawler/:name" element={<Brawlers />} />
-        <Route path="/events" element={<Events />} />
+        <Route path="/events/:mode" element={<Events />} />
         <Route path="/maps/:id" element={<MapDetail />} />
 
         <Route path="/blossom" element={<BlossomMain />} />
@@ -41,7 +41,7 @@ const App = () => {
         <Route path="/blossom/members/:id" element={<User />} />
         <Route path="/blossom/brawlers" element={<BlossomBrawlers />} />
         <Route path="/blossom/battles" element={<BlossomBattles />} />
-        <Route path="/blossom/events" element={<Events />} />
+        <Route path="/blossom/events/:mode" element={<Events />} />
         <Route path="/blossom/maps/:id" element={<MapDetail />} />
       </Routes>
       <Footer />

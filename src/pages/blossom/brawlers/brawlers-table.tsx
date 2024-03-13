@@ -5,13 +5,13 @@ import TableBody from '~/components/table/members/body';
 import Pagination from '~/components/pagination/pagination';
 import SearchMembers from '~/components/search/search-members';
 
-import BrawlerTotalStats from '~/components/brawler/summary/total-stats';
+import { BrawlerTotalStats } from '~/components/brawler/summary/total-stats';
 import { BrawlerSelection } from '~/components/brawler/summary/selection';
-import BrawlerService from '~/services/brawler.service';
-
-import styles from './brawlers-table.module.scss';
 import { BrawlerStatsType } from '~/common/type/brawlers.type';
 import { Spinner } from '~/components/spinner/spinner';
+import { BrawlerService } from '~/services/brawler.service';
+
+import styles from './brawlers-table.module.scss';
 
 const BrawlersTable = () => {
   const [brawlers, setBrawlers] = useState([]);

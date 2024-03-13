@@ -193,6 +193,7 @@ const User = () => {
             setMode,
             setStack,
             setRetryCount,
+            setLoad,
           }}
         >
           <div className={styles.app}>

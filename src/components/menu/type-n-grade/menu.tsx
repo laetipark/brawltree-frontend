@@ -1,23 +1,27 @@
 import React from 'react';
-
 import config from '~/config/config';
-
 import styles from './menu.module.scss';
+import { useTranslation } from 'react-i18next';
+
+const tlGrade = ['~39', '40~139', '140~299', '300~499', '500~749', '750~999', '1000~1249', '1250~'];
+const plGrade = ['bronze', 'silver', 'gold', 'diamond', 'mythic', 'legendary', 'masters'];
 
 const MenuTypeNGrade = ({
-  type,
-  grade,
-  setType,
-  setGrade,
-  rotationTL,
-  rotationPL,
-}) => {
+                          type,
+                          grade,
+                          setType,
+                          setGrade,
+                          rotationTL,
+                          rotationPL,
+                        }) => {
+  const { t } = useTranslation();
+
   const handleRadioButton = ({ target }) => {
-    setType(target.name);
-    if (target.name === '0') {
-      setGrade(['0', '1', '2', '3', '4', '5', '6', '7']);
+    setType(target.id);
+    if (target.id === '0') {
+      setGrade(['4', '5', '6', '7']);
     } else {
-      setGrade(['0', '1', '2', '3', '4', '5', '6']);
+      setGrade(['4', '5', '6']);
     }
   };
 
@@ -34,12 +38,15 @@ const MenuTypeNGrade = ({
   return (
     <div className={styles.mapMenu}>
       <div>
+        <div className={styles.mapTitle}>
+          <span>분류</span>
+        </div>
         <ul className={styles.mapTypeGroup}>
           <li>
             <input
               type={'radio'}
               id={'0'}
-              name={'0'}
+              name={'matchType'}
               checked={type === '0'}
               disabled={!rotationTL}
               onChange={handleRadioButton}
@@ -50,13 +57,14 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/trophyLeague.webp`}
                 alt={`trophyLeague`}
               />
+              <span>트로피 리그</span>
             </label>
           </li>
           <li>
             <input
               type={'radio'}
               id={'2'}
-              name={'2'}
+              name={'matchType'}
               checked={type === '2'}
               disabled={!rotationPL}
               onChange={handleRadioButton}
@@ -67,60 +75,58 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/powerLeagueSolo.webp`}
                 alt={`trophyLeague`}
               />
+              <span>솔로 파워 리그</span>
             </label>
           </li>
           <li>
             <input
               type={'radio'}
               id={'3'}
-              name={'3'}
+              name={'matchType'}
               checked={type === '3'}
               disabled={!rotationPL}
               onChange={handleRadioButton}
             />
-            <label htmlFor={'3'}>
-              <img
-                className={styles.mapMenuItemImage}
-                src={`${config.assets}/modes/icon/powerLeagueTeam.webp`}
-                alt={`trophyLeague`}
-              />
-            </label>
           </li>
         </ul>
       </div>
       <div>
+        <div className={styles.mapTitle}>
+          <span>등급</span>
+        </div>
         <ul className={styles.mapGradeGroup}>
           {type === '0'
-            ? ['0', '1', '2', '3', '4', '5', '6', '7'].map((gradeNum) => {
-                return (
-                  <li key={`grade_${gradeNum}`}>
-                    <input
-                      type={'checkbox'}
-                      id={`grade_${gradeNum}`}
-                      name={`grade_${gradeNum}`}
-                      checked={isChecked(gradeNum)}
-                      onChange={({ target: { checked } }) =>
-                        handleCheckBoxButton({ checked, value: gradeNum })
-                      }
+            ? ['0', '1', '2', '3', '4', '5', '6', '7'].map((gradeNum, index) => {
+              return (
+                <li key={`grade_${gradeNum}`}>
+                  <input
+                    type={'checkbox'}
+                    id={`grade_${gradeNum}`}
+                    name={`matchTLGrade`}
+                    checked={isChecked(gradeNum)}
+                    onChange={({ target: { checked } }) =>
+                      handleCheckBoxButton({ checked, value: gradeNum })
+                    }
+                  />
+                  <label htmlFor={`grade_${gradeNum}`}>
+                    <img
+                      className={styles.mapMenuItemImage}
+                      src={`${config.assets}/rank/trophy_league/grade/${gradeNum}.webp`}
+                      alt={`grade_${gradeNum}`}
                     />
-                    <label htmlFor={`grade_${gradeNum}`}>
-                      <img
-                        className={styles.mapMenuItemImage}
-                        src={`${config.assets}/rank/trophy_league/grade/${gradeNum}.webp`}
-                        alt={`grade_${gradeNum}`}
-                      />
-                    </label>
-                  </li>
-                );
-              })
+                    <span>{tlGrade[index]}</span>
+                  </label>
+                </li>
+              );
+            })
             : ['2', '3'].includes(type)
-            ? ['0', '1', '2', '3', '4', '5', '6'].map((gradeNum) => {
+              ? ['0', '1', '2', '3', '4', '5', '6'].map((gradeNum, index) => {
                 return (
                   <li key={`grade_${gradeNum}`}>
                     <input
                       type={'checkbox'}
                       id={`grade_${gradeNum}`}
-                      name={`grade_${gradeNum}`}
+                      name={`matchPLGrade`}
                       checked={isChecked(gradeNum)}
                       onChange={({ target: { checked } }) =>
                         handleCheckBoxButton({ checked, value: gradeNum })
@@ -132,11 +138,12 @@ const MenuTypeNGrade = ({
                         src={`${config.assets}/rank/power_league/${gradeNum}.webp`}
                         alt={`grade_${gradeNum}`}
                       />
+                      <span>{plGrade[index]}</span>
                     </label>
                   </li>
                 );
               })
-            : null}
+              : null}
         </ul>
       </div>
     </div>
