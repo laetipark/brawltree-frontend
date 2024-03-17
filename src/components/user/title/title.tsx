@@ -10,7 +10,7 @@ import config from '~/config/config';
 
 import styles from './title.module.scss';
 
-const UserTitle = () => {
+export const UserTitle = () => {
   const { t } = useTranslation();
 
   const context = useContext(UserContext);
@@ -74,5 +74,3 @@ const UserTitle = () => {
     </div>
   );
 };
-
-export default UserTitle;

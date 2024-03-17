@@ -9,7 +9,7 @@ import i18n from '~/locales/i18n';
 import styles from './footer.module.scss';
 import useWindowClick from '~/hooks/use-window-click.hook';
 
-const Footer = () => {
+export const Footer = () => {
   const { t } = useTranslation();
 
   const dropDownRef = useRef();
@@ -76,5 +76,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;

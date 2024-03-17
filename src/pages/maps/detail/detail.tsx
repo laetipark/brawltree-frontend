@@ -5,12 +5,12 @@ import MapInfo from '~/components/maps/detail';
 import MapMenu from '~/components/menu/type-n-grade/menu';
 import MapStats from '~/components/maps/detail/stats/stats';
 
-import MapService from '~/services/map.service';
+import { MapService } from '~/services/map.service';
 
 import styles from './detail.module.scss';
 import { Spinner } from '~/components/spinner/spinner';
 
-const MapDetail = () => {
+export const MapDetail = () => {
   const { id } = useParams();
   const [type, setType] = useState('0');
   const [grade, setGrade] = useState(['4', '5', '6', '7']);
@@ -58,5 +58,3 @@ const MapDetail = () => {
     ) : <Spinner />
   );
 };
-
-export default MapDetail;

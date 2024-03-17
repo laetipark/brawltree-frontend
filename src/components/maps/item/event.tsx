@@ -9,7 +9,7 @@ import config from '~/config/config';
 
 import styles from './event.module.scss';
 
-const EventItem = ({ event, type }) => {
+export const EventItem = ({ event, type }) => {
   const { t } = useTranslation();
 
   const location = useLocation();
@@ -21,7 +21,7 @@ const EventItem = ({ event, type }) => {
       nextTime.set('date', new Date().getDate() + 1);
     }
   }
-  
+
   const diffTime = {
     day: type === 'end' ? moment.duration(nextTime.diff(moment())).days() :
       moment.duration(nextTime.diff(moment())).days() > 0 ?
@@ -99,5 +99,3 @@ const EventItem = ({ event, type }) => {
     </div>
   );
 };
-
-export default EventItem;

@@ -1,0 +1,42 @@
+.modeFilterWrapper {
+  display: grid;
+  width: calc(100% - 20px);
+  grid-template-columns: 100%;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+
+  & > a {
+    display: flex;
+    padding: 8px;
+    background: #7F669D;
+    border-radius: 4px;
+    text-decoration-line: none;
+    gap: 4px;
+    color: black;
+
+    & > img {
+      width: 24px;
+      object-fit: contain;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .modeFilterWrapper {
+    grid-template-columns: 33% 33% 33%;
+  }
+}
+
+@media (min-width: 768px) {
+  .modeFilterWrapper {
+    margin: 0 auto;
+    max-width: 728px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modeFilterWrapper {
+    max-width: 924px;
+  }
+}

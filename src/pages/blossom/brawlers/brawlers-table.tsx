@@ -13,7 +13,7 @@ import { BrawlerService } from '~/services/brawler.service';
 
 import styles from './brawlers-table.module.scss';
 
-const BrawlersTable = () => {
+export const BlossomBrawlers = () => {
   const [brawlers, setBrawlers] = useState([]);
   const [brawlerStats, setBrawlerStats] = useState<BrawlerStatsType[]>([]);
   const [brawler, setBrawler] = useState({
@@ -89,5 +89,3 @@ const BrawlersTable = () => {
     ) : <Spinner />
   );
 };
-
-export default BrawlersTable;

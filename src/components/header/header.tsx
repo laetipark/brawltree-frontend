@@ -8,7 +8,7 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './header.module.scss';
 
-const Header = ({ dir }) => {
+export const Header = ({ dir }) => {
   const { t } = useTranslation();
   const [isToggled, setIsToggled] = useState(false);
 
@@ -66,6 +66,11 @@ const Header = ({ dir }) => {
                     <span>{t('application.header.events')}</span>
                   </Link>
                 </li>
+                <li>
+                  <Link to={'/maps'} onClick={() => setIsToggled(false)}>
+                    <span>{t('application.header.maps')}</span>
+                  </Link>
+                </li>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -114,5 +119,3 @@ const Header = ({ dir }) => {
     </header>
   );
 };
-
-export default Header;

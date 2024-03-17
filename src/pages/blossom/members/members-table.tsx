@@ -13,7 +13,7 @@ import { Spinner } from '~/components/spinner/spinner';
 
 const roman = ['Ⅰ', 'Ⅱ', 'Ⅲ'];
 
-const MemberTable = () => {
+export const BlossomMembers = () => {
   const [members, setMembers] = useState([]);
   const [filterMembers, setFilterMembers] = useState([]);
 
@@ -65,5 +65,3 @@ const MemberTable = () => {
     </div>) : <Spinner />
   );
 };
-
-export default MemberTable;

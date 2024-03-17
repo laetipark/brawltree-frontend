@@ -13,7 +13,7 @@ import UserService from '~/services/user.service';
 import styles from './battles-table.module.scss';
 import { Spinner } from '~/components/spinner/spinner';
 
-const BattleTable = () => {
+export const BlossomBattles = () => {
   const [date, setDate] = useState(
     new Date(
       new Date(
@@ -108,5 +108,3 @@ const BattleTable = () => {
     </div>) : <Spinner />
   );
 };
-
-export default BattleTable;

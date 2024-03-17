@@ -11,7 +11,7 @@ import axios from 'axios';
 import config from '~/config/config';
 import { Spinner } from '~/components/spinner/spinner';
 
-const Main = () => {
+export const BlossomMain = () => {
   const [members, setMembers] = useState({
     memberCount: 0,
     currentTotalTrophies: 0,
@@ -47,5 +47,3 @@ const Main = () => {
     ) : <Spinner />
   );
 };
-
-export default Main;

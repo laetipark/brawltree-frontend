@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import EventItem from '~/components/events/list/item/event';
+import { EventItem } from '~/components/maps/item/event';
 import EventService from '~/services/event.service';
 
 import styles from './menu-items.module.scss';

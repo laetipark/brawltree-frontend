@@ -7,7 +7,7 @@ import UserBrawlers from '~/components/user/brawlers/';
 import styles from './menu.module.scss';
 import UserContext from '~/context/user-context';
 
-const UserMenu = () => {
+export const UserMenu = () => {
   const context = useContext(UserContext);
   const { t } = useTranslation();
   const [menu, setMenu] = useState('summary');
@@ -54,5 +54,3 @@ const UserMenu = () => {
     </div>
   );
 };
-
-export default UserMenu;

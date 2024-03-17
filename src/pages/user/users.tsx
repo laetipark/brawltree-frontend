@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import UserTitle from '~/components/user/title/title';
-import UserMenu from '~/components/user/menu/menu';
+import { UserTitle } from '~/components/user/title/title';
+import { UserMenu } from '~/components/user/menu/menu';
 
 import UserService from '~/services/user.service';
 import { UserProfileType, UsersType } from '~/common/type/users.type';
@@ -14,7 +14,7 @@ import { Spinner } from '~/components/spinner/spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
-const User = () => {
+export const Users = () => {
   const location = useLocation();
   const { id } = useParams();
   const [user, setUser] = useState<UsersType>({
@@ -210,5 +210,3 @@ const User = () => {
       <Spinner />
   );
 };
-
-export default User;
