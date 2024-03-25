@@ -13,7 +13,7 @@ import {
 import { rotationModes } from '~/common/type/events.type';
 import { SeasonType } from '~/common/type/season.type';
 
-type UserContext = {
+type UserContextType = {
   id: string;
   user: UsersType;
   profile: UserProfileType;
@@ -37,4 +37,4 @@ type UserContext = {
   setLoad: (bool: boolean) => void;
 };
 
-export default createContext<UserContext | null>(null);
+export const UserContext = createContext<UserContextType | null>(null);

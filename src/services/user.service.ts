@@ -1,12 +1,21 @@
 import axios from 'axios';
 import config from '~/config/config';
 
-export default class UserService {
-  static getUsers = (keyword: string) =>
+export class UserService {
+  static getUsersByNickname = (keyword: string) =>
     axios
-      .get(`${config.url}/brawlian/`, {
+      .get(`${config.url}/brawlian/nickname`, {
         params: {
           keyword: keyword,
+        },
+      })
+      .then((result) => result.data);
+
+  static getUsersByUserIDs = (userIDs: string) =>
+    axios
+      .get(`${config.url}/brawlian/ids`, {
+        params: {
+          userIDs: userIDs,
         },
       })
       .then((result) => result.data);

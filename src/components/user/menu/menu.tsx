@@ -5,7 +5,7 @@ import UserSummary from '~/components/user/summary';
 import UserBrawlers from '~/components/user/brawlers/';
 
 import styles from './menu.module.scss';
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 export const UserMenu = () => {
   const context = useContext(UserContext);

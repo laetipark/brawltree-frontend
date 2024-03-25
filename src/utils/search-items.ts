@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
-import UserService from '~/services/user.service';
+import { UserService } from '~/services/user.service';
 
 const getResultByKeyword = async (keyword: string) => {
-  return UserService.getUsers(keyword);
+  return UserService.getUsersByNickname(keyword);
 };
 
 export const searchItems = (keyword: string) => {

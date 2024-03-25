@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import styles from './search-members.module.scss';
+import styles from './index.module.scss';
 
 interface InputData {
   name?: string;
 }
 
-const SearchMembers = ({ members, setFilterMembers }) => {
+export const SearchBox = ({ members, setFilterMembers }) => {
   const [keyword, setKeyword] = useState<string>('');
 
   const onChangeData = (e: React.FormEvent<HTMLInputElement>) => {
@@ -16,8 +16,8 @@ const SearchMembers = ({ members, setFilterMembers }) => {
   const updateData = () => {
     const filter = keyword
       ? members.filter((list: InputData) =>
-          new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase()),
-        )
+        new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase()),
+      )
       : members;
     setFilterMembers(filter);
   };
@@ -29,7 +29,7 @@ const SearchMembers = ({ members, setFilterMembers }) => {
     return () => {
       clearTimeout(debounce);
     };
-  }, [keyword, members]); //키워드가 변경되면 api를 호출
+  }, [keyword, members]); // 키워드가 변경되면 api를 호출
 
   return (
     <div className={styles.searchWrapper}>
@@ -42,5 +42,3 @@ const SearchMembers = ({ members, setFilterMembers }) => {
     </div>
   );
 };
-
-export default SearchMembers;

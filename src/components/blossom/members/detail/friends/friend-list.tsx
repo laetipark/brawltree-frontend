@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import UserFriendItem from './friend-item';
 
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 import styles from './friend-list.module.scss';
 

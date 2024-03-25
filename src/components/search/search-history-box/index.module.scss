@@ -1,0 +1,19 @@
+.SearchHistoryWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  height: 280px;
+  padding: 4px;
+  overflow-y: scroll;
+
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+
+    & > li {
+      padding: 4px;
+    }
+  }
+}

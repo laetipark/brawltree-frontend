@@ -1,0 +1,59 @@
+.resultFieldWrapper {
+  display: flex;
+  position: absolute;
+  top: 48px;
+  width: 100%;
+  max-height: 320px;
+  border: 2px solid #609966;
+  border-radius: 8px;
+  background-color: #EDF1D6;
+  overflow-y: scroll;
+  font-size: 16px;
+  z-index: 4;
+
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    list-style: none;
+  }
+
+  & > ul > li {
+    padding: 4px;
+  }
+}
+
+.addAccount {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #FBC687;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #EA907A;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  & > div > img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+
+  & > div > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}

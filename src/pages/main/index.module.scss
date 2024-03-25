@@ -1,0 +1,114 @@
+.app {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 12px;
+  gap: 12px;
+}
+
+@media (min-width: 576px) {
+  .app {
+    width: 556px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .app {
+    width: 748px;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app {
+    width: 924px;
+    margin: 0 auto;
+  }
+}
+
+.inputBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 360px;
+  font-size: 24px;
+
+  & > img {
+    height: 28px;
+    padding: 8px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    background-color: #76BA99;
+  }
+
+  & > input {
+    width: 240px;
+    height: 28px;
+    z-index: 2;
+    border: none;
+    border-radius: 0;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  & > button {
+    padding: 8px;
+    width: 80px;
+    height: 44px;
+    background-color: #CA955C;
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    font-family: 'Logo Font', serif;
+    color: #EDDFB3;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  & > button:hover {
+    background-color: #876445;
+  }
+}
+
+.recentSearch {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #609966;
+  border-radius: 8px;
+  background-color: #EDF1D6;
+}
+
+.recentSearchTitle {
+  width: 100%;
+  padding: 4px 0;
+  font-family: "Main Bold", serif;
+  font-size: 20px;
+  border-bottom: 2px solid #609966;
+  text-align: center;
+}
+
+.findTagToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 360px;
+  gap: 4px;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+
+  & > h3 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+}
+
+.howToFindTag {
+  width: 360px;
+  object-fit: contain;
+}

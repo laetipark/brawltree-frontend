@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import TableHorizontal from '~/components/table/horizontal/table';
 
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 import config from '~/config/config';
 

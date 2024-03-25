@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
@@ -13,7 +13,6 @@ export const EventItem = ({ event, type }) => {
   const { t } = useTranslation();
 
   const location = useLocation();
-  const navigate = useNavigate();
   const nextTime = moment(type === 'end' ? event.endTime : event.startTime);
   if (type !== 'end') {
     nextTime.set('date', new Date().getDate());
@@ -50,16 +49,11 @@ export const EventItem = ({ event, type }) => {
   }, 1000);
 
   return (
-    <div
-      key={event.startTime?.toString()}
-      className={styles.eventWrapper}
-      onClick={() => {
-        navigate(
-          `${!/\/blossom.*/g.test(location.pathname) ? '' : '/blossom'}/maps/${
-            event.mapID
-          }`,
-        );
-      }}
+    <a key={event.startTime?.toString()}
+       className={styles.eventWrapper}
+       href={`${!/\/blossom.*/g.test(location.pathname) ? '' : '/blossom'}/maps/${
+         event.mapID
+       }`}
     >
       <div>
         <div className={styles.eventTitle}>
@@ -96,6 +90,6 @@ export const EventItem = ({ event, type }) => {
           />
         </div>
       </div>
-    </div>
+    </a>
   );
 };

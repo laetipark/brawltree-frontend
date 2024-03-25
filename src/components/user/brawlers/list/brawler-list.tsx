@@ -5,8 +5,8 @@ import { Line } from '@nivo/line';
 import { BrawlerSummary } from '~/components/user/brawlers/list/summary/brawler-summary';
 import { BrawlerDetail } from '~/components/user/brawlers/list/detail/brawler-detail';
 
-import UserService from '~/services/user.service';
-import UserContext from '~/context/user-context';
+import { UserService } from '~/services/user.service';
+import { UserContext } from '~/context/user.context';
 
 import styles from './brawler-list.module.scss';
 import { Spinner } from '~/components/spinner/spinner';

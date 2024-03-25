@@ -5,7 +5,7 @@ import UserMenuMode from '~/components/menu/type-n-mode/menu-mode/menu-mode';
 import UserBattleSummary from '~/components/user/summary/battles/stats/battle-stats';
 import UserBattleLogs from '~/components/user/summary/battles/battle-logs/battle-logs';
 
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 import styles from './battles.module.scss';
 

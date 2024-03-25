@@ -4,7 +4,7 @@ import UserRecord from '~/components/user/summary/record/record';
 import { UserBattles } from '~/components/user/summary/battles/battles';
 
 import styles from './index.module.scss';
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 import { UserFriendList } from '~/components/blossom/members/detail/friends/friend-list';
 import { UserSeasonRecords } from '~/components/blossom/members/detail/season/season';
 

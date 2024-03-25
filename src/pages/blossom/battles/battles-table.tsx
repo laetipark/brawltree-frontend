@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import UserMenuType from '~/components/menu/type-n-mode/menu-type/menu-type';
 import UserMenuMode from '~/components/menu/type-n-mode/menu-mode/menu-mode';
 import Pagination from '~/components/pagination/pagination';
-import SearchMembers from '~/components/search/search-members';
+import { SearchBox } from '~/components/search/search-box';
 import CalendarView from '~/components/calendar/calendar';
 import TableHead from '~/components/table/members/head';
 import TableBody from '~/components/table/members/body';
 
-import UserService from '~/services/user.service';
+import { UserService } from '~/services/user.service';
 
 import styles from './battles-table.module.scss';
 import { Spinner } from '~/components/spinner/spinner';
@@ -82,7 +82,7 @@ export const BlossomBattles = () => {
       </div>
       <div className={styles.filter}>
         <Pagination page={page} total={total} setPage={setPage} />
-        <SearchMembers members={members} setFilterMembers={setFilterMembers} />
+        <SearchBox members={members} setFilterMembers={setFilterMembers} />
       </div>
       <div className={styles.table}>
         <TableHead col={'닉네임'} colArray={['매치', '변화량']} />

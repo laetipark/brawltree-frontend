@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 import useInterval from '~/hooks/use-interval.hook';
 
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 import config from '~/config/config';
 

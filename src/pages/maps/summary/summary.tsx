@@ -13,7 +13,6 @@ export const MapSummary = () => {
     });
   }, []);
 
-  console.log(maps);
   return (
     <div className={styles.app}>
       <ModeFilter maps={maps} />

@@ -5,10 +5,10 @@ import config from '~/config/config';
 import TableHead from '~/components/table/members/head';
 import TableBody from '~/components/table/members/body';
 import Pagination from '~/components/pagination/pagination';
-import SearchMembers from '~/components/search/search-members';
+import { SearchBox } from '~/components/search/search-box';
 
 import styles from './members-table.module.scss';
-import UserService from '~/services/user.service';
+import { UserService } from '~/services/user.service';
 import { Spinner } from '~/components/spinner/spinner';
 
 const roman = ['Ⅰ', 'Ⅱ', 'Ⅲ'];
@@ -32,7 +32,7 @@ export const BlossomMembers = () => {
     members.length > 0 ? (<div className={styles.app}>
       <div className={styles.filter}>
         <Pagination page={page} total={total} setPage={setPage} />
-        <SearchMembers members={members} setFilterMembers={setFilterMembers} />
+        <SearchBox members={members} setFilterMembers={setFilterMembers} />
       </div>
       <div className={styles.table}>
         <TableHead col={'닉네임'} colArray={['트로피', '솔로', '팀']} />

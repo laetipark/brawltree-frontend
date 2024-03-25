@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import TableHead from '~/components/table/members/head';
 import TableBody from '~/components/table/members/body';
 import Pagination from '~/components/pagination/pagination';
-import SearchMembers from '~/components/search/search-members';
+import { SearchBox } from '~/components/search/search-box';
 
 import { BrawlerTotalStats } from '~/components/brawler/summary/total-stats';
 import { BrawlerSelection } from '~/components/brawler/summary/selection';
@@ -59,7 +59,7 @@ export const BlossomBrawlers = () => {
         <div>
           <div className={styles.filter}>
             <Pagination page={page} total={total} setPage={setPage} />
-            <SearchMembers
+            <SearchBox
               members={members}
               setFilterMembers={setFilterMembers}
             />

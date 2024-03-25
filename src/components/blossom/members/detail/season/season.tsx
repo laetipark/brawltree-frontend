@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import UserContext from '~/context/user-context';
+import { UserContext } from '~/context/user.context';
 
 import config from '~/config/config';
 

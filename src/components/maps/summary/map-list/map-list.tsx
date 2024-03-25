@@ -22,7 +22,7 @@ export const MapList = ({ maps }) => {
             modeMaps.map((map) => {
               return (
                 <div key={`${map.mapID}_${map.startTime}`}>
-                  <EventItem key={map.mapID} event={map} type={null} />
+                  <EventItem key={map.mapID} event={map} type={'begin'} />
                 </div>
               );
             })

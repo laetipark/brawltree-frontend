@@ -1,18 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 
-import { UserTitle } from '~/components/user/title/title';
-import { UserMenu } from '~/components/user/menu/menu';
-
-import UserService from '~/services/user.service';
-import { UserProfileType, UsersType } from '~/common/type/users.type';
-import { rotationModes } from '~/common/type/events.type';
-import UserContext from '~/context/user-context';
-
-import styles from './user.module.scss';
-import { Spinner } from '~/components/spinner/spinner';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
+
+import { UserTitle } from '~/components/user/title/title';
+import { UserMenu } from '~/components/user/menu/menu';
+import { Spinner } from '~/components/spinner/spinner';
+
+import { UserProfileType, UsersType } from '~/common/type/users.type';
+import { rotationModes } from '~/common/type/events.type';
+import { UserContext } from '~/context/user.context';
+import { UserService } from '~/services/user.service';
+
+import styles from './user.module.scss';
 
 export const Users = () => {
   const location = useLocation();
@@ -199,7 +200,6 @@ export const Users = () => {
           <div className={styles.app}>
             <UserTitle />
             <UserMenu />
-
             <div ref={target} className={styles.breakLine} style={{ display: load ? 'flex' : 'none' }}>
               <FontAwesomeIcon icon={faEllipsis}
                                fontSize={28} />
