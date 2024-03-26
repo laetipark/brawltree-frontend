@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const useWindowClick = (ref, initialState) => {
+export const useWindowClick = (ref, initialState) => {
   const [open, setOpen] = useState(initialState);
 
   useEffect(() => {
-    const pageClickEvent = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
+    const pageClickEvent = ({ target }) => {
+      if (ref.current && !ref.current.contains(target)) {
         setOpen(!open);
       }
     };
@@ -20,5 +20,3 @@ const useWindowClick = (ref, initialState) => {
   }, [open, ref]);
   return [open, setOpen];
 };
-
-export default useWindowClick;

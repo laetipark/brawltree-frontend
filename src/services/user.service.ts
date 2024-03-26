@@ -4,7 +4,7 @@ import config from '~/config/config';
 export class UserService {
   static getUsersByNickname = (keyword: string) =>
     axios
-      .get(`${config.url}/brawlian/nickname`, {
+      .get(`${config.url}/brawlian/keyword`, {
         params: {
           keyword: keyword,
         },

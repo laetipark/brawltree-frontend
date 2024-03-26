@@ -200,7 +200,11 @@ export const Users = () => {
           <div className={styles.app}>
             <UserTitle />
             <UserMenu />
-            <div ref={target} className={styles.breakLine} style={{ display: load ? 'flex' : 'none' }}>
+            <div
+              className={styles.breakLine}
+              style={{ display: load ? 'flex' : 'none' }}
+              ref={target}
+            >
               <FontAwesomeIcon icon={faEllipsis}
                                fontSize={28} />
             </div>

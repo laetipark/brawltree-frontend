@@ -1,16 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { SearchItem } from '~/components/search/search-item';
 import { SearchContext } from '~/context/search.context';
 import { searchItems } from '~/utils/search-items';
+import { useWindowClick } from '~/hooks/use-window-click.hook';
 
 import styles from './index.module.scss';
 
 export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
-  const { status, data } = searchItems(inputValue);
   const context = useContext(SearchContext);
   const { onAddSearchHistory } = context;
+  const { status, data } = searchItems(inputValue);
+  const dropDownRef = useRef();
+  const [checked, setChecked] = useWindowClick(dropDownRef, false);
+
+  useEffect(() => {
+    if (inputValue.length > 1) {
+      setChecked(true);
+    }
+  }, [inputValue]);
 
   const getDataByStatus = () => {
     switch (status) {
@@ -57,9 +66,12 @@ export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
     }
   };
 
-
   return data ? (
-    <div className={styles.resultFieldWrapper}>
+    <div
+      className={styles.resultFieldWrapper}
+      style={{ display: `${checked ? 'flex' : 'none'}` }}
+      ref={dropDownRef}
+    >
       {getDataByStatus()}
     </div>
   ) : null;

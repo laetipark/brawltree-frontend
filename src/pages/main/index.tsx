@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { SearchHistoryBox } from '~/components/search/search-history-box';
+
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { InputField } from '~/components/main/input-field';
 import { ResultField } from '~/components/main/result-field';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { SearchHistoryBox } from '~/components/search/search-history-box';
 
 import { SearchContext } from '~/context/search.context';
 import { debounce } from '~/utils/debounce';
@@ -26,14 +27,17 @@ export const Main = () => {
   }, [searchHistory]);
 
   /** Function related to searching by nickname OR user tag */
-  const handleChangeInputValue = debounce((value: string) => {
+  const handleChangeInputValue = debounce((target) => {
+    const { value } = target;
+    console.log(value);
     if (value.length > 1) {
-      setInputValue(value);
+      target.value = value.replace('#', '');
+      setInputValue(value.replace('#', ''));
     }
-  }, 500);
+  }, 200);
 
-  const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handleChangeInputValue(e.target.value);
+  const handleChangeInput = ({ target }) => {
+    handleChangeInputValue(target);
   };
 
   /** Function related to recent search */

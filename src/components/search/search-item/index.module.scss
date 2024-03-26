@@ -1,6 +1,6 @@
 .searchItemWrapper {
   display: flex;
-  padding: 8px;
+  padding: 4px;
   border-radius: 4px;
   color: black;
   text-decoration: none;
@@ -12,13 +12,14 @@
   }
 
   & > img {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
   }
 
   & > div {
     display: flex;
+    width: 236px;
     flex-direction: column;
     gap: 8px;
   }
@@ -48,7 +49,6 @@
 }
 
 .searchItemTag {
-  width: 120px;
   padding: 4px;
   border-radius: 4px;
   background-color: #9DC08B;

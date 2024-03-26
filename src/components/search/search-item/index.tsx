@@ -41,6 +41,8 @@ export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => 
             <span className={styles.searchItemTag}>
               {user.userID}
             </span>
+          </div>
+          <div className={styles.searchItemContent}>
             <span className={styles.searchItemTrophy}>
               <img
                 src={`${config.assets}/modes/icon/trophyLeague.webp`}

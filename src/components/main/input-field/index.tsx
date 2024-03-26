@@ -18,7 +18,7 @@ export const InputField = ({ onChangeInput }) => {
       <img src={'/images/etc/search.webp'} alt={'search'} />
       <input
         type={'text'}
-        name={'id'}
+        name={'search'}
         required={true}
         placeholder={t('main.input')}
         maxLength={12}

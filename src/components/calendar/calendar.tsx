@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import moment from 'moment/moment';
 
 import Calendar from 'react-calendar';
-import useWindowClick from '~/hooks/use-window-click.hook';
+import { useWindowClick } from '~/hooks/use-window-click.hook';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';

@@ -10,6 +10,21 @@ body {
     background-color: #E5F9DB;
 }
 
+::-webkit-scrollbar {
+    width: 6px; /* 스크롤바의 너비 */
+}
+
+::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #2CC4CB; /* 스크롤바의 색상 */
+
+    border-radius: 40px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(25, 114, 164, 0.1); /*스크롤바 뒷 배경 색상*/
+}
+
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
