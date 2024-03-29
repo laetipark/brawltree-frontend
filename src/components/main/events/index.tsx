@@ -6,14 +6,14 @@ import { RotationType } from '~/common/type/maps.type';
 
 import config from '~/config/config';
 
-import styles from './events.module.scss';
+import styles from './index.module.scss';
 
-const EventsSummary = ({ events }) => {
+export const EventsSummary = ({ events }) => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.eventsSummaryWrapper}>
-      <Link to={'/events'}>
+      <Link to={'/events/curr'}>
         <span>진행 중인 이벤트</span>
       </Link>
       <div className={styles.eventItem}>
@@ -48,5 +48,3 @@ const EventsSummary = ({ events }) => {
     </div>
   );
 };
-
-export default EventsSummary;

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { Header } from '~/components/header/header';
-import { Footer } from '~/components/footer/footer';
+import { Header } from '~/components/header';
+import { Footer } from '~/components/footer';
 
 import { Main } from '~/pages/main';
 import { Users } from '~/pages/user/users';

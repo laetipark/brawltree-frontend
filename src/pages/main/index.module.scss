@@ -8,6 +8,7 @@
   flex: 1;
   padding: 12px;
   gap: 12px;
+  min-width: 336px;
 }
 
 @media (min-width: 576px) {
@@ -68,6 +69,7 @@
     font-family: 'Logo Font', serif;
     color: #EDDFB3;
     transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
   }
 
   & > button:hover {
@@ -92,6 +94,19 @@
   text-align: center;
 }
 
+.clearSearch {
+  display: flex;
+  justify-content: flex-end;
+
+  & > div {
+    padding: 0 4px;
+    font-family: "Main Medium", serif;
+    font-size: 12px;
+    color: #333333;
+    cursor: pointer;
+  }
+}
+
 .findTagToggle {
   display: flex;
   flex-direction: column;
@@ -100,6 +115,7 @@
   gap: 4px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  cursor: pointer;
 
   & > h3 {
     display: flex;
@@ -111,4 +127,10 @@
 .howToFindTag {
   width: 300px;
   object-fit: contain;
+}
+
+.eventSummary {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
 }

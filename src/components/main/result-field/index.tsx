@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { SearchItem } from '~/components/search/search-item';
+
+import { SearchUserItemType } from '~/common/type/main.type';
 import { SearchContext } from '~/context/search.context';
 import { searchItems } from '~/utils/search-items';
 import { useWindowClick } from '~/hooks/use-window-click.hook';
@@ -28,7 +30,7 @@ export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
       default:
         return (
           <ul>
-            {data?.map((user) => {
+            {data?.map((user: SearchUserItemType) => {
               return (
                 <SearchItem
                   key={user.userID}

@@ -1,18 +1,21 @@
 .footerWrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 320px;
   height: 60px;
   padding: 20px;
   background-color: #343A40;
   color: white;
-  gap: 20px;
+  gap: 12px;
+  font-size: 12px;
 }
 
 .footerLinks {
   display: flex;
-  justify-content: start;
-  width: 380px;
+  justify-content: space-between;
+  width: 320px;
   gap: 20px;
 
   & > a {
@@ -30,23 +33,42 @@
   justify-content: center;
   text-align: center;
   position: relative;
-  width: 80px;
+  width: 320px;
   height: 20px;
-  padding: 8px;
+  padding: 4px;
   border-radius: 4px;
   background-color: #9DC08B;
 
   & > ul {
     position: absolute;
-    bottom: 40px;
-    width: 80px;
+    bottom: 32px;
+    width: 320px;
     list-style: none;
-    padding: 8px;
+    padding: 4px;
     border-radius: 4px;
     background-color: #9DC08B;
   }
 
   & > ul span {
     width: 100%;
+  }
+}
+
+@media (min-width: 576px) {
+  .footerWrapper {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .footerLinks {
+    justify-content: flex-start;
+  }
+
+  .languageMenu {
+    width: 80px;
+
+    & > ul {
+      width: 80px;
+    }
   }
 }

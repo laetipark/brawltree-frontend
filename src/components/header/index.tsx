@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import styles from './header.module.scss';
+import styles from './index.module.scss';
 
 export const Header = ({ dir }) => {
   const { t } = useTranslation();
@@ -15,13 +15,13 @@ export const Header = ({ dir }) => {
   return (
     <header>
       <div className={styles.titleWrapper}>
-        <Link to={dir === 'brawltree' ? '' : 'blossom'}
-              onClick={() => setIsToggled(false)}>
+        <a href={dir === 'brawltree' ? '../../' : '../../blossom'}
+           onClick={() => setIsToggled(false)}>
           <img
             src={`/images/logo/${dir}/logo_horizontal.png`}
             alt={'Logo Horizontal'}
           />
-        </Link>
+        </a>
       </div>
       <div className={styles.menuWrapper}>
         <div>

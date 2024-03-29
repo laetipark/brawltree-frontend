@@ -1,13 +1,13 @@
 import { useQuery } from 'react-query';
-import { UserService } from '~/services/user.service';
+import { MainService } from '~/services/main.service';
 
 const getResultByKeyword = async (keyword: string) => {
-  return UserService.getUsersByNickname(keyword);
+  return MainService.getUsersByNickname(keyword);
 };
 
-export const searchItems = (keyword: string) => {
-  return useQuery(['keyword', keyword], () => getResultByKeyword(keyword), {
+export const searchItems = (keyword: string) =>
+  useQuery(['keyword', keyword], () => getResultByKeyword(keyword), {
     enabled: !!keyword,
-    select: (data) => data,
+    select: (data) => keyword.length > 1 ? data : null,
   });
-};
+

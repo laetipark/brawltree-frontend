@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,9 +9,13 @@ import { InputField } from '~/components/main/input-field';
 import { ResultField } from '~/components/main/result-field';
 import { SearchHistoryBox } from '~/components/search/search-history-box';
 
+import { SearchItemType } from '~/common/type/main.type';
 import { SearchContext } from '~/context/search.context';
 import { debounce } from '~/utils/debounce';
+
 import styles from './index.module.scss';
+import { EventsSummary } from '~/components/main/events';
+import EventService from '~/services/event.service';
 
 export const Main = () => {
   const { t } = useTranslation();
@@ -21,19 +25,22 @@ export const Main = () => {
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem('searchHistory') || '[]'),
   );
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
   }, [searchHistory]);
 
+  useEffect(() => {
+    EventService.getTLCurrentEvents()
+      .then((data) => setEvents(data));
+  }, []);
+
   /** Function related to searching by nickname OR user tag */
-  const handleChangeInputValue = debounce((target) => {
+  const handleChangeInputValue = debounce((target: { value: string; }) => {
     const { value } = target;
-    console.log(value);
-    if (value.length > 1) {
-      target.value = value.replace('#', '');
-      setInputValue(value.replace('#', ''));
-    }
+    target.value = value.replace('#', '');
+    setInputValue(value.replace('#', ''));
   }, 200);
 
   const handleChangeInput = ({ target }) => {
@@ -53,7 +60,7 @@ export const Main = () => {
   };
 
   const handleFilterSearchItem = (userIDs: string[]) => {
-    const nextKeyword = searchHistory.filter((item) => {
+    const nextKeyword = searchHistory.filter((item: SearchItemType) => {
       return userIDs.includes(item.userID);
     });
     if (searchHistory.length !== nextKeyword.length) {
@@ -62,14 +69,16 @@ export const Main = () => {
   };
 
   const handleRemoveSearchItem = (userID: string) => {
-    const nextKeyword = searchHistory.filter((user) => {
+    const nextKeyword = searchHistory.filter((user: SearchItemType) => {
       return user.userID != userID;
     });
     setSearchHistory(nextKeyword);
   };
 
   const handleClearSearchHistory = () => {
-    setSearchHistory([]);
+    if (window.confirm(t('main.checkClearSearch'))) {
+      setSearchHistory([]);
+    }
   };
 
   return (
@@ -79,7 +88,6 @@ export const Main = () => {
           onAddSearchHistory: handleAddSearchItem,
           onFilterSearchItem: handleFilterSearchItem,
           onRemoveSearchItem: handleRemoveSearchItem,
-          onClearSearchHistory: handleClearSearchHistory,
         }}>
         <form
           className={styles.inputBox}
@@ -102,9 +110,19 @@ export const Main = () => {
             <SearchHistoryBox
               searchHistory={searchHistory}
             />
+            <div className={styles.clearSearch}>
+              <div
+                onClick={handleClearSearchHistory}
+              >
+                {t('main.clearSearch')}
+              </div>
+            </div>
           </div>
         </div>
       </SearchContext.Provider>
+      <div className={styles.eventSummary}>
+        <EventsSummary events={events} />
+      </div>
       <div className={styles.findTagToggle}>
         <h3 onClick={() => setToggle(!toggle)}>
           <FontAwesomeIcon

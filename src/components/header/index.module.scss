@@ -21,6 +21,7 @@
 }
 
 .menuWrapper {
+  min-width: 360px;
   height: 60px;
   padding: 8px 0 8px 0;
   background-color: #343A40;
@@ -71,6 +72,10 @@
 .menuToggle {
   display: flex;
   padding: 12px;
+
+  & > svg {
+    cursor: pointer;
+  }
 }
 
 @media (min-width: 576px) {

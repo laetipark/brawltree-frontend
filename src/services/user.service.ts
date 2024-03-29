@@ -2,24 +2,6 @@ import axios from 'axios';
 import config from '~/config/config';
 
 export class UserService {
-  static getUsersByNickname = (keyword: string) =>
-    axios
-      .get(`${config.url}/brawlian/keyword`, {
-        params: {
-          keyword: keyword,
-        },
-      })
-      .then((result) => result.data);
-
-  static getUsersByUserIDs = (userIDs: string) =>
-    axios
-      .get(`${config.url}/brawlian/ids`, {
-        params: {
-          userIDs: userIDs,
-        },
-      })
-      .then((result) => result.data);
-
   static getUser = ({ id }) =>
     axios.get(`${config.url}/brawlian/${id}`).then((result) => result.data);
 

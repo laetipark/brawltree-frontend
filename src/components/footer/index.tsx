@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComputer, faGamepad, faTasks } from '@fortawesome/free-solid-svg-icons';
 
-import { useTranslation } from 'react-i18next';
 import i18n from '~/locales/i18n';
-
-import styles from './footer.module.scss';
 import { useWindowClick } from '~/hooks/use-window-click.hook';
+
+import styles from './index.module.scss';
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -44,7 +44,7 @@ export const Footer = () => {
           <span>{t('application.footer.devNote')}</span>
         </a>
         <a
-          href={'https://open.kakao.com/me/Laeti_Cre'}
+          href={'https://open.kakao.com/me/laeti'}
           target={'_blank'}
           rel="noreferrer"
         >
@@ -55,7 +55,7 @@ export const Footer = () => {
       <div
         ref={dropDownRef}
         className={styles.languageMenu}
-        onClick={() => setLanguageMenuOpen((prev) => !prev)}
+        onClick={() => setLanguageMenuOpen((prev: boolean) => !prev)}
       >
         <span>{t('application.footer.language')}</span>
         {isLanguageMenuOpen && (

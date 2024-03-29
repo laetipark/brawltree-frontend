@@ -1,15 +1,17 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import MemberSummary from '~/components/blossom/main/members/members';
 import BrawlerSummary from '~/components/blossom/main/brawlers/brawlers';
 import BattleSummary from '~/components/blossom/main/battles/battles';
-import EventsSummary from '~/components/blossom/main/events/events';
 import SeasonSummary from '~/components/blossom/main/season/season';
-
-import styles from './main.module.scss';
-import axios from 'axios';
-import config from '~/config/config';
+import { EventsSummary } from '~/components/main/events';
 import { Spinner } from '~/components/spinner/spinner';
+
+import EventService from '~/services/event.service';
+
+import config from '~/config/config';
+import styles from './main.module.scss';
 
 export const BlossomMain = () => {
   const [members, setMembers] = useState({
@@ -29,8 +31,12 @@ export const BlossomMain = () => {
       setSeason(result.data.season);
       setBrawlersTL(result.data.brawlersTL);
       setBrawlersPL(result.data.brawlersPL);
-      setEvents(result.data.events);
     });
+  }, []);
+
+  useEffect(() => {
+    EventService.getTLCurrentEvents()
+      .then((data) => setEvents(data));
   }, []);
 
   return (
