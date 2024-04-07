@@ -66,9 +66,9 @@ export const EventMenu = () => {
             <input
               className={styles.typeButton}
               type={'radio'}
-              id={'pl'}
+              id={'ranked'}
               name={'event'}
-              checked={menu === 'pl'}
+              checked={menu === 'ranked'}
               onChange={(e) => {
                 const { target } = e;
                 setMenu(target.id);
@@ -77,8 +77,8 @@ export const EventMenu = () => {
                   `../${baseURL[1]}/${target.id}` : `../${baseURL[1]}/${baseURL[2]}/${target.id}`);
               }}
             />
-            <label htmlFor={'pl'}>
-              <div>{t('map.event.powerLeague')}</div>
+            <label htmlFor={'ranked'}>
+              <div>{t('map.event.ranked')}</div>
             </label>
           </li>
         </ul>
@@ -87,7 +87,7 @@ export const EventMenu = () => {
         <TLCurrentEvents />
       ) : menu === 'next' ? (
         <TLTomorrowEvents />
-      ) : menu === 'pl' ? (
+      ) : menu === 'ranked' ? (
         <PLEvents />
       ) : <div></div>}
     </div>

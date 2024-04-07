@@ -8,7 +8,7 @@ import SeasonSummary from '~/components/blossom/main/season/season';
 import { EventsSummary } from '~/components/main/events';
 import { Spinner } from '~/components/spinner/spinner';
 
-import EventService from '~/services/event.service';
+import { EventService } from '~/services/event.service';
 
 import config from '~/config/config';
 import styles from './main.module.scss';

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '~/config/config';
 
-export default class EventService {
+export class EventService {
   static getTLCurrentEvents = () =>
     axios.get(`${config.url}/events/tl/curr`).then((result) => result.data);
 

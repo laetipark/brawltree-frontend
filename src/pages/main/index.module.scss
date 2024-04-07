@@ -1,13 +1,10 @@
 .app {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  justify-content: flex-start;
-  align-content: center;
   align-items: center;
   flex: 1;
   padding: 12px;
-  gap: 12px;
+  gap: 8px;
   min-width: 336px;
 }
 
@@ -21,15 +18,21 @@
 @media (min-width: 768px) {
   .app {
     width: 748px;
-    margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
   .app {
     width: 924px;
-    margin: 0 auto;
   }
+}
+
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
 }
 
 .inputBox {
@@ -120,6 +123,7 @@
   & > h3 {
     display: flex;
     align-items: center;
+    font-size: 16px;
     gap: 4px;
   }
 }
@@ -129,8 +133,29 @@
   object-fit: contain;
 }
 
-.eventSummary {
+.summary {
   display: flex;
   flex-direction: column;
   width: 300px;
+}
+
+@media (min-width: 576px) {
+  .summary {
+    justify-content: center;
+    width: 556px;
+    margin: 0 auto;
+    gap: 4px;
+  }
+}
+
+@media (min-width: 768px) {
+  .summary {
+    width: 748px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .summary {
+    width: 924px;
+  }
 }

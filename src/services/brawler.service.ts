@@ -7,6 +7,11 @@ export class BrawlerService {
     return result.data;
   };
 
+  static getBrawlerSummary = async () => {
+    const result = await axios.get(`${config.url}/brawler/summary`);
+    return result.data;
+  };
+
   static getBlossomMember = async ({ brawlerID }) => {
     const result = await axios.get(`${config.url}/blossom/brawlers`, {
       params: {

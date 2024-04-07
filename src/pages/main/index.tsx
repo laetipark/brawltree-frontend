@@ -13,9 +13,11 @@ import { SearchItemType } from '~/common/type/main.type';
 import { SearchContext } from '~/context/search.context';
 import { debounce } from '~/utils/debounce';
 
-import styles from './index.module.scss';
 import { EventsSummary } from '~/components/main/events';
-import EventService from '~/services/event.service';
+import { BrawlerSummary } from '~/components/main/brawlers';
+import { EventService } from '~/services/event.service';
+import { BrawlerService } from '~/services/brawler.service';
+import styles from './index.module.scss';
 
 export const Main = () => {
   const { t } = useTranslation();
@@ -25,7 +27,10 @@ export const Main = () => {
   const [searchHistory, setSearchHistory] = useState(
     JSON.parse(localStorage.getItem('searchHistory') || '[]'),
   );
-  const [events, setEvents] = useState([]);
+  const [trophyEvents, setTrophyEvents] = useState([]);
+  const [rankedEvents, setRankedEvents] = useState([]);
+  const [brawlersTrophy, setBrawlersTrophy] = useState([]);
+  const [brawlersRanked, setBrawlersRanked] = useState([]);
 
   useEffect(() => {
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
@@ -33,7 +38,17 @@ export const Main = () => {
 
   useEffect(() => {
     EventService.getTLCurrentEvents()
-      .then((data) => setEvents(data));
+      .then((data) => setTrophyEvents(data));
+    EventService.getPLEvents()
+      .then((data) => setRankedEvents(data));
+  }, []);
+
+  useEffect(() => {
+    BrawlerService.getBrawlerSummary()
+      .then((data) => {
+        setBrawlersTrophy(data.brawlersTrophy);
+        setBrawlersRanked(data.brawlersRanked);
+      });
   }, []);
 
   /** Function related to searching by nickname OR user tag */
@@ -49,13 +64,22 @@ export const Main = () => {
 
   /** Function related to recent search */
   const handleAddSearchItem = (userID: string) => {
-    const user = searchHistory.find((user) => user.id === userID);
+    const user = searchHistory.find((user: SearchItemType) => user.userID === userID);
+    const searchItem = {
+      id: Date.now(),
+      userID: userID,
+    };
+
     if (!user) {
-      const searchItem = {
-        id: Date.now(),
-        userID: userID,
-      };
-      setSearchHistory([searchItem, ...searchHistory]);
+      setSearchHistory(
+        [searchItem, ...searchHistory].slice(0, 10),
+      );
+    } else {
+      setSearchHistory([
+        searchItem,
+        ...searchHistory
+          .filter((user: SearchItemType) => user.userID !== userID),
+      ]);
     }
   };
 
@@ -83,64 +107,71 @@ export const Main = () => {
 
   return (
     <div className={styles.app}>
-      <SearchContext.Provider
-        value={{
-          onAddSearchHistory: handleAddSearchItem,
-          onFilterSearchItem: handleFilterSearchItem,
-          onRemoveSearchItem: handleRemoveSearchItem,
-        }}>
-        <form
-          className={styles.inputBox}
-          onSubmit={(e) => {
-            navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
-          }}
-        >
-          <InputField onChangeInput={handleChangeInput} />
-          <ResultField
-            inputValue={inputValue}
-            onChangeInputValue={setInputValue}
-            setToggle={setToggle}
-          />
-        </form>
-        <div>
-          <div className={styles.recentSearch}>
-            <div className={styles.recentSearchTitle}>
-              {t('main.recentSearch')}
-            </div>
-            <SearchHistoryBox
-              searchHistory={searchHistory}
+      <div className={styles.search}>
+        <SearchContext.Provider
+          value={{
+            onAddSearchHistory: handleAddSearchItem,
+            onFilterSearchItem: handleFilterSearchItem,
+            onRemoveSearchItem: handleRemoveSearchItem,
+          }}>
+          <form className={styles.inputBox}
+                onSubmit={(e) => {
+                  navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
+                }}>
+            <InputField onChangeInput={handleChangeInput} />
+            <ResultField
+              inputValue={inputValue}
+              onChangeInputValue={setInputValue}
+              setToggle={setToggle}
             />
-            <div className={styles.clearSearch}>
-              <div
-                onClick={handleClearSearchHistory}
-              >
-                {t('main.clearSearch')}
+          </form>
+          <div>
+            <div className={styles.recentSearch}>
+              <div className={styles.recentSearchTitle}>
+                {t('main.recentSearch')}
+              </div>
+              <SearchHistoryBox
+                searchHistory={searchHistory}
+              />
+              <div className={styles.clearSearch}>
+                <div
+                  onClick={handleClearSearchHistory}
+                >
+                  {t('main.clearSearch')}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </SearchContext.Provider>
-      <div className={styles.eventSummary}>
-        <EventsSummary events={events} />
+          <div className={styles.findTagToggle}>
+            <h3 onClick={() => setToggle(!toggle)}>
+              <FontAwesomeIcon
+                icon={faAngleRight}
+                style={{
+                  transform: toggle ? 'rotate(90deg)' : '',
+                  transition: 'transform 0.3s ease',
+                }}
+              />
+              <span>{t('main.findTag')}</span>
+            </h3>
+            {toggle && (
+              <img
+                className={styles.howToFindTag}
+                src={'/images/help/find_tag_kr.webp'}
+                alt={'find_tag'}
+              />
+            )}
+          </div>
+        </SearchContext.Provider>
       </div>
-      <div className={styles.findTagToggle}>
-        <h3 onClick={() => setToggle(!toggle)}>
-          <FontAwesomeIcon
-            icon={faAngleRight}
-            style={{
-              transform: toggle ? 'rotate(90deg)' : '',
-              transition: 'transform 0.3s ease',
-            }}
-          />
-          <span>{t('main.findTag')}</span>
-        </h3>
-        {toggle && (
-          <img
-            className={styles.howToFindTag}
-            src={'/images/help/find_tag_kr.webp'}
-            alt={'find_tag'}
-          />
-        )}
+      <div className={styles.summary}>
+        <EventsSummary events={trophyEvents}
+                       type={'curr'} />
+        <EventsSummary events={rankedEvents}
+                       type={'ranked'} />
+      </div>
+      <div className={styles.summary}>
+        <BrawlerSummary brawlersTrophy={brawlersTrophy}
+                        brawlersRanked={brawlersRanked} />
       </div>
     </div>
   );

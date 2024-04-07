@@ -1,0 +1,71 @@
+.brawlersSummaryWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  & > a {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #557153;
+    padding-bottom: 8px;
+    color: inherit;
+    gap: 8px;
+    font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    text-align: left;
+    text-decoration: none;
+  }
+}
+
+.brawlerSummaryTypeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 4px;
+  gap: 8px;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (min-width: 576px) {
+  .brawlerSummaryTypeList {
+    display: grid;
+    grid-template-columns: 49% 49%;
+  }
+}
+
+
+.brawlerSummaryTypeTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 20px;
+}
+
+.brawlerSummaryItems {
+  display: flex;
+  flex-direction: column;
+  border-top: 3px solid #A9AF7E;
+  background-color: #E6E5A3;
+
+  & > a:nth-last-child(n + 3) {
+    border-bottom: 1px #A9AF7E solid;
+  }
+}
+
+@media (min-width: 768px) {
+  .brawlerSummaryItems {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    & > a:nth-child(2n + 1) {
+      border-right: 1px #A9AF7E solid;
+    }
+  }
+}
