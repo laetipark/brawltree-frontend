@@ -121,18 +121,18 @@ export type UserBattlePlayersType = {
 
 export type UserFriendsType = {
   friendID: string;
-  matchType: number;
-  matchGrade: number;
-  mode: string;
   friendName: string;
+  profileIcon: string;
   matchCount: number;
+  matchGrade: number;
+  matchType: number;
+  mode: string;
   victoriesCount: number;
   defeatsCount: number;
   victoryRate: number;
-  friendPoints: number;
 };
 
-export type UserSeasonRecordsType = {
+export type UserSeasonType = {
   matchType: number;
   matchGrade: number;
   mode: string;

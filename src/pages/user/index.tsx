@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
@@ -8,26 +8,25 @@ import { UserTitle } from '~/components/user/title/title';
 import { UserMenu } from '~/components/user/menu/menu';
 import { Spinner } from '~/components/spinner/spinner';
 
-import { UserProfileType, UsersType } from '~/common/type/users.type';
+import { UserFriendsType, UserProfileType, UsersType } from '~/common/type/users.type';
 import { rotationModes } from '~/common/type/events.type';
 import { UserContext } from '~/context/user.context';
 import { UserService } from '~/services/user.service';
 
-import styles from './user.module.scss';
+import styles from './index.module.scss';
 
 export const Users = () => {
-  const location = useLocation();
   const { id } = useParams();
   const [user, setUser] = useState<UsersType>({
     userID: '',
     userName: '',
     profileIcon: '',
     lastBattleAt: new Date(0),
-    crew: '',
-    crewName: '',
+    crew: null,
+    crewName: null,
     updatedAt: new Date(0),
   });
-  const [retryCount, setRetryCount] = useState(0);
+  const [retryCount, setRetryCount] = useState<number>(0);
 
   const [profile, setProfile] = useState<UserProfileType>({
     brawlerRank25: 0,
@@ -66,12 +65,12 @@ export const Users = () => {
 
   const [season, setSeason] = useState();
 
-  const [friends, setFriends] = useState();
+  const [friends, setFriends] = useState<UserFriendsType[]>();
   const [seasonRecords, setSeasonRecords] = useState();
 
   const [load, setLoad] = useState(true);
-  const target = useRef(null);
   const [scrollStack, setScrollerStack] = useState(0);
+  const target = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -90,19 +89,9 @@ export const Users = () => {
 
     if (retryCount === 0) {
       getUser();
-      /\/blossom.*/g.test(location.pathname) &&
-      UserService.getBlossomMemberDetail({ id }).then((data) => {
-        setFriends(data.friends);
-        setSeasonRecords(data.seasonRecords);
-      });
     } else if (retryCount < 3 && !(new Date(user.updatedAt).getTime() > 0)) {
       const timer = setTimeout(() => {
         getUser();
-        /\/blossom.*/g.test(location.pathname) &&
-        UserService.getBlossomMemberDetail({ id }).then((data) => {
-          setFriends(data.friends);
-          setSeasonRecords(data.seasonRecords);
-        });
       }, 1000);
 
       return () => {
@@ -110,6 +99,13 @@ export const Users = () => {
       };
     }
   }, [id, retryCount, user?.updatedAt || new Date()]);
+
+  useEffect(() => {
+    user?.crew && UserService.getBlossomMemberDetail({ id }).then((data) => {
+      setFriends(data.friends);
+      setSeasonRecords(data.seasonRecords);
+    });
+  }, [user?.crew]);
 
   useEffect(() => {
     UserService.getUserByTypeNMode({ id, type, mode, stack }).then((data) => {

@@ -3,13 +3,12 @@ import config from '~/config/config';
 
 export class UserService {
   static getUser = ({ id }) =>
-    axios.get(`${config.url}/brawlian/${id}`).then((result) => result.data);
-
-  static getUserBrawlers = ({ id }) => {
-    return axios
-      .get(`${config.url}/brawlian/${id}/brawlers`, {})
+    axios.get(`${config.url}/brawlian/${id}`)
       .then((result) => result.data);
-  };
+
+  static getUserBrawlers = ({ id }) => axios
+    .get(`${config.url}/brawlian/${id}/brawlers`, {})
+    .then((result) => result.data);
 
   static getUserByTypeNMode = ({ id, type, mode, stack }) =>
     axios
@@ -22,10 +21,9 @@ export class UserService {
       })
       .then((result) => result.data);
 
-  static getBlossomMemberDetail = ({ id }) =>
-    axios
-      .get(`${config.url}/blossom/members/${id}`)
-      .then(async (result) => result.data);
+  static getBlossomMemberDetail = ({ id }) => axios
+    .get(`${config.url}/blossom/members/${id}`)
+    .then(async (result) => result.data);
 
   static getBlossomMembers = () =>
     axios

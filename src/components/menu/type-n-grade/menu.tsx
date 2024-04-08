@@ -72,7 +72,7 @@ const MenuTypeNGrade = ({
             <label htmlFor={'2'}>
               <img
                 className={styles.mapMenuItemImage}
-                src={`${config.assets}/modes/icon/powerLeagueSolo.webp`}
+                src={`${config.assets}/modes/icon/ranked.webp`}
                 alt={`trophyLeague`}
               />
               <span>솔로 파워 리그</span>

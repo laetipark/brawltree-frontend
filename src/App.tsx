@@ -5,7 +5,7 @@ import { Header } from '~/components/header';
 import { Footer } from '~/components/footer';
 
 import { Main } from '~/pages/main';
-import { Users } from '~/pages/user/users';
+import { Users } from '~/pages/user';
 import { Brawlers } from '~/pages/brawler/brawlers';
 import { Events } from '~/pages/events/events';
 import { MapSummary } from '~/pages/maps/summary/summary';

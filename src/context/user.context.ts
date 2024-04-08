@@ -7,7 +7,7 @@ import {
   UserProfileType,
   UserRecentBattlesType,
   UserRecentBrawlersType,
-  UserSeasonRecordsType,
+  UserSeasonType,
   UsersType,
 } from '~/common/type/users.type';
 import { rotationModes } from '~/common/type/events.type';
@@ -28,7 +28,7 @@ type UserContextType = {
   battles: UserBattlesType[];
   season: SeasonType;
   friends?: UserFriendsType[];
-  seasonRecords?: UserSeasonRecordsType[];
+  seasonRecords?: UserSeasonType[];
   setUser: (user: UsersType) => void;
   setType: (type: string) => void;
   setMode: (mode: string) => void;

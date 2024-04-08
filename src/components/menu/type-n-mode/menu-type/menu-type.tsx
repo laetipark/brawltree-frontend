@@ -85,7 +85,7 @@ const MenuType = ({ type, setMatchType }) => {
         />
         <label htmlFor={'type_2'}>
           <img
-            src={`${config.assets}/modes/icon/powerLeagueSolo.webp`}
+            src={`${config.assets}/modes/icon/ranked.webp`}
             alt={'type_2'}
           />
           <div>{t('battle.type.ranked')}</div>
