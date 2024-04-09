@@ -16,31 +16,19 @@
   display: grid;
   grid-template-columns: 100%;
   justify-content: space-between;
+  width: 100%;
   gap: 8px;
-}
-
-@media (min-width: 576px) {
-  .matchList {
-    grid-template-columns: 49% 49%;
-    gap: 4px;
-  }
 }
 
 @media (min-width: 768px) {
   .matchList {
-    grid-template-columns: 33% 33% 33%;
+    grid-template-columns: 49.5% 49.5%;
+    gap: 4px;
   }
 }
 
-.modeImage {
-  width: 44px;
-  height: 36px;
-  object-fit: contain;
-  object-position: center;
-}
-
-.rankImage {
-  width: 24px;
-  height: 20px;
-  object-fit: contain;
+@media (min-width: 1024px) {
+  .matchList {
+    grid-template-columns: 32% 32% 32%;
+  }
 }

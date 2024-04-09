@@ -1,9 +1,18 @@
-.seasonDetailItemWrapper {
+.seasonDetailContentWrapper {
+  position: relative;
+  width: 100%;
+  color: black;
+  text-decoration: none;
+}
+
+.seasonDetailContent {
   display: flex;
-  align-items: center;
   padding: 4px;
+  width: 100%;
   background-color: #EAE7B1;
   border: 1px solid #A8DE8E;
+  transition: border-color 0.3s;
+  font-family: "Main Bold", serif;
   gap: 4px;
 }
 
@@ -14,8 +23,8 @@
 }
 
 .modeImage {
-  width: 44px;
-  height: 36px;
+  width: 28px;
+  height: 24px;
   object-fit: contain;
   object-position: center;
 }

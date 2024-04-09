@@ -28,16 +28,14 @@ export const UserSeasonRecords = () => {
       seasonRecords.reduce((sum, value) => {
         return sum + (value.victoriesCount || 0);
       }, 0) * 100,
-    ) / 100
-      : 0;
+    ) / 100 : 0;
   const totalMatchDefCount =
     seasonRecords.length !== 0
       ? Math.round(
       seasonRecords.reduce((sum, value) => {
         return sum + (value.defeatsCount || 0);
       }, 0) * 100,
-    ) / 100
-      : 0;
+    ) / 100 : 0;
 
   const trophyMatches = seasonRecords?.find((item) => {
     return item.matchType === 0;

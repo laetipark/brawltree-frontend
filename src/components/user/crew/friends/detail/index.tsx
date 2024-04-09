@@ -23,27 +23,26 @@ export const UserFriendDetail = ({ friend }) => {
       <div className={styles.friendSummary}
            onMouseEnter={() => setHover(true)}
            onMouseLeave={() => setHover(false)}>
+        <img src={`${config.assets}/brawlian/profile/${friend.profileIcon}.webp`}
+             alt={friend.profileIcon} />
         <div>
-          <img src={`${config.assets}/brawlian/profile/${friend.profileIcon}.webp`}
-               alt={friend.profileIcon} />
+          <h4>{friend.friendName}</h4>
           <div>
-            <h4>{friend.friendName}</h4>
             <div>
-              <div>
                 <span style={{ fontWeight: 600 }}>
                   {friend.matchCount}
                 </span>
-                <span>{t('battle.result.game')}</span>
-              </div>
-              <div style={{ color: '#5AA469' }}>
+              <span>{t('battle.result.game')}</span>
+            </div>
+            <div style={{ color: '#5AA469' }}>
                 <span>
                   {friend.victoriesCount}
                 </span>
-                <span>
+              <span>
                   {t('battle.result.w')}
                 </span>
-              </div>
-              <div style={{ color: '#556FB5' }}>
+            </div>
+            <div style={{ color: '#556FB5' }}>
                 <span>
                   {drwCount(
                     friend.matchCount,
@@ -51,18 +50,18 @@ export const UserFriendDetail = ({ friend }) => {
                     friend.defeatsCount,
                   )}
                 </span>
-                <span>{t('battle.result.d')}</span>
-              </div>
-              <div style={{ color: '#D35D6E' }}>
+              <span>{t('battle.result.d')}</span>
+            </div>
+            <div style={{ color: '#D35D6E' }}>
                 <span>
                   {friend.defeatsCount}
                 </span>
-                <span>
+              <span>
                   {t('battle.result.l')}
                 </span>
-              </div>
-              <div>
-                (<span>
+            </div>
+            <div>
+              (<span>
                   {
                     friend.victoriesCount > 0
                       ? Math.round(
@@ -73,7 +72,6 @@ export const UserFriendDetail = ({ friend }) => {
                       ) : 0
                   }%)
                 </span>
-              </div>
             </div>
           </div>
         </div>
