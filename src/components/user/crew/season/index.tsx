@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { UserSeasonDetail } from '~/components/user/crew/season/detail';
+import { UserSeasonDetail } from '~/components/user/crew/season/list';
 
 import { UserContext } from '~/context/user.context';
 
@@ -56,7 +56,7 @@ export const UserSeasonRecords = () => {
     <div className={styles.seasonWrapper}>
       <div>
         <h2>
-          시즌 기록<span>({matchCount}회)</span>
+          {t('user.crew.seasonRecord')}<span>({matchCount}회)</span>
         </h2>
         <h4 className={styles.seasonStatsSummary}>
           <div style={{ color: '#5AA469' }}>

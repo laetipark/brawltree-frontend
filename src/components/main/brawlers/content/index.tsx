@@ -12,10 +12,8 @@ export const BrawlerSummaryItem = ({ brawlerID, brawlerName, pickRate, victoryRa
     <a className={styles.brawlerSummaryItemWrapper}
        href={`./brawler/${brawlerName.toLowerCase()}`}>
       <div className={styles.brawlerSummaryItemName}>
-        <img
-          src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
-          alt={brawlerID}
-        />
+        <img src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
+             alt={brawlerID} />
         <div>
           <span>{t(`brawler.brawler.${brawlerName}`)}</span>
           <span style={{ fontFamily: '"Main Bold", serif', color: '#D15A7C' }}>#{index}</span>

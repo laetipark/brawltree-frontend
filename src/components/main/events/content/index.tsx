@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
-import useInterval from '~/hooks/use-interval.hook';
+import { useInterval } from '~/hooks/use-interval.hook';
 import config from '~/config/config';
 import styles from './index.module.scss';
 

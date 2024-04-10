@@ -6,7 +6,7 @@ import config from '~/config/config';
 
 import styles from './menu-mode.module.scss';
 
-const TypeMode = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
+export const ModeMenu = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
   const { t } = useTranslation();
 
   const dropDownRef = useRef();
@@ -78,5 +78,3 @@ const TypeMode = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
     </div>
   );
 };
-
-export default TypeMode;

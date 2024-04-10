@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsis } from '@fortawesome/free-solid-svg-icons';
 
-import { UserTitle } from '~/components/user/title/title';
-import { UserMenu } from '~/components/user/menu/menu';
+import { UserTitle } from '~/components/user/title';
+import { UserMenu } from '~/components/user/menu';
 import { Spinner } from '~/components/spinner/spinner';
 
 import { UserFriendsType, UserProfileType, UsersType } from '~/common/type/users.type';
@@ -18,12 +18,9 @@ import styles from './index.module.scss';
 export const Users = () => {
   const { id } = useParams();
   const [user, setUser] = useState<UsersType>({
-    userID: '',
-    userName: '',
-    profileIcon: '',
+    userID: '', userName: '', profileIcon: '',
     lastBattleAt: new Date(0),
-    crew: null,
-    crewName: null,
+    crew: null, crewName: null,
     updatedAt: new Date(0),
   });
   const [retryCount, setRetryCount] = useState<number>(0);

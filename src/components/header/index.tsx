@@ -8,17 +8,17 @@ import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './index.module.scss';
 
-export const Header = ({ dir }) => {
+export const Header = () => {
   const { t } = useTranslation();
   const [isToggled, setIsToggled] = useState(false);
 
   return (
     <header>
       <div className={styles.titleWrapper}>
-        <a href={dir === 'brawltree' ? '../../' : '../../blossom'}
+        <a href={'../../'}
            onClick={() => setIsToggled(false)}>
           <img
-            src={`/images/logo/${dir}/logo_horizontal.png`}
+            src={`/images/logo/brawltree/logo_horizontal.png`}
             alt={'Logo Horizontal'}
           />
         </a>
@@ -27,7 +27,7 @@ export const Header = ({ dir }) => {
         <div>
           <img
             className={styles.menuLogo}
-            src={`/images/logo/${dir}/logo192.png`}
+            src={`/images/logo/brawltree/logo192.png`}
             alt={'Logo'}
           />
           <div
@@ -41,78 +41,39 @@ export const Header = ({ dir }) => {
               fontSize={24}
             />
           </div>
-          <ul
-            className={styles.menuList}
-            style={
-              useMediaQuery({ maxWidth: 576 })
-                ? { display: `${isToggled ? 'flex' : 'none'}` }
-                : {}
-            }
-          >
-            {dir === 'brawltree' ? (
-              <React.Fragment>
-                <li>
-                  <Link to={'/'} onClick={() => setIsToggled(false)}>
-                    <span>{t('application.header.main')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
-                    <span>{t('application.header.brawler')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
-                    <span>{t('application.header.events')}</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={'/maps'} onClick={() => setIsToggled(false)}>
-                    <span>{t('application.header.maps')}</span>
-                  </Link>
-                </li>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <li>
-                  <Link to={'/blossom'} onClick={() => setIsToggled(false)}>
-                    메인
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/blossom/members'}
-                    onClick={() => setIsToggled(false)}
-                  >
-                    멤버
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/blossom/brawlers'}
-                    onClick={() => setIsToggled(false)}
-                  >
-                    브롤러
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/blossom/events/curr'}
-                    onClick={() => setIsToggled(false)}
-                  >
-                    로테이션
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={'/blossom/battles'}
-                    onClick={() => setIsToggled(false)}
-                  >
-                    일일 전투
-                  </Link>
-                </li>
-              </React.Fragment>
-            )}
+          <ul className={styles.menuList}
+              style={
+                useMediaQuery({ maxWidth: 576 })
+                  ? { display: `${isToggled ? 'flex' : 'none'}` }
+                  : {}
+              }>
+            <React.Fragment>
+              <li>
+                <Link to={'/'} onClick={() => setIsToggled(false)}>
+                  <span>{t('application.header.main')}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
+                  <span>{t('application.header.brawler')}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
+                  <span>{t('application.header.events')}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/maps'} onClick={() => setIsToggled(false)}>
+                  <span>{t('application.header.maps')}</span>
+                </Link>
+              </li>
+              <li>
+                <Link to={'/crew'} onClick={() => setIsToggled(false)}>
+                  <span>{t('application.header.crew')}</span>
+                </Link>
+              </li>
+            </React.Fragment>
           </ul>
         </div>
       </div>
