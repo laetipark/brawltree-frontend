@@ -15,9 +15,16 @@
   display: flex;
   gap: 4px;
   align-items: center;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 52px;
+  }
 }
 
-.gameResult {
+.matchResultBox {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -26,11 +33,11 @@
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   gap: 6px;
-}
 
-.gameResult > div {
-  display: flex;
-  gap: 6px;
+  & > div {
+    display: flex;
+    gap: 6px;
+  }
 }
 
 .battleArrow {
@@ -38,16 +45,13 @@
   justify-content: flex-end;
 }
 
-.gameModeImage {
-  display: flex;
-  flex-direction: column;
-}
-
-.gameModeImage > img {
-  width: 22px;
-  height: 22px;
-  vertical-align: middle;
-  object-fit: contain;
+.matchInfoImageBox {
+  & > img {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    object-fit: contain;
+  }
 }
 
 .brawlerImage {
@@ -59,9 +63,13 @@
 }
 
 .battleSummaryTitle {
+  width: 160px;
   font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .battleSummarySubTitle {

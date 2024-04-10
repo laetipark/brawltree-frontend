@@ -15,7 +15,7 @@ import { UserBattlePlayersType } from '~/common/type/users.type';
 const gameResultColors = ['#9ED2BE', '#9EA1D4', '#FD8A8A'];
 const typeArray = {
   0: 'trophyLeague',
-  2: 'powerLeagueSolo',
+  2: 'ranked',
   3: 'powerLeagueTeam',
   4: 'challenge',
   5: 'challenge',
@@ -82,7 +82,7 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
               src={`${config.assets}/brawlers/profiles/${battleInfo.brawlerID}.webp`}
               alt={battleInfo.brawlerID}
             />
-            <div className={styles.gameModeImage}>
+            <div className={styles.matchInfoImageBox}>
               <img
                 src={`${config.assets}/modes/icon/${
                   typeArray[battleInfo.matchType]
@@ -107,7 +107,7 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
               </div>
             </div>
           </div>
-          <div className={styles.gameResult}>
+          <div className={styles.matchResultBox}>
             <div>{battleInfo.duration} seconds</div>
             <div>
               <div>{t(`battle.result.${battleInfo.gameResult}`)}</div>

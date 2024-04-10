@@ -6,7 +6,7 @@ import config from '~/config/config';
 
 import styles from './index.module.scss';
 
-export const UserSeasonDetailContent = ({ record, type }) => {
+export const UserSeasonDetailContent = ({ record }) => {
   const { t } = useTranslation();
   const [hover, setHover] = useState(false);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
