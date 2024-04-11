@@ -6,8 +6,14 @@ interface InputData {
   name?: string;
 }
 
-export const SearchBox = ({ members, setFilterMembers }) => {
+export const SearchBox = ({ crews, setFilterMembers }) => {
   const [keyword, setKeyword] = useState<string>('');
+  const [members, setMembers] = useState<InputData[]>([]);
+
+  useEffect(() => {
+    console.log(Object.values(crews));
+    setMembers(Object.values(crews).flat());
+  }, [crews]);
 
   const onChangeData = (e: React.FormEvent<HTMLInputElement>) => {
     setKeyword(e.currentTarget.value);
@@ -17,8 +23,7 @@ export const SearchBox = ({ members, setFilterMembers }) => {
     const filter = keyword
       ? members.filter((list: InputData) =>
         new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase()),
-      )
-      : members;
+      ) : members;
     setFilterMembers(filter);
   };
 

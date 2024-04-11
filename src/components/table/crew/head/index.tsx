@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './head.module.scss';
+import styles from './index.module.scss';
 
-const TableHead = ({ col, colArray }) => {
+export const CrewTableHead = ({ col, colArray }) => {
   return (
     <div className={styles.head}>
       <div className={styles.headRow}>
@@ -18,5 +18,3 @@ const TableHead = ({ col, colArray }) => {
     </div>
   );
 };
-
-export default TableHead;

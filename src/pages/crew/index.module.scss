@@ -26,38 +26,47 @@
   }
 }
 
-.menuWrapper {
+.crewTitle {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 8px;
+
+  & > img {
+    width: 80px;
+    object-fit: contain;
+  }
 }
 
-.table {
-  display: table;
-  width: 100%;
-}
-
-.body {
-  display: table-row-group;
-}
-
-.battlesMenus {
+.crewBox {
   display: grid;
   grid-template-columns: 100%;
-  gap: 8px;
-  border-bottom: 1px #83BD75 solid;
+  justify-content: space-between;
+  border: 2px solid #609966;
+  border-radius: 8px;
+  background-color: #EDF1D6;
+  padding: 4px;
+  list-style: none;
 }
 
 @media (min-width: 576px) {
-  .battlesMenus {
-    display: grid;
-    grid-template-columns: 49% 49%;
-    justify-content: space-between;
-    align-items: center;
+  .crewBox {
+    grid-template-columns: 49.5% 49.5%;
 
-    & > div > div {
-      width: 272px !important;
+    & > li {
+      width: 100%;
     }
+  }
+}
+
+@media (min-width: 768px) {
+  .crewBox {
+    grid-template-columns: 33.3% 33.3% 33.3%;
+  }
+}
+
+@media (min-width: 976px) {
+  .crewBox {
+    grid-template-columns: 33% 33% 33%;
   }
 }
 

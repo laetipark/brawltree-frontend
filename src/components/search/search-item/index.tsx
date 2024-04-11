@@ -37,6 +37,15 @@ export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => 
               )
             }
           </div>
+          {user.crewName &&
+            (
+              <div className={styles.searchItemContent}>
+                <span className={styles.searchItemCrewName}>
+                  {user.crewName}
+                </span>
+              </div>
+            )
+          }
           <div className={styles.searchItemContent}>
             <span className={styles.searchItemTag}>
               {user.userID}

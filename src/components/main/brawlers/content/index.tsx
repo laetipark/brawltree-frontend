@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
 
 
-export const BrawlerSummaryItem = ({ brawlerID, brawlerName, pickRate, victoryRate, index }) => {
+export const BrawlerSummaryItem = ({ brawlerID, brawlerName, pickRate, victoryRate }) => {
   const { t } = useTranslation();
 
   return (
@@ -16,7 +16,6 @@ export const BrawlerSummaryItem = ({ brawlerID, brawlerName, pickRate, victoryRa
              alt={brawlerID} />
         <div>
           <span>{t(`brawler.brawler.${brawlerName}`)}</span>
-          <span style={{ fontFamily: '"Main Bold", serif', color: '#D15A7C' }}>#{index}</span>
         </div>
       </div>
       <div className={styles.brawlerSummaryItemRate}>

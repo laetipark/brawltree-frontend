@@ -16,7 +16,7 @@ export const BrawlerSummary = ({ brawlersTrophy, brawlersRanked }) => {
       </Link>
       <div className={styles.brawlerSummaryTypeList}>
         <div>
-          <span className={styles.brawlerSummaryTypeTitle}>{t('battle.type.trophy')}</span>
+          <span className={styles.brawlerSummaryTypeTitle}>{t('battle.type.trophy')} TOP 10</span>
           <div className={styles.brawlerSummaryItems}>
             {brawlersTrophy &&
               brawlersTrophy?.map(
@@ -25,21 +25,20 @@ export const BrawlerSummary = ({ brawlersTrophy, brawlersRanked }) => {
                    brawlerName,
                    trophyPickRate,
                    trophyVictoryRate,
-                 }, index) => {
+                 }) => {
                   return (
                     <BrawlerSummaryItem key={`trophy_${brawlerID}`}
                                         brawlerID={brawlerID}
                                         brawlerName={brawlerName}
                                         pickRate={trophyPickRate}
-                                        victoryRate={trophyVictoryRate}
-                                        index={index + 1} />
+                                        victoryRate={trophyVictoryRate} />
                   );
                 },
               )}
           </div>
         </div>
         <div>
-          <span className={styles.brawlerSummaryTypeTitle}>{t('battle.type.ranked')}</span>
+          <span className={styles.brawlerSummaryTypeTitle}>{t('battle.type.ranked')} TOP 10</span>
           <div className={styles.brawlerSummaryItems}>
             {brawlersRanked &&
               brawlersRanked?.map(
@@ -48,14 +47,13 @@ export const BrawlerSummary = ({ brawlersTrophy, brawlersRanked }) => {
                    brawlerName,
                    rankedPickRate,
                    rankedVictoryRate,
-                 }, index) => {
+                 }) => {
                   return (
                     <BrawlerSummaryItem key={`ranked_${brawlerID}`}
                                         brawlerID={brawlerID}
                                         brawlerName={brawlerName}
                                         pickRate={rankedPickRate}
-                                        victoryRate={rankedVictoryRate}
-                                        index={index + 1} />
+                                        victoryRate={rankedVictoryRate} />
                   );
                 },
               )}

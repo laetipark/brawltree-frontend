@@ -1,15 +1,15 @@
 import React, { useNavigate } from 'react-router-dom';
 
-import styles from './body.module.scss';
+import styles from './index.module.scss';
 
-const TableBody = ({ col, colArray, colImage, id }) => {
+export const CrewTableBody = ({ col, colArray, colImage, id }) => {
   const navigate = useNavigate();
 
   return (
     <div
       className={styles.bodyRow}
       onClick={() => {
-        navigate(`../blossom/members/${id.replace('#', '')}`);
+        navigate(`../brawlian/${id.replace('#', '')}`);
       }}
     >
       <div>{col}</div>
@@ -24,5 +24,3 @@ const TableBody = ({ col, colArray, colImage, id }) => {
     </div>
   );
 };
-
-export default TableBody;

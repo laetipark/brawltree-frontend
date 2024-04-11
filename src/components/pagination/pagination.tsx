@@ -5,7 +5,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './pagination.module.scss';
 
-const Pagination = ({ page, total, setPage }) => {
+export const Pagination = ({ page, total, setPage }) => {
   return (
     <div className={styles.pagination}>
       <button onClick={() => setPage(page - 1)} disabled={page <= 1}>
@@ -20,5 +20,3 @@ const Pagination = ({ page, total, setPage }) => {
     </div>
   );
 };
-
-export default Pagination;
