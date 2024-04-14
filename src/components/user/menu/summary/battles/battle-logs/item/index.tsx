@@ -14,7 +14,7 @@ import { UserBattlePlayersType } from '~/common/type/users.type';
 
 const gameResultColors = ['#9ED2BE', '#9EA1D4', '#FD8A8A'];
 const typeArray = {
-  0: 'trophyLeague',
+  0: 'trophy',
   2: 'ranked',
   3: 'powerLeagueTeam',
   4: 'challenge',

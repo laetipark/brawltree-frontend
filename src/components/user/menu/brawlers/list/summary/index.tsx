@@ -39,7 +39,7 @@ export const BrawlerSummary = ({
         <h4>{name}</h4>
         <div>
           <img
-            src={`${config.assets}/modes/icon/trophyLeague.webp`}
+            src={`${config.assets}/modes/icon/trophy.webp`}
             alt={'브롤러'}
           />
           <div className={styles.brawlerTrophy}>

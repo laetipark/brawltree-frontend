@@ -66,7 +66,7 @@ export const TypeMenu = ({ type, setMatchType }) => {
         />
         <label htmlFor={'type_0'}>
           <img
-            src={`${config.assets}/modes/icon/trophyLeague.webp`}
+            src={`${config.assets}/modes/icon/trophy.webp`}
             alt={'type_0'}
           />
           <div>{t('battle.type.trophy')}</div>

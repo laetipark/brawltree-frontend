@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 import { UserFriendDetailItem } from '~/components/user/crew/friends/detail/item';
 
@@ -15,18 +14,23 @@ export const UserFriendDetail = ({ friend }) => {
   };
 
   return (
-    <Link
-      key={friend.friendID}
-      to={`/brawlian/${friend.friendID.replace('#', '')}`}
-      className={styles.friendDetailWrapper}
-    >
+    <a key={friend.friendID}
+       href={`../brawlian/${friend.friendID.replace('#', '')}`}
+       className={styles.friendDetailWrapper}>
       <div className={styles.friendSummary}
            onMouseEnter={() => setHover(true)}
            onMouseLeave={() => setHover(false)}>
         <img src={`${config.assets}/brawlian/profile/${friend.profileIcon}.webp`}
              alt={friend.profileIcon} />
         <div>
-          <h4>{friend.friendName}</h4>
+          <h4>
+            <span>{friend.friendName}</span>
+            <img src={'/images/etc/info.webp'} alt={'info'}
+                 onClick={(e) => {
+                   e.preventDefault();
+                   setHover(!hover);
+                 }} />
+          </h4>
           <div>
             <div>
                 <span style={{ fontWeight: 600 }}>
@@ -79,6 +83,6 @@ export const UserFriendDetail = ({ friend }) => {
       <UserFriendDetailItem
         matchList={friend.matchList}
         hover={hover} />
-    </Link>
+    </a>
   );
 };

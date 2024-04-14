@@ -43,7 +43,7 @@ export const BrawlerDetail = ({
           <div className={styles.gameTypeTitle}>
             <img
               className={styles.gameTypeImage}
-              src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              src={`${config.assets}/modes/icon/trophy.webp`}
               alt={'trophyLeague'}
             />
             <span>트로피 리그</span>

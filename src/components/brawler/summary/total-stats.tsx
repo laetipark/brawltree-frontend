@@ -32,7 +32,7 @@ export const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
         <div>
           <div>
             <img
-              src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              src={`${config.assets}/modes/icon/trophy.webp`}
               alt={'트로피'}
             />
             <div>
@@ -49,7 +49,7 @@ export const BrawlerTotalStats = ({ brawler, brawlerStats }) => {
           </div>
           <div>
             <img
-              src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              src={`${config.assets}/modes/icon/trophy.webp`}
               alt={'트로피'}
             />
             <div>

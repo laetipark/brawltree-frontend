@@ -23,10 +23,6 @@
     border-color: #4E944F;
   }
 
-  & > h4 {
-    padding: 4px;
-  }
-
   & > img {
     width: 44px;
     object-fit: contain;
@@ -41,6 +37,16 @@
       display: flex;
       gap: 4px;
       font-size: 12px;
+    }
+
+    & > h4 {
+      display: flex;
+      gap: 4px;
+
+      & > img {
+        width: 20px;
+        object-fit: contain;
+      }
     }
   }
 }

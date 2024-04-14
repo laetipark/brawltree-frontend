@@ -21,13 +21,13 @@ const MapInfo = ({ mapInfo }) => {
         <div>
           {mapInfo.isTrophyLeague > 0 && (
             <img
-              src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              src={`${config.assets}/modes/icon/trophy.webp`}
               alt={`trophyLeague`}
             />
           )}
           {mapInfo.isPowerLeague > 0 && (
             <img
-              src={`${config.assets}/modes/icon/powerLeague.webp`}
+              src={`${config.assets}/modes/icon/ranked.webp`}
               alt={`trophyLeague`}
             />
           )}

@@ -53,7 +53,7 @@ export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => 
           </div>
           <div className={styles.searchItemContent}>
             <span className={styles.searchItemTrophy}>
-              <img src={`${config.assets}/modes/icon/trophyLeague.webp`}
+              <img src={`${config.assets}/modes/icon/trophy.webp`}
                    alt={'trophyLeague'} />
               {user.currentTrophies}
             </span>

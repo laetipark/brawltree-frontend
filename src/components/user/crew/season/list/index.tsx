@@ -15,9 +15,9 @@ export const UserSeasonDetail = ({ matches, toggle, setToggle, type }) => {
   const vicRate = (vicCount: number, defCount: number) => {
     return Math.round((vicCount / (vicCount + defCount)) * 100) || 0;
   };
-  const keys = Object.keys(matches.matchList);
+  const keys = matches?.matchList && Object.keys(matches.matchList);
 
-  return (keys.length > 0 && (
+  return (keys?.length > 0 && (
     <React.Fragment>
       <h3 className={styles.seasonStatsToggle}
           onClick={() => setToggle(!toggle)}>
@@ -72,8 +72,7 @@ export const UserSeasonDetail = ({ matches, toggle, setToggle, type }) => {
               return (
                 <React.Fragment key={`${record.mode}_${record.matchType}_${record.matchGrade}`}>
                   <UserSeasonDetailContent
-                    record={record}
-                    type={type} />
+                    record={record} />
                 </React.Fragment>
               );
             })}

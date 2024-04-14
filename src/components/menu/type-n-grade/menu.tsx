@@ -1,7 +1,6 @@
 import React from 'react';
 import config from '~/config/config';
 import styles from './menu.module.scss';
-import { useTranslation } from 'react-i18next';
 
 const tlGrade = ['~39', '40~139', '140~299', '300~499', '500~749', '750~999', '1000~1249', '1250~'];
 const plGrade = ['bronze', 'silver', 'gold', 'diamond', 'mythic', 'legendary', 'masters'];
@@ -14,8 +13,6 @@ const MenuTypeNGrade = ({
                           rotationTL,
                           rotationPL,
                         }) => {
-  const { t } = useTranslation();
-
   const handleRadioButton = ({ target }) => {
     setType(target.id);
     if (target.id === '0') {
@@ -54,7 +51,7 @@ const MenuTypeNGrade = ({
             <label htmlFor={'0'}>
               <img
                 className={styles.mapMenuItemImage}
-                src={`${config.assets}/modes/icon/trophyLeague.webp`}
+                src={`${config.assets}/modes/icon/trophy.webp`}
                 alt={`trophyLeague`}
               />
               <span>트로피 리그</span>

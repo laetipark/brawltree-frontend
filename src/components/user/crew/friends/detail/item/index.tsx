@@ -22,7 +22,7 @@ export const UserFriendDetailItem = ({ matchList, hover }) => {
               {match.matchType === 0 ? (
                 <img
                   className={styles.iconImage}
-                  src={`${config.assets}/modes/icon/trophyLeague.webp`}
+                  src={`${config.assets}/modes/icon/trophy.webp`}
                   alt={'게임방식'}
                 />
               ) : match.matchType === 2 ? (
