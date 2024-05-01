@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
@@ -6,13 +6,28 @@ import { useInterval } from '~/hooks/use-interval.hook';
 import config from '~/config/config';
 import styles from './index.module.scss';
 
-export const EventsSummaryItem = ({ event, type }) => {
+export const EventItem = ({ event, type }) => {
   const { t } = useTranslation();
-  const time = moment(event.endTime);
+  const time = moment(type === 'curr' ? event.endTime : event.startTime);
+  if (type !== 'curr') {
+    time.set('date', new Date().getDate());
+    if (moment.duration(time.diff(moment())).asSeconds() < 0) {
+      time.set('date', new Date().getDate() + 1);
+    }
+  }
+
   const diffTime = {
-    day: moment.duration(time.diff(moment())).days(),
-    hour: moment.duration(time.diff(moment())).hours(),
-    minute: moment.duration(time.diff(moment())).minutes(),
+    day: type === 'curr' ? moment.duration(time.diff(moment())).days() :
+      moment.duration(time.diff(moment())).days() > 0 ?
+        moment.duration(time.diff(moment())).days() : 0,
+    hour:
+      type === 'curr'
+        ? moment.duration(time.diff(moment())).hours()
+        : Math.abs(moment.duration(time.diff(moment())).hours()),
+    minute:
+      type === 'curr'
+        ? moment.duration(time.diff(moment())).minutes()
+        : Math.abs(moment.duration(time.diff(moment())).minutes()),
   };
   const [mouseOver, setMouseOver] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
@@ -33,36 +48,23 @@ export const EventsSummaryItem = ({ event, type }) => {
   };
 
   useInterval(() => {
-    diffTime.day = moment.duration(time.diff(moment())).days();
-    diffTime.hour = moment.duration(time.diff(moment())).hours();
-    diffTime.minute = moment.duration(time.diff(moment())).minutes();
+    diffTime.day =
+      type === 'curr' ? moment.duration(time.diff(moment())).days() : 0;
+    diffTime.hour =
+      type === 'curr'
+        ? moment.duration(time.diff(moment())).hours()
+        : Math.abs(moment.duration(time.diff(moment())).hours());
+    diffTime.minute =
+      type === 'curr'
+        ? moment.duration(time.diff(moment())).minutes()
+        : Math.abs(moment.duration(time.diff(moment())).minutes());
   }, 1000);
-
-  useEffect(() => {
-    const handleMouseMove = ({ clientY, target }) => {
-      if (mouseOver) {
-        const rect =
-          target.parentElement.parentElement.parentElement.getBoundingClientRect();
-
-        const x = parseInt(rect.left);
-        const y = clientY + window.scrollY;
-
-        setTooltipPosition({ x, y });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, [mouseOver]);
 
   return (
     <React.Fragment>
       <a key={event.mapID}
          className={styles.mapItem}
-         href={`./maps/${event.mapID}`}>
+         href={`../maps/${event.mapID}`}>
         <img src={`${config.assets}/modes/icon/${event.mode}.webp`}
              alt={event.mode} />
         <div>
@@ -77,9 +79,11 @@ export const EventsSummaryItem = ({ event, type }) => {
                  onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut} />
           </div>
           {
-            type !== 'ranked' &&
+            ['curr', 'next'].includes(type) &&
             <div>
-              <span>{t('map.event.endsIn')}</span>
+              <span>{type === 'curr'
+                ? t('map.event.endsIn')
+                : t('map.event.startsIn')}</span>
               <span>{diffTime.day}{t('map.event.d')}</span>
               <span>{diffTime.hour}{t('map.event.h')}</span>
               <span>{diffTime.minute}{t('map.event.m')}</span>

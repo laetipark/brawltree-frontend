@@ -4,10 +4,10 @@ import ItemTooltip from '~/components/items/detail/item-info';
 import config from '~/config/config';
 
 import styles from './index.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const BrawlerDetail = ({
-                                brawlerID,
-                                name,
+                                brawlerID, name,
                                 powerLeaguePickRate,
                                 trophyLeaguePickRate,
                                 powerLeagueVictoryRate,
@@ -19,6 +19,8 @@ export const BrawlerDetail = ({
                                 currentTrophies,
                                 highestTrophies,
                               }) => {
+  const { t } = useTranslation();
+
   const brawlerGadgets = userBrawlerItems?.filter(
     ({ brawlerID: item, itemKind }) =>
       item === brawlerID && itemKind === 'gadget',
@@ -46,7 +48,7 @@ export const BrawlerDetail = ({
               src={`${config.assets}/modes/icon/trophy.webp`}
               alt={'trophyLeague'}
             />
-            <span>트로피 리그</span>
+            <span>{t('battle.type.trophy')}</span>
           </div>
           <div>
             <span>Pick</span>
@@ -61,10 +63,10 @@ export const BrawlerDetail = ({
           <div className={styles.gameTypeTitle}>
             <img
               className={styles.gameTypeImage}
-              src={`${config.assets}/modes/icon/powerLeague.webp`}
+              src={`${config.assets}/modes/icon/ranked.webp`}
               alt={'브롤러'}
             />
-            <span>파워 리그</span>
+            <span>{t('battle.type.ranked')}</span>
           </div>
           <div>
             <span>Pick</span>

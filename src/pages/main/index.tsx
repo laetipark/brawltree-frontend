@@ -13,7 +13,7 @@ import { SearchItemType } from '~/common/type/main.type';
 import { SearchContext } from '~/context/search.context';
 import { debounce } from '~/utils/debounce';
 
-import { EventsSummary } from '~/components/main/events';
+import { EventItems } from '~/components/maps/item';
 import { BrawlerSummary } from '~/components/main/brawlers';
 import { EventService } from '~/services/event.service';
 import { BrawlerService } from '~/services/brawler.service';
@@ -164,10 +164,10 @@ export const Main = () => {
         </SearchContext.Provider>
       </div>
       <div className={styles.summary}>
-        <EventsSummary events={trophyEvents}
-                       type={'curr'} />
-        <EventsSummary events={rankedEvents}
-                       type={'ranked'} />
+        <EventItems events={trophyEvents}
+                    type={'curr'} />
+        <EventItems events={rankedEvents}
+                    type={'ranked'} />
       </div>
       <div className={styles.summary}>
         <BrawlerSummary brawlersTrophy={brawlersTrophy}

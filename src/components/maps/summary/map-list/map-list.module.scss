@@ -33,10 +33,6 @@
   .modeTitle {
     margin: 0 auto;
   }
-
-  .modeList {
-    display: grid;
-  }
 }
 
 @media (min-width: 768px) {
@@ -46,7 +42,6 @@
 
   .modeList {
     justify-content: space-between;
-    grid-template-columns: 49% 49%;
     max-width: 728px;
   }
 }

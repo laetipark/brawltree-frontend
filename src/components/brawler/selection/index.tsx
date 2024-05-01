@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import config from '~/config/config';
 
-import styles from './selection.module.scss';
+import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
 import { isRRMatch } from '~/utils/korean-pattern';
 import { useLocation, useNavigate } from 'react-router-dom';

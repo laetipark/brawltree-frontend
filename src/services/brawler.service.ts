@@ -1,7 +1,12 @@
-import config from '~/config/config';
 import axios from 'axios';
+import config from '~/config/config';
 
 export class BrawlerService {
+  static getBrawler = async (id: string) => {
+    const result = await axios.get(`${config.url}/brawler/${id}/info`);
+    return result.data;
+  };
+
   static getBrawlers = async () => {
     const result = await axios.get(`${config.url}/brawler`);
     return result.data;
@@ -9,15 +14,6 @@ export class BrawlerService {
 
   static getBrawlerSummary = async () => {
     const result = await axios.get(`${config.url}/brawler/summary`);
-    return result.data;
-  };
-
-  static getBlossomMember = async ({ brawlerID }) => {
-    const result = await axios.get(`${config.url}/blossom/brawlers`, {
-      params: {
-        brawler: brawlerID,
-      },
-    });
     return result.data;
   };
 }

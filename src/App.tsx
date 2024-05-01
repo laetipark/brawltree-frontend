@@ -6,7 +6,7 @@ import { Footer } from '~/components/footer';
 
 import { Main } from '~/pages/main';
 import { Users } from '~/pages/user';
-import { Brawlers } from '~/pages/brawler/brawlers';
+import { Brawlers } from '~/pages/brawlers';
 import { Events } from '~/pages/events/events';
 import { MapSummary } from '~/pages/maps/summary/summary';
 import { MapDetail } from '~/pages/maps/detail/detail';

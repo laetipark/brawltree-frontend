@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
-import { TLCurrentEvents } from '~/components/events/list/menu-tl-current';
-import { TLTomorrowEvents } from '~/components/events/list/menu-tl-tomorrow';
-import { PLEvents } from '~/components/events/list/menu-pl';
+import { TrophyCurrentEvents } from '~/components/events/list/trophy-curr';
+import { TrophyTomorrowEvents } from '~/components/events/list/trophy-next';
+import { RankedEvents } from '~/components/events/list/ranked';
 
 import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
@@ -84,11 +84,11 @@ export const EventMenu = () => {
         </ul>
       </div>
       {menu === 'curr' ? (
-        <TLCurrentEvents />
+        <TrophyCurrentEvents />
       ) : menu === 'next' ? (
-        <TLTomorrowEvents />
+        <TrophyTomorrowEvents />
       ) : menu === 'ranked' ? (
-        <PLEvents />
+        <RankedEvents />
       ) : <div></div>}
     </div>
   );

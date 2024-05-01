@@ -4,12 +4,12 @@ import { Line } from '@nivo/line';
 
 import { BrawlerSummary } from '~/components/user/menu/brawlers/list/summary';
 import { BrawlerDetail } from '~/components/user/menu/brawlers/list/detail';
+import { Spinner } from '~/components/spinner/spinner';
 
 import { UserService } from '~/services/user.service';
 import { UserContext } from '~/context/user.context';
 
 import styles from './index.module.scss';
-import { Spinner } from '~/components/spinner/spinner';
 
 export const UserBrawlerList = () => {
   const { t } = useTranslation();

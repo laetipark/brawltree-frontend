@@ -1,0 +1,43 @@
+.brawlerStatsWrapper {
+  & > img {
+    height: 100%;
+  }
+}
+
+.brawlerTitle {
+  display: flex;
+  height: 54px;
+  padding: 10px;
+  gap: 6px;
+  background-color: #39375B;
+
+  & > img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    object-position: left;
+    align-self: center;
+  }
+
+  & h3 {
+    font-weight: normal;
+    color: #EFEFEF;
+  }
+
+  & span {
+    font-size: 16px;
+    color: #FFD1D1;
+  }
+}
+
+.brawlerItemsBox {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  background-color: #745C97;
+
+  & > div {
+    display: flex;
+    gap: 8px;
+  }
+}

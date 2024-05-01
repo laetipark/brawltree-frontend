@@ -1,3 +1,49 @@
+.brawlerStatsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brawlerStatsSummaryBox {
+  padding: 10px;
+  gap: 6px;
+  background-color: #D597CE;
+
+  & > div {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+
+    & > div {
+      display: flex;
+      gap: 8px;
+
+      & > img {
+        width: 32px;
+        object-fit: contain;
+        align-self: center;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .brawlerStatsSummaryBox > div {
+    grid-template-columns: 24% 24% 24% 24%;
+  }
+}
+
+.brawlerRateTitle {
+  font-size: 14px;
+  color: #FCE2DB;
+}
+
+.brawlerRateContent {
+  display: flex;
+  gap: 4px;
+  font-size: 16px;
+}
+
 .statsSummaryWrapper {
   display: flex;
   flex-direction: column;

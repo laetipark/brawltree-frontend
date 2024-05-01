@@ -15,18 +15,13 @@ interface ItemTooltipProps {
 
 const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawlerValues }) => {
   const [mouseOver, setMouseOver] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [tooltipY, setTooltipY] = useState<number>();
 
   const { t } = useTranslation();
 
-  const handleMouseOver = ({ clientY, target }) => {
-    const rect =
-      target.parentElement.parentElement.parentElement.getBoundingClientRect();
-
-    const x = parseInt(rect.left);
-    const y = clientY + window.scrollY;
-
-    setTooltipPosition({ x, y });
+  const handleMouseOver = ({ clientY }) => {
+    const y = clientY + window.scrollY + 30;
+    setTooltipY(y);
     setMouseOver(true);
   };
 
@@ -37,13 +32,9 @@ const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawler
   useEffect(() => {
     const handleMouseMove = ({ clientY, target }) => {
       if (mouseOver) {
-        const rect =
-          target.parentElement.parentElement.parentElement.getBoundingClientRect();
+        const y = clientY + window.scrollY + 30;
 
-        const x = parseInt(rect.left);
-        const y = clientY + window.scrollY;
-
-        setTooltipPosition({ x, y });
+        setTooltipY(y);
       }
     };
 
@@ -79,28 +70,26 @@ const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawler
 
   return (
     <React.Fragment>
-      <div onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
-        <img
-          className={styles.brawlerItem}
-          src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
-          alt={itemID}
-        />
+      <div
+        onMouseEnter={handleMouseOver}
+        onMouseLeave={handleMouseOut}>
+        <img className={styles.brawlerItem}
+             src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
+             alt={itemID} />
       </div>
       {mouseOver && (
-        <div
-          className={styles.brawlerItemToolTip}
-          style={{ left: tooltipPosition.x - 100, top: tooltipPosition.y + 30 }}
-        >
+        <div className={styles.brawlerItemToolTip}
+             style={{ top: tooltipY }}>
           <div className={styles.itemName}>
-            <img
-              className={styles.brawlerItem}
-              src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
-              alt={itemID}
-            />
+            <img className={styles.brawlerItem}
+                 src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
+                 alt={itemID} />
             <span>{itemName}</span>
           </div>
           {
-            <div>{description}</div>
+            <div>
+              {description}
+            </div>
           }
         </div>
       )}
