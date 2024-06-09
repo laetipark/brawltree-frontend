@@ -6,7 +6,7 @@ import config from '~/config/config';
 
 import styles from './index.module.scss';
 
-export const UserFriendDetailItem = ({ matchList, hover }) => {
+export const UserFriendDetailItem = ({ matchList, isDetailVisible }) => {
   const { t } = useTranslation();
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
@@ -14,7 +14,7 @@ export const UserFriendDetailItem = ({ matchList, hover }) => {
 
   return (
     <div className={styles.friendDetailItemWrapper}
-         style={{ display: hover ? 'flex' : 'none' }}>
+         style={{ display: isDetailVisible ? 'flex' : 'none' }}>
       {matchList?.map((match: UserFriendsType) => {
         return (
           <div key={`${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}>
@@ -37,12 +37,6 @@ export const UserFriendDetailItem = ({ matchList, hover }) => {
                   src={`${config.assets}/modes/icon/powerLeagueTeam.webp`}
                   alt={'게임방식'}
                 />
-              ) : match.matchType === 4 ? (
-                <img
-                  className={styles.iconImage}
-                  src={`${config.assets}/modes/icon/challenge.webp`}
-                  alt={'게임방식'}
-                />
               ) : (
                 <img
                   className={styles.iconImage}
@@ -60,15 +54,13 @@ export const UserFriendDetailItem = ({ matchList, hover }) => {
               {match.matchType === 0 ? (
                 <img
                   className={styles.iconImage}
-                  src={`${config.assets}/rank/trophy_league/grade/${match.matchGrade}.webp`}
+                  src={`${config.assets}/rank/trophy/grade/${match.matchGrade}.webp`}
                   alt={'트로피'}
                 />
               ) : [2, 3].includes(match.matchType) ? (
                 <img
                   className={styles.iconImage}
-                  src={`${config.assets}/rank/power_league/${Math.floor(
-                    (match.matchGrade - 1) / 3,
-                  )}.webp`}
+                  src={`${config.assets}/rank/ranked/${match.matchGrade}.webp`}
                   alt={'경쟁전'}
                 />
               ) : (

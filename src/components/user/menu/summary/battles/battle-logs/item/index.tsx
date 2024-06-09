@@ -2,15 +2,15 @@ import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
-import { UserContext } from '~/context/user.context';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
+
+import { UserContext } from '~/context/user.context';
+import { UserBattlePlayersType } from '~/common/type/users.type';
 
 import config from '~/config/config';
 
 import styles from './index.module.scss';
-import { UserBattlePlayersType } from '~/common/type/users.type';
 
 const gameResultColors = ['#9ED2BE', '#9EA1D4', '#FD8A8A'];
 const typeArray = {
@@ -119,11 +119,10 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
             </div>
           </div>
           <div className={styles.battleArrow}>
-            {isChecked ? (
-              <FontAwesomeIcon fontSize={13} icon={faArrowDown} />
-            ) : (
-              <FontAwesomeIcon fontSize={13} icon={faArrowUp} />
-            )}
+            <FontAwesomeIcon style={{
+              transform: isChecked ? 'rotate(180deg)' : '',
+              transition: 'transform 0.3s ease',
+            }} fontSize={13} icon={faArrowUp} />
           </div>
         </label>
       </div>
@@ -212,7 +211,7 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
                                 <img
                                   src={`${
                                     config.assets
-                                  }/rank/power_league/${Math.floor(
+                                  }/rank/ranked/${Math.floor(
                                     (brawlerTrophies - 1) / 3,
                                   )}.webp`}
                                   alt={'ranked_image'}

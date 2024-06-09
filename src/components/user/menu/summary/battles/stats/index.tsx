@@ -24,7 +24,7 @@ export const UserBattleStats = ({ battlesSummary, brawlersSummary, season }) => 
             data={battlesSummary[0] || [{ day: '2023-09-09', value: 0 }]}
             from={fromDate || '2023-09-09'}
             to={season?.endDate?.slice(0, 10) || '2023-09-10'}
-            width={320}
+            width={340}
             height={260}
             emptyColor={'#DDDDDD'}
             align={'center'}
@@ -32,8 +32,8 @@ export const UserBattleStats = ({ battlesSummary, brawlersSummary, season }) => 
             maxValue={80}
             colors={colors}
             margin={{ top: 36, bottom: 16, left: 48 }}
-            weekdayTicks={[1, 5]}
-            weekdayLegendOffset={44}
+            weekdayTicks={[0, 1, 2, 3, 4, 5, 6]}
+            weekdayLegendOffset={68}
             dayBorderWidth={2}
             dayBorderColor={'#EEEEEE'}
             tooltip={(n) => {

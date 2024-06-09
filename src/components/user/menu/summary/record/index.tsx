@@ -30,7 +30,7 @@ export const UserRecord = () => {
                 : profile.trophyChange || 0
             }개`,
           ],
-          [t('user.record.soloLeagueRank'), roman[profile.currentSoloPL % 3]],
+          [t('user.record.soloLeagueRank'), profile.currentSoloPL / 3 < 6 ? roman[profile.currentSoloPL % 3] : ''],
           [
             t('user.record.club'),
             profile?.clubName?.replace(/(<+)([/c]+|c[1-9])(>)/g, '') ||
@@ -42,7 +42,7 @@ export const UserRecord = () => {
           [null, null],
           [
             null,
-            `${config.assets}/rank/power_league/${Math.floor(
+            `${config.assets}/rank/ranked/${Math.floor(
               profile.currentSoloPL / 3,
             )}.webp`,
           ],
@@ -59,7 +59,7 @@ export const UserRecord = () => {
           [t('user.record.rank25Brawlers'), `${profile.brawlerRank25}개`],
           [t('user.record.rank30Brawlers'), `${profile.brawlerRank30}개`],
           [t('user.record.rank35Brawlers'), `${profile.brawlerRank35}개`],
-          [t('user.record.highestSoloPL'), roman[profile.highestSoloPL % 3]],
+          [t('user.record.highestSoloPL'), profile.highestSoloPL / 3 < 6 ? roman[profile.highestSoloPL % 3] : ''],
         ]}
         bodyRowImages={[
           [null, null],
@@ -71,7 +71,7 @@ export const UserRecord = () => {
           [null, null],
           [
             null,
-            `${config.assets}/rank/power_league/${Math.floor(
+            `${config.assets}/rank/ranked/${Math.floor(
               profile.highestSoloPL / 3,
             )}.webp`,
           ],

@@ -20,16 +20,14 @@ export const UserSeasonDetailItem = ({ items, hover }) => {
                 {item.matchType === 0 ? (
                   <img
                     className={styles.iconImage}
-                    src={`${config.assets}/rank/trophy_league/grade/${item.matchGrade}.webp`}
-                    alt={'트로피'}
+                    src={`${config.assets}/rank/trophy/grade/${item.matchGrade}.webp`}
+                    alt={`trophy_${item.matchGrade}`}
                   />
                 ) : [2, 3].includes(item.matchType) ? (
                   <img
                     className={styles.iconImage}
-                    src={`${config.assets}/rank/power_league/${Math.floor(
-                      (item.matchGrade - 1) / 3,
-                    )}.webp`}
-                    alt={'경쟁전'}
+                    src={`${config.assets}/rank/ranked/${item.matchGrade}.webp`}
+                    alt={`ranked_${item.matchGrade}`}
                   />
                 ) : (
                   <img

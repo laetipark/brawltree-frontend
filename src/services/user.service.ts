@@ -21,23 +21,12 @@ export class UserService {
       })
       .then((result) => result.data);
 
-  static getBlossomMemberDetail = ({ id }) => axios
-    .get(`${config.url}/blossom/members/${id}`)
+  static getCrewMemberDetail = ({ id }) => axios
+    .get(`${config.url}/crew/members/${id}`)
     .then(async (result) => result.data);
 
-  static getBlossomMembers = () =>
+  static getCrewMembers = () =>
     axios
-      .get(`${config.url}/blossom/members`)
-      .then(async (result) => result.data);
-
-  static getBlossomBattles = ({ date, type, mode }) =>
-    axios
-      .get(`${config.url}/blossom/battles`, {
-        params: {
-          date: date,
-          type: type,
-          mode: mode,
-        },
-      })
+      .get(`${config.url}/crew/members`)
       .then(async (result) => result.data);
 }

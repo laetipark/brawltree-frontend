@@ -8,7 +8,7 @@ import styles from './index.module.scss';
 
 export const UserFriendDetail = ({ friend }) => {
   const { t } = useTranslation();
-  const [hover, setHover] = useState(false);
+  const [isDetailVisible, setIsDetailVisible] = useState(false);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
   };
@@ -18,8 +18,7 @@ export const UserFriendDetail = ({ friend }) => {
        href={`../brawlian/${friend.friendID.replace('#', '')}`}
        className={styles.friendDetailWrapper}>
       <div className={styles.friendSummary}
-           onMouseEnter={() => setHover(true)}
-           onMouseLeave={() => setHover(false)}>
+           onMouseLeave={() => setIsDetailVisible(false)}>
         <img src={`${config.assets}/brawlian/profile/${friend.profileIcon}.webp`}
              alt={friend.profileIcon} />
         <div>
@@ -28,7 +27,7 @@ export const UserFriendDetail = ({ friend }) => {
             <img src={'/images/etc/info.webp'} alt={'info'}
                  onClick={(e) => {
                    e.preventDefault();
-                   setHover(!hover);
+                   setIsDetailVisible(!isDetailVisible);
                  }} />
           </h4>
           <div>
@@ -82,7 +81,7 @@ export const UserFriendDetail = ({ friend }) => {
       </div>
       <UserFriendDetailItem
         matchList={friend.matchList}
-        hover={hover} />
+        isDetailVisible={isDetailVisible} />
     </a>
   );
 };

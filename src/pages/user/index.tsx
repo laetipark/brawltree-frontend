@@ -98,11 +98,11 @@ export const Users = () => {
   }, [id, retryCount, user?.updatedAt || new Date()]);
 
   useEffect(() => {
-    user?.crew && UserService.getBlossomMemberDetail({ id }).then((data) => {
+    user?.crew && UserService.getCrewMemberDetail({ id }).then((data) => {
       setFriends(data.friends);
       setSeasonRecords(data.seasonRecords);
     });
-  }, [user?.crew]);
+  }, [retryCount, user?.crew]);
 
   useEffect(() => {
     UserService.getUserByTypeNMode({ id, type, mode, stack }).then((data) => {

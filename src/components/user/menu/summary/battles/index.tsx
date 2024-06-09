@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { TypeMenu } from '~/components/menu/type-n-mode/menu-type/type-menu';
+import { MenuType } from '~/components/menu/type-n-mode/menu-type/menu-type';
 import { ModeMenu } from '~/components/menu/type-n-mode/menu-mode/menu-mode';
 import { UserBattleStats } from '~/components/user/menu/summary/battles/stats';
 import { UserBattleLogs } from '~/components/user/menu/summary/battles/battle-logs';
@@ -44,7 +44,7 @@ export const UserBattles = () => {
       <div className={styles.battlesTitle}>전투 기록</div>
       <div className={styles.battleContent}>
         <div className={styles.battleContentMenus}>
-          <TypeMenu type={type} setMatchType={setMatchType} />
+          <MenuType type={type} setMatchType={setMatchType} />
           <ModeMenu
             mode={mode}
             setMatchMode={setMatchMode}

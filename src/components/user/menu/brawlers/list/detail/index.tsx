@@ -1,5 +1,5 @@
 import React from 'react';
-import ItemTooltip from '~/components/items/detail/item-info';
+import { ItemTooltip } from '~/components/items/item-info';
 
 import config from '~/config/config';
 
