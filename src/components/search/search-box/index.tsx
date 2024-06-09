@@ -11,7 +11,6 @@ export const SearchBox = ({ crews, setFilterMembers }) => {
   const [members, setMembers] = useState<InputData[]>([]);
 
   useEffect(() => {
-    console.log(Object.values(crews));
     setMembers(Object.values(crews).flat());
   }, [crews]);
 

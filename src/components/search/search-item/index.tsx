@@ -61,12 +61,12 @@ export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => 
               <img
                 src={`${
                   config.assets
-                }/rank/power_league/${Math.floor(
+                }/rank/ranked/${Math.floor(
                   user.currentSoloPL / 3,
                 )}.webp`}
                 alt={Math.floor(user.currentSoloPL / 3).toString()}
               />
-              {roman[user.currentSoloPL % 3]}
+              {user.currentSoloPL / 3 < 6 ? roman[user.currentSoloPL % 3] : ''}
             </span>
           </div>
         </div>
