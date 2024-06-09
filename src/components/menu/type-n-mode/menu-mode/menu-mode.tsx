@@ -5,6 +5,8 @@ import { useWindowClick } from '~/hooks/use-window-click.hook';
 import config from '~/config/config';
 
 import styles from './menu-mode.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 
 export const ModeMenu = ({ mode, setMatchMode, type, rotationTL, rotationPL }) => {
   const { t } = useTranslation();
@@ -22,6 +24,10 @@ export const ModeMenu = ({ mode, setMatchMode, type, rotationTL, rotationPL }) =
       >
         <img src={`${config.assets}/modes/icon/${mode}.webp`} alt={mode} />
         <div>{t(`battle.mode.${mode}`)}</div>
+        <FontAwesomeIcon style={{
+          transform: checked ? 'rotate(180deg)' : '',
+          transition: 'transform 0.3s ease',
+        }} fontSize={14} icon={faCaretUp} />
       </button>
       <div
         className={styles.typeMenuList}

@@ -1,6 +1,7 @@
 import React from 'react';
 import config from '~/config/config';
 import styles from './menu.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const tlGrade = ['~39', '40~139', '140~299', '300~499', '500~749', '750~999', '1000~1249', '1250~'];
 const plGrade = ['bronze', 'silver', 'gold', 'diamond', 'mythic', 'legendary', 'masters'];
@@ -13,6 +14,8 @@ const MenuTypeNGrade = ({
                           rotationTL,
                           rotationPL,
                         }) => {
+  const { t } = useTranslation();
+
   const handleRadioButton = ({ target }) => {
     setType(target.id);
     if (target.id === '0') {
@@ -54,7 +57,7 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/trophy.webp`}
                 alt={`trophyLeague`}
               />
-              <span>트로피 리그</span>
+              <div>{t('battle.type.trophy')}</div>
             </label>
           </li>
           <li>
@@ -72,7 +75,7 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/ranked.webp`}
                 alt={`trophyLeague`}
               />
-              <span>솔로 파워 리그</span>
+              <div>{t('battle.type.ranked')}</div>
             </label>
           </li>
           <li>
@@ -108,7 +111,7 @@ const MenuTypeNGrade = ({
                   <label htmlFor={`grade_${gradeNum}`}>
                     <img
                       className={styles.mapMenuItemImage}
-                      src={`${config.assets}/rank/trophy_league/grade/${gradeNum}.webp`}
+                      src={`${config.assets}/rank/trophy/grade/${gradeNum}.webp`}
                       alt={`grade_${gradeNum}`}
                     />
                     <span>{tlGrade[index]}</span>
@@ -132,7 +135,7 @@ const MenuTypeNGrade = ({
                     <label htmlFor={`grade_${gradeNum}`}>
                       <img
                         className={styles.mapMenuItemImage}
-                        src={`${config.assets}/rank/power_league/${gradeNum}.webp`}
+                        src={`${config.assets}/rank/ranked/${gradeNum}.webp`}
                         alt={`grade_${gradeNum}`}
                       />
                       <span>{plGrade[index]}</span>

@@ -1,5 +1,8 @@
 import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { useWindowClick } from '~/hooks/use-window-click.hook';
 
 import config from '~/config/config';
@@ -12,7 +15,7 @@ const typeNumber = {
   2: 'ranked',
 };
 
-export const TypeMenu = ({ type, setMatchType }) => {
+export const MenuType = ({ type, setMatchType }) => {
   const { t } = useTranslation();
 
   const dropDownRef = useRef();
@@ -31,6 +34,10 @@ export const TypeMenu = ({ type, setMatchType }) => {
           alt={'type_7'}
         />
         <div>{t(`battle.type.${typeNumber[type]}`)}</div>
+        <FontAwesomeIcon style={{
+          transform: checked ? 'rotate(180deg)' : '',
+          transition: 'transform 0.3s ease',
+        }} fontSize={14} icon={faCaretUp} />
       </button>
       <div
         className={styles.typeMenuList}
