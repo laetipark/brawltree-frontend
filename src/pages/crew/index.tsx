@@ -11,7 +11,7 @@ export const CrewMembers = () => {
   const [crews, setCrews] = useState([]);
 
   useEffect(() => {
-    UserService.getBlossomMembers().then((data) => {
+    UserService.getCrewMembers().then((data) => {
       setCrews(data);
     });
   }, []);
