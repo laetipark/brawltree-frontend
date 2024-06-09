@@ -1,0 +1,42 @@
+.brawlerInfoDetailWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #9D9ADB;
+  gap: 4px;
+
+  & > div {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    width: 100%;
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      padding: 8px;
+      gap: 4px;
+      border-bottom: 1px solid #39375C;
+
+      & > div {
+        display: flex;
+        gap: 4px;
+      }
+    }
+  }
+}
+
+.attackName {
+  font-family: "Main Bold", serif;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #696786;
+}
+
+@media (max-width: 768px) {
+  .brawlerInfoDetailWrapper {
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+}

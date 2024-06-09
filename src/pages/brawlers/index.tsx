@@ -56,7 +56,6 @@ export const Brawlers = () => {
       gender: 'Female',
     });
   }, [name, brawlers]);
-  console.log(brawlerSkills, brawlerItems);
 
   return (
     brawlers.length > 0 ? (

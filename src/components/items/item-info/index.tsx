@@ -2,18 +2,10 @@ import React, { useEffect, useState } from 'react';
 
 import config from '~/config/config';
 
-import styles from './item-info.module.scss';
+import styles from './index.module.scss';
 import { useTranslation } from 'react-i18next';
 
-interface ItemTooltipProps {
-  brawlerPower: null;
-}
-
-interface ItemTooltipProps {
-  brawlerValues: null;
-}
-
-const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawlerValues }) => {
+export const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawlerValues }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [tooltipY, setTooltipY] = useState<number>();
 
@@ -30,10 +22,9 @@ const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawler
   };
 
   useEffect(() => {
-    const handleMouseMove = ({ clientY, target }) => {
+    const handleMouseMove = ({ clientY }) => {
       if (mouseOver) {
         const y = clientY + window.scrollY + 30;
-
         setTooltipY(y);
       }
     };
@@ -96,5 +87,3 @@ const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawler
     </React.Fragment>
   );
 };
-
-export default ItemTooltip;
