@@ -1,19 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Pie } from '@nivo/pie';
 
 import BattleLogItem from '~/components/user/menu/summary/battles/battle-logs/item';
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
 import styles from './index.module.scss';
-import { useTranslation } from 'react-i18next';
 
-export const UserBattleLogs = ({
-                                 recentBattles,
-                                 recentBrawlers,
-                                 battles,
-                               }) => {
-  const { t } = useTranslation();
+export const UserBattleLogs = ({ recentBattles, recentBrawlers, battles }) => {
+  const locales = useContext(CdnContext);
 
   const matchCount = recentBattles?.length || 0;
   const vicCount =
@@ -41,19 +37,19 @@ export const UserBattleLogs = ({
   const battleData = [
     {
       id: 'Defeat',
-      label: t('battle.result.1'),
+      label: locales.battle['result']['1'],
       value: defCount,
       color: 'hsl(351,57%,60%)',
     },
     {
       id: 'Draw',
-      label: t('battle.result.0'),
+      label: locales.battle['result']['0'],
       value: drwCount,
       color: 'hsl(224,39%,52%)',
     },
     {
       id: 'Victory',
-      label: t('battle.result.-1'),
+      label: locales.battle['result']['-1'],
       value: vicCount,
       color: 'hsl(132,29%,50%)',
     },
@@ -62,37 +58,37 @@ export const UserBattleLogs = ({
   const brawlerData = [
     {
       id: 'Artillery',
-      label: t('brawler.brawlerRole.Artillery'),
+      label: locales.brawler['brawlerRole'].Artillery,
       value: (artCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Assassin',
-      label: t('brawler.brawlerRole.Assassin'),
+      label: locales.brawler['brawlerRole'].Assassin,
       value: (sinCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Controller',
-      label: t('brawler.brawlerRole.Controller'),
+      label: locales.brawler['brawlerRole'].Controller,
       value: (cntCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Damage Dealer',
-      label: t('brawler.brawlerRole.Damage Dealer'),
+      label: locales.brawler['brawlerRole']['Damage Dealer'],
       value: (dmgCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Marksman',
-      label: t('brawler.brawlerRole.Marksman'),
+      label: locales.brawler['brawlerRole'].Marksman,
       value: (mrkCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Support',
-      label: t('brawler.brawlerRole.Support'),
+      label: locales.brawler['brawlerRole'].Support,
       value: (supCount / matchCount).toFixed(3) || 0,
     },
     {
       id: 'Tank',
-      label: t('brawler.brawlerRole.Tank'),
+      label: locales.brawler['brawlerRole'].Tank,
       value: (tnkCount / matchCount).toFixed(3) || 0,
     },
   ];
@@ -106,23 +102,23 @@ export const UserBattleLogs = ({
               <div className={styles.battleLogsText}>
                 <span>
                   {matchCount}
-                  {t('battle.result.game')}
+                  {locales.battle['result'].game}
                 </span>
                 <span style={{ color: '#5AA469' }}>
                   {vicCount}
-                  {t('battle.result.w')}
+                  {locales.battle['result'].w}
                 </span>
                 <span style={{ color: '#556FB5' }}>
                   {drwCount}
-                  {t('battle.result.d')}
+                  {locales.battle['result'].d}
                 </span>
                 <span style={{ color: '#D35D6E' }}>
                   {defCount}
-                  {t('battle.result.l')}
+                  {locales.battle['result'].l}
                 </span>
                 <span>
-                  ({t('application.recent')} {battles.length}{' '}
-                  {t('application.game')})
+                  ({locales.application['recent']} {battles.length}{' '}
+                  {locales.application['game']})
                 </span>
               </div>
               <Pie
@@ -159,7 +155,7 @@ export const UserBattleLogs = ({
             </div>
             <div>
               <div className={styles.battleLogsText}>
-                <span>{t('user.battle.brawlerRoleUsed')}</span>
+                <span>{locales.user['battle'].brawlerRoleUsed}</span>
               </div>
               <Pie
                 data={brawlerData}
@@ -196,7 +192,7 @@ export const UserBattleLogs = ({
           </div>
           <div className={styles.battleLogsBrawlerRecord}>
             <div className={styles.battleLogsText}>
-              <span>{t('user.battle.brawlerBattleHistory')}</span>
+              <span>{locales.user['battle'].brawlerBattleHistory}</span>
             </div>
             {recentBrawlers?.map(
               ({ brawlerID, brawlerName, matchCount, resultCount }) => (
@@ -207,23 +203,23 @@ export const UserBattleLogs = ({
                   />
                   <div>
                     <div className={styles.brawlerName}>
-                      {t(`brawler.brawler.${brawlerName}`)}
+                      {locales.brawler['brawler'][`${brawlerName}`]}
                     </div>
                     <div className={styles.brawlerGame}>
-                      {matchCount} {t('application.game')}
+                      {matchCount} {locales.application['game']}
                     </div>
                   </div>
                   <span style={{ color: '#5AA469' }}>
                     {resultCount['-1'] || 0}
-                    {t('battle.result.w')}
+                    {locales.battle['result'].w}
                   </span>
                   <span style={{ color: '#556FB5' }}>
                     {resultCount['0'] || 0}
-                    {t('battle.result.d')}
+                    {locales.battle['result'].d}
                   </span>
                   <span style={{ color: '#D35D6E' }}>
                     {resultCount['1'] || 0}
-                    {t('battle.result.l')}
+                    {locales.battle['result'].l}
                   </span>
                 </div>
               ),

@@ -1,20 +1,37 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import config from '~/config/config';
 import styles from './menu.module.scss';
-import { useTranslation } from 'react-i18next';
+import { CdnContext } from '~/context/cdn.context';
 
-const tlGrade = ['~39', '40~139', '140~299', '300~499', '500~749', '750~999', '1000~1249', '1250~'];
-const plGrade = ['bronze', 'silver', 'gold', 'diamond', 'mythic', 'legendary', 'masters'];
+const tlGrade = [
+  '~39',
+  '40~139',
+  '140~299',
+  '300~499',
+  '500~749',
+  '750~999',
+  '1000~1249',
+  '1250~',
+];
+const plGrade = [
+  'bronze',
+  'silver',
+  'gold',
+  'diamond',
+  'mythic',
+  'legendary',
+  'masters',
+];
 
 const MenuTypeNGrade = ({
-                          type,
-                          grade,
-                          setType,
-                          setGrade,
-                          rotationTL,
-                          rotationPL,
-                        }) => {
-  const { t } = useTranslation();
+  type,
+  grade,
+  setType,
+  setGrade,
+  rotationTL,
+  rotationPL,
+}) => {
+  const locales = useContext(CdnContext);
 
   const handleRadioButton = ({ target }) => {
     setType(target.id);
@@ -57,7 +74,7 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/trophy.webp`}
                 alt={`trophyLeague`}
               />
-              <div>{t('battle.type.trophy')}</div>
+              <div>{locales.battle['type']['trophy']}</div>
             </label>
           </li>
           <li>
@@ -75,7 +92,7 @@ const MenuTypeNGrade = ({
                 src={`${config.assets}/modes/icon/ranked.webp`}
                 alt={`trophyLeague`}
               />
-              <div>{t('battle.type.ranked')}</div>
+              <div>{locales.battle['type']['ranked']}</div>
             </label>
           </li>
           <li>
@@ -96,53 +113,55 @@ const MenuTypeNGrade = ({
         </div>
         <ul className={styles.mapGradeGroup}>
           {type === '0'
-            ? ['0', '1', '2', '3', '4', '5', '6', '7'].map((gradeNum, index) => {
-              return (
-                <li key={`grade_${gradeNum}`}>
-                  <input
-                    type={'checkbox'}
-                    id={`grade_${gradeNum}`}
-                    name={`matchTLGrade`}
-                    checked={isChecked(gradeNum)}
-                    onChange={({ target: { checked } }) =>
-                      handleCheckBoxButton({ checked, value: gradeNum })
-                    }
-                  />
-                  <label htmlFor={`grade_${gradeNum}`}>
-                    <img
-                      className={styles.mapMenuItemImage}
-                      src={`${config.assets}/rank/trophy/grade/${gradeNum}.webp`}
-                      alt={`grade_${gradeNum}`}
-                    />
-                    <span>{tlGrade[index]}</span>
-                  </label>
-                </li>
-              );
-            })
+            ? ['0', '1', '2', '3', '4', '5', '6', '7'].map(
+                (gradeNum, index) => {
+                  return (
+                    <li key={`grade_${gradeNum}`}>
+                      <input
+                        type={'checkbox'}
+                        id={`grade_${gradeNum}`}
+                        name={`matchTLGrade`}
+                        checked={isChecked(gradeNum)}
+                        onChange={({ target: { checked } }) =>
+                          handleCheckBoxButton({ checked, value: gradeNum })
+                        }
+                      />
+                      <label htmlFor={`grade_${gradeNum}`}>
+                        <img
+                          className={styles.mapMenuItemImage}
+                          src={`${config.assets}/rank/trophy/grade/${gradeNum}.webp`}
+                          alt={`grade_${gradeNum}`}
+                        />
+                        <span>{tlGrade[index]}</span>
+                      </label>
+                    </li>
+                  );
+                },
+              )
             : ['2', '3'].includes(type)
               ? ['0', '1', '2', '3', '4', '5', '6'].map((gradeNum, index) => {
-                return (
-                  <li key={`grade_${gradeNum}`}>
-                    <input
-                      type={'checkbox'}
-                      id={`grade_${gradeNum}`}
-                      name={`matchPLGrade`}
-                      checked={isChecked(gradeNum)}
-                      onChange={({ target: { checked } }) =>
-                        handleCheckBoxButton({ checked, value: gradeNum })
-                      }
-                    />
-                    <label htmlFor={`grade_${gradeNum}`}>
-                      <img
-                        className={styles.mapMenuItemImage}
-                        src={`${config.assets}/rank/ranked/${gradeNum}.webp`}
-                        alt={`grade_${gradeNum}`}
+                  return (
+                    <li key={`grade_${gradeNum}`}>
+                      <input
+                        type={'checkbox'}
+                        id={`grade_${gradeNum}`}
+                        name={`matchPLGrade`}
+                        checked={isChecked(gradeNum)}
+                        onChange={({ target: { checked } }) =>
+                          handleCheckBoxButton({ checked, value: gradeNum })
+                        }
                       />
-                      <span>{plGrade[index]}</span>
-                    </label>
-                  </li>
-                );
-              })
+                      <label htmlFor={`grade_${gradeNum}`}>
+                        <img
+                          className={styles.mapMenuItemImage}
+                          src={`${config.assets}/rank/ranked/${gradeNum}.webp`}
+                          alt={`grade_${gradeNum}`}
+                        />
+                        <span>{plGrade[index]}</span>
+                      </label>
+                    </li>
+                  );
+                })
               : null}
         </ul>
       </div>

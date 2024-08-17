@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useState } from 'react';
 import moment from 'moment/moment';
 
 import { useInterval } from '~/hooks/use-interval.hook';
+
+import { CdnContext } from '~/context/cdn.context';
+
 import config from '~/config/config';
 import styles from './index.module.scss';
 
 export const EventItem = ({ event, type }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const time = moment(type === 'curr' ? event.endTime : event.startTime);
   if (type !== 'curr') {
     time.set('date', new Date().getDate());
@@ -17,9 +19,12 @@ export const EventItem = ({ event, type }) => {
   }
 
   const diffTime = {
-    day: type === 'curr' ? moment.duration(time.diff(moment())).days() :
-      moment.duration(time.diff(moment())).days() > 0 ?
-        moment.duration(time.diff(moment())).days() : 0,
+    day:
+      type === 'curr'
+        ? moment.duration(time.diff(moment())).days()
+        : moment.duration(time.diff(moment())).days() > 0
+          ? moment.duration(time.diff(moment())).days()
+          : 0,
     hour:
       type === 'curr'
         ? moment.duration(time.diff(moment())).hours()
@@ -62,39 +67,60 @@ export const EventItem = ({ event, type }) => {
 
   return (
     <React.Fragment>
-      <a key={event.mapID}
-         className={styles.mapItem}
-         href={`../maps/${event.mapID}`}>
-        <img src={`${config.assets}/modes/icon/${event.mode}.webp`}
-             alt={event.mode} />
+      <a
+        key={event.mapID}
+        className={styles.mapItem}
+        href={`../maps/${event.mapID}`}
+      >
+        <img
+          src={`${config.assets}/modes/icon/${event.mode}.webp`}
+          alt={event.mode}
+        />
         <div>
           <div className={styles.eventInfo}>
-          <span>
-            {event.mapID ? t(`map.map.${event.mapID}`) : event.mapName}
-          </span>
-            <img src={'/images/etc/info.webp'} alt={'info'}
-                 onClick={(e) => {
-                   e.preventDefault();
-                 }}
-                 onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut} />
+            <span>{locales.map['map'][`${event.mapID}`] || event.mapName}</span>
+            <img
+              src={'/images/etc/info.webp'}
+              alt={'info'}
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+              onMouseEnter={handleMouseOver}
+              onMouseLeave={handleMouseOut}
+            />
           </div>
-          {
-            ['curr', 'next'].includes(type) &&
+          {['curr', 'next'].includes(type) && (
             <div>
-              <span>{type === 'curr'
-                ? t('map.event.endsIn')
-                : t('map.event.startsIn')}</span>
-              <span>{diffTime.day}{t('map.event.d')}</span>
-              <span>{diffTime.hour}{t('map.event.h')}</span>
-              <span>{diffTime.minute}{t('map.event.m')}</span>
+              <span>
+                {type === 'curr'
+                  ? locales.map['event'].endsIn
+                  : locales.map['event'].startsIn}
+              </span>
+              <span>
+                {diffTime.day}
+                {locales.user['battle'].d}
+              </span>
+              <span>
+                {diffTime.hour}
+                {locales.user['battle'].h}
+              </span>
+              <span>
+                {diffTime.minute}
+                {locales.user['battle'].m}
+              </span>
             </div>
-          }
+          )}
         </div>
       </a>
       {mouseOver && (
-        <div className={styles.mapToolTip}
-             style={{ left: tooltipPosition.x + 40, top: tooltipPosition.y + 20 }}>
-          <img src={`${config.assets}/maps/${event.mapID}.webp`} alt={event.mapID} />
+        <div
+          className={styles.mapToolTip}
+          style={{ left: tooltipPosition.x + 40, top: tooltipPosition.y + 20 }}
+        >
+          <img
+            src={`${config.assets}/maps/${event.mapID}.webp`}
+            alt={event.mapID}
+          />
         </div>
       )}
     </React.Fragment>

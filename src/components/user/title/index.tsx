@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { useTranslation } from 'react-i18next';
 import moment from 'moment';
 
 import { useInterval } from '~/hooks/use-interval.hook';
 import { UserContext } from '~/context/user.context';
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
 import styles from './index.module.scss';
 
 export const UserTitle = () => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
   const context = useContext(UserContext);
   const { user, setRetryCount } = context;
@@ -53,21 +53,23 @@ export const UserTitle = () => {
             }
           }}
         >
-          <span>{t(`user.title.update`)}</span>
+          <span>{locales.user['title'].update}</span>
           <span>
             <span>{Math.floor(lastUpdatedDiff)}</span>
-            <span>{t(`user.title.updateAgo`)}</span>
+            <span>{locales.user['title'].updateAgo}</span>
           </span>
         </span>
         <CopyToClipboard
           text={user.userID}
-          onCopy={() => alert(t(`user.title.copyAlert`))}
+          onCopy={() => alert(locales.user['title'].copyAlert)}
         >
-          <span className={styles.titleButton}>{t(`user.title.copyTag`)}</span>
+          <span className={styles.titleButton}>
+            {locales.user['title'].copyTag}
+          </span>
         </CopyToClipboard>
         <CopyToClipboard text={user.userID}>
           <a className={styles.titleButton} href={'brawlstars://'}>
-            {t(`user.title.copyTagAndRun`)}
+            {locales.user['title'].copyTagAndRun}
           </a>
         </CopyToClipboard>
       </div>

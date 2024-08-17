@@ -1,25 +1,29 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from 'react';
+
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
 import styles from './stats.module.scss';
 
 const MapStats = ({ brawlers }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
   return (
     <div className={styles.brawlerStatsWrapper}>
       {brawlers?.map((brawler) => {
         return (
-          <a key={`${brawler.brawlerID}`} className={styles.brawlerStatsItem}
-             href={`../brawler/${brawler.brawlerName.toLowerCase().replaceAll(' ', '')}`}>
+          <a
+            key={`${brawler.brawlerID}`}
+            className={styles.brawlerStatsItem}
+            href={`../brawler/${brawler.brawlerName.toLowerCase().replaceAll(' ', '')}`}
+          >
             <div className={styles.brawlerTitle}>
               <img
                 src={`${config.assets}/brawlers/pins/${brawler.brawlerID}.webp`}
                 alt={'브롤러'}
               />
-              <div>{t(`brawler.brawler.${brawler.brawlerName}`)}</div>
+              <div>{locales.brawler['brawler'][`${brawler.brawlerName}`]}</div>
             </div>
             <div className={styles.brawlerContent}>
               <div>

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import moment from 'moment/moment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +6,7 @@ import { faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import { UserContext } from '~/context/user.context';
 import { UserBattlePlayersType } from '~/common/type/users.type';
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
@@ -24,7 +24,7 @@ const typeArray = {
 const roman = ['I', 'II', 'III'];
 
 const BattleLogItem = ({ battleInfo, battlePlayers }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
   const context = useContext(UserContext);
   const { setUser, setRetryCount } = context;
@@ -96,21 +96,22 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
             </div>
             <div>
               <div className={styles.battleSummaryTitle}>
-                {t(`map.map.${battleInfo.mapID}`) || battleInfo.mapName}
+                {locales.map['map'][`${battleInfo.mapID}`] ||
+                  battleInfo.mapName}
               </div>
               <div className={styles.battleSummarySubTitle}>
                 {dateDiff > 0
-                  ? `${dateDiff} ${t('user.battle.daysAgo')}`
+                  ? `${dateDiff} ${locales.user['battle'].daysAgo}`
                   : hourDiff > 0
-                    ? `${hourDiff} ${t('user.battle.hoursAgo')}`
-                    : `${minuteDiff} ${t('user.battle.minutesAgo')}`}
+                    ? `${hourDiff} ${locales.user['battle'].hoursAgo}`
+                    : `${minuteDiff} ${locales.user['battle'].minutesAgo}`}
               </div>
             </div>
           </div>
           <div className={styles.matchResultBox}>
             <div>{battleInfo.duration} seconds</div>
             <div>
-              <div>{t(`battle.result.${battleInfo.gameResult}`)}</div>
+              <div>{locales.battle['result'][`${battleInfo.gameResult}`]}</div>
               <div>
                 {battleInfo.trophyChange > 0
                   ? `+${battleInfo.trophyChange}`
@@ -119,10 +120,14 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
             </div>
           </div>
           <div className={styles.battleArrow}>
-            <FontAwesomeIcon style={{
-              transform: isChecked ? 'rotate(180deg)' : '',
-              transition: 'transform 0.3s ease',
-            }} fontSize={13} icon={faArrowUp} />
+            <FontAwesomeIcon
+              style={{
+                transform: isChecked ? 'rotate(180deg)' : '',
+                transition: 'transform 0.3s ease',
+              }}
+              fontSize={13}
+              icon={faArrowUp}
+            />
           </div>
         </label>
       </div>
@@ -134,7 +139,7 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
           const teamGameResult =
             battleInfo.modeCode === 3
               ? team.find((item) => item.playerID === battleInfo.userID) !==
-              undefined
+                undefined
                 ? battleInfo.gameResult + 1
                 : battleInfo.gameResult * -1 + 1
               : matchTeams[index][0].gameResult + 1;
@@ -142,7 +147,7 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
           return (
             <React.Fragment key={`${battleInfo.battleTime}_${index}`}>
               <div className={styles.battleLogsDetailTitle}>
-                {t(`battle.result.${teamGameResult - 1}`)}(
+                {locales.battle['result'][`${teamGameResult - 1}`]}(
                 {battleInfo.modeCode === 3
                   ? index === 0
                     ? '블루'
@@ -156,13 +161,13 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
               >
                 {team?.map(
                   ({
-                     brawlerID,
-                     brawlerPower,
-                     brawlerTrophies,
-                     playerID,
-                     playerName,
-                     isStarPlayer,
-                   }) => {
+                    brawlerID,
+                    brawlerPower,
+                    brawlerTrophies,
+                    playerID,
+                    playerName,
+                    isStarPlayer,
+                  }) => {
                     return (
                       <a
                         key={`${battleInfo.battleTime}_${index}_${playerID}`}
@@ -196,7 +201,9 @@ const BattleLogItem = ({ battleInfo, battlePlayers }) => {
                                   src={`${config.assets}/game/icon/logo_star.webp`}
                                   alt={'게임모드'}
                                 />
-                                <span>{t('battle.result.starPlayer')}</span>
+                                <span>
+                                  {locales.battle['result'].starPlayer}
+                                </span>
                               </React.Fragment>
                             )}
                           </div>

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
 import config from '~/config/config';
-import { useTranslation } from 'react-i18next';
 
 export const BrawlerStats = ({ brawler, stats, maps }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
   const brawlerTrophy = stats.find(({ brawlerID, matchType }) => {
     return brawlerID === String(brawler.id) && Number(matchType) === 0;
@@ -29,7 +30,7 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
             />
             <div>
               <div className={styles.brawlerRateTitle}>
-                {t('brawler.stats.trophyLeaguePick')}
+                {locales.brawler['stats'].trophyLeaguePick}
               </div>
               <div className={styles.brawlerRateContent}>
                 <span>
@@ -46,7 +47,7 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
             />
             <div>
               <div className={styles.brawlerRateTitle}>
-                {t('brawler.stats.trophyLeagueWin')}
+                {locales.brawler['stats'].trophyLeagueWin}
               </div>
               <div className={styles.brawlerRateContent}>
                 <span>
@@ -63,7 +64,7 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
             />
             <div>
               <div className={styles.brawlerRateTitle}>
-                {t('brawler.stats.powerLeaguePick')}
+                {locales.brawler['stats'].powerLeaguePick}
               </div>
               <div className={styles.brawlerRateContent}>
                 <span>
@@ -80,7 +81,7 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
             />
             <div>
               <div className={styles.brawlerRateTitle}>
-                {t('brawler.stats.powerLeagueWin')}
+                {locales.brawler['stats'].powerLeagueWin}
               </div>
               <div className={styles.brawlerRateContent}>
                 <span>
@@ -93,30 +94,35 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
         </div>
       </div>
       <div className={styles.statsSummaryWrapper}>
-        {filterBrawler.map(({ mapID, mapName, mode, pickRate, victoryRate }) => {
-          return (
-            <a
-              key={mapID}
-              className={styles.statsSummaryMapButton}
-              href={`../maps/${mapID}`}
-            >
-              <img src={`${config.assets}/modes/icon/${mode}.webp`} alt={mode} />
-              <span style={{ fontWeight: 600 }}>
-              {t(`map.map.${mapID}`) || mapName}
-            </span>
-              <div>
-                <span>Pick</span>
-                <span style={{ fontWeight: 600 }}>{pickRate}</span>
-                <span>%</span>
-              </div>
-              <div>
-                <span>Win</span>
-                <span style={{ fontWeight: 600 }}>{victoryRate}</span>
-                <span>%</span>
-              </div>
-            </a>
-          );
-        })}
+        {filterBrawler.map(
+          ({ mapID, mapName, mode, pickRate, victoryRate }) => {
+            return (
+              <a
+                key={mapID}
+                className={styles.statsSummaryMapButton}
+                href={`../maps/${mapID}`}
+              >
+                <img
+                  src={`${config.assets}/modes/icon/${mode}.webp`}
+                  alt={mode}
+                />
+                <span style={{ fontWeight: 600 }}>
+                  {locales.map['map'][`${mapID}`] || mapName}
+                </span>
+                <div>
+                  <span>Pick</span>
+                  <span style={{ fontWeight: 600 }}>{pickRate}</span>
+                  <span>%</span>
+                </div>
+                <div>
+                  <span>Win</span>
+                  <span style={{ fontWeight: 600 }}>{victoryRate}</span>
+                  <span>%</span>
+                </div>
+              </a>
+            );
+          },
+        )}
       </div>
     </div>
   );

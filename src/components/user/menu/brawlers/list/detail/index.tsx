@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ItemTooltip } from '~/components/items/item-info';
+
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
 import styles from './index.module.scss';
-import { useTranslation } from 'react-i18next';
 
 export const BrawlerDetail = ({
-                                brawlerID, name,
-                                powerLeaguePickRate,
-                                trophyLeaguePickRate,
-                                powerLeagueVictoryRate,
-                                trophyLeagueVictoryRate,
-                                brawlerRank,
-                                userBrawlerItems,
-                                brawlerPower,
-                                brawlerValues,
-                                currentTrophies,
-                                highestTrophies,
-                              }) => {
-  const { t } = useTranslation();
+  brawlerID,
+  name,
+  powerLeaguePickRate,
+  trophyLeaguePickRate,
+  powerLeagueVictoryRate,
+  trophyLeagueVictoryRate,
+  brawlerRank,
+  userBrawlerItems,
+  brawlerPower,
+  brawlerValues,
+  currentTrophies,
+  highestTrophies,
+}) => {
+  const locales = useContext(CdnContext);
 
   const brawlerGadgets = userBrawlerItems?.filter(
     ({ brawlerID: item, itemKind }) =>
@@ -37,9 +39,10 @@ export const BrawlerDetail = ({
   return (
     <div className={styles.userBrawlerDetailWrapper}>
       <div>
-        <img className={styles.brawlerProfile}
-             src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
-             alt={'브롤러'}
+        <img
+          className={styles.brawlerProfile}
+          src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`}
+          alt={'브롤러'}
         />
         <div className={styles.gameType}>
           <div className={styles.gameTypeTitle}>
@@ -48,7 +51,7 @@ export const BrawlerDetail = ({
               src={`${config.assets}/modes/icon/trophy.webp`}
               alt={'trophyLeague'}
             />
-            <span>{t('battle.type.trophy')}</span>
+            <span>{locales.battle['type'].trophy}</span>
           </div>
           <div>
             <span>Pick</span>
@@ -66,7 +69,7 @@ export const BrawlerDetail = ({
               src={`${config.assets}/modes/icon/ranked.webp`}
               alt={'브롤러'}
             />
-            <span>{t('battle.type.ranked')}</span>
+            <span>{locales.battle['type'].ranked}</span>
           </div>
           <div>
             <span>Pick</span>
@@ -82,7 +85,7 @@ export const BrawlerDetail = ({
         <div className={styles.brawlerTitle}>
           <img
             className={styles.brawlerRankImage}
-            src={`${config.assets}/rank/trophy_league/${brawlerRank}.webp`}
+            src={`${config.assets}/rank/trophy/${brawlerRank}.webp`}
             alt={'브롤러'}
           />
           <span className={styles.brawlerName}>{name}</span>

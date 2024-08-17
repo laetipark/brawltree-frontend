@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { CdnContext } from '~/context/cdn.context';
+import { isRRMatch } from '~/utils/korean-pattern';
 
 import config from '~/config/config';
 
 import styles from './index.module.scss';
-import { useTranslation } from 'react-i18next';
-import { isRRMatch } from '~/utils/korean-pattern';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
   const [radio, setRadio] = useState(brawler?.id || '16000000');
@@ -16,14 +17,19 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
   const [filterBrawlers, setFilterBrawlers] = useState([]);
   const [baseURL, setBaseURL] = useState(`../brawler/`);
 
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setFilterBrawlers(brawlers.filter(brawler => {
-      return isRRMatch(searchBrawlerName, t(`brawler.brawler.${brawler.name}`));
-    }));
+    setFilterBrawlers(
+      brawlers.filter((brawler) => {
+        return isRRMatch(
+          searchBrawlerName,
+          locales.brawler['brawler'][`${brawler.name}`],
+        );
+      }),
+    );
   }, [searchBrawlerName]);
 
   useEffect(() => {
@@ -43,10 +49,12 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
       <div>
         <span>브롤러 목록</span>
         <input
-          type={'text'} className={styles.searchBrawlers}
+          type={'text'}
+          className={styles.searchBrawlers}
           placeholder={'브롤러 검색 (쉘리, ㅅㄹ)'}
           maxLength={12}
-          onChange={event => SetSearchBrawlerName(event.target.value)} />
+          onChange={(event) => SetSearchBrawlerName(event.target.value)}
+        />
       </div>
       <div>
         {filterBrawlers?.map((brawler) => {
@@ -60,8 +68,11 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
                 checked={radio === brawler.id}
                 onChange={() => {
                   handleRadioButton(brawler);
-                  navigate(!/\/blossom.*/g.test(location.pathname) ?
-                    `${baseURL}${brawler.name.toLowerCase().replaceAll(' ', '')}` : baseURL);
+                  navigate(
+                    !/\/blossom.*/g.test(location.pathname)
+                      ? `${baseURL}${brawler.name.toLowerCase().replaceAll(' ', '')}`
+                      : baseURL,
+                  );
                 }}
               />
               <label htmlFor={brawler.id} className={styles.brawlerImage}>
@@ -69,7 +80,9 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
                   src={`${config.assets}/brawlers/profiles/${brawler.id}.webp`}
                   alt={brawler.id}
                 />
-                <div><span>{t(`brawler.brawler.${brawler.name}`)}</span></div>
+                <div>
+                  <span>{locales.brawler['brawler'][`${brawler.name}`]}</span>
+                </div>
               </label>
             </React.Fragment>
           );

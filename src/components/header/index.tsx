@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { useTranslation } from 'react-i18next';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+import { CdnContext } from '~/context/cdn.context';
+
 import styles from './index.module.scss';
 
 export const Header = () => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const [isToggled, setIsToggled] = useState(false);
 
   return (
     <header>
       <div className={styles.titleWrapper}>
-        <a href={'../../'}
-           onClick={() => setIsToggled(false)}>
+        <a href={'../../'} onClick={() => setIsToggled(false)}>
           <img
             src={`/images/logo/brawltree/logo_horizontal.png`}
             alt={'Logo Horizontal'}
@@ -41,36 +41,41 @@ export const Header = () => {
               fontSize={24}
             />
           </div>
-          <ul className={styles.menuList}
-              style={
-                useMediaQuery({ maxWidth: 576 })
-                  ? { display: `${isToggled ? 'flex' : 'none'}` }
-                  : {}
-              }>
+          <ul
+            className={styles.menuList}
+            style={
+              useMediaQuery({ maxWidth: 576 })
+                ? { display: `${isToggled ? 'flex' : 'none'}` }
+                : {}
+            }
+          >
             <React.Fragment>
               <li>
                 <Link to={'/'} onClick={() => setIsToggled(false)}>
-                  <span>{t('application.header.main')}</span>
+                  <span>{locales.application['header'].main}</span>
                 </Link>
               </li>
               <li>
-                <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
-                  <span>{t('application.header.brawler')}</span>
+                <Link
+                  to={'/brawler/shelly'}
+                  onClick={() => setIsToggled(false)}
+                >
+                  <span>{locales.application['header'].brawler}</span>
                 </Link>
               </li>
               <li>
                 <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
-                  <span>{t('application.header.events')}</span>
+                  <span>{locales.application['header'].events}</span>
                 </Link>
               </li>
               <li>
                 <Link to={'/maps'} onClick={() => setIsToggled(false)}>
-                  <span>{t('application.header.maps')}</span>
+                  <span>{locales.application['header'].maps}</span>
                 </Link>
               </li>
               <li>
                 <Link to={'/crew'} onClick={() => setIsToggled(false)}>
-                  <span>{t('application.header.crew')}</span>
+                  <span>{locales.application['header'].crew}</span>
                 </Link>
               </li>
             </React.Fragment>

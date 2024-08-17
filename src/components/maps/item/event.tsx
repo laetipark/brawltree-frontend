@@ -1,6 +1,4 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from 'react';
 import moment from 'moment';
 
 import { useInterval } from '~/hooks/use-interval.hook';
@@ -8,12 +6,12 @@ import { useInterval } from '~/hooks/use-interval.hook';
 import config from '~/config/config';
 
 import styles from './event.module.scss';
+import { CdnContext } from '~/context/cdn.context';
 
 export const EventItem = ({ event, type }) => {
-  const { t } = useTranslation();
-
-  const location = useLocation();
   const nextTime = moment(type === 'end' ? event.endTime : event.startTime);
+  const locales = useContext(CdnContext);
+
   if (type !== 'end') {
     nextTime.set('date', new Date().getDate());
     if (moment.duration(nextTime.diff(moment())).asSeconds() < 0) {
@@ -22,9 +20,12 @@ export const EventItem = ({ event, type }) => {
   }
 
   const diffTime = {
-    day: type === 'end' ? moment.duration(nextTime.diff(moment())).days() :
-      moment.duration(nextTime.diff(moment())).days() > 0 ?
-        moment.duration(nextTime.diff(moment())).days() : 0,
+    day:
+      type === 'end'
+        ? moment.duration(nextTime.diff(moment())).days()
+        : moment.duration(nextTime.diff(moment())).days() > 0
+          ? moment.duration(nextTime.diff(moment())).days()
+          : 0,
     hour:
       type === 'end'
         ? moment.duration(nextTime.diff(moment())).hours()
@@ -49,11 +50,10 @@ export const EventItem = ({ event, type }) => {
   }, 1000);
 
   return (
-    <a key={event.startTime?.toString()}
-       className={styles.eventWrapper}
-       href={`${!/\/blossom.*/g.test(location.pathname) ? '' : '/blossom'}/maps/${
-         event.mapID
-       }`}
+    <a
+      key={event.startTime?.toString()}
+      className={styles.eventWrapper}
+      href={`/maps/${event.mapID}`}
     >
       <div>
         <div className={styles.eventTitle}>
@@ -64,7 +64,7 @@ export const EventItem = ({ event, type }) => {
           <div>
             <div>
               <span className={styles.content}>
-                {t(`map.map.${event.mapID}`) || event.name}
+                {locales.map['map'][`${event.mapID}`] || event.name}
               </span>
             </div>
             {type && (
@@ -72,11 +72,11 @@ export const EventItem = ({ event, type }) => {
                 <span className={styles.content}>
                   {`${
                     type === 'end'
-                      ? t('map.event.endsIn')
-                      : t('map.event.startsIn')
-                  } ${diffTime.day}${t('map.event.d')} ${diffTime.hour}${t(
-                    'map.event.h',
-                  )} ${diffTime.minute}${t('map.event.m')}`}
+                      ? locales.map['event']['endsIn']
+                      : locales.map['event']['startsIn']
+                  } ${diffTime.day}${locales.user['battle'].d} ${diffTime.hour}${
+                    locales.user['battle'].h
+                  } ${diffTime.minute}${locales.user['battle'].m}`}
                 </span>
               </div>
             )}

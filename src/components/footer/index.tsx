@@ -1,16 +1,18 @@
-import React, { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useRef } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComputer, faGamepad, faTasks } from '@fortawesome/free-solid-svg-icons';
-
-import i18n from '~/locales/i18n';
+import {
+  faComputer,
+  faGamepad,
+  faTasks,
+} from '@fortawesome/free-solid-svg-icons';
 import { useWindowClick } from '~/hooks/use-window-click.hook';
+import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
 
 export const Footer = () => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
   const dropDownRef = useRef();
   const [isLanguageMenuOpen, setLanguageMenuOpen] = useWindowClick(
@@ -19,7 +21,8 @@ export const Footer = () => {
   );
 
   const changeLanguage = (lang: string) => {
-    i18n.changeLanguage(lang).then(() => setLanguageMenuOpen(false));
+    locales.setLanguage(lang);
+    setLanguageMenuOpen(false);
   };
 
   return (
@@ -31,7 +34,7 @@ export const Footer = () => {
           rel="noreferrer"
         >
           <FontAwesomeIcon icon={faGamepad} />
-          <span>{t('application.footer.openSource')}</span>
+          <span>{locales.application['footer'].openSource}</span>
         </a>
         <a
           href={
@@ -41,7 +44,7 @@ export const Footer = () => {
           rel="noreferrer"
         >
           <FontAwesomeIcon icon={faTasks} />
-          <span>{t('application.footer.devNote')}</span>
+          <span>{locales.application['footer'].devNote}</span>
         </a>
         <a
           href={'https://open.kakao.com/me/laeti'}
@@ -49,7 +52,7 @@ export const Footer = () => {
           rel="noreferrer"
         >
           <FontAwesomeIcon icon={faComputer} />
-          <span>{t('application.footer.contact')}</span>
+          <span>{locales.application['footer'].contact}</span>
         </a>
       </div>
       <div
@@ -57,17 +60,13 @@ export const Footer = () => {
         className={styles.languageMenu}
         onClick={() => setLanguageMenuOpen((prev: boolean) => !prev)}
       >
-        <span>{t('application.footer.language')}</span>
+        <span>{locales.application['footer'].language}</span>
         {isLanguageMenuOpen && (
           <ul>
-            <li
-              onClick={() => changeLanguage('ko')}
-            >
+            <li onClick={() => changeLanguage('ko')}>
               <span>한국어</span>
             </li>
-            <li
-              onClick={() => changeLanguage('en')}
-            >
+            <li onClick={() => changeLanguage('en')}>
               <span>English</span>
             </li>
           </ul>

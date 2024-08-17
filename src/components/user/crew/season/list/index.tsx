@@ -1,14 +1,16 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from 'react';
 
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { UserSeasonDetailContent } from './detail';
+
+import { CdnContext } from '~/context/cdn.context';
+
 import styles from './index.module.scss';
 
 export const UserSeasonDetail = ({ matches, toggle, setToggle, type }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
   };
@@ -17,32 +19,31 @@ export const UserSeasonDetail = ({ matches, toggle, setToggle, type }) => {
   };
   const keys = matches?.matchList && Object.keys(matches.matchList);
 
-  return (keys?.length > 0 && (
-    <React.Fragment>
-      <h3 className={styles.seasonStatsToggle}
-          onClick={() => setToggle(!toggle)}>
-        <FontAwesomeIcon
-          icon={faAngleRight}
-          style={{
-            padding: '2px',
-            transform: toggle ? 'rotate(90deg)' : '',
-            transition: 'transform 0.3s ease',
-          }}
-        />
-        <span>{t(`battle.type.${type}`)}</span>
-      </h3>
-      {toggle && (
-        <div>
-          <h4 className={styles.seasonStatsSummary}>
-            <div style={{ color: '#5AA469' }}>
-                <span>
-                  {matches.victoriesCount}
-                </span>
-              <span>
-                  {t('battle.result.w')}
-                </span>
-            </div>
-            <div style={{ color: '#556FB5' }}>
+  return (
+    keys?.length > 0 && (
+      <React.Fragment>
+        <h3
+          className={styles.seasonStatsToggle}
+          onClick={() => setToggle(!toggle)}
+        >
+          <FontAwesomeIcon
+            icon={faAngleRight}
+            style={{
+              padding: '2px',
+              transform: toggle ? 'rotate(90deg)' : '',
+              transition: 'transform 0.3s ease',
+            }}
+          />
+          <span>{locales.battle['type'][`${type}`]}</span>
+        </h3>
+        {toggle && (
+          <div>
+            <h4 className={styles.seasonStatsSummary}>
+              <div style={{ color: '#5AA469' }}>
+                <span>{matches.victoriesCount}</span>
+                <span>{locales.battle['result'].w}</span>
+              </div>
+              <div style={{ color: '#556FB5' }}>
                 <span>
                   {drwCount(
                     matches.matchCount,
@@ -50,35 +51,31 @@ export const UserSeasonDetail = ({ matches, toggle, setToggle, type }) => {
                     matches.defeatsCount,
                   )}
                 </span>
+                <span>{locales.battle['result'].d}</span>
+              </div>
+              <div style={{ color: '#D35D6E' }}>
+                <span>{matches.defeatsCount}</span>
+                <span>{locales.battle['result'].l}</span>
+              </div>
               <span>
-                  {t('battle.result.d')}
-                </span>
-            </div>
-            <div style={{ color: '#D35D6E' }}>
-                <span>
-                  {matches.defeatsCount}
-                </span>
-              <span>
-                  {t('battle.result.l')}
-                </span>
-            </div>
-            <span>
                 ({vicRate(matches.victoriesCount, matches.defeatsCount)}%)
               </span>
-          </h4>
-          <div className={styles.matchList}>
-            {keys.map((key) => {
-              const record = matches.matchList[key];
-              return (
-                <React.Fragment key={`${record.mode}_${record.matchType}_${record.matchGrade}`}>
-                  <UserSeasonDetailContent
-                    record={record} />
-                </React.Fragment>
-              );
-            })}
+            </h4>
+            <div className={styles.matchList}>
+              {keys.map((key) => {
+                const record = matches.matchList[key];
+                return (
+                  <React.Fragment
+                    key={`${record.mode}_${record.matchType}_${record.matchGrade}`}
+                  >
+                    <UserSeasonDetailContent record={record} />
+                  </React.Fragment>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
-    </React.Fragment>
-  ));
+        )}
+      </React.Fragment>
+    )
+  );
 };

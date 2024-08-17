@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
 import UserSummary from '~/components/user/menu/summary';
 import { UserBrawlers } from '~/components/user/menu/brawlers/';
 
 import { UserContext } from '~/context/user.context';
+import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
 
 export const UserMenu = () => {
   const context = useContext(UserContext);
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const [menu, setMenu] = useState('summary');
   const { setLoad } = context;
 
@@ -33,7 +33,7 @@ export const UserMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'summary'}>
-              <div>{t(`user.menu.summary`)}</div>
+              <div>{locales.user['menu'].summary}</div>
             </label>
           </li>
           <li>
@@ -46,7 +46,7 @@ export const UserMenu = () => {
               onChange={handleRadioButton}
             />
             <label htmlFor={'brawlers'}>
-              <div>{t(`user.menu.brawlers`)}</div>
+              <div>{locales.user['menu'].brawlers}</div>
             </label>
           </li>
         </ul>

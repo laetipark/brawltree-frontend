@@ -1,23 +1,28 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext } from 'react';
 
 import { UserFriendsType } from '~/common/type/users.type';
+import { CdnContext } from '~/context/cdn.context';
+
 import config from '~/config/config';
 
 import styles from './index.module.scss';
 
 export const UserFriendDetailItem = ({ matchList, isDetailVisible }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
   };
 
   return (
-    <div className={styles.friendDetailItemWrapper}
-         style={{ display: isDetailVisible ? 'flex' : 'none' }}>
+    <div
+      className={styles.friendDetailItemWrapper}
+      style={{ display: isDetailVisible ? 'flex' : 'none' }}
+    >
       {matchList?.map((match: UserFriendsType) => {
         return (
-          <div key={`${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}>
+          <div
+            key={`${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}
+          >
             <div>
               {match.matchType === 0 ? (
                 <img
@@ -72,20 +77,12 @@ export const UserFriendDetailItem = ({ matchList, isDetailVisible }) => {
               )}
             </div>
             <div>
-              <span>
-                {match.matchCount}
-              </span>
-              <span>
-                {t('battle.result.game')}
-              </span>
+              <span>{match.matchCount}</span>
+              <span>{locales.battle['result'].game}</span>
             </div>
             <div style={{ color: '#5AA469' }}>
-              <span>
-                {match.victoriesCount}
-              </span>
-              <span>
-                {t('battle.result.w')}
-              </span>
+              <span>{match.victoriesCount}</span>
+              <span>{locales.battle['result'].w}</span>
             </div>
             <div style={{ color: '#556FB5' }}>
               <span>
@@ -95,28 +92,24 @@ export const UserFriendDetailItem = ({ matchList, isDetailVisible }) => {
                   match.defeatsCount,
                 )}
               </span>
-              <span>
-                {t('battle.result.d')}
-              </span>
+              <span>{locales.battle['result'].d}</span>
             </div>
             <div style={{ color: '#D35D6E' }}>
-              <span>
-                {match.defeatsCount}
-              </span>
-              <span>
-                {t('battle.result.l')}
-              </span>
+              <span>{match.defeatsCount}</span>
+              <span>{locales.battle['result'].l}</span>
             </div>
             <div>
-              (<span>
-                  {
-                    match.victoriesCount > 0
-                      ? Math.round(
-                        (match.victoriesCount / (match.victoriesCount + match.defeatsCount)) *
-                        100)
-                      : 0
-                  }%)
-                </span>
+              (
+              <span>
+                {match.victoriesCount > 0
+                  ? Math.round(
+                      (match.victoriesCount /
+                        (match.victoriesCount + match.defeatsCount)) *
+                        100,
+                    )
+                  : 0}
+                %)
+              </span>
             </div>
           </div>
         );

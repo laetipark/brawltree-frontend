@@ -50,6 +50,13 @@ export default ({ mode }) => {
     },
     plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
     server: {
+      proxy: {
+        '/api': {
+          target: 'https://cdn.brawltree.me',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ''),
+        },
+      },
       host: '0.0.0.0',
       port: parseInt(process.env.VITE_PORT),
     },

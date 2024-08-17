@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TimeRange } from '@nivo/calendar';
 
-import { useTranslation } from 'react-i18next';
+import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 import styles from './index.module.scss';
 
-export const UserBattleStats = ({ battlesSummary, brawlersSummary, season }) => {
-  const { t } = useTranslation();
+export const UserBattleStats = ({
+  battlesSummary,
+  brawlersSummary,
+  season,
+}) => {
+  const locales = useContext(CdnContext);
   const colors = ['#9DC08B', '#609966', '#557153', '#40513B'];
-  const beginDate = new Date(new Date(season?.beginDate).getTime() - 1000 * 60 * 60 * 24);
+  const beginDate = new Date(
+    new Date(season?.beginDate).getTime() - 1000 * 60 * 60 * 24,
+  );
   const fromDateYear = beginDate.getFullYear();
   const fromDateMonth = ('0' + (beginDate.getMonth() + 1)).slice(-2);
   const fromDateDay = ('0' + beginDate.getDate()).slice(-2);
@@ -67,10 +73,10 @@ export const UserBattleStats = ({ battlesSummary, brawlersSummary, season }) => 
                     alt={brawlerID}
                   />
                   <div className={styles.brawlerPicksContent}>
-                    <div>{t(`brawler.brawler.${name}`)}</div>
+                    <div>{locales.brawler['brawler'][`${name}`]}</div>
                     <div>
                       <span>{matchCount}</span>
-                      <span>{t('application.game')}</span>
+                      <span>{locales.application['game']}</span>
                     </div>
                   </div>
                   <div className={styles.brawlerPicksContent}>

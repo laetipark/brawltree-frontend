@@ -46,7 +46,6 @@ const CalendarView = ({ date, beginDate, setDate }) => {
       >
         <Calendar
           value={date}
-          calendarType="US"
           minDate={beginDate}
           maxDate={new Date()}
           formatDay={(locale, date) => moment(date).format('D')}

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -18,9 +17,9 @@ import { BrawlerSummary } from '~/components/main/brawlers';
 import { EventService } from '~/services/event.service';
 import { BrawlerService } from '~/services/brawler.service';
 import styles from './index.module.scss';
+import { CdnContext } from '~/context/cdn.context';
 
 export const Main = () => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState<string>('');
   const [toggle, setToggle] = useState(false);
@@ -32,27 +31,26 @@ export const Main = () => {
   const [brawlersTrophy, setBrawlersTrophy] = useState([]);
   const [brawlersRanked, setBrawlersRanked] = useState([]);
 
+  const locales = useContext(CdnContext);
+
   useEffect(() => {
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
   }, [searchHistory]);
 
   useEffect(() => {
-    EventService.getTLCurrentEvents()
-      .then((data) => setTrophyEvents(data));
-    EventService.getPLEvents()
-      .then((data) => setRankedEvents(data));
+    EventService.getTLCurrentEvents().then((data) => setTrophyEvents(data));
+    EventService.getPLEvents().then((data) => setRankedEvents(data));
   }, []);
 
   useEffect(() => {
-    BrawlerService.getBrawlerSummary()
-      .then((data) => {
-        setBrawlersTrophy(data.brawlersTrophy);
-        setBrawlersRanked(data.brawlersRanked);
-      });
+    BrawlerService.getBrawlerSummary().then((data) => {
+      setBrawlersTrophy(data.brawlersTrophy);
+      setBrawlersRanked(data.brawlersRanked);
+    });
   }, []);
 
   /** Function related to searching by nickname OR user tag */
-  const handleChangeInputValue = debounce((target: { value: string; }) => {
+  const handleChangeInputValue = debounce((target: { value: string }) => {
     const { value } = target;
     target.value = value.replace('#', '');
     setInputValue(value.replace('#', ''));
@@ -64,21 +62,22 @@ export const Main = () => {
 
   /** Function related to recent search */
   const handleAddSearchItem = (userID: string) => {
-    const user = searchHistory.find((user: SearchItemType) => user.userID === userID);
+    const user = searchHistory.find(
+      (user: SearchItemType) => user.userID === userID,
+    );
     const searchItem = {
       id: Date.now(),
       userID: userID,
     };
 
     if (!user) {
-      setSearchHistory(
-        [searchItem, ...searchHistory].slice(0, 10),
-      );
+      setSearchHistory([searchItem, ...searchHistory].slice(0, 10));
     } else {
       setSearchHistory([
         searchItem,
-        ...searchHistory
-          .filter((user: SearchItemType) => user.userID !== userID),
+        ...searchHistory.filter(
+          (user: SearchItemType) => user.userID !== userID,
+        ),
       ]);
     }
   };
@@ -100,7 +99,7 @@ export const Main = () => {
   };
 
   const handleClearSearchHistory = () => {
-    if (window.confirm(t('main.checkClearSearch'))) {
+    if (window.confirm(locales.main['checkClearSearch'])) {
       setSearchHistory([]);
     }
   };
@@ -113,11 +112,14 @@ export const Main = () => {
             onAddSearchHistory: handleAddSearchItem,
             onFilterSearchItem: handleFilterSearchItem,
             onRemoveSearchItem: handleRemoveSearchItem,
-          }}>
-          <form className={styles.inputBox}
-                onSubmit={(e) => {
-                  navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
-                }}>
+          }}
+        >
+          <form
+            className={styles.inputBox}
+            onSubmit={(e) => {
+              navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
+            }}
+          >
             <InputField onChangeInput={handleChangeInput} />
             <ResultField
               inputValue={inputValue}
@@ -128,16 +130,12 @@ export const Main = () => {
           <div>
             <div className={styles.recentSearch}>
               <div className={styles.recentSearchTitle}>
-                {t('main.recentSearch')}
+                {locales.main['recentSearch']}
               </div>
-              <SearchHistoryBox
-                searchHistory={searchHistory}
-              />
+              <SearchHistoryBox searchHistory={searchHistory} />
               <div className={styles.clearSearch}>
-                <div
-                  onClick={handleClearSearchHistory}
-                >
-                  {t('main.clearSearch')}
+                <div onClick={handleClearSearchHistory}>
+                  {locales.main['clearSearch']}
                 </div>
               </div>
             </div>
@@ -151,7 +149,7 @@ export const Main = () => {
                   transition: 'transform 0.3s ease',
                 }}
               />
-              <span>{t('main.findTag')}</span>
+              <span>{locales.main['findTag']}</span>
             </h3>
             {toggle && (
               <img
@@ -164,14 +162,14 @@ export const Main = () => {
         </SearchContext.Provider>
       </div>
       <div className={styles.summary}>
-        <EventItems events={trophyEvents}
-                    type={'curr'} />
-        <EventItems events={rankedEvents}
-                    type={'ranked'} />
+        <EventItems events={trophyEvents} type={'curr'} />
+        <EventItems events={rankedEvents} type={'ranked'} />
       </div>
       <div className={styles.summary}>
-        <BrawlerSummary brawlersTrophy={brawlersTrophy}
-                        brawlersRanked={brawlersRanked} />
+        <BrawlerSummary
+          brawlersTrophy={brawlersTrophy}
+          brawlersRanked={brawlersRanked}
+        />
       </div>
     </div>
   );

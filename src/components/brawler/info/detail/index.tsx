@@ -1,16 +1,15 @@
-import { useTranslation } from 'react-i18next';
+import { useContext } from 'react';
+
+import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
 
 const powerLevelElement = ['health', 'attack-damage'];
 
 export const BrawlerInfoDetail = ({ infoDetail }) => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
 
-  let health: number,
-    speed: number,
-    superAttack,
-    attack;
+  let health: number, speed: number, superAttack, attack;
 
   if (infoDetail) {
     speed = infoDetail.speed;
@@ -23,69 +22,67 @@ export const BrawlerInfoDetail = ({ infoDetail }) => {
         <div>
           <div>
             <div>
-              <strong>
-                {t('brawler.info.health')}
-              </strong>:
-              <span>
-                {health * 2}
-              </span>
+              <strong>{locales.brawler['info'].health}</strong>:
+              <span>{health * 2}</span>
             </div>
           </div>
           <div>
             <div>
-              <strong>
-                {t('brawler.info.speed')}
-              </strong>:
-              <span>
-                {speed}
-              </span>
+              <strong>{locales.brawler['info'].speed}</strong>:
+              <span>{speed}</span>
             </div>
           </div>
         </div>
         <div>
           <div>
             <div className={styles.attackName}>
-              {t('brawler.info.attack')} : {attack.name}
+              {locales.brawler['info'].attack} : {attack.name}
             </div>
-            {
-              Object.entries(attack).map(([key, value]: [string, number]) => {
+            {Object.entries(attack).map(([key, value]: [string, number]) => {
+              if (key !== 'name') {
+                return (
+                  <div key={key}>
+                    <strong>
+                      {locales.brawler['info'][`attack-${key}`] ||
+                        `attack-${key}`}
+                    </strong>
+                    :
+                    <span>
+                      {powerLevelElement.includes(`attack-${key}`)
+                        ? value * 2
+                        : value}
+                    </span>
+                  </div>
+                );
+              }
+              return null;
+            })}
+          </div>
+          <div>
+            <div className={styles.attackName}>
+              {locales.brawler['info'].super} : {superAttack.name}
+            </div>
+            {Object.entries(superAttack).map(
+              ([key, value]: [string, number]) => {
                 if (key !== 'name') {
                   return (
                     <div key={key}>
                       <strong>
-                        {t(`brawler.info.attack-${key}`)}
-                      </strong>:
+                        {locales.brawler['info'][`attack-${key}`] ||
+                          `attack-${key}`}
+                      </strong>
+                      :
                       <span>
-                        {powerLevelElement.includes(`attack-${key}`) ? value * 2 : value}
+                        {powerLevelElement.includes(`attack-${key}`)
+                          ? value * 2
+                          : value}
                       </span>
                     </div>
                   );
                 }
                 return null;
-              })
-            }
-          </div>
-          <div>
-            <div className={styles.attackName}>
-              {t('brawler.info.super')} : {superAttack.name}
-            </div>
-            {
-              Object.entries(superAttack).map(([key, value]: [string, number]) => {
-                if (key !== 'name') {
-                  return (
-                    <div key={key}>
-                      <strong>
-                        {t(`brawler.info.attack-${key}`)}
-                      </strong>:
-                      <span>
-                      {powerLevelElement.includes(`attack-${key}`) ? value * 2 : value}
-                    </span>
-                    </div>
-                  );
-                }
-                return null;
-              })
-            }
+              },
+            )}
           </div>
         </div>
       </div>

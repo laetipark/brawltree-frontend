@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useContext, useRef } from 'react';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,6 +7,7 @@ import { useWindowClick } from '~/hooks/use-window-click.hook';
 import config from '~/config/config';
 
 import styles from './menu-type.module.scss';
+import { CdnContext } from '~/context/cdn.context';
 
 const typeNumber = {
   7: 'all',
@@ -16,10 +16,9 @@ const typeNumber = {
 };
 
 export const MenuType = ({ type, setMatchType }) => {
-  const { t } = useTranslation();
-
   const dropDownRef = useRef();
   const [checked, setChecked] = useWindowClick(dropDownRef, false);
+  const locales = useContext(CdnContext);
 
   return (
     <div className={styles.typeMenuWrapper} ref={dropDownRef}>
@@ -33,11 +32,15 @@ export const MenuType = ({ type, setMatchType }) => {
           src={`${config.assets}/modes/icon/${typeNumber[type]}.webp`}
           alt={'type_7'}
         />
-        <div>{t(`battle.type.${typeNumber[type]}`)}</div>
-        <FontAwesomeIcon style={{
-          transform: checked ? 'rotate(180deg)' : '',
-          transition: 'transform 0.3s ease',
-        }} fontSize={14} icon={faCaretUp} />
+        <div>{locales.battle['type'][`${typeNumber[type]}`]}</div>
+        <FontAwesomeIcon
+          style={{
+            transform: checked ? 'rotate(180deg)' : '',
+            transition: 'transform 0.3s ease',
+          }}
+          fontSize={14}
+          icon={faCaretUp}
+        />
       </button>
       <div
         className={styles.typeMenuList}
@@ -57,7 +60,7 @@ export const MenuType = ({ type, setMatchType }) => {
         />
         <label htmlFor={'type_7'}>
           <img src={`${config.assets}/modes/icon/all.webp`} alt={'type_7'} />
-          <div>{t('battle.type.all')}</div>
+          <div>{locales.battle[`type`].all}</div>
         </label>
         <input
           className={styles.typeButton}
@@ -72,11 +75,8 @@ export const MenuType = ({ type, setMatchType }) => {
           }}
         />
         <label htmlFor={'type_0'}>
-          <img
-            src={`${config.assets}/modes/icon/trophy.webp`}
-            alt={'type_0'}
-          />
-          <div>{t('battle.type.trophy')}</div>
+          <img src={`${config.assets}/modes/icon/trophy.webp`} alt={'type_0'} />
+          <div>{locales.battle['type'].trophy}</div>
         </label>
         <input
           className={styles.typeButton}
@@ -91,11 +91,8 @@ export const MenuType = ({ type, setMatchType }) => {
           }}
         />
         <label htmlFor={'type_2'}>
-          <img
-            src={`${config.assets}/modes/icon/ranked.webp`}
-            alt={'type_2'}
-          />
-          <div>{t('battle.type.ranked')}</div>
+          <img src={`${config.assets}/modes/icon/ranked.webp`} alt={'type_2'} />
+          <div>{locales.battle['type'].ranked}</div>
         </label>
       </div>
     </div>

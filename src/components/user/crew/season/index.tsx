@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { UserSeasonDetail } from '~/components/user/crew/season/list';
 
 import { UserContext } from '~/context/user.context';
+import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
 
 export const UserSeasonRecords = () => {
-  const { t } = useTranslation();
+  const locales = useContext(CdnContext);
   const context = useContext(UserContext);
   const { seasonRecords } = context;
 
@@ -17,25 +17,27 @@ export const UserSeasonRecords = () => {
   const matchCount =
     seasonRecords.length !== 0
       ? Math.round(
-      seasonRecords.reduce((sum, value) => {
-        return sum + (value.matchCount || 0);
-      }, 0) * 100,
-    ) / 100
+          seasonRecords.reduce((sum, value) => {
+            return sum + (value.matchCount || 0);
+          }, 0) * 100,
+        ) / 100
       : 0;
   const totalMatchVicCount =
     seasonRecords.length !== 0
       ? Math.round(
-      seasonRecords.reduce((sum, value) => {
-        return sum + (value.victoriesCount || 0);
-      }, 0) * 100,
-    ) / 100 : 0;
+          seasonRecords.reduce((sum, value) => {
+            return sum + (value.victoriesCount || 0);
+          }, 0) * 100,
+        ) / 100
+      : 0;
   const totalMatchDefCount =
     seasonRecords.length !== 0
       ? Math.round(
-      seasonRecords.reduce((sum, value) => {
-        return sum + (value.defeatsCount || 0);
-      }, 0) * 100,
-    ) / 100 : 0;
+          seasonRecords.reduce((sum, value) => {
+            return sum + (value.defeatsCount || 0);
+          }, 0) * 100,
+        ) / 100
+      : 0;
 
   const trophyMatches = seasonRecords?.find((item) => {
     return item.matchType === 0;
@@ -56,46 +58,41 @@ export const UserSeasonRecords = () => {
     <div className={styles.seasonWrapper}>
       <div>
         <h2>
-          {t('user.crew.seasonRecord')}<span>({matchCount}회)</span>
+          {locales.user['crew'].seasonRecord}
+          <span>({matchCount}회)</span>
         </h2>
         <h4 className={styles.seasonStatsSummary}>
           <div style={{ color: '#5AA469' }}>
-            <span>
-              {totalMatchVicCount}
-            </span>
-            <span>
-              {t('battle.result.w')}
-            </span>
+            <span>{totalMatchVicCount}</span>
+            <span>{locales.battle['result'].w}</span>
           </div>
           <div style={{ color: '#556FB5' }}>
             <span>
               {drwCount(matchCount, totalMatchVicCount, totalMatchDefCount)}
             </span>
-            <span>
-              {t('battle.result.d')}
-            </span>
+            <span>{locales.battle['result'].d}</span>
           </div>
           <div style={{ color: '#D35D6E' }}>
-            <span>
-              {totalMatchDefCount}
-            </span>
-            <span>
-              {t('battle.result.l')}
-            </span>
+            <span>{totalMatchDefCount}</span>
+            <span>{locales.battle['result'].l}</span>
           </div>
           <span style={{ fontWeight: 600 }}>
             ({vicRate(totalMatchVicCount, totalMatchDefCount)}%)
           </span>
         </h4>
       </div>
-      <UserSeasonDetail matches={trophyMatches}
-                        toggle={trophyToggle}
-                        setToggle={setTrophyToggle}
-                        type={'trophy'} />
-      <UserSeasonDetail matches={rankedMatches}
-                        toggle={rankedToggle}
-                        setToggle={setRankedToggle}
-                        type={'ranked'} />
+      <UserSeasonDetail
+        matches={trophyMatches}
+        toggle={trophyToggle}
+        setToggle={setTrophyToggle}
+        type={'trophy'}
+      />
+      <UserSeasonDetail
+        matches={rankedMatches}
+        toggle={rankedToggle}
+        setToggle={setRankedToggle}
+        type={'ranked'}
+      />
     </div>
   );
 };

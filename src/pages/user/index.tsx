@@ -8,7 +8,11 @@ import { UserTitle } from '~/components/user/title';
 import { UserMenu } from '~/components/user/menu';
 import { Spinner } from '~/components/spinner/spinner';
 
-import { UserFriendsType, UserProfileType, UsersType } from '~/common/type/users.type';
+import {
+  UserFriendsType,
+  UserProfileType,
+  UsersType,
+} from '~/common/type/users.type';
 import { rotationModes } from '~/common/type/events.type';
 import { UserContext } from '~/context/user.context';
 import { UserService } from '~/services/user.service';
@@ -18,9 +22,12 @@ import styles from './index.module.scss';
 export const Users = () => {
   const { id } = useParams();
   const [user, setUser] = useState<UsersType>({
-    userID: '', userName: '', profileIcon: '',
+    userID: '',
+    userName: '',
+    profileIcon: '',
     lastBattleAt: new Date(0),
-    crew: null, crewName: null,
+    crew: null,
+    crewName: null,
     updatedAt: new Date(0),
   });
   const [retryCount, setRetryCount] = useState<number>(0);
@@ -98,10 +105,11 @@ export const Users = () => {
   }, [id, retryCount, user?.updatedAt || new Date()]);
 
   useEffect(() => {
-    user?.crew && UserService.getCrewMemberDetail({ id }).then((data) => {
-      setFriends(data.friends);
-      setSeasonRecords(data.seasonRecords);
-    });
+    user?.crew &&
+      UserService.getCrewMemberDetail({ id }).then((data) => {
+        setFriends(data.friends);
+        setSeasonRecords(data.seasonRecords);
+      });
   }, [retryCount, user?.crew]);
 
   useEffect(() => {
@@ -127,7 +135,6 @@ export const Users = () => {
         if (entry.isIntersecting) {
           setStack((prevStack: number) => {
             if (recentBattles.length % 30 === 0 && scrollStack < 3) {
-
               return prevStack + 1;
             } else {
               setLoad(false);
@@ -162,48 +169,45 @@ export const Users = () => {
     }
   }, [mode, type]);
 
-
-  return (
-    new Date(user?.updatedAt).getTime() > 0 ? (
-        <UserContext.Provider
-          value={{
-            id,
-            user,
-            profile,
-            rotationTL,
-            rotationPL,
-            type,
-            mode,
-            battlesSummary,
-            brawlersSummary,
-            recentBattles,
-            recentBrawlers,
-            battles,
-            season,
-            friends,
-            seasonRecords,
-            setUser,
-            setType,
-            setMode,
-            setStack,
-            setRetryCount,
-            setLoad,
-          }}
+  return new Date(user?.updatedAt).getTime() > 0 ? (
+    <UserContext.Provider
+      value={{
+        id,
+        user,
+        profile,
+        rotationTL,
+        rotationPL,
+        type,
+        mode,
+        battlesSummary,
+        brawlersSummary,
+        recentBattles,
+        recentBrawlers,
+        battles,
+        season,
+        friends,
+        seasonRecords,
+        setUser,
+        setType,
+        setMode,
+        setStack,
+        setRetryCount,
+        setLoad,
+      }}
+    >
+      <div className={styles.app}>
+        <UserTitle />
+        <UserMenu />
+        <div
+          className={styles.breakLine}
+          style={{ display: load ? 'flex' : 'none' }}
+          ref={target}
         >
-          <div className={styles.app}>
-            <UserTitle />
-            <UserMenu />
-            <div
-              className={styles.breakLine}
-              style={{ display: load ? 'flex' : 'none' }}
-              ref={target}
-            >
-              <FontAwesomeIcon icon={faEllipsis}
-                               fontSize={28} />
-            </div>
-          </div>
-        </UserContext.Provider>
-      ) :
-      <Spinner />
+          <FontAwesomeIcon icon={faEllipsis} fontSize={28} />
+        </div>
+      </div>
+    </UserContext.Provider>
+  ) : (
+    <Spinner />
   );
 };
