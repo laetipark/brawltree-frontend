@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import viteTsconfigPaths from 'vite-tsconfig-paths';
 import svgrPlugin from 'vite-plugin-svgr';
+import prerender from '@prerenderer/rollup-plugin';
 import { resolve } from 'path';
 
 export default ({ mode }) => {
@@ -48,7 +49,31 @@ export default ({ mode }) => {
         },
       ],
     },
-    plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
+    plugins: [
+      react(),
+      viteTsconfigPaths(),
+      svgrPlugin(),
+      prerender({
+        routes: ['/', '/brawlian', '/brawler', '/events', '/maps', '/crew'],
+        renderer: '@prerenderer/renderer-puppeteer',
+        server: {
+          host: 'localhost',
+          listenHost: 'localhost',
+        },
+        rendererOptions: {
+          maxConcurrentRoutes: 1,
+          renderAfterTime: 500,
+        },
+        postProcess(renderedRoute) {
+          renderedRoute.html = renderedRoute.html
+            .replace(/http:/i, 'https:')
+            .replace(
+              /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
+              'web3darchitrip.com',
+            );
+        },
+      }),
+    ],
     server: {
       proxy: {
         '/cdn': {

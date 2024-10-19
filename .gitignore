@@ -243,3 +243,4 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+iml,node,react
 /src/locales/
+/public/robots.txt
