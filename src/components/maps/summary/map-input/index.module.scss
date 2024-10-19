@@ -1,0 +1,33 @@
+.mapInputWrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mapInput {
+  width: 98%;
+  margin: 4px auto;
+  height: 28px;
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .mapInputWrapper {
+    max-width: 728px;
+  }
+
+  .mapInput {
+    width: 728px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mapInputWrapper {
+    max-width: 924px;
+  }
+
+  .mapInput {
+    width: 924px;
+  }
+}

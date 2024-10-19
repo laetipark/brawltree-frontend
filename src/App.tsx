@@ -21,21 +21,23 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [language, setLanguage] = useState('ko');
 
-  const [applicationCdn, setApplicationCdn] = useState();
-  const [battleCdn, setBattleCdn] = useState();
-  const [brawlerCdn, setBrawlerCdn] = useState();
-  const [mainCdn, setMainCdn] = useState();
-  const [mapCdn, setMapCdn] = useState();
-  const [userCdn, setUserCdn] = useState();
+  const [applicationCdn, setApplicationCdn] = useState({});
+  const [battleCdn, setBattleCdn] = useState({});
+  const [brawlerCdn, setBrawlerCdn] = useState({});
+  const [mainCdn, setMainCdn] = useState({});
+  const [mapCdn, setMapCdn] = useState({});
+  const [userCdn, setUserCdn] = useState({});
 
   useEffect(() => {
+    const time = new Date().getTime();
+
     Promise.all([
-      CdnService.getApplicationCdn(language),
-      CdnService.getBattleCdn(language),
-      CdnService.getBrawlerCdn(language),
-      CdnService.getMainCdn(language),
-      CdnService.getMapCdn(language),
-      CdnService.getUserCdn(language),
+      CdnService.getApplicationCdn(language, time),
+      CdnService.getBattleCdn(language, time),
+      CdnService.getBrawlerCdn(language, time),
+      CdnService.getMainCdn(language, time),
+      CdnService.getMapCdn(language, time),
+      CdnService.getUserCdn(language, time),
     ])
       .then(
         ([
@@ -59,14 +61,6 @@ const App = () => {
         console.error('Error fetching CDN data:', error);
       });
   }, [isLoaded, language]);
-  console.log({
-    application: applicationCdn,
-    battle: battleCdn,
-    brawler: brawlerCdn,
-    main: mainCdn,
-    map: mapCdn,
-    user: userCdn,
-  });
 
   return isLoaded ? (
     <CdnContext.Provider

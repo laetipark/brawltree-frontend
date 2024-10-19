@@ -51,8 +51,13 @@ export default ({ mode }) => {
     plugins: [react(), viteTsconfigPaths(), svgrPlugin()],
     server: {
       proxy: {
-        '/api': {
+        '/cdn': {
           target: 'https://cdn.brawltree.me',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/cdn/, ''),
+        },
+        '/api': {
+          target: 'https://server.brawltree.me',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ''),
         },

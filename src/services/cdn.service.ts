@@ -1,33 +1,33 @@
 import axios from 'axios';
 
 export class CdnService {
-  static getApplicationCdn = (language: string) =>
+  static getApplicationCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/application.json`)
+      .get(`/cdn/database/locales/${language}/application.json?time=${time}`)
       .then((result) => result.data);
 
-  static getBattleCdn = (language: string) =>
+  static getBattleCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/battle.json`)
+      .get(`/cdn/database/locales/${language}/battle.json?time=${time}`)
       .then((result) => result.data);
 
-  static getBrawlerCdn = (language: string) =>
+  static getBrawlerCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/brawler.json`)
+      .get(`/cdn/database/locales/${language}/brawler.json?time=${time}`)
       .then((result) => result.data);
 
-  static getMainCdn = (language: string) =>
+  static getMainCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/main.json`)
+      .get(`/cdn/database/locales/${language}/main.json?time=${time}`)
       .then((result) => result.data);
 
-  static getMapCdn = (language: string) =>
+  static getMapCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/map.json`)
+      .get(`/cdn/database/locales/${language}/map.json?time=${time}`)
       .then((result) => result.data);
 
-  static getUserCdn = (language: string) =>
+  static getUserCdn = (language: string, time: number) =>
     axios
-      .get(`/api/database/locales/${language}/user.json`)
+      .get(`/cdn/database/locales/${language}/user.json?time=${time}`)
       .then((result) => result.data);
 }
