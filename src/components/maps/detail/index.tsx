@@ -6,7 +6,7 @@ import config from '~/config/config';
 
 import styles from './index.module.scss';
 
-const MapInfo = ({ mapInfo }) => {
+export const MapInfo = ({ mapInfo }) => {
   const locales = useContext(CdnContext);
 
   return (
@@ -45,5 +45,3 @@ const MapInfo = ({ mapInfo }) => {
     </div>
   );
 };
-
-export default MapInfo;

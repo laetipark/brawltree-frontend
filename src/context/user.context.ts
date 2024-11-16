@@ -32,7 +32,7 @@ type UserContextType = {
   setUser: (user: UsersType) => void;
   setType: (type: string) => void;
   setMode: (mode: string) => void;
-  setStack: (prevStack: (stack: number) => (number)) => void;
+  setStack: (prevStack: (stack: number) => number) => void;
   setRetryCount: (retryCount: number) => void;
   setLoad: (bool: boolean) => void;
 };

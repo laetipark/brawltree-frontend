@@ -15,6 +15,7 @@ export const Header = () => {
 
   return (
     <header>
+      <h1 className={styles.hidden}>Brawl Tree</h1>
       <div className={styles.titleWrapper}>
         <a href={'../../'} onClick={() => setIsToggled(false)}>
           <img

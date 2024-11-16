@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { CdnContext } from '~/context/cdn.context';
 import { isRRMatch } from '~/utils/korean-pattern';
@@ -15,10 +15,8 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
   };
   const [searchBrawlerName, SetSearchBrawlerName] = useState('');
   const [filterBrawlers, setFilterBrawlers] = useState([]);
-  const [baseURL, setBaseURL] = useState(`../brawler/`);
 
   const locales = useContext(CdnContext);
-  const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,14 +29,6 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
       }),
     );
   }, [searchBrawlerName]);
-
-  useEffect(() => {
-    if (!/\/blossom.*/g.test(location.pathname)) {
-      setBaseURL('../brawler/');
-    } else {
-      setBaseURL('../blossom/brawlers/');
-    }
-  }, [location]);
 
   useEffect(() => {
     setRadio(brawler.id);
@@ -69,9 +59,7 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
                 onChange={() => {
                   handleRadioButton(brawler);
                   navigate(
-                    !/\/blossom.*/g.test(location.pathname)
-                      ? `${baseURL}${brawler.name.toLowerCase().replaceAll(' ', '')}`
-                      : baseURL,
+                    `../brawler/${brawler.name.toLowerCase().replaceAll(' ', '')}`,
                   );
                 }}
               />

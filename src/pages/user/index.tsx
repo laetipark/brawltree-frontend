@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,19 +9,24 @@ import { UserTitle } from '~/components/user/title';
 import { UserMenu } from '~/components/user/menu';
 import { Spinner } from '~/components/spinner/spinner';
 
-import {
-  UserFriendsType,
-  UserProfileType,
-  UsersType,
-} from '~/common/type/users.type';
+import { UserFriendsType, UserProfileType, UsersType } from '~/common/type/users.type';
 import { rotationModes } from '~/common/type/events.type';
 import { UserContext } from '~/context/user.context';
 import { UserService } from '~/services/user.service';
 
 import styles from './index.module.scss';
 
-export const Users = () => {
+/**
+ * @class User
+ * @author creator98
+ * @description플레이어에 대한 정보 페이지
+ *
+ * @route /brawlian/:id
+ */
+export const User = () => {
+  /* params 로 받을 id */
   const { id } = useParams();
+  /* user object 정보 */
   const [user, setUser] = useState<UsersType>({
     userID: '',
     userName: '',
@@ -30,21 +36,20 @@ export const Users = () => {
     crewName: null,
     updatedAt: new Date(0),
   });
-  const [retryCount, setRetryCount] = useState<number>(0);
-
+  /* user object 정보 */
   const [profile, setProfile] = useState<UserProfileType>({
     brawlerRank25: 0,
     brawlerRank30: 0,
-    brawlerRank35: 0,
+    brawlerRank50: 0,
     duoMatchVictories: 0,
     soloMatchVictories: 0,
     trioMatchVictories: 0,
     clubID: '',
     clubName: '',
-    currentSoloPL: 0,
-    highestSoloPL: 0,
-    currentTeamPL: 0,
-    highestTeamPL: 0,
+    currentSoloRanked: 0,
+    highestSoloRanked: 0,
+    // currentTeamPL: 0,
+    // highestTeamPL: 0,
     currentTrophies: 0,
     highestTrophies: 0,
     trophyChange: 0,
@@ -52,6 +57,9 @@ export const Users = () => {
     userName: '',
     profileIcon: '',
   });
+
+  /* user object 정보 */
+  const [retryCount, setRetryCount] = useState<number>(0);
 
   const [type, setType] = useState('7');
   const [mode, setMode] = useState('all');
@@ -105,11 +113,12 @@ export const Users = () => {
   }, [id, retryCount, user?.updatedAt || new Date()]);
 
   useEffect(() => {
-    user?.crew &&
+    if (user && user.crew) {
       UserService.getCrewMemberDetail({ id }).then((data) => {
         setFriends(data.friends);
         setSeasonRecords(data.seasonRecords);
       });
+    }
   }, [retryCount, user?.crew]);
 
   useEffect(() => {
@@ -169,33 +178,34 @@ export const Users = () => {
     }
   }, [mode, type]);
 
+  const contextValue = {
+    id,
+    user,
+    profile,
+    rotationTL,
+    rotationPL,
+    type,
+    mode,
+    battlesSummary,
+    brawlersSummary,
+    recentBattles,
+    recentBrawlers,
+    battles,
+    season,
+    friends,
+    seasonRecords,
+    setUser,
+    setType,
+    setMode,
+    setStack,
+    setRetryCount,
+    setLoad,
+  };
+
   return new Date(user?.updatedAt).getTime() > 0 ? (
-    <UserContext.Provider
-      value={{
-        id,
-        user,
-        profile,
-        rotationTL,
-        rotationPL,
-        type,
-        mode,
-        battlesSummary,
-        brawlersSummary,
-        recentBattles,
-        recentBrawlers,
-        battles,
-        season,
-        friends,
-        seasonRecords,
-        setUser,
-        setType,
-        setMode,
-        setStack,
-        setRetryCount,
-        setLoad,
-      }}
-    >
+    <UserContext.Provider value={contextValue}>
       <div className={styles.app}>
+        <Helmet></Helmet>
         <UserTitle />
         <UserMenu />
         <div

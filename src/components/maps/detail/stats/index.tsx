@@ -4,35 +4,35 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/config/config';
 
-import styles from './stats.module.scss';
+import styles from './index.module.scss';
 
 const MapStats = ({ brawlers }) => {
   const locales = useContext(CdnContext);
 
   return (
     <div className={styles.brawlerStatsWrapper}>
-      {brawlers?.map((brawler) => {
+      {brawlers?.map(({ brawlerID, brawlerName, pickRate, victoryRate }) => {
         return (
           <a
-            key={`${brawler.brawlerID}`}
+            key={`${brawlerID}`}
             className={styles.brawlerStatsItem}
-            href={`../brawler/${brawler.brawlerName.toLowerCase().replaceAll(' ', '')}`}
+            href={`../brawler/${brawlerName.toLowerCase().replaceAll(' ', '')}`}
           >
             <div className={styles.brawlerTitle}>
               <img
-                src={`${config.assets}/brawlers/pins/${brawler.brawlerID}.webp`}
+                src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
                 alt={'브롤러'}
               />
-              <div>{locales.brawler['brawler'][`${brawler.brawlerName}`]}</div>
+              <div>{locales.brawler['brawler'][`${brawlerName}`]}</div>
             </div>
             <div className={styles.brawlerContent}>
               <div>
                 <span>Pick</span>
-                <span className={styles.textRate}>{brawler.pickRate}%</span>
+                <span className={styles.textRate}>{pickRate}%</span>
               </div>
               <div>
                 <span>Win</span>
-                <span className={styles.textRate}>{brawler.victoryRate}%</span>
+                <span className={styles.textRate}>{victoryRate}%</span>
               </div>
             </div>
           </a>

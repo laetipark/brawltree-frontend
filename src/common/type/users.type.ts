@@ -22,11 +22,11 @@ export type UserProfileType = {
   soloMatchVictories: number;
   brawlerRank25: number;
   brawlerRank30: number;
-  brawlerRank35: number;
-  currentSoloPL: number;
-  highestSoloPL: number;
-  currentTeamPL: number;
-  highestTeamPL: number;
+  brawlerRank50: number;
+  currentSoloRanked: number;
+  highestSoloRanked: number;
+  // currentTeamPL: number;
+  // highestTeamPL: number;
 };
 
 export type UserBrawlersType = {

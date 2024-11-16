@@ -5,7 +5,7 @@ import { Header } from '~/components/header';
 import { Footer } from '~/components/footer';
 
 import { Main } from '~/pages/main';
-import { Users } from '~/pages/user';
+import { User } from '~/pages/user';
 import { Brawlers } from '~/pages/brawlers';
 import { Events } from '~/pages/events/events';
 import { MapSummary } from '~/pages/maps/summary/summary';
@@ -16,7 +16,6 @@ import { CdnContext } from '~/context/cdn.context';
 import { CdnService } from '~/services/cdn.service';
 import { Spinner } from '~/components/spinner/spinner';
 
-// TODO : 언어 변경 또는 frontend 재시작하는 경우 캐시 삭제
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [language, setLanguage] = useState('ko');
@@ -78,7 +77,7 @@ const App = () => {
         <Header />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/brawlian/:id" element={<Users />} />
+          <Route path="/brawlian/:id" element={<User />} />
           <Route path="/brawler/:name" element={<Brawlers />} />
           <Route path="/events/:mode" element={<Events />} />
           <Route path="/maps" element={<MapSummary />} />

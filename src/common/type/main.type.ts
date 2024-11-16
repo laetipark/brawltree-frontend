@@ -1,7 +1,7 @@
 export type SearchItemType = {
   id: number;
   userID: string;
-}
+};
 
 export type SearchUserItemType = {
   userID: string;
@@ -9,5 +9,5 @@ export type SearchUserItemType = {
   profileIcon: string;
   clubName: string;
   currentTrophies: number;
-  currentSoloPL: number;
-}
+  currentSoloRanked: number;
+};

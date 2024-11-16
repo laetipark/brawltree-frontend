@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import MapInfo from '~/components/maps/detail';
+import { MapInfo } from '~/components/maps/detail';
 import MapMenu from '~/components/menu/type-n-grade/menu';
-import MapStats from '~/components/maps/detail/stats/stats';
+import MapStats from '~/components/maps/detail/stats';
 
 import { MapService } from '~/services/map.service';
 
@@ -29,32 +29,30 @@ export const MapDetail = () => {
     });
   }, [id, type, grade]);
 
-  return (
-    mapInfo.mapID ? (
-      <div className={styles.app}>
-        <MapInfo mapInfo={mapInfo} />
-        {
-          ![
-            'soloShowdown',
-            'duoShowdown',
-            'duels',
-            'hunters',
-            'roboRumble',
-            'bigGame',
-            'bossFight',
-          ].includes(mapInfo.mode) && (
-            <MapMenu
-              type={type}
-              grade={grade}
-              setType={setType}
-              setGrade={setGrade}
-              rotationTL={mapInfo.isTrophyLeague}
-              rotationPL={mapInfo.isPowerLeague}
-            />
-          )
-        }
-        <MapStats brawlers={brawlerStats} />
-      </div>
-    ) : <Spinner />
+  return mapInfo.mapID ? (
+    <div className={styles.app}>
+      <MapInfo mapInfo={mapInfo} />
+      {![
+        'soloShowdown',
+        'duoShowdown',
+        'duels',
+        'hunters',
+        'roboRumble',
+        'bigGame',
+        'bossFight',
+      ].includes(mapInfo.mode) && (
+        <MapMenu
+          type={type}
+          grade={grade}
+          setType={setType}
+          setGrade={setGrade}
+          rotationTL={mapInfo.isTrophyLeague}
+          rotationPL={mapInfo.isPowerLeague}
+        />
+      )}
+      <MapStats brawlers={brawlerStats} />
+    </div>
+  ) : (
+    <Spinner />
   );
 };

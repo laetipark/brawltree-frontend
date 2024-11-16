@@ -32,9 +32,9 @@ export const UserRecord = () => {
             }개`,
           ],
           [
-            locales.user['record'].soloLeagueRank,
-            profile.currentSoloPL / 3 < 6
-              ? roman[profile.currentSoloPL % 3]
+            locales.user['record'].currentSoloRanked,
+            profile.currentSoloRanked / 3 < 6
+              ? roman[profile.currentSoloRanked % 3]
               : '',
           ],
           [
@@ -49,7 +49,7 @@ export const UserRecord = () => {
           [
             null,
             `${config.assets}/rank/ranked/${Math.floor(
-              profile.currentSoloPL / 3,
+              profile.currentSoloRanked / 3,
             )}.webp`,
           ],
           [null, null],
@@ -74,13 +74,11 @@ export const UserRecord = () => {
             locales.user['record'].soloVictories,
             `${profile.soloMatchVictories}회`,
           ],
-          [locales.user['record'].rank25Brawlers, `${profile.brawlerRank25}개`],
-          [locales.user['record'].rank30Brawlers, `${profile.brawlerRank30}개`],
-          [locales.user['record'].rank35Brawlers, `${profile.brawlerRank35}개`],
+          [locales.user['record'].rank35Brawlers, `${profile.brawlerRank50}개`],
           [
-            locales.user['record'].highestSoloPL,
-            profile.highestSoloPL / 3 < 6
-              ? roman[profile.highestSoloPL % 3]
+            locales.user['record'].highestSoloRanked,
+            profile.highestSoloRanked / 3 < 6
+              ? roman[profile.highestSoloRanked % 3]
               : '',
           ],
         ]}
@@ -90,12 +88,10 @@ export const UserRecord = () => {
           [null, null],
           [null, null],
           [null, null],
-          [null, null],
-          [null, null],
           [
             null,
             `${config.assets}/rank/ranked/${Math.floor(
-              profile.highestSoloPL / 3,
+              profile.highestSoloRanked / 3,
             )}.webp`,
           ],
         ]}

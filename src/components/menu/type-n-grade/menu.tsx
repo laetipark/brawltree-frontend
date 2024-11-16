@@ -4,14 +4,14 @@ import styles from './menu.module.scss';
 import { CdnContext } from '~/context/cdn.context';
 
 const tlGrade = [
-  '~39',
-  '40~139',
-  '140~299',
-  '300~499',
-  '500~749',
-  '750~999',
-  '1000~1249',
-  '1250~',
+  '0~500',
+  '500~799',
+  '800~999',
+  '1000~1399',
+  '1300~1599',
+  '1500~1699',
+  '1700~1999',
+  '2000~',
 ];
 const plGrade = [
   'bronze',

@@ -6,14 +6,18 @@ import styles from './index.module.scss';
 
 const roman = ['I', 'II', 'III'];
 
-export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => {
+export const SearchItem = ({
+  user,
+  onAddSearchHistory,
+  onRemoveSearchItem,
+}) => {
   return (
     <li key={user.userID} value={user.userName}>
       <a
         className={styles.searchItemWrapper}
         href={`/brawlian/${user.userID.replace('#', '')}`}
         onClick={() => {
-          onAddSearchHistory && onAddSearchHistory(user.userID);
+          onAddSearchHistory(user.userID);
         }}
       >
         <img
@@ -24,49 +28,43 @@ export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => 
         <div>
           <div className={styles.searchItemTitle}>
             <span>{user.userName}</span>
-            {
-              onRemoveSearchItem && (
-                <img
-                  src={'/images/etc/close.webp'}
-                  alt={'close'}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onRemoveSearchItem(user.userID);
-                  }}
-                />
-              )
-            }
+            {onRemoveSearchItem && (
+              <img
+                src={'/images/etc/close.webp'}
+                alt={'close'}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onRemoveSearchItem(user.userID);
+                }}
+              />
+            )}
           </div>
-          {user.crewName &&
-            (
-              <div className={styles.searchItemContent}>
-                <span className={styles.searchItemCrewName}>
-                  {user.crewName}
-                </span>
-              </div>
-            )
-          }
+          {user.crewName && (
+            <div className={styles.searchItemContent}>
+              <span className={styles.searchItemCrewName}>{user.crewName}</span>
+            </div>
+          )}
           <div className={styles.searchItemContent}>
-            <span className={styles.searchItemTag}>
-              {user.userID}
-            </span>
+            <span className={styles.searchItemTag}>{user.userID}</span>
           </div>
           <div className={styles.searchItemContent}>
             <span className={styles.searchItemTrophy}>
-              <img src={`${config.assets}/modes/icon/trophy.webp`}
-                   alt={'trophyLeague'} />
+              <img
+                src={`${config.assets}/modes/icon/trophy.webp`}
+                alt={'trophyLeague'}
+              />
               {user.currentTrophies}
             </span>
             <span className={styles.searchItemRanked}>
               <img
-                src={`${
-                  config.assets
-                }/rank/ranked/${Math.floor(
-                  user.currentSoloPL / 3,
+                src={`${config.assets}/rank/ranked/${Math.floor(
+                  user.currentSoloRanked / 3,
                 )}.webp`}
-                alt={Math.floor(user.currentSoloPL / 3).toString()}
+                alt={Math.floor(user.currentSoloRanked / 3).toString()}
               />
-              {user.currentSoloPL / 3 < 6 ? roman[user.currentSoloPL % 3] : ''}
+              {user.currentSoloRanked / 3 < 6
+                ? roman[user.currentSoloRanked % 3]
+                : ''}
             </span>
           </div>
         </div>

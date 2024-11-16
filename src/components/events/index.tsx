@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { TrophyCurrentEvents } from '~/components/events/list/trophy-curr';
 import { TrophyTomorrowEvents } from '~/components/events/list/trophy-next';
@@ -10,7 +10,6 @@ import { CdnContext } from '~/context/cdn.context';
 import styles from './index.module.scss';
 
 export const EventMenu = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const { mode } = useParams();
   const locales = useContext(CdnContext);
@@ -36,11 +35,7 @@ export const EventMenu = () => {
                 const { target } = e;
                 setMenu(target.id);
                 const baseURL = location.pathname.split('/');
-                navigate(
-                  !/\/blossom.*/g.test(location.pathname)
-                    ? `../${baseURL[1]}/${target.id}`
-                    : `../${baseURL[1]}/${baseURL[2]}/${target.id}`,
-                );
+                navigate(`../${baseURL[1]}/${target.id}`);
               }}
             />
             <label htmlFor={'curr'}>
@@ -58,11 +53,7 @@ export const EventMenu = () => {
                 const { target } = e;
                 setMenu(target.id);
                 const baseURL = location.pathname.split('/');
-                navigate(
-                  !/\/blossom.*/g.test(location.pathname)
-                    ? `../${baseURL[1]}/${target.id}`
-                    : `../${baseURL[1]}/${baseURL[2]}/${target.id}`,
-                );
+                navigate(`../${baseURL[1]}/${target.id}`);
               }}
             />
             <label htmlFor={'next'}>
@@ -80,11 +71,7 @@ export const EventMenu = () => {
                 const { target } = e;
                 setMenu(target.id);
                 const baseURL = location.pathname.split('/');
-                navigate(
-                  !/\/blossom.*/g.test(location.pathname)
-                    ? `../${baseURL[1]}/${target.id}`
-                    : `../${baseURL[1]}/${baseURL[2]}/${target.id}`,
-                );
+                navigate(`../${baseURL[1]}/${target.id}`);
               }}
             />
             <label htmlFor={'ranked'}>
