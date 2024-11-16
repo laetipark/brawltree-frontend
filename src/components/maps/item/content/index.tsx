@@ -118,7 +118,7 @@ export const EventItem = ({ event, type }) => {
           style={{ left: tooltipPosition.x + 40, top: tooltipPosition.y + 20 }}
         >
           <img
-            src={`${config.assets}/maps/${event.mapID}.webp`}
+            src={`${config.assets}/maps/w220/${event.mapID}.webp`}
             alt={event.mapID}
           />
         </div>
