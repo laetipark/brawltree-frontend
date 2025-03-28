@@ -1,0 +1,15 @@
+.userProfileContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+@media (max-width: 576px) {
+  .userProfileContainer {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 24px);
+    gap: 8px;
+  }
+}

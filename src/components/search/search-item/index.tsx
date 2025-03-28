@@ -1,6 +1,6 @@
 import React from 'react';
 
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 
@@ -9,7 +9,7 @@ const roman = ['I', 'II', 'III'];
 export const SearchItem = ({
   user,
   onAddSearchHistory,
-  onRemoveSearchItem,
+  onRemoveSearchItem
 }) => {
   return (
     <li key={user.userID} value={user.userName}>
@@ -58,7 +58,7 @@ export const SearchItem = ({
             <span className={styles.searchItemRanked}>
               <img
                 src={`${config.assets}/rank/ranked/${Math.floor(
-                  user.currentSoloRanked / 3,
+                  user.currentSoloRanked / 3
                 )}.webp`}
                 alt={Math.floor(user.currentSoloRanked / 3).toString()}
               />

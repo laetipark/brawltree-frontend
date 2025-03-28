@@ -1,0 +1,28 @@
+.userInfoContainer {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+
+  & > img {
+    width: 80px;
+  }
+
+  & .realName {
+    font-size: 24px;
+
+    & .userTag {
+      color: #666666;
+      font-size: 16px;
+      font-family: "Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
+    }
+  }
+
+  & .crewName {
+    display: flex;
+    height: 18px;
+    font-size: 16px;
+    gap: 2px;
+    color: #557153;
+  }
+}

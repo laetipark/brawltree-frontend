@@ -1,0 +1,70 @@
+.mapItemBox {
+  display: flex;
+  padding: 12px;
+  border-radius: 4px;
+  background-color: #E6E5A3;
+  text-decoration: none !important;
+
+  & > img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    margin-right: 4px;
+  }
+
+  &::before {
+    content: '';
+    position: relative;
+    left: -4px;
+    width: 4px;
+    height: 100%;
+    background-color: #A9AF7E;
+    transition: background-color 0.3s;
+  }
+
+  &:hover::before {
+    background-color: #557153;
+  }
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 4px;
+
+    & > div {
+      display: flex;
+      gap: 4px;
+      font-size: 12px;
+    }
+  }
+}
+
+.eventInfoBox {
+  justify-content: space-between;
+
+  & > img {
+    width: 20px;
+    object-fit: contain;
+    cursor: default;
+  }
+}
+
+.mapToolTip {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 220px;
+  background-color: #D7C0AE;
+  border: 2px solid #967E76;
+  border-radius: 6px;
+  padding: 10px;
+  gap: 8px;
+  z-index: 2;
+
+  & > img {
+    width: 220px;
+    object-fit: contain;
+  }
+}

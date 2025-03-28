@@ -9,45 +9,59 @@ export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
+    define: {
+      'process.env': process.env
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler' // or "modern"
+        }
+      }
+    },
     resolve: {
       alias: [
         {
           find: '~/src',
-          replacement: resolve(__dirname, 'src'),
+          replacement: resolve(__dirname, 'src')
+        },
+        {
+          find: '~/assets',
+          replacement: resolve(__dirname, 'src/assets')
         },
         {
           find: '~/components',
-          replacement: resolve(__dirname, 'src/components'),
+          replacement: resolve(__dirname, 'src/components')
         },
         {
           find: '~/config',
-          replacement: resolve(__dirname, 'src/config'),
+          replacement: resolve(__dirname, 'src/config')
         },
         {
           find: '~/context',
-          replacement: resolve(__dirname, 'src/context'),
+          replacement: resolve(__dirname, 'src/context')
         },
         {
           find: '~/hooks',
-          replacement: resolve(__dirname, 'src/hooks'),
+          replacement: resolve(__dirname, 'src/hooks')
         },
         {
           find: '~/images',
-          replacement: resolve(__dirname, 'src/images'),
+          replacement: resolve(__dirname, 'src/images')
         },
         {
           find: '~/locales',
-          replacement: resolve(__dirname, 'src/locales'),
+          replacement: resolve(__dirname, 'src/locales')
         },
         {
           find: '~/pages',
-          replacement: resolve(__dirname, 'src/pages'),
+          replacement: resolve(__dirname, 'src/pages')
         },
         {
           find: '~/utils',
-          replacement: resolve(__dirname, 'src/utils'),
-        },
-      ],
+          replacement: resolve(__dirname, 'src/utils')
+        }
+      ]
     },
     plugins: [
       react(),
@@ -58,41 +72,44 @@ export default ({ mode }) => {
         renderer: '@prerenderer/renderer-puppeteer',
         server: {
           host: 'localhost',
-          listenHost: 'localhost',
+          listenHost: 'localhost'
         },
         rendererOptions: {
           maxConcurrentRoutes: 1,
-          renderAfterTime: 500,
-        },
-        postProcess(renderedRoute) {
-          renderedRoute.html = renderedRoute.html
-            .replace(/http:/i, 'https:')
-            .replace(
-              /(https:\/\/)?(localhost|127\.0\.0\.1):\d*/i,
-              'web3darchitrip.com',
-            );
-        },
-      }),
+          renderAfterTime: 500
+        }
+      })
     ],
     server: {
+      allowedHosts: ['brawltree.me', 'www.brawltree.me'],
+      host: '0.0.0.0',
+      port: parseInt(process.env.VITE_PORT),
       proxy: {
         '/cdn': {
           target: 'https://cdn.brawltree.me',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/cdn/, ''),
+          rewrite: (path) => path.replace(/^\/cdn/, '')
         },
         '/api': {
           target: 'https://server.brawltree.me',
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, '')
         },
-      },
-      host: '0.0.0.0',
-      port: parseInt(process.env.VITE_PORT),
+        '/youtube': {
+          target: 'https://www.googleapis.com/youtube/v3',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/youtube/, '')
+        },
+        '/inbox': {
+          target: 'https://brawlstars.inbox.supercell.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/inbox/, '')
+        }
+      }
     },
     preview: {
       host: '0.0.0.0',
-      port: parseInt(process.env.VITE_PORT),
-    },
+      port: parseInt(process.env.VITE_PORT)
+    }
   });
 };

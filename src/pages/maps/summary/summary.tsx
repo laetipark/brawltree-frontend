@@ -3,9 +3,11 @@ import { MapService } from '~/services/map.service';
 import { MapInput } from '~/components/maps/summary/map-input';
 import { ModeFilter } from '~/components/maps/summary/mode-filter';
 import { MapList } from '~/components/maps/summary/map-list';
-import styles from './summary.module.scss';
+
 import { isRRMatch } from '~/utils/korean-pattern';
 import { CdnContext } from '~/context/cdn.context';
+
+import styles from './summary.module.scss';
 
 export const MapSummary = () => {
   const [maps, setMaps] = useState({});

@@ -1,17 +1,17 @@
 import axios from 'axios';
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 export class MapService {
   static getMaps = () =>
     axios.get(`${config.url}/maps/`).then((result) => result.data);
 
-  static getMap = ({ id, type, grade }) =>
+  static getMap = ({ name, type, grade }) =>
     axios
-      .get(`${config.url}/maps/${id}`, {
+      .get(`${config.url}/maps/${name}`, {
         params: {
           type: type,
-          grade: grade,
-        },
+          grade: grade
+        }
       })
       .then((result) => result.data);
 }

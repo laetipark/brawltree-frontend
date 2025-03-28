@@ -1,15 +1,26 @@
 .spinnerWrapper {
-  display: flex;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+  box-sizing: border-box;
+  display: block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: auto;
+  outline: 0;
+  background-color: #E5F9DB;
 }
 
 .spinner {
+  position: relative;
   width: 120px;
   height: 120px;
-  border: 8px solid #9DC08B;
+  top: 50%;
+  margin: 0 auto;
+  padding: 40px 20px;
   box-sizing: border-box;
+  border: 8px solid #9DC08B;
 
   border-top-color: #4E944F;
   border-bottom-color: #4E944F;

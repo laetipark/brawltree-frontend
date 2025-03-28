@@ -1,0 +1,15 @@
+.userRecordsContent {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  align-items: flex-start
+}
+
+@media (min-width: 576px) {
+  .userRecordsContent {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    column-gap: 1%;
+  }
+}

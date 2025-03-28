@@ -1,4 +1,4 @@
-.menuWrapper {
+.userMenuContainer {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -62,7 +62,7 @@
   border-left: 1px solid #C4D7B2;
   border-right: 1px solid #C4D7B2;
   padding: 8px;
-  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 20px;
   transition: background-color 0.2s ease-in;

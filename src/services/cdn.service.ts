@@ -26,6 +26,11 @@ export class CdnService {
       .get(`/cdn/database/locales/${language}/map.json?time=${time}`)
       .then((result) => result.data);
 
+  static getNewsCdn = (language: string, time: number) =>
+    axios
+      .get(`/cdn/database/locales/${language}/news.json?time=${time}`)
+      .then((result) => result.data);
+
   static getUserCdn = (language: string, time: number) =>
     axios
       .get(`/cdn/database/locales/${language}/user.json?time=${time}`)

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 export class BrawlerService {
   static getBrawler = async (id: string) => {

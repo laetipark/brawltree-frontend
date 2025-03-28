@@ -1,4 +1,4 @@
-import { IntervalFunc } from '~/common/interface/interval_function';
+import { IntervalFunc } from '~/common/interfaces/interval_function';
 import { useEffect, useRef } from 'react';
 
 export const useInterval = (callback: () => void, delay: number) => {

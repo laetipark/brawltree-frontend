@@ -1,0 +1,44 @@
+.brawlersContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 24px);
+  gap: 8px;
+}
+
+@media screen and (min-width: 576px) {
+  .brawlersContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+
+    & > div:first-child {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}
+
+.ownedBrawlersContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+@media screen and (min-width: 768px) {
+  .ownedBrawlersContent {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+    gap: 4px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ownedBrawlersContent {
+    grid-template-columns: 33% 33% 33%;
+  }
+}

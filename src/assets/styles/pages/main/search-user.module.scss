@@ -1,0 +1,78 @@
+.searchUserContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: calc(100% - 24px);
+  padding: 8px 12px 0 12px;
+  gap: 12px;
+
+  & > h2 {
+    border-bottom: 3px solid #557153;
+    padding-bottom: 8px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  & > form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    font-size: 24px;
+
+    & > button:hover {
+      background-color: #876445;
+    }
+  }
+}
+
+.recentSearch {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #609966;
+  border-radius: 8px;
+  background-color: #EDF1D6;
+}
+
+.recentSearchTitle {
+  width: 100%;
+  padding: 4px 0;
+  border-bottom: 2px solid #609966;
+  text-align: center;
+}
+
+.clearSearch {
+  display: flex;
+  justify-content: flex-end;
+
+  & > div {
+    padding: 0 4px;
+    font-size: 14px;
+    color: #333333;
+    cursor: pointer;
+  }
+}
+
+.findTagToggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+  gap: 4px;
+  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  cursor: pointer;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 4px;
+  }
+}
+
+.howToFindTag {
+  width: 300px;
+  object-fit: contain;
+}

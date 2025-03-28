@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import App from './App';
 import reportWebVitals from './report-web-vitals';
 
-import './index.css';
+import '~/common/styles/index.css';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));

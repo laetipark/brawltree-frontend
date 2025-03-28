@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { EventService } from '~/services/event.service';
 
 import { Spinner } from '~/components/spinner/spinner';
-import { EventItems } from '~/components/maps/item';
+import { EventSummaryContainer } from '~/components/maps/event-summary';
 
 export const TrophyCurrentEvents = () => {
   const [events, setEvents] = useState([]);
@@ -13,8 +13,8 @@ export const TrophyCurrentEvents = () => {
 
   return (
     (events?.length || 0 > 0) ? (
-      <EventItems events={events}
-                  type={'curr'} />
+      <EventSummaryContainer events={events}
+                             type={'curr'} />
     ) : <Spinner />
   );
 };

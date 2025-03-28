@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { SearchItem } from '~/components/search/search-item';
 
-import { SearchUserItemType } from '~/common/type/main.type';
+import { SearchUserItemType } from '~/common/types/main.type';
 import { SearchContext } from '~/context/search.context';
 import { searchItems } from '~/utils/search-items';
 import { useWindowClick } from '~/hooks/use-window-click.hook';

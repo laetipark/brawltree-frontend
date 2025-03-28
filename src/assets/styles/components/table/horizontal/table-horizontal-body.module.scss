@@ -1,0 +1,30 @@
+.tableHorizontalBodyContainer {
+  display: table-row-group;
+
+  & > div {
+    display: table-row;
+
+    & > div,
+    & > h3 {
+      display: table-cell;
+      width: 60%;
+      padding: 10px;
+      border-left: 1px solid #B4E197;
+      border-right: 1px solid #B4E197;
+      border-bottom: 1px solid #B4E197;
+      background-color: #E9EFC0;
+      vertical-align: middle;
+    }
+
+    & > div {
+      font-size: 18px;
+      border-left: 0;
+
+      & > img {
+        height: 20px;
+        margin-right: 4px;
+        object-fit: contain;
+      }
+    }
+  }
+}

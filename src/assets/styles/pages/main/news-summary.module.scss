@@ -1,0 +1,40 @@
+.brawlNewsContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 24px);
+  padding: 0 12px;
+  gap: 8px;
+}
+
+@media (min-width: 576px) {
+  .brawlNewsBox {
+    padding: 0;
+  }
+}
+
+.brawlNewsTitle {
+  border-bottom: 3px solid #557153;
+  padding-bottom: 8px;
+  color: inherit;
+}
+
+.brawlNewsBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    height: 392px;
+  }
+}
+
+@media (min-width: 768px) {
+  .brawlNewsBox {
+    display: grid;
+    grid-template-columns: 49% 49%;
+    justify-content: space-between;
+    gap: 0;
+  }
+}

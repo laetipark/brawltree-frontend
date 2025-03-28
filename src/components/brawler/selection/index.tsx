@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { CdnContext } from '~/context/cdn.context';
 import { isRRMatch } from '~/utils/korean-pattern';
 
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 

@@ -5,8 +5,10 @@ type CdnContextType = {
   battle: object;
   brawler: object;
   main: object;
+  news: object;
   map: object;
   user: object;
+  language: string;
   setLanguage: (language: string) => void;
 };
 

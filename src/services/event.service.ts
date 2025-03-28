@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 export class EventService {
   static getTLCurrentEvents = () =>
@@ -10,5 +10,4 @@ export class EventService {
 
   static getPLEvents = () =>
     axios.get(`${config.url}/events/pl`).then((result) => result.data);
-
 }

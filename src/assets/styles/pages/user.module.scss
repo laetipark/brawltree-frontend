@@ -1,0 +1,9 @@
+.userWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: calc(100% - 24px);
+  padding: 12px 12px 0 12px;
+  gap: 12px;
+  background-color: #C7E9B0;
+}

@@ -3,6 +3,11 @@
   height: 32px;
   object-fit: contain;
   object-position: center;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: grayscale(100%);
+  }
 }
 
 .brawlerItemToolTip {
@@ -10,11 +15,11 @@
   flex-direction: column;
   position: absolute;
   width: 300px;
-  height: 160px;
+  height: 100px;
   background-color: #D7C0AE;
   border: 2px solid #967E76;
   border-radius: 6px;
-  padding: 10px;
+  padding: 8px;
   gap: 8px;
   z-index: 2;
   top: 40px;
@@ -23,8 +28,6 @@
 .itemName {
   display: flex;
   align-items: center;
-  font-family: "Main Bold", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 20px;
   gap: 8px;
 }

@@ -1,0 +1,50 @@
+.userMenuContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+  gap: 8px;
+}
+
+.userMenuContent {
+  display: flex;
+  background-color: #C7E9B0;
+
+  & > ul {
+    display: grid;
+    grid-template-columns: 120px 120px;
+    width: 100%;
+    margin-left: 12px;
+    gap: 8px;
+    list-style: none;
+
+    & > li {
+      margin: 0;
+      padding: 0;
+
+      & > input {
+        display: none;
+
+        &:hover + label > div {
+          background-color: #A0C49D;
+        }
+
+        &:checked + label > div {
+          background-color: #F7FFE5;
+        }
+      }
+
+      & > label > div {
+        display: flex;
+        justify-content: center;
+        background-color: #E1ECC8;
+        border-top: 1px solid #C4D7B2;
+        border-left: 1px solid #C4D7B2;
+        border-right: 1px solid #C4D7B2;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 22px;
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.buttonBoxContent {
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.userReloadButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: black;
+  text-decoration: none;
+  border: 1px solid #C4D7B2;
+  background-color: #E1ECC8;
+  padding: 8px;
+  font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #A0C49D;
+  }
+}
+
+@media (max-width: 576px) {
+  .buttonBoxContent {
+    grid-template-columns: 100%;
+    gap: 4px;
+  }
+}

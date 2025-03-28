@@ -1,18 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CdnContext } from '~/context/cdn.context';
 
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 
-export const ItemTooltip = ({
-  itemID,
-  itemName,
-  itemKind,
-  values,
-  brawlerPower,
-  brawlerValues,
-}) => {
+export const ItemTooltip = ({ itemID, itemName, itemKind, values, brawlerPower, brawlerValues }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [tooltipY, setTooltipY] = useState<number>();
 
@@ -48,23 +41,19 @@ export const ItemTooltip = ({
   const pattern = /(\d+)/g;
   const matches = description
     ?.match(patternWithBracket)
-    ?.map((item) => item.match(pattern))
+    ?.map((item: string) => item.match(pattern))
     .map(Number);
 
-  matches?.map((number) => {
+  matches?.map((number: number) => {
     let value = undefined;
     if (values) {
       if (typeof values[number] === 'string') {
         const [first, second] = values[number].split('*');
         if (first.includes('.')) {
           const [firstChild, secondChild] = first.split('.');
-          value =
-            brawlerValues &&
-            `${second * 100}%(${(brawlerValues[firstChild][secondChild] + brawlerValues[firstChild][secondChild] * (brawlerPower - 1) * 0.1) * second})`;
+          value = brawlerValues && `${Number(second) * 100}%(${(brawlerValues[firstChild][secondChild] + brawlerValues[firstChild][secondChild] * (brawlerPower - 1) * 0.1) * Number(second)})`;
         } else {
-          value =
-            brawlerValues &&
-            `${second * 100}%(${(brawlerValues[first] + brawlerValues[first] * (brawlerPower - 1) * 0.1) * second})`;
+          value = brawlerValues && `${Number(second) * 100}%(${(brawlerValues[first] + brawlerValues[first] * (brawlerPower - 1) * 0.1) * Number(second)})`;
         }
       } else {
         value = values[number];
@@ -76,20 +65,11 @@ export const ItemTooltip = ({
   return (
     <React.Fragment>
       <div onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOut}>
-        <img
-          className={styles.brawlerItem}
-          src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
-          alt={itemID}
-        />
+        <img className={styles.brawlerItem} src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`} alt={itemID} />
       </div>
       {mouseOver && (
         <div className={styles.brawlerItemToolTip} style={{ top: tooltipY }}>
           <div className={styles.itemName}>
-            <img
-              className={styles.brawlerItem}
-              src={`${config.assets}/brawlers/${itemKind}s/${itemID}.webp`}
-              alt={itemID}
-            />
             <span>{itemName}</span>
           </div>
           {<div>{description}</div>}

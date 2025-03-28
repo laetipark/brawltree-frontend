@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { CdnContext } from '~/context/cdn.context';
 
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 

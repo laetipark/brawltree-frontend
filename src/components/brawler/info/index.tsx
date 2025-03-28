@@ -4,7 +4,7 @@ import { ItemTooltip } from '~/components/items/item-info';
 
 import { CdnContext } from '~/context/cdn.context';
 
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 

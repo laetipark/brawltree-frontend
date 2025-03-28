@@ -1,0 +1,58 @@
+.mainHeadContainer {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 24px);
+  height: 112px;
+
+  & > img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    object-position: bottom;
+    mask-image: linear-gradient(to top, black, transparent);
+  }
+
+  & > h1 {
+    position: relative;
+    top: -50px;
+    font-size: 18px;
+    padding: 4px;
+    color: #ffffff;
+    background-color: rgba(11, 102, 106, 0.8);
+  }
+}
+
+@media (min-width: 500px) {
+  .mainHeadContainer {
+    & > h1 {
+      top: -30px;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .mainHeadContainer {
+    height: 180px;
+    padding: 12px;
+
+    & > img {
+      height: 200px;
+    }
+
+    & > h1 {
+      top: -32px;
+      font-size: 20px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .mainHeadContainer {
+    height: 180px;
+
+    & > h1 {
+      top: -32px;
+      font-size: 22px;
+    }
+  }
+}

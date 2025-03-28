@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { CdnContext } from '~/context/cdn.context';
 
 import styles from './index.module.scss';
-import config from '~/config/config';
+import config from '~/common/config/config';
 
 export const BrawlerStats = ({ brawler, stats, maps }) => {
   const locales = useContext(CdnContext);
@@ -106,17 +106,17 @@ export const BrawlerStats = ({ brawler, stats, maps }) => {
                   src={`${config.assets}/modes/icon/${mode}.webp`}
                   alt={mode}
                 />
-                <span style={{ fontWeight: 600 }}>
+                <span>
                   {locales.map['map'][`${mapID}`] || mapName}
                 </span>
                 <div>
                   <span>Pick</span>
-                  <span style={{ fontWeight: 600 }}>{pickRate}</span>
+                  <span>{pickRate}</span>
                   <span>%</span>
                 </div>
                 <div>
                   <span>Win</span>
-                  <span style={{ fontWeight: 600 }}>{victoryRate}</span>
+                  <span>{victoryRate}</span>
                   <span>%</span>
                 </div>
               </a>

@@ -5,7 +5,7 @@ import { BrawlerInfo } from '~/components/brawler/info';
 import { BrawlerStats } from '~/components/brawler/stats';
 import { Spinner } from '~/components/spinner/spinner';
 
-import { BrawlerType } from '~/common/type/brawlers.type';
+import { BrawlerType } from '~/common/types/brawlers.type';
 import { BrawlerService } from '~/services/brawler.service';
 
 import styles from './index.module.scss';

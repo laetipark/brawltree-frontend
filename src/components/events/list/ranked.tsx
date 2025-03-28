@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { EventService } from '~/services/event.service';
-import { EventItems } from '~/components/maps/item';
+import { EventSummaryContainer } from '~/components/maps/event-summary';
 import { Spinner } from '~/components/spinner/spinner';
 
 export const RankedEvents = () => {
@@ -11,7 +11,7 @@ export const RankedEvents = () => {
   }, []);
   return (
     (events?.length || 0 > 0) ? (
-      <EventItems events={events} type={'ranked'} />
+      <EventSummaryContainer events={events} type={'ranked'} />
     ) : <Spinner />
   );
 };

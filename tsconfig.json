@@ -20,6 +20,9 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
+      "~/assets/*": [
+        "./src/assets/*"
+      ],
       "~/common/*": [
         "./src/common/*"
       ],
@@ -49,6 +52,9 @@
       ],
       "~/utils/*": [
         "./src/utils/*"
+      ],
+      "~/public/*": [
+        "./public/*"
       ]
     }
   },
