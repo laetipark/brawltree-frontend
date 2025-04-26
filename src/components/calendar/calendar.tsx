@@ -17,7 +17,7 @@ const CalendarView = ({ date, beginDate, setDate }) => {
     padding: '2px',
     margin: '0 4px 0 0',
     transform: checked ? 'rotate(90deg)' : '',
-    transition: 'transform 0.3s ease',
+    transition: 'transform 0.3s ease'
   };
 
   return (
@@ -40,24 +40,14 @@ const CalendarView = ({ date, beginDate, setDate }) => {
           </div>
         </label>
       </div>
-      <div
-        className={'calendar-box__view'}
-        style={{ display: `${checked ? 'block' : 'none'}` }}
-      >
+      <div className={'calendar-box__view'} style={{ display: `${checked ? 'block' : 'none'}` }}>
         <Calendar
           value={date}
           minDate={beginDate}
           maxDate={new Date()}
           formatDay={(locale, date) => moment(date).format('D')}
           onChange={(element: Date) => {
-            setDate(
-              new Date(new Date(element).getTime()),
-              new Date(
-                new Date(
-                  new Date(element).setDate(element.getDate() + 1),
-                ).getTime(),
-              ),
-            );
+            setDate(new Date(new Date(element).getTime()), new Date(new Date(new Date(element).setDate(element.getDate() + 1)).getTime()));
             setChecked(!checked);
           }}
         />

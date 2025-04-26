@@ -10,9 +10,7 @@ export const MapList = ({ maps }) => {
 
     return maps[`${mode}`].length ? (
       <div id={modeName} className={styles.mapListWrapper} key={mode}>
-        <div className={styles.modeList}>
-          {<EventSummaryContainer events={modeMaps} type={mode} />}
-        </div>
+        <div className={styles.modeList}>{<EventSummaryContainer events={modeMaps} type={mode} />}</div>
       </div>
     ) : null;
   });

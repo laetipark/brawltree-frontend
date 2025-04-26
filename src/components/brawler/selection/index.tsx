@@ -22,11 +22,8 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
   useEffect(() => {
     setFilterBrawlers(
       brawlers.filter((brawler) => {
-        return isRRMatch(
-          searchBrawlerName,
-          locales.brawler['brawler'][`${brawler.name}`],
-        );
-      }),
+        return isRRMatch(searchBrawlerName, locales.brawler['brawler'][`${brawler.name}`]);
+      })
     );
   }, [searchBrawlerName]);
 
@@ -38,13 +35,7 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
     <div className={styles.brawlerSelectionWrapper}>
       <div>
         <span>브롤러 목록</span>
-        <input
-          type={'text'}
-          className={styles.searchBrawlers}
-          placeholder={'브롤러 검색 (쉘리, ㅅㄹ)'}
-          maxLength={12}
-          onChange={(event) => SetSearchBrawlerName(event.target.value)}
-        />
+        <input type={'text'} className={styles.searchBrawlers} placeholder={'브롤러 검색 (쉘리, ㅅㄹ)'} maxLength={12} onChange={(event) => SetSearchBrawlerName(event.target.value)} />
       </div>
       <div>
         {filterBrawlers?.map((brawler) => {
@@ -58,16 +49,11 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
                 checked={radio === brawler.id}
                 onChange={() => {
                   handleRadioButton(brawler);
-                  navigate(
-                    `../brawler/${brawler.name.toLowerCase().replaceAll(' ', '')}`,
-                  );
+                  navigate(`../brawler/${brawler.name.toLowerCase().replaceAll(' ', '')}`);
                 }}
               />
               <label htmlFor={brawler.id} className={styles.brawlerImage}>
-                <img
-                  src={`${config.assets}/brawlers/profiles/${brawler.id}.webp`}
-                  alt={brawler.id}
-                />
+                <img src={`${config.assets}/brawlers/profiles/${brawler.id}.webp`} alt={brawler.id} />
                 <div>
                   <span>{locales.brawler['brawler'][`${brawler.name}`]}</span>
                 </div>

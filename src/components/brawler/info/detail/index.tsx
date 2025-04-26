@@ -22,14 +22,12 @@ export const BrawlerInfoDetail = ({ infoDetail }) => {
         <div>
           <div>
             <div>
-              <strong>{locales.brawler['info'].health}</strong>:
-              <span>{health * 2}</span>
+              <strong>{locales.brawler['info'].health}</strong>:<span>{health * 2}</span>
             </div>
           </div>
           <div>
             <div>
-              <strong>{locales.brawler['info'].speed}</strong>:
-              <span>{speed}</span>
+              <strong>{locales.brawler['info'].speed}</strong>:<span>{speed}</span>
             </div>
           </div>
         </div>
@@ -42,16 +40,7 @@ export const BrawlerInfoDetail = ({ infoDetail }) => {
               if (key !== 'name') {
                 return (
                   <div key={key}>
-                    <strong>
-                      {locales.brawler['info'][`attack-${key}`] ||
-                        `attack-${key}`}
-                    </strong>
-                    :
-                    <span>
-                      {powerLevelElement.includes(`attack-${key}`)
-                        ? value * 2
-                        : value}
-                    </span>
+                    <strong>{locales.brawler['info'][`attack-${key}`] || `attack-${key}`}</strong>:<span>{powerLevelElement.includes(`attack-${key}`) ? value * 2 : value}</span>
                   </div>
                 );
               }
@@ -62,27 +51,16 @@ export const BrawlerInfoDetail = ({ infoDetail }) => {
             <div className={styles.attackName}>
               {locales.brawler['info'].super} : {superAttack.name}
             </div>
-            {Object.entries(superAttack).map(
-              ([key, value]: [string, number]) => {
-                if (key !== 'name') {
-                  return (
-                    <div key={key}>
-                      <strong>
-                        {locales.brawler['info'][`attack-${key}`] ||
-                          `attack-${key}`}
-                      </strong>
-                      :
-                      <span>
-                        {powerLevelElement.includes(`attack-${key}`)
-                          ? value * 2
-                          : value}
-                      </span>
-                    </div>
-                  );
-                }
-                return null;
-              },
-            )}
+            {Object.entries(superAttack).map(([key, value]: [string, number]) => {
+              if (key !== 'name') {
+                return (
+                  <div key={key}>
+                    <strong>{locales.brawler['info'][`attack-${key}`] || `attack-${key}`}</strong>:<span>{powerLevelElement.includes(`attack-${key}`) ? value * 2 : value}</span>
+                  </div>
+                );
+              }
+              return null;
+            })}
           </div>
         </div>
       </div>

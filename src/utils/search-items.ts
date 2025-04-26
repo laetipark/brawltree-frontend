@@ -8,6 +8,5 @@ const getResultByKeyword = async (keyword: string) => {
 export const searchItems = (keyword: string) =>
   useQuery(['keyword', keyword], () => getResultByKeyword(keyword), {
     enabled: !!keyword,
-    select: (data) => keyword.length > 1 ? data : null,
+    select: (data) => (keyword.length > 1 ? data : null)
   });
-

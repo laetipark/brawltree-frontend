@@ -35,10 +35,7 @@ export const ModeMenu = ({ mode, setMatchMode, type, modeTL, modePL }) => {
           icon={faCaretUp}
         />
       </button>
-      <div
-        className={styles.typeMenuList}
-        style={{ display: checked ? 'flex' : 'none' }}
-      >
+      <div className={styles.typeMenuList} style={{ display: checked ? 'flex' : 'none' }}>
         {type === '0' || type === '7'
           ? modeTL?.map((modeName: string) => (
               <React.Fragment key={`${modeName}`}>
@@ -55,10 +52,7 @@ export const ModeMenu = ({ mode, setMatchMode, type, modeTL, modePL }) => {
                   }}
                 />
                 <label htmlFor={modeName}>
-                  <img
-                    src={`${config.assets}/modes/icon/${modeName}.webp`}
-                    alt={modeName}
-                  />
+                  <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
                   <div>{locales.battle['mode'][`${modeName}`]}</div>
                 </label>
               </React.Fragment>
@@ -78,10 +72,7 @@ export const ModeMenu = ({ mode, setMatchMode, type, modeTL, modePL }) => {
                   }}
                 />
                 <label htmlFor={modeName}>
-                  <img
-                    src={`${config.assets}/modes/icon/${modeName}.webp`}
-                    alt={modeName}
-                  />
+                  <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
                   <div>{locales.battle['mode'][`${modeName}`]}</div>
                 </label>
               </React.Fragment>

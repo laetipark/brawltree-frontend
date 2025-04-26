@@ -4,13 +4,9 @@ import { SearchItemType } from '~/common/types/main.type';
 
 export class MainService {
   static getYoutubePlayListItem = (playlistID: string) =>
-    axios
-      .get(
-        `/youtube/playlistItems?part=snippet&playlistId=${playlistID}&maxResults=1&key=${process.env.VITE_YOUTUBE_API_KEY}`
-      )
-      .then((result) => {
-        return result.data;
-      });
+    axios.get(`/youtube/playlistItems?part=snippet&playlistId=${playlistID}&maxResults=1&key=${process.env.VITE_YOUTUBE_API_KEY}`).then((result) => {
+      return result.data;
+    });
 
   static getUsersByKeyword = (keyword: string) =>
     axios

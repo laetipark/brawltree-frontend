@@ -26,12 +26,7 @@ export const MapSummary = () => {
     const filteredMaps = {};
 
     Object.keys(maps).forEach((mode) => {
-      filteredMaps[mode] = maps[mode].filter((map) =>
-        isRRMatch(
-          searchMapName,
-          locales.map['map'][`${map.mapID}`] || map.mapName,
-        ),
-      );
+      filteredMaps[mode] = maps[mode].filter((map) => isRRMatch(searchMapName, locales.map['map'][`${map.mapID}`] || map.mapName));
     });
     setFilterMaps(filteredMaps);
   }, [searchMapName, maps]);

@@ -18,7 +18,7 @@ export const Brawlers = () => {
     name: 'SHELLY',
     rarity: 'Trophy Road',
     role: 'Damage Dealer',
-    gender: 'Female',
+    gender: 'Female'
   });
 
   const [brawlerStats, setBrawlerStats] = useState([]);
@@ -43,35 +43,27 @@ export const Brawlers = () => {
   }, [brawler.id]);
 
   useEffect(() => {
-    const brawlerByName = brawlers.find(brawler =>
-      brawler.name
-        .toLowerCase()
-        .replaceAll(' ', '')
-      === name);
-    setBrawler(brawlerByName || {
-      id: '16000000',
-      name: 'SHELLY',
-      rarity: 'Trophy Road',
-      role: 'Damage Dealer',
-      gender: 'Female',
-    });
+    const brawlerByName = brawlers.find((brawler) => brawler.name.toLowerCase().replaceAll(' ', '') === name);
+    setBrawler(
+      brawlerByName || {
+        id: '16000000',
+        name: 'SHELLY',
+        rarity: 'Trophy Road',
+        role: 'Damage Dealer',
+        gender: 'Female'
+      }
+    );
   }, [name, brawlers]);
 
-  return (
-    brawlers.length > 0 ? (
-      <div className={styles.app}>
-        <BrawlerSelection brawlers={brawlers}
-                          brawler={brawler}
-                          setBrawler={setBrawler} />
-        <div>
-          <BrawlerInfo brawler={brawler}
-                       skills={brawlerSkills}
-                       items={brawlerItems} />
-          <BrawlerStats brawler={brawler}
-                        stats={brawlerStats}
-                        maps={brawlerMaps} />
-        </div>
+  return brawlers.length > 0 ? (
+    <div className={styles.app}>
+      <BrawlerSelection brawlers={brawlers} brawler={brawler} setBrawler={setBrawler} />
+      <div>
+        <BrawlerInfo brawler={brawler} skills={brawlerSkills} items={brawlerItems} />
+        <BrawlerStats brawler={brawler} stats={brawlerStats} maps={brawlerMaps} />
       </div>
-    ) : <Spinner />
+    </div>
+  ) : (
+    <Spinner />
   );
 };

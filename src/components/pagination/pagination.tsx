@@ -11,10 +11,7 @@ export const Pagination = ({ page, total, setPage }) => {
       <button onClick={() => setPage(page - 1)} disabled={page <= 1}>
         <FontAwesomeIcon icon={faAngleLeft} /> 이전
       </button>
-      <button
-        onClick={() => setPage(page + 1)}
-        disabled={page === total || total === 0}
-      >
+      <button onClick={() => setPage(page + 1)} disabled={page === total || total === 0}>
         다음 <FontAwesomeIcon icon={faAngleRight} />
       </button>
     </div>

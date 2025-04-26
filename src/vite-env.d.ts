@@ -7,8 +7,11 @@ declare namespace NodeJS {
 
   interface ProcessEnv {
     VITE_YOUTUBE_API_KEY: any;
+
     YOUTUBE_API_KEY(YOUTUBE_API_KEY: any): unknown;
+
     REACT_APP_API_KEY(REACT_APP_API_KEY: any): unknown;
+
     /**
      * By default, there are two modes in Vite:
      *
@@ -52,9 +55,7 @@ declare module '*.webp' {
 declare module '*.svg' {
   import * as React from 'react';
 
-  export const ReactComponent: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & { title?: string }
-  >;
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement> & { title?: string }>;
 
   const src: string;
   export default src;

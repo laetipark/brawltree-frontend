@@ -13,15 +13,14 @@ const orderOffest = [
   ['ㅁ', 47560],
   ['ㅂ', 48148],
   ['ㅃ', 48736],
-  ['ㅅ', 49324],
+  ['ㅅ', 49324]
 ];
 
 const con2syl = Object.fromEntries(orderOffest as readonly any[]);
 const pattern = (ch: string) => {
   let r;
   if (reJa.test(ch)) {
-    const begin =
-      con2syl[ch] || (ch.charCodeAt(0) - 12613) * 588 + con2syl['ㅅ'];
+    const begin = con2syl[ch] || (ch.charCodeAt(0) - 12613) * 588 + con2syl['ㅅ'];
     const end = begin + 587;
     r = `[${ch}\\u${begin.toString(16)}-\\u${end.toString(16)}]`;
   } else if (reChar.test(ch)) {

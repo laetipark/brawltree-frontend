@@ -12,10 +12,7 @@ export const ModeFilter = ({ maps }) => {
 
         return maps[`${mode}`].length ? (
           <a key={modeName} href={`#${modeName}`}>
-            <img
-              src={`${config.assets}/modes/icon/${modeName}.webp`}
-              alt={modeName}
-            />
+            <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
             <div>{locales.battle['mode'][`${modeName}`] || modeName}</div>
           </a>
         ) : null;

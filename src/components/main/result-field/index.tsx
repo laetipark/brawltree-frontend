@@ -31,14 +31,7 @@ export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
         return (
           <ul>
             {data?.map((user: SearchUserItemType) => {
-              return (
-                <SearchItem
-                  key={user.userID}
-                  user={user}
-                  onAddSearchHistory={onAddSearchHistory}
-                  onRemoveSearchItem={null}
-                />
-              );
+              return <SearchItem key={user.userID} user={user} onAddSearchHistory={onAddSearchHistory} onRemoveSearchItem={null} />;
             })}
             <li>
               <div
@@ -56,10 +49,7 @@ export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
                   </div>
                 </div>
                 <div>
-                  <FontAwesomeIcon
-                    icon={faArrowUpRightFromSquare}
-                    height={40}
-                  />
+                  <FontAwesomeIcon icon={faArrowUpRightFromSquare} height={40} />
                 </div>
               </div>
             </li>
@@ -69,11 +59,7 @@ export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
   };
 
   return data ? (
-    <div
-      className={styles.resultFieldWrapper}
-      style={{ display: `${checked ? 'flex' : 'none'}` }}
-      ref={dropDownRef}
-    >
+    <div className={styles.resultFieldWrapper} style={{ display: `${checked ? 'flex' : 'none'}` }} ref={dropDownRef}>
       {getDataByStatus()}
     </div>
   ) : null;

@@ -55,14 +55,7 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
   return (
     <div>
       <div>
-        <input
-          className={styles.battleSummaryButton}
-          type={'checkbox'}
-          id={battleInfo.battleTime}
-          name={battleInfo.battleTime}
-          checked={isChecked}
-          onChange={checkHandler}
-        />
+        <input className={styles.battleSummaryButton} type={'checkbox'} id={battleInfo.battleTime} name={battleInfo.battleTime} checked={isChecked} onChange={checkHandler} />
         <label
           htmlFor={battleInfo.battleTime}
           className={styles.battleSummary}

@@ -6,4 +6,4 @@ export type RotationType = {
   mapName: string;
   mode: string;
   modifiers: string | null;
-}
+};

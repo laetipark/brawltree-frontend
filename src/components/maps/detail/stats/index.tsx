@@ -13,16 +13,9 @@ const MapStats = ({ brawlers }) => {
     <div className={styles.brawlerStatsWrapper}>
       {brawlers?.map(({ brawlerID, brawlerName, pickRate, victoryRate }) => {
         return (
-          <a
-            key={`${brawlerID}`}
-            className={styles.brawlerStatsItem}
-            href={`../brawler/${brawlerName.toLowerCase().replaceAll(' ', '')}`}
-          >
+          <a key={`${brawlerID}`} className={styles.brawlerStatsItem} href={`../brawler/${brawlerName.toLowerCase().replaceAll(' ', '')}`}>
             <div className={styles.brawlerTitle}>
-              <img
-                src={`${config.assets}/brawlers/pins/${brawlerID}.webp`}
-                alt={'브롤러'}
-              />
+              <img src={`${config.assets}/brawlers/pins/${brawlerID}.webp`} alt={'브롤러'} />
               <div>{locales.brawler['brawler'][`${brawlerName}`]}</div>
             </div>
             <div className={styles.brawlerContent}>

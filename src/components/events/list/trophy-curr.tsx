@@ -11,10 +11,5 @@ export const TrophyCurrentEvents = () => {
     EventService.getTLCurrentEvents().then((data) => setEvents(data));
   }, []);
 
-  return (
-    (events?.length || 0 > 0) ? (
-      <EventSummaryContainer events={events}
-                             type={'curr'} />
-    ) : <Spinner />
-  );
+  return events?.length || 0 > 0 ? <EventSummaryContainer events={events} type={'curr'} /> : <Spinner />;
 };

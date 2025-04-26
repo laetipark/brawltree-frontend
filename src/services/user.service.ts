@@ -8,15 +8,9 @@ export class UserService {
       .then((result) => result.data)
       .catch((error) => console.error(error));
 
-  static getUserProfile = ({ id }) =>
-    axios
-      .get(`${config.url}/brawlian/${id}/profile`)
-      .then((result) => result.data);
+  static getUserProfile = ({ id }) => axios.get(`${config.url}/brawlian/${id}/profile`).then((result) => result.data);
 
-  static getUserBrawlers = ({ id }) =>
-    axios
-      .get(`${config.url}/brawlian/${id}/brawlers`, {})
-      .then((result) => result.data);
+  static getUserBrawlers = ({ id }) => axios.get(`${config.url}/brawlian/${id}/brawlers`, {}).then((result) => result.data);
 
   static getUserBattleStats = ({ id, type, mode }) =>
     axios
@@ -39,11 +33,7 @@ export class UserService {
       })
       .then((result) => result.data);
 
-  static getCrewMemberDetail = ({ id }) =>
-    axios
-      .get(`${config.url}/crew/members/${id}`)
-      .then(async (result) => result.data);
+  static getCrewMemberDetail = ({ id }) => axios.get(`${config.url}/crew/members/${id}`).then(async (result) => result.data);
 
-  static getCrewMembers = () =>
-    axios.get(`${config.url}/crew/members`).then(async (result) => result.data);
+  static getCrewMembers = () => axios.get(`${config.url}/crew/members`).then(async (result) => result.data);
 }

@@ -6,11 +6,7 @@ import styles from './index.module.scss';
 
 const roman = ['I', 'II', 'III'];
 
-export const SearchItem = ({
-  user,
-  onAddSearchHistory,
-  onRemoveSearchItem
-}) => {
+export const SearchItem = ({ user, onAddSearchHistory, onRemoveSearchItem }) => {
   return (
     <li key={user.userID} value={user.userName}>
       <a
@@ -20,11 +16,7 @@ export const SearchItem = ({
           onAddSearchHistory(user.userID);
         }}
       >
-        <img
-          className={styles.image}
-          src={`${config.assets}/brawlian/profile/${user.profileIcon}.webp`}
-          alt={user.profileIcon}
-        />
+        <img className={styles.image} src={`${config.assets}/brawlian/profile/${user.profileIcon}.webp`} alt={user.profileIcon} />
         <div>
           <div className={styles.searchItemTitle}>
             <span>{user.userName}</span>
@@ -49,22 +41,12 @@ export const SearchItem = ({
           </div>
           <div className={styles.searchItemContent}>
             <span className={styles.searchItemTrophy}>
-              <img
-                src={`${config.assets}/modes/icon/trophy.webp`}
-                alt={'trophyLeague'}
-              />
+              <img src={`${config.assets}/modes/icon/trophy.webp`} alt={'trophyLeague'} />
               {user.currentTrophies}
             </span>
             <span className={styles.searchItemRanked}>
-              <img
-                src={`${config.assets}/rank/ranked/${Math.floor(
-                  user.currentSoloRanked / 3
-                )}.webp`}
-                alt={Math.floor(user.currentSoloRanked / 3).toString()}
-              />
-              {user.currentSoloRanked / 3 < 6
-                ? roman[user.currentSoloRanked % 3]
-                : ''}
+              <img src={`${config.assets}/rank/ranked/${Math.floor(user.currentSoloRanked / 3)}.webp`} alt={Math.floor(user.currentSoloRanked / 3).toString()} />
+              {user.currentSoloRanked / 3 < 6 ? roman[user.currentSoloRanked % 3] : ''}
             </span>
           </div>
         </div>

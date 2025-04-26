@@ -23,14 +23,7 @@ export const SearchHistoryBox = ({ searchHistory }) => {
   return (
     <ul className={styles.SearchHistoryContainer}>
       {historyUsers.map((user) => {
-        return (
-          <SearchItem
-            key={user.userID}
-            user={user}
-            onAddSearchHistory={null}
-            onRemoveSearchItem={onRemoveSearchItem}
-          />
-        );
+        return <SearchItem key={user.userID} user={user} onAddSearchHistory={null} onRemoveSearchItem={onRemoveSearchItem} />;
       })}
     </ul>
   );

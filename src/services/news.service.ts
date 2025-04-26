@@ -8,9 +8,7 @@ export class NewsService {
     });
 
   static getNewsListItem = (region: string, title: string) =>
-    axios
-      .get(`${config.url}/news/${title}?region=${region}`)
-      .then((response) => {
-        return response.data;
-      });
+    axios.get(`${config.url}/news/${title}?region=${region}`).then((response) => {
+      return response.data;
+    });
 }

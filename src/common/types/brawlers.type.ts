@@ -4,7 +4,7 @@ export type BrawlerType = {
   rarity: string;
   role: string;
   gender: string;
-}
+};
 
 export type BrawlerStatsType = {
   brawlerID: string;

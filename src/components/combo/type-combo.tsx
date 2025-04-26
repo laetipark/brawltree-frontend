@@ -12,7 +12,7 @@ import { CdnContext } from '~/context/cdn.context';
 const typeNumber = {
   7: 'all',
   0: 'trophy',
-  2: 'ranked',
+  2: 'ranked'
 };
 
 export const TypeComboBox = ({ type, setMatchType }) => {
@@ -28,24 +28,18 @@ export const TypeComboBox = ({ type, setMatchType }) => {
           setChecked(!checked);
         }}
       >
-        <img
-          src={`${config.assets}/modes/icon/${typeNumber[type]}.webp`}
-          alt={'type_7'}
-        />
+        <img src={`${config.assets}/modes/icon/${typeNumber[type]}.webp`} alt={'type_7'} />
         <div>{locales.battle['type'][`${typeNumber[type]}`]}</div>
         <FontAwesomeIcon
           style={{
             transform: checked ? 'rotate(180deg)' : '',
-            transition: 'transform 0.3s ease',
+            transition: 'transform 0.3s ease'
           }}
           fontSize={14}
           icon={faCaretUp}
         />
       </button>
-      <div
-        className={styles.typeMenuList}
-        style={{ display: checked ? 'flex' : 'none' }}
-      >
+      <div className={styles.typeMenuList} style={{ display: checked ? 'flex' : 'none' }}>
         <input
           className={styles.typeButton}
           type={'radio'}

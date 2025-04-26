@@ -80,15 +80,7 @@ export const EventMenu = () => {
           </li>
         </ul>
       </div>
-      {menu === 'curr' ? (
-        <TrophyCurrentEvents />
-      ) : menu === 'next' ? (
-        <TrophyTomorrowEvents />
-      ) : menu === 'ranked' ? (
-        <RankedEvents />
-      ) : (
-        <div></div>
-      )}
+      {menu === 'curr' ? <TrophyCurrentEvents /> : menu === 'next' ? <TrophyTomorrowEvents /> : menu === 'ranked' ? <RankedEvents /> : <div></div>}
     </div>
   );
 };

@@ -19,10 +19,7 @@ export const SearchBox = ({ crews, setFilterMembers }) => {
   };
 
   const updateData = () => {
-    const filter = keyword
-      ? members.filter((list: InputData) =>
-        new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase()),
-      ) : members;
+    const filter = keyword ? members.filter((list: InputData) => new RegExp(`${keyword}.*`, `g`).test(list.name.toLowerCase())) : members;
     setFilterMembers(filter);
   };
 
@@ -37,11 +34,7 @@ export const SearchBox = ({ crews, setFilterMembers }) => {
 
   return (
     <div className={styles.searchWrapper}>
-      <input
-        className={styles.search}
-        value={keyword}
-        onChange={onChangeData}
-      />
+      <input className={styles.search} value={keyword} onChange={onChangeData} />
       <img src={'/images/etc/search.webp'} alt={'search'} />
     </div>
   );
