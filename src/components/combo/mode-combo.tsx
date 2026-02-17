@@ -12,6 +12,8 @@ import styles from '~/assets/styles/components/combo/mode-combo.module.scss';
 
 export const ModeMenu = ({ mode, setMatchMode, type, modeTL, modePL }) => {
   const locales = useContext(CdnContext);
+  const modeAll = Array.from(new Set([...(modeTL || []), ...(modePL || [])]));
+  const modeList = type === '0' ? modeTL : type === '2' ? modePL : modeAll;
 
   const dropDownRef = useRef();
   const [checked, setChecked] = useWindowClick(dropDownRef, false);
@@ -36,47 +38,26 @@ export const ModeMenu = ({ mode, setMatchMode, type, modeTL, modePL }) => {
         />
       </button>
       <div className={styles.typeMenuList} style={{ display: checked ? 'flex' : 'none' }}>
-        {type === '0' || type === '7'
-          ? modeTL?.map((modeName: string) => (
-              <React.Fragment key={`${modeName}`}>
-                <input
-                  className={styles.typeButton}
-                  type={'radio'}
-                  id={modeName}
-                  name={modeName}
-                  value={modeName}
-                  checked={modeName === mode}
-                  onChange={(e) => {
-                    setMatchMode(e);
-                    setChecked(!checked);
-                  }}
-                />
-                <label htmlFor={modeName}>
-                  <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
-                  <div>{locales.battle['mode'][`${modeName}`]}</div>
-                </label>
-              </React.Fragment>
-            ))
-          : modePL?.map((modeName: string) => (
-              <React.Fragment key={`${modeName}`}>
-                <input
-                  className={styles.typeButton}
-                  type={'radio'}
-                  id={modeName}
-                  name={modeName}
-                  value={modeName}
-                  checked={modeName === mode}
-                  onChange={(e) => {
-                    setMatchMode(e);
-                    setChecked(!checked);
-                  }}
-                />
-                <label htmlFor={modeName}>
-                  <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
-                  <div>{locales.battle['mode'][`${modeName}`]}</div>
-                </label>
-              </React.Fragment>
-            ))}
+        {modeList?.map((modeName: string) => (
+          <React.Fragment key={`${modeName}`}>
+            <input
+              className={styles.typeButton}
+              type={'radio'}
+              id={modeName}
+              name={modeName}
+              value={modeName}
+              checked={modeName === mode}
+              onChange={(e) => {
+                setMatchMode(e);
+                setChecked(!checked);
+              }}
+            />
+            <label htmlFor={modeName}>
+              <img src={`${config.assets}/modes/icon/${modeName}.webp`} alt={modeName} />
+              <div>{locales.battle['mode'][`${modeName}`]}</div>
+            </label>
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

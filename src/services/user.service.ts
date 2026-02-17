@@ -55,6 +55,22 @@ type CrewMemberDetailResponseType = {
 };
 
 export class UserService {
+  private static normalizeBattleType(type: string): string {
+    if (type === 'normal') {
+      return '0';
+    }
+
+    if (type === 'ranked') {
+      return '2';
+    }
+
+    if (type === 'all') {
+      return '7';
+    }
+
+    return type;
+  }
+
   static getUser = ({ id }: { id: string }) =>
     axios
       .get<{ user: UsersType }>(`${config.url}/brawlian/${id}`)
@@ -86,7 +102,7 @@ export class UserService {
     axios
       .get<UserBattleStatsResponseType>(`${config.url}/brawlian/${id}/battles/stats`, {
         params: {
-          type: type,
+          type: UserService.normalizeBattleType(type),
           mode: mode
         }
       })
@@ -106,7 +122,7 @@ export class UserService {
     axios
       .get<UserBattleLogsResponseType>(`${config.url}/brawlian/${id}/battles/logs`, {
         params: {
-          type: type,
+          type: UserService.normalizeBattleType(type),
           mode: mode,
           stack: battleStack
         }
