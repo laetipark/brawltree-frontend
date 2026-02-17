@@ -124,10 +124,10 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
                           userID: '',
                           userName: '',
                           profileIcon: '',
-                          lastBattleAt: undefined,
+                          lastBattledOn: undefined,
                           updatedAt: undefined,
-                          crew: '',
-                          crewName: '',
+                          crew: null,
+                          crewName: null,
                           isCrew: false
                         });
                         setRetryUserInfoCount(0);

@@ -3,6 +3,7 @@ import { MapService } from '~/services/map.service';
 import { MapInput } from '~/components/maps/summary/map-input';
 import { ModeFilter } from '~/components/maps/summary/mode-filter';
 import { MapList } from '~/components/maps/summary/map-list';
+import { MapSummaryType } from '~/common/types/maps.type';
 
 import { isRRMatch } from '~/utils/korean-pattern';
 import { CdnContext } from '~/context/cdn.context';
@@ -10,9 +11,9 @@ import { CdnContext } from '~/context/cdn.context';
 import styles from './summary.module.scss';
 
 export const MapSummary = () => {
-  const [maps, setMaps] = useState({});
+  const [maps, setMaps] = useState<Record<string, MapSummaryType[]>>({});
   const [searchMapName, setSearchMapName] = useState('');
-  const [filterMaps, setFilterMaps] = useState({});
+  const [filterMaps, setFilterMaps] = useState<Record<string, MapSummaryType[]>>({});
 
   const locales = useContext(CdnContext);
 

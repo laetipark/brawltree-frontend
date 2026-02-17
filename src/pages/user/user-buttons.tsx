@@ -12,7 +12,14 @@ export const UserButtonsContainer = () => {
   const locales = useContext(CdnContext);
 
   const context = useContext(UserContext);
-  const { user, setRetrySummaryCount, setRetryBrawlerCount, setSummaryLoaded, setBrawlerLoaded, setBattlesLoaded } = context;
+  const {
+    user,
+    setRetryProfileCount,
+    setRetryBrawlerCount,
+    setProfileLoaded,
+    setBrawlerLoaded,
+    setBattlesLoaded
+  } = context;
   const [lastUpdatedDiff, setLastUpdatedDiff] = useState(moment.duration(moment().diff(moment(user.updatedAt))).asMinutes());
 
   useInterval(() => {
@@ -25,10 +32,10 @@ export const UserButtonsContainer = () => {
         className={styles.userReloadButton}
         onClick={() => {
           if (lastUpdatedDiff > 1) {
-            setSummaryLoaded(false);
+            setProfileLoaded(false);
             setBrawlerLoaded(false);
             setBattlesLoaded(false);
-            setRetrySummaryCount(0);
+            setRetryProfileCount(0);
             setRetryBrawlerCount(0);
           }
         }}

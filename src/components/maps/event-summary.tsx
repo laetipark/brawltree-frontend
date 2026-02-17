@@ -9,7 +9,13 @@ import { CdnContext } from '~/context/cdn.context';
 
 import styles from '~/assets/styles/components/maps/event-summary.module.scss';
 
-export const EventSummaryContainer = ({ events, type }) => {
+export const EventSummaryContainer = ({
+  events,
+  type
+}: {
+  events: RotationType[];
+  type: string;
+}) => {
   const locales = useContext(CdnContext);
 
   return (

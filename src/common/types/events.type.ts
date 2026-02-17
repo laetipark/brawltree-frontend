@@ -1,9 +1,11 @@
 export type EventsType = {
+  id?: number;
   mapID: string;
-  name: string;
+  mapName: string;
   mode: string;
-  beginDate: Date;
-  endDate: Date;
+  startTime?: Date | string;
+  endTime?: Date | string;
+  modifiers?: string | null;
 };
 
 export type RotationModes = {

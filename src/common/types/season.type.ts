@@ -1,4 +1,4 @@
 export type SeasonType = {
-  beginDate: Date;
-  endDate: Date;
+  beginDate: Date | string | undefined;
+  endDate: Date | string | undefined;
 };

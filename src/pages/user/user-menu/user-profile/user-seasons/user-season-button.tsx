@@ -4,12 +4,23 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { UserSeasonModeBox } from '~/pages/user/user-menu/user-profile/user-seasons/user-season-mode';
+import { UserSeasonsType } from '~/common/types/users.type';
 
 import { CdnContext } from '~/context/cdn.context';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-seasons/user-season-button.module.scss';
 
-export const UserSeasonButtonBox = ({ matches, toggle, setToggle, type }) => {
+export const UserSeasonButtonBox = ({
+  matches,
+  toggle,
+  setToggle,
+  type
+}: {
+  matches: UserSeasonsType | undefined;
+  toggle: boolean;
+  setToggle: (toggle: boolean) => void;
+  type: 'trophy' | 'ranked';
+}) => {
   const locales = useContext(CdnContext);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
@@ -17,10 +28,10 @@ export const UserSeasonButtonBox = ({ matches, toggle, setToggle, type }) => {
   const vicRate = (vicCount: number, defCount: number) => {
     return Math.round((vicCount / (vicCount + defCount)) * 100) || 0;
   };
-  const keys = matches?.matchList && Object.keys(matches.matchList);
+  const keys = matches ? Object.keys(matches.matchList) : [];
 
   return (
-    keys?.length > 0 && (
+    keys.length > 0 && (
       <React.Fragment>
         <h3 className={styles.userSeasonButtonBox} onClick={() => setToggle(!toggle)}>
           <FontAwesomeIcon
@@ -54,7 +65,7 @@ export const UserSeasonButtonBox = ({ matches, toggle, setToggle, type }) => {
               {keys.map((key) => {
                 const season = matches.matchList[key];
                 return (
-                  <React.Fragment key={`${season.modeName}_${season.matchType}_${season.matchGrade}`}>
+                  <React.Fragment key={`${matches.matchType}_${season.mode}`}>
                     <UserSeasonModeBox season={season} />
                   </React.Fragment>
                 );

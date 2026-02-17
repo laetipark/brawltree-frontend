@@ -1,13 +1,19 @@
 import React, { useContext } from 'react';
 
-import { UserFriendsType } from '~/common/types/users.type';
+import { UserFriendMatchType } from '~/common/types/users.type';
 import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-friends/user-friend-info-item.module.scss';
 
-export const UserFriendInfoItemBox = ({ matchList, isDetailVisible }) => {
+export const UserFriendInfoItemBox = ({
+  matchList,
+  isDetailVisible
+}: {
+  matchList: UserFriendMatchType[];
+  isDetailVisible: boolean;
+}) => {
   const locales = useContext(CdnContext);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
@@ -15,7 +21,7 @@ export const UserFriendInfoItemBox = ({ matchList, isDetailVisible }) => {
 
   return (
     <div className={styles.friendInfoItemBox} style={{ display: isDetailVisible ? 'flex' : 'none' }}>
-      {matchList?.map((match: UserFriendsType) => {
+      {matchList?.map((match: UserFriendMatchType) => {
         return (
           <div key={`${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}>
             <div>

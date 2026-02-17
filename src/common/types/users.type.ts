@@ -2,48 +2,40 @@ export type UsersType = {
   userID: string;
   userName: string;
   profileIcon: string;
-  lastBattleAt: Date;
+  lastBattledOn: Date | string;
   isCrew: boolean;
-  crew: string;
-  crewName: string;
-  updatedAt: Date;
+  crew: string | null;
+  crewName: string | null;
+  updatedAt: Date | string;
 };
 
 export type UserProfileType = {
   userID: string;
-  userName: string;
+  name: string;
   profileIcon: string;
-  clubID: string;
-  clubName: string;
+  clubID: string | null;
+  clubName: string | null;
   currentTrophies: number;
   highestTrophies: number;
   trophyChange: number;
   trioMatchVictories: number;
   duoMatchVictories: number;
   soloMatchVictories: number;
-  // brawlerRank25: number;
-  // brawlerRank30: number;
   brawlerRank50: number;
   currentSoloRanked: number;
   highestSoloRanked: number;
-  // currentTeamPL: number;
-  // highestTeamPL: number;
 };
 
 export type UserSummaryBattlesType = {
   day: string;
-  value: string;
+  value: number;
 };
 
 export type UserDailyBattlesType = {
-  date: Date;
+  date: Date | string;
   brawlers: UserDailyBrawlersType[];
 };
 
-/**
- * @type UserDailyBrawlersType
- * @description 일일 브롤러 별 픽/승률 타입
- */
 export type UserDailyBrawlersType = {
   brawlerID: string;
   matchCount: number;
@@ -79,12 +71,20 @@ export type UserBattlesType = {
 
 export type UserBattleInfoType = {
   userID: string;
-  battleTime: Date;
+  battleTime: Date | string;
   duration: number;
   matchType: number;
   modeCode: number;
   matchGrade: number;
   trophyChange: number;
+  brawlerID: string;
+  gameResult: number;
+  mapID: string;
+  isStarPlayer: boolean;
+  mode: string;
+  mapName: string;
+  brawlerName: string;
+  role: string;
 };
 
 export type UserBattlePlayersType = {
@@ -99,25 +99,38 @@ export type UserBattlePlayersType = {
   isStarPlayer: number;
 };
 
-export type UserFriendListType = {
-  friends: UserFriendsType[];
-  friendsUpdatedAt: Date;
+export type UserFriendMatchType = {
+  friendID: string;
+  friendName: string;
+  profileIcon: string;
+  matchType: number;
+  matchGrade: number;
+  mode: string;
+  matchCount: number;
+  victoriesCount: number;
+  defeatsCount: number;
+  victoryRate: number;
+  createdAt: Date | string;
 };
 
-export type UserFriendsType = {
+export type UserFriendType = {
   friendID: string;
   friendName: string;
   profileIcon: string;
   matchCount: number;
-  matchGrade: number;
-  matchType: number;
-  mode: string;
   victoriesCount: number;
   defeatsCount: number;
   victoryRate: number;
+  createdAt: Date | string;
+  matchList: UserFriendMatchType[];
 };
 
-export type UserSeasonsType = {
+export type UserFriendListType = {
+  friends: UserFriendType[];
+  friendsUpdatedAt: Date | string | undefined;
+};
+
+export type UserSeasonGradeType = {
   matchType: number;
   matchGrade: number;
   modeName: string;
@@ -125,6 +138,23 @@ export type UserSeasonsType = {
   victoriesCount: number;
   defeatsCount: number;
   victoryRate: number;
+};
+
+export type UserSeasonModeType = {
+  mode: string;
+  items: UserSeasonGradeType[];
+  matchCount: number;
+  victoriesCount: number;
+  defeatsCount: number;
+};
+
+export type UserSeasonsType = {
+  matchType: number;
+  matchCount: number;
+  victoriesCount: number;
+  defeatsCount: number;
+  victoryRate: number;
+  matchList: Record<string, UserSeasonModeType>;
 };
 
 export type UserWithoutBrawlersType = {

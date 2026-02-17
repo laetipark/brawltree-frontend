@@ -1,20 +1,90 @@
 import axios from 'axios';
 import config from '~/common/config/config';
+import {
+  UserBattlesType,
+  UserBrawlerGraphType,
+  UserBrawlerItemsType,
+  UserDailyBattlesType,
+  UserFriendListType,
+  UserOwnedBrawlersType,
+  UserProfileType,
+  UserRecentBattlesType,
+  UserRecentBrawlersType,
+  UserSeasonsType,
+  UsersType,
+  UserSummaryBattlesType,
+  UserWithoutBrawlersType
+} from '~/common/types/users.type';
+import { SeasonType } from '~/common/types/season.type';
+
+export type CrewMembersType = {
+  userID: string;
+  userName: string;
+  crew: string | null;
+  crewName: string | null;
+  profileIcon: string;
+  currentTrophies: number;
+  currentSoloRanked: number;
+  highestSoloRanked: number;
+};
+
+type UserBrawlersResponseType = {
+  userWithoutBrawlers: UserWithoutBrawlersType[];
+  userOwnedBrawlers: UserOwnedBrawlersType[];
+  brawlerItems: UserBrawlerItemsType[];
+  brawlerGraphs: UserBrawlerGraphType[];
+};
+
+type UserBattleStatsResponseType = {
+  summaryBattles: UserSummaryBattlesType[];
+  dailyBrawlers: UserDailyBattlesType[];
+  modeTL: string[];
+  modePL: string[];
+  season: SeasonType;
+};
+
+type UserBattleLogsResponseType = {
+  recentBattles: UserRecentBattlesType[];
+  recentBrawlers: UserRecentBrawlersType[];
+  battles: UserBattlesType[];
+};
+
+type CrewMemberDetailResponseType = {
+  friendList: UserFriendListType;
+  seasonList: UserSeasonsType[];
+};
 
 export class UserService {
-  static getUser = ({ id }) =>
+  static getUser = ({ id }: { id: string }) =>
     axios
-      .get(`${config.url}/brawlian/${id}`)
+      .get<{ user: UsersType }>(`${config.url}/brawlian/${id}`)
       .then((result) => result.data)
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+        return null;
+      });
 
-  static getUserProfile = ({ id }) => axios.get(`${config.url}/brawlian/${id}/profile`).then((result) => result.data);
-
-  static getUserBrawlers = ({ id }) => axios.get(`${config.url}/brawlian/${id}/brawlers`, {}).then((result) => result.data);
-
-  static getUserBattleStats = ({ id, type, mode }) =>
+  static getUserProfile = ({ id }: { id: string }) =>
     axios
-      .get(`${config.url}/brawlian/${id}/battles/stats`, {
+      .get<{ profile: UserProfileType }>(`${config.url}/brawlian/${id}/profile`)
+      .then((result) => result.data);
+
+  static getUserBrawlers = ({ id }: { id: string }) =>
+    axios
+      .get<UserBrawlersResponseType>(`${config.url}/brawlian/${id}/brawlers`, {})
+      .then((result) => result.data);
+
+  static getUserBattleStats = ({
+    id,
+    type,
+    mode
+  }: {
+    id: string;
+    type: string;
+    mode: string;
+  }) =>
+    axios
+      .get<UserBattleStatsResponseType>(`${config.url}/brawlian/${id}/battles/stats`, {
         params: {
           type: type,
           mode: mode
@@ -22,9 +92,19 @@ export class UserService {
       })
       .then((result) => result.data);
 
-  static getUserBattleLogs = ({ id, type, mode, battleStack }) =>
+  static getUserBattleLogs = ({
+    id,
+    type,
+    mode,
+    battleStack
+  }: {
+    id: string;
+    type: string;
+    mode: string;
+    battleStack: number;
+  }) =>
     axios
-      .get(`${config.url}/brawlian/${id}/battles/logs`, {
+      .get<UserBattleLogsResponseType>(`${config.url}/brawlian/${id}/battles/logs`, {
         params: {
           type: type,
           mode: mode,
@@ -33,7 +113,13 @@ export class UserService {
       })
       .then((result) => result.data);
 
-  static getCrewMemberDetail = ({ id }) => axios.get(`${config.url}/crew/members/${id}`).then(async (result) => result.data);
+  static getCrewMemberDetail = ({ id }: { id: string }) =>
+    axios
+      .get<CrewMemberDetailResponseType>(`${config.url}/crew/members/${id}`)
+      .then((result) => result.data);
 
-  static getCrewMembers = () => axios.get(`${config.url}/crew/members`).then(async (result) => result.data);
+  static getCrewMembers = () =>
+    axios
+      .get<Record<string, CrewMembersType[]>>(`${config.url}/crew/members`)
+      .then((result) => result.data);
 }

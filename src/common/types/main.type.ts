@@ -8,6 +8,7 @@ export type SearchUserItemType = {
   userName: string;
   profileIcon: string;
   clubName: string;
+  crewName?: string;
   currentTrophies: number;
   currentSoloRanked: number;
 };

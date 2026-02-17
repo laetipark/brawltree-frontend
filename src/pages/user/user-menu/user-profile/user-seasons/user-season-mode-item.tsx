@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { UserSeasonGradeType } from '~/common/types/users.type';
 
 import { CdnContext } from '~/context/cdn.context';
 
@@ -6,7 +7,13 @@ import config from '~/common/config/config';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-seasons/user-season-mode-item.module.scss';
 
-export const UserSeasonModeItemBox = ({ items, hover }) => {
+export const UserSeasonModeItemBox = ({
+  items,
+  hover
+}: {
+  items: UserSeasonGradeType[];
+  hover: boolean;
+}) => {
   const locales = useContext(CdnContext);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
     return matchCount - (vicCount + defCount);
@@ -16,7 +23,7 @@ export const UserSeasonModeItemBox = ({ items, hover }) => {
     <div className={styles.userSeasonModeItemBox} style={{ display: hover ? 'flex' : 'none' }}>
       {items.map((item) => {
         return (
-          <div key={`${item.mode}_${item.matchType}_${item.matchGrade}`}>
+          <div key={`${item.modeName}_${item.matchType}_${item.matchGrade}`}>
             <div>
               {item.matchType === 0 ? (
                 <img className={styles.iconImage} src={`${config.assets}/rank/trophy/grade/${item.matchGrade}.webp`} alt={`trophy_${item.matchGrade}`} />

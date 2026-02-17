@@ -73,10 +73,10 @@ export type UserProfileContextType = {
   /* User Friends/Seasons container values */
   isCrew: boolean;
   setIsCrew: (isCrew: boolean) => void;
-  friendList?: UserFriendListType;
-  seasonList?: UserSeasonsType[];
-  setFriendList?: (userFriends: UserFriendListType) => void;
-  setSeasonList?: (userSeasons: UserSeasonsType[]) => void;
+  friendList: UserFriendListType;
+  seasonList: UserSeasonsType[];
+  setFriendList: (userFriends: UserFriendListType) => void;
+  setSeasonList: (userSeasons: UserSeasonsType[]) => void;
 };
 
 /**

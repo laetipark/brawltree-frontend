@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { MapBrawlerStatsType } from '~/services/map.service';
 
 import { CdnContext } from '~/context/cdn.context';
 
@@ -6,7 +7,7 @@ import config from '~/common/config/config';
 
 import styles from './index.module.scss';
 
-const MapStats = ({ brawlers }) => {
+const MapStats = ({ brawlers }: { brawlers: MapBrawlerStatsType[] }) => {
   const locales = useContext(CdnContext);
 
   return (

@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 
 import { UserFriendInfoItemBox } from '~/pages/user/user-menu/user-profile/user-friends/user-friend-info-item';
+import { UserFriendType } from '~/common/types/users.type';
 import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-friends/user-friend-info.module.scss';
 
-export const UserFriendInfoBox = ({ friend }) => {
+export const UserFriendInfoBox = ({ friend }: { friend: UserFriendType }) => {
   const locales = useContext(CdnContext);
   const [isDetailVisible, setIsDetailVisible] = useState(false);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {
@@ -49,7 +50,13 @@ export const UserFriendInfoBox = ({ friend }) => {
             <div>
               (
               <span>
-                {friend.victoriesCount > 0 ? Math.round((friend.victoriesCount / (parseInt(friend.victoriesCount) + parseInt(friend.defeatsCount))) * 100) : 0}
+                {friend.victoriesCount > 0
+                  ? Math.round(
+                      (friend.victoriesCount /
+                        (friend.victoriesCount + friend.defeatsCount)) *
+                        100
+                    )
+                  : 0}
                 %)
               </span>
             </div>

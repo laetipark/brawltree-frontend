@@ -49,7 +49,7 @@ export const UserWrapper = () => {
     userID: `#${id}`,
     userName: '',
     profileIcon: '',
-    lastBattleAt: new Date(0),
+    lastBattledOn: new Date(0),
     crew: null,
     crewName: null,
     isCrew: false,
@@ -92,7 +92,7 @@ export const UserWrapper = () => {
   /* User Profile container values */
   const [profile, setProfile] = useState<UserProfileType>({
     userID: '',
-    userName: '',
+    name: '',
     profileIcon: '',
     clubID: '',
     clubName: '',

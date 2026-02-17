@@ -3,16 +3,17 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { UserFriendInfoBox } from '~/pages/user/user-menu/user-profile/user-friends/user-friend-info';
+import { UserFriendListType, UserFriendType } from '~/common/types/users.type';
 
 import { CdnContext } from '~/context/cdn.context';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-friends.module.scss';
 
-export const UserFriendsContent = ({ friendList }) => {
+export const UserFriendsContent = ({ friendList }: { friendList: UserFriendListType }) => {
   const locales = useContext(CdnContext);
   const { friends, friendsUpdatedAt } = friendList;
 
-  const [filterFriends, setFilterFriends] = useState([]);
+  const [filterFriends, setFilterFriends] = useState<UserFriendType[]>([]);
   const [isMore, setIsMore] = useState(false);
 
   useEffect(() => {

@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { SearchItem } from '~/components/search/search-item';
 import { Spinner } from '~/components/spinner/spinner';
 
-import { UserService } from '~/services/user.service';
+import { CrewMembersType, UserService } from '~/services/user.service';
 
 import styles from './index.module.scss';
 
 export const CrewMembers = () => {
-  const [crews, setCrews] = useState([]);
+  const [crews, setCrews] = useState<Record<string, CrewMembersType[]>>({});
 
   useEffect(() => {
     UserService.getCrewMembers().then((data) => {

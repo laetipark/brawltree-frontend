@@ -1,13 +1,14 @@
 import React, { useContext, useState } from 'react';
 
 import { UserSeasonModeItemBox } from './user-season-mode-item';
+import { UserSeasonModeType } from '~/common/types/users.type';
 import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-seasons/user-season-mode.module.scss';
 
-export const UserSeasonModeBox = ({ season }) => {
+export const UserSeasonModeBox = ({ season }: { season: UserSeasonModeType }) => {
   const locales = useContext(CdnContext);
   const [hover, setHover] = useState(false);
   const drwCount = (matchCount: number, vicCount: number, defCount: number) => {

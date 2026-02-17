@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { UserSeasonButtonBox } from '~/pages/user/user-menu/user-profile/user-seasons/user-season-button';
+import { UserSeasonsType } from '~/common/types/users.type';
 
 import { CdnContext } from '~/context/cdn.context';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-seasons.module.scss';
 
-export const UserSeasonsContent = ({ seasonList }) => {
+export const UserSeasonsContent = ({ seasonList }: { seasonList: UserSeasonsType[] }) => {
   const locales = useContext(CdnContext);
 
   const [trophyToggle, setTrophyToggle] = useState(false);
