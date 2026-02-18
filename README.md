@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+![BrawlTree](https://brawltree.me/images/logo/brawltree/logo_horizontal.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# :deciduous_tree: BrawlTree Frontend
 
-## Available Scripts
+## :hash: 프로젝트 소개
 
-In the project directory, you can run:
+`BrawlTree Frontend`는 브롤스타즈 전투/통계 데이터를 사용자에게 보여주는 웹 클라이언트입니다.  
+`React + Vite + TypeScript` 기반으로 구성되어 있으며, `Backend API`를 호출해 화면을 렌더링합니다.
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## :hammer_and_wrench: 기술 스택
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black">&nbsp;
+<img src="https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white">&nbsp;
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge">&nbsp;
+<img src="https://img.shields.io/badge/Sass-1-CC6699?style=for-the-badge&logo=sass&logoColor=white">
 
-### `npm test`
+<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## :bookmark_tabs: 목차
 
-### `npm run build`
+1. [:gear: 환경 설정 및 실행](#gear-환경-설정-및-실행)
+2. [:open_file_folder: 디렉토리 구조](#open_file_folder-디렉토리-구조)
+3. [:rocket: 스크립트](#rocket-스크립트)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## :gear: 환경 설정 및 실행
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+패키지 설치 후 개발 서버를 실행합니다.
 
-### `npm run eject`
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+환경 변수는 `frontend/.env.development.sample`을 기준으로 설정합니다.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```dotenv
+VITE_BASE_URL=
+VITE_PORT=
+YOUTUBE_API_KEY=
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## :open_file_folder: 디렉토리 구조
 
-## Learn More
+```text
+frontend
+|-- src
+|   |-- components
+|   |-- pages
+|   |-- services
+|   |-- hooks
+|   |-- context
+|   `-- utils
+|-- public
+`-- package.json
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## :rocket: 스크립트
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `npm run dev`: 개발 서버 실행
+- `npm run build`: 프로덕션 빌드
+- `npm run preview`: 빌드 결과 미리보기
+- `npm run test`: 테스트 실행
+- `npm run start:pm2`: PM2 실행
