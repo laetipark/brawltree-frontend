@@ -88,14 +88,18 @@
 
 .nivoLegend {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
   border-radius: 4px;
   background-color: #643843;
-  gap: 4px;
-  padding: 12px;
+  gap: 2px;
+  padding: 8px 10px;
   color: white;
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.25;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
   & > span:last-child {
     color: #E7CBCB;

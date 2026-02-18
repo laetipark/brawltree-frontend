@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,14 +24,18 @@ export const SearchUserContainer = () => {
   const { searchHistory, setSearchHistory } = searchContext;
 
   /** Function related to searching by nickname OR user tag */
-  const handleChangeInputValue = debounce((target: { value: string }) => {
-    const { value } = target;
-    target.value = value.replace('#', '');
-    setInputValue(value.replace('#', ''));
-  }, 200);
+  const handleChangeInputValue = useMemo(
+    () =>
+      debounce((value: string) => {
+        setInputValue(value);
+      }, 200),
+    []
+  );
 
-  const handleChangeInput = ({ target }) => {
-    handleChangeInputValue(target);
+  const handleChangeInput = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    const nextValue = target.value.replace('#', '');
+    target.value = nextValue;
+    handleChangeInputValue(nextValue);
   };
 
   const handleClearSearchHistory = () => {
@@ -45,7 +49,10 @@ export const SearchUserContainer = () => {
       <h2>{locales.main['searchProfile'] || 'searchProfile'}</h2>
       <form
         onSubmit={(e) => {
-          navigate(`/brawlian/${e.target[0].value.toUpperCase()}`);
+          e.preventDefault();
+          const formData = new FormData(e.currentTarget);
+          const userTag = String(formData.get('search') || '').toUpperCase();
+          navigate(`/brawlian/${userTag}`);
         }}
       >
         <SearchUserInputBox onChangeInput={handleChangeInput} />

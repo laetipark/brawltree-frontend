@@ -1,78 +1,77 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { Header } from '~/components/layout/header';
 import { Footer } from '~/components/layout/footer';
-
-import { MainWrapper } from '~/pages/main';
-import { UserWrapper } from '~/pages/user';
-import { Brawlers } from '~/pages/brawlers';
-import { Events } from '~/pages/events/events';
-import { MapSummary } from '~/pages/maps/summary/summary';
-import { MapDetail } from '~/pages/maps/detail/detail';
-import { CrewMembers } from '~/pages/crew';
-import { NewsWrapper } from '~/pages/news';
-import { NewsListItem } from '~/pages/news/detail';
-
-import { CdnContext } from '~/context/cdn.context';
+import { CdnContext, EMPTY_CDN_BUNDLE } from '~/context/cdn.context';
+import type { CdnBundle } from '~/context/cdn.context';
 import { CdnService } from '~/services/cdn.service';
 import { Spinner } from '~/components/spinner/spinner';
+
+const MainWrapper = lazy(() => import('~/pages/main').then((module) => ({ default: module.MainWrapper })));
+const UserWrapper = lazy(() => import('~/pages/user').then((module) => ({ default: module.UserWrapper })));
+const Brawlers = lazy(() => import('~/pages/brawlers').then((module) => ({ default: module.Brawlers })));
+const Events = lazy(() => import('~/pages/events/events').then((module) => ({ default: module.Events })));
+const MapSummary = lazy(() => import('~/pages/maps/summary/summary').then((module) => ({ default: module.MapSummary })));
+const MapDetail = lazy(() => import('~/pages/maps/detail/detail').then((module) => ({ default: module.MapDetail })));
+const CrewMembers = lazy(() => import('~/pages/crew').then((module) => ({ default: module.CrewMembers })));
+const NewsWrapper = lazy(() => import('~/pages/news').then((module) => ({ default: module.NewsWrapper })));
+const NewsListItem = lazy(() => import('~/pages/news/detail').then((module) => ({ default: module.NewsListItem })));
+
+const fetchCdnBundle = async (language: string): Promise<CdnBundle> => {
+  const cacheBuster = Date.now();
+  const [application, battle, brawler, main, map, news, user] = await Promise.all([
+    CdnService.getApplicationCdn(language, cacheBuster),
+    CdnService.getBattleCdn(language, cacheBuster),
+    CdnService.getBrawlerCdn(language, cacheBuster),
+    CdnService.getMainCdn(language, cacheBuster),
+    CdnService.getMapCdn(language, cacheBuster),
+    CdnService.getNewsCdn(language, cacheBuster),
+    CdnService.getUserCdn(language, cacheBuster)
+  ]);
+
+  return { application, battle, brawler, main, map, news, user };
+};
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [language, setLanguage] = useState('ko');
-
-  const [applicationCdn, setApplicationCdn] = useState({});
-  const [battleCdn, setBattleCdn] = useState({});
-  const [brawlerCdn, setBrawlerCdn] = useState({});
-  const [mainCdn, setMainCdn] = useState({});
-  const [mapCdn, setMapCdn] = useState({});
-  const [newsCdn, setNewsCdn] = useState({});
-  const [userCdn, setUserCdn] = useState({});
+  const [cdnBundle, setCdnBundle] = useState<CdnBundle>(EMPTY_CDN_BUNDLE);
 
   useEffect(() => {
-    const time = new Date().getTime();
+    let isSubscribed = true;
 
-    Promise.all([
-      CdnService.getApplicationCdn(language, time),
-      CdnService.getBattleCdn(language, time),
-      CdnService.getBrawlerCdn(language, time),
-      CdnService.getMainCdn(language, time),
-      CdnService.getMapCdn(language, time),
-      CdnService.getNewsCdn(language, time),
-      CdnService.getUserCdn(language, time)
-    ])
-      .then(([applicationData, battleData, brawlerData, mainData, mapData, newsData, userData]) => {
-        setApplicationCdn(applicationData);
-        setBattleCdn(battleData);
-        setBrawlerCdn(brawlerData);
-        setMainCdn(mainData);
-        setMapCdn(mapData);
-        setNewsCdn(newsData);
-        setUserCdn(userData);
+    fetchCdnBundle(language)
+      .then((nextBundle) => {
+        if (!isSubscribed) {
+          return;
+        }
+
+        setCdnBundle(nextBundle);
         setIsLoaded(true);
       })
       .catch((error) => {
         console.error('Error fetching CDN data:', error);
       });
-  }, [isLoaded, language]);
+
+    return () => {
+      isSubscribed = false;
+    };
+  }, [language]);
+
+  const contextValue = useMemo(
+    () => ({
+      ...cdnBundle,
+      language,
+      setLanguage
+    }),
+    [cdnBundle, language]
+  );
 
   return isLoaded ? (
-    <CdnContext.Provider
-      value={{
-        application: applicationCdn,
-        battle: battleCdn,
-        brawler: brawlerCdn,
-        main: mainCdn,
-        map: mapCdn,
-        news: newsCdn,
-        user: userCdn,
-        language,
-        setLanguage
-      }}
-    >
-      <React.Fragment>
-        <Header />
+    <CdnContext.Provider value={contextValue}>
+      <Header />
+      <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<MainWrapper />} />
           <Route path="/brawlian/:id" element={<UserWrapper />} />
@@ -84,8 +83,8 @@ const App = () => {
           <Route path="/news" element={<NewsWrapper />} />
           <Route path="/news/:title" element={<NewsListItem />} />
         </Routes>
-        <Footer />
-      </React.Fragment>
+      </Suspense>
+      <Footer />
     </CdnContext.Provider>
   ) : (
     <Spinner />

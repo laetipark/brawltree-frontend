@@ -10,9 +10,9 @@ export const SearchUserInputBox = ({ onChangeInput }) => {
   const { onAddSearchHistory } = context;
 
   const handleEnterKey = useCallback(
-    ({ keyCode, target }) => {
-      if (keyCode === 13) {
-        onAddSearchHistory(target.value);
+    ({ key, currentTarget }: React.KeyboardEvent<HTMLInputElement>) => {
+      if (key === 'Enter') {
+        onAddSearchHistory(currentTarget.value);
       }
     },
     [onAddSearchHistory]
@@ -30,6 +30,7 @@ export const SearchUserInputBox = ({ onChangeInput }) => {
         maxLength={12}
         pattern="#?[O0289PYLQGRJCUVopylqgrjcuv]{3,12}"
         style={{ textTransform: 'uppercase' }}
+        autoComplete="off"
         onChange={onChangeInput}
         onKeyDown={handleEnterKey}
       />

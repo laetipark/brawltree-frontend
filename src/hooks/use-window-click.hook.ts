@@ -1,22 +1,31 @@
 import { useEffect, useState } from 'react';
 
-export const useWindowClick = (ref, initialState) => {
+type ClickOutsideRef = {
+  current: HTMLElement | null | undefined;
+};
+
+export const useWindowClick = (ref: ClickOutsideRef, initialState: boolean) => {
   const [open, setOpen] = useState(initialState);
 
   useEffect(() => {
-    const pageClickEvent = ({ target }) => {
-      if (ref.current && !ref.current.contains(target)) {
-        setOpen(!open);
+    if (!open) {
+      return;
+    }
+
+    const pageClickEvent = ({ target }: MouseEvent) => {
+      const targetNode = target as Node | null;
+
+      if (ref.current && targetNode && !ref.current.contains(targetNode)) {
+        setOpen(false);
       }
     };
 
-    if (open) {
-      window.addEventListener('click', pageClickEvent);
-    }
+    window.addEventListener('click', pageClickEvent);
 
     return () => {
       window.removeEventListener('click', pageClickEvent);
     };
   }, [open, ref]);
-  return [open, setOpen];
+
+  return [open, setOpen] as const;
 };

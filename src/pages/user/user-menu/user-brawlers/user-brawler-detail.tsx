@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Line } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
 
 import { ItemTooltip } from '~/components/items/item-info';
 
@@ -88,67 +88,60 @@ export const UserBrawlerDetailContent = ({
         </div>
       </div>
       {brawlerGraphData[0].data.length > 1 && (
-        <Line
-          data={brawlerGraphData}
-          width={280}
-          height={240}
-          margin={{ top: 12, right: 16, bottom: 40, left: 52 }}
-          yFormat=" >-.0f"
-          xScale={{ type: 'point' }}
-          yScale={{
-            type: 'linear',
-            min:
-              brawlerData
-                ?.map((item) => item.y)
-                .reduce((a, b) => {
-                  return Math.min(a, b);
-                }) - 40,
-            max:
-              brawlerData
-                ?.map((item) => item.y)
-                .reduce((a, b) => {
-                  return Math.max(a, b);
-                }) + 40,
-            stacked: true,
-            reverse: false
-          }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={{
-            tickSize: 4,
-            tickPadding: 4,
-            tickRotation: 0,
-            legend: locales.application['date'] || 'date',
-            legendOffset: 32,
-            legendPosition: 'middle'
-          }}
-          axisLeft={{
-            tickSize: 8,
-            tickPadding: 4,
-            tickRotation: 0,
-            legend: locales.user['records']?.trophies || 'trophies',
-            legendOffset: -44,
-            legendPosition: 'middle'
-          }}
-          colors={{ scheme: 'category10' }}
-          enableArea={true}
-          areaBaselineValue={
-            brawlerData
-              ?.map((item) => item.y)
-              .reduce((a, b) => {
-                return Math.min(a, b);
-              }) - 40
-          }
-          pointSize={8}
-          pointColor={{ from: 'color' }}
-          pointBorderWidth={2}
-          pointBorderColor={{ from: 'serieColor' }}
-          pointLabelYOffset={-12}
-          enablePointLabel={true}
-          useMesh={true}
-          animate={false}
-          isInteractive={false}
-        />
+        <div className={styles.nivoLineFrame}>
+          <ResponsiveLine
+            data={brawlerGraphData}
+            margin={{ top: 12, right: 16, bottom: 40, left: 52 }}
+            yFormat=" >-.0f"
+            xScale={{ type: 'point' }}
+            yScale={{
+              type: 'linear',
+              min:
+                brawlerData
+                  ?.map((item) => item.y)
+                  .reduce((a, b) => {
+                    return Math.min(a, b);
+                  }) - 40,
+              max:
+                brawlerData
+                  ?.map((item) => item.y)
+                  .reduce((a, b) => {
+                    return Math.max(a, b);
+                  }) + 40,
+              stacked: true,
+              reverse: false
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+              tickSize: 4,
+              tickPadding: 4,
+              tickRotation: 0,
+              legend: locales.application['date'] || 'date',
+              legendOffset: 32,
+              legendPosition: 'middle'
+            }}
+            axisLeft={{
+              tickSize: 8,
+              tickPadding: 4,
+              tickRotation: 0,
+              legend: locales.user['records']?.trophies || 'trophies',
+              legendOffset: -44,
+              legendPosition: 'middle'
+            }}
+            colors={{ scheme: 'category10' }}
+            enableArea={true}
+            pointSize={8}
+            pointColor={{ from: 'color' }}
+            pointBorderWidth={2}
+            pointBorderColor={{ from: 'serieColor' }}
+            pointLabelYOffset={-12}
+            enablePointLabel={true}
+            useMesh={true}
+            animate={false}
+            isInteractive={false}
+          />
+        </div>
       )}
     </div>
   );

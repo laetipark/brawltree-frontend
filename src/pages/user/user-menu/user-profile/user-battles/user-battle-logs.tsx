@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Pie } from '@nivo/pie';
+import { useMediaQuery } from 'react-responsive';
 
 import { UserBattleLogsItemBox } from '~/pages/user/user-menu/user-profile/user-battles/user-battle-logs-item';
 import { UserBrawlerStatsBox } from '~/pages/user/user-menu/user-profile/user-battles/user-brawler-stats';
@@ -9,6 +10,33 @@ import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-battl
 
 export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) => {
   const locales = useContext(CdnContext);
+  const isDesktop = useMediaQuery({ minWidth: 1280 });
+
+  const battlePieWidth = isDesktop ? 320 : 280;
+  const battlePieHeight = isDesktop ? 242 : 224;
+  const rolePieWidth = isDesktop ? 320 : 280;
+  const rolePieHeight = isDesktop ? 262 : 244;
+  const pieTheme = {
+    text: {
+      fontFamily:
+        '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+      fill: '#1f2e22',
+      fontSize: isDesktop ? 12 : 11
+    },
+    legends: {
+      text: {
+        fill: '#1f2e22',
+        fontSize: isDesktop ? 12 : 10
+      }
+    },
+    labels: {
+      text: {
+        fill: '#1d2b21',
+        fontSize: isDesktop ? 13 : 11,
+        fontWeight: 700
+      }
+    }
+  };
 
   const matchCount = recentBattles?.length || 0;
   const vicCount = recentBattles?.filter(({ gameResult }) => gameResult === -1).length || 0;
@@ -48,37 +76,37 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
     {
       id: 'Artillery',
       label: locales.brawler['brawlerRole'].Artillery,
-      value: (artCount / matchCount).toFixed(3) || 0
+      value: Number((artCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Assassin',
       label: locales.brawler['brawlerRole'].Assassin,
-      value: (sinCount / matchCount).toFixed(3) || 0
+      value: Number((sinCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Tank',
       label: locales.brawler['brawlerRole'].Tank,
-      value: (tnkCount / matchCount).toFixed(3) || 0
+      value: Number((tnkCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Damage Dealer',
       label: locales.brawler['brawlerRole']['Damage Dealer'],
-      value: (dmgCount / matchCount).toFixed(3) || 0
+      value: Number((dmgCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Marksman',
       label: locales.brawler['brawlerRole'].Marksman,
-      value: (mrkCount / matchCount).toFixed(3) || 0
+      value: Number((mrkCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Support',
       label: locales.brawler['brawlerRole'].Support,
-      value: (supCount / matchCount).toFixed(3) || 0
+      value: Number((supCount / matchCount).toFixed(3)) || 0
     },
     {
       id: 'Controller',
       label: locales.brawler['brawlerRole'].Controller,
-      value: (cntCount / matchCount).toFixed(3) || 0
+      value: Number((cntCount / matchCount).toFixed(3)) || 0
     }
   ];
 
@@ -112,69 +140,78 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
                   </span>
                 </div>
               </div>
-              <Pie
-                data={battleData}
-                width={280}
-                height={220}
-                margin={{ bottom: 40 }}
-                startAngle={-180}
-                endAngle={180}
-                innerRadius={0.4}
-                colors={{ scheme: 'set1' }}
-                enableArcLinkLabels={false}
-                arcLabelsSkipAngle={10}
-                isInteractive={false}
-                animate={false}
-                legends={[
-                  {
-                    anchor: 'bottom',
-                    direction: 'row',
-                    justify: false,
-                    translateY: 12,
-                    itemsSpacing: 12,
-                    itemWidth: 32,
-                    itemHeight: 4,
-                    itemTextColor: '#111',
-                    itemDirection: 'top-to-bottom',
-                    itemOpacity: 1,
-                    symbolSize: 12,
-                    symbolShape: 'circle'
-                  }
-                ]}
-              />
+              <div className={`${styles.nivoPieFrame} ${styles.nivoPieFrameCompact}`}>
+                <Pie
+                  data={battleData}
+                  width={battlePieWidth}
+                  height={battlePieHeight}
+                  margin={isDesktop ? { top: 12, right: 16, bottom: 56, left: 16 } : { top: 12, right: 16, bottom: 56, left: 16 }}
+                  sortByValue={false}
+                  innerRadius={0.42}
+                  padAngle={0.6}
+                  cornerRadius={3}
+                  colors={{ scheme: 'set1' }}
+                  enableArcLinkLabels={false}
+                  arcLabelsSkipAngle={10}
+                  theme={pieTheme}
+                  isInteractive={false}
+                  animate={false}
+                  legends={[
+                    {
+                      anchor: 'bottom',
+                      direction: 'row',
+                      justify: false,
+                      translateY: isDesktop ? 18 : 18,
+                      itemsSpacing: isDesktop ? 12 : 10,
+                      itemWidth: isDesktop ? 46 : 44,
+                      itemHeight: 10,
+                      itemTextColor: '#111',
+                      itemDirection: 'top-to-bottom',
+                      itemOpacity: 1,
+                      symbolSize: isDesktop ? 14 : 12,
+                      symbolShape: 'circle'
+                    }
+                  ]}
+                />
+              </div>
             </div>
             <div>
               <h3>{locales.user['battle'].brawlerRoleUsed}</h3>
-              <Pie
-                data={brawlerData}
-                width={280}
-                height={220}
-                margin={{ bottom: 40 }}
-                valueFormat=" >-~%"
-                sortByValue={true}
-                innerRadius={0.4}
-                colors={{ scheme: 'set3' }}
-                enableArcLinkLabels={false}
-                arcLabelsSkipAngle={10}
-                isInteractive={false}
-                animate={false}
-                legends={[
-                  {
-                    anchor: 'bottom',
-                    direction: 'row',
-                    justify: false,
-                    translateY: 12,
-                    itemsSpacing: 12,
-                    itemWidth: 28,
-                    itemHeight: 4,
-                    itemTextColor: '#111',
-                    itemDirection: 'top-to-bottom',
-                    itemOpacity: 1,
-                    symbolSize: 12,
-                    symbolShape: 'circle'
-                  }
-                ]}
-              />
+              <div className={styles.nivoPieFrame}>
+                <Pie
+                  data={brawlerData}
+                  width={rolePieWidth}
+                  height={rolePieHeight}
+                  margin={isDesktop ? { top: 8, right: 14, bottom: 52, left: 14 } : { top: 8, right: 12, bottom: 48, left: 12 }}
+                  valueFormat=" >-~%"
+                  sortByValue={true}
+                  innerRadius={0.42}
+                  padAngle={0.5}
+                  cornerRadius={2}
+                  colors={{ scheme: 'set3' }}
+                  enableArcLinkLabels={false}
+                  arcLabelsSkipAngle={10}
+                  theme={pieTheme}
+                  isInteractive={false}
+                  animate={false}
+                  legends={[
+                    {
+                      anchor: 'bottom',
+                      direction: 'row',
+                      justify: false,
+                      translateY: isDesktop ? 14 : 12,
+                      itemsSpacing: isDesktop ? 12 : 12,
+                      itemWidth: isDesktop ? 30 : 28,
+                      itemHeight: 4,
+                      itemTextColor: '#111',
+                      itemDirection: 'top-to-bottom',
+                      itemOpacity: 1,
+                      symbolSize: isDesktop ? 14 : 12,
+                      symbolShape: 'circle'
+                    }
+                  ]}
+                />
+              </div>
             </div>
           </div>
           <div className={styles.recentBrawlerRecordBox}>

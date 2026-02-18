@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { SearchUserContainer } from '~/pages/main/search-user';
 import { BrawlerSummaryContainer } from '~/pages/main/brawler-summary';
@@ -18,7 +18,7 @@ import styles from '~/assets/styles/pages/main.module.scss';
 export const MainWrapper = () => {
   const locales = useContext(CdnContext);
 
-  const [searchHistory, setSearchHistory] = useState(JSON.parse(localStorage.getItem('searchHistory') || '[]'));
+  const [searchHistory, setSearchHistory] = useState(() => JSON.parse(localStorage.getItem('searchHistory') || '[]'));
   const [trophyEvents, setTrophyEvents] = useState([]);
   const [rankedEvents, setRankedEvents] = useState([]);
   const [brawlersTrophy, setBrawlersTrophy] = useState([]);
@@ -41,35 +41,48 @@ export const MainWrapper = () => {
   }, []);
 
   /** Function related to recent search */
-  const handleAddSearchItem = (userID: string) => {
-    const user = searchHistory.find((user: SearchItemType) => user.userID === userID);
-    const searchItem = {
-      id: Date.now(),
-      userID: userID
-    };
+  const handleAddSearchItem = useCallback((userID: string) => {
+    setSearchHistory((prevSearchHistory: SearchItemType[]) => {
+      const user = prevSearchHistory.find((searchItem: SearchItemType) => searchItem.userID === userID);
+      const searchItem = {
+        id: Date.now(),
+        userID
+      };
 
-    if (!user) {
-      setSearchHistory([searchItem, ...searchHistory].slice(0, 10));
-    } else {
-      setSearchHistory([searchItem, ...searchHistory.filter((user: SearchItemType) => user.userID !== userID)]);
-    }
-  };
+      if (!user) {
+        return [searchItem, ...prevSearchHistory].slice(0, 10);
+      }
 
-  const handleFilterSearchItem = (userIDs: string[]) => {
-    const nextKeyword = searchHistory.filter((item: SearchItemType) => {
-      return userIDs.includes(item.userID);
+      return [searchItem, ...prevSearchHistory.filter((item: SearchItemType) => item.userID !== userID)];
     });
-    if (searchHistory.length !== nextKeyword.length) {
-      setSearchHistory(nextKeyword);
-    }
-  };
+  }, []);
 
-  const handleRemoveSearchItem = (userID: string) => {
-    const nextKeyword = searchHistory.filter((user: SearchItemType) => {
-      return user.userID != userID;
+  const handleFilterSearchItem = useCallback((userIDs: string[]) => {
+    setSearchHistory((prevSearchHistory: SearchItemType[]) => {
+      const nextKeyword = prevSearchHistory.filter((item: SearchItemType) => {
+        return userIDs.includes(item.userID);
+      });
+
+      return prevSearchHistory.length === nextKeyword.length ? prevSearchHistory : nextKeyword;
     });
-    setSearchHistory(nextKeyword);
-  };
+  }, []);
+
+  const handleRemoveSearchItem = useCallback((userID: string) => {
+    setSearchHistory((prevSearchHistory: SearchItemType[]) => {
+      return prevSearchHistory.filter((searchItem: SearchItemType) => searchItem.userID !== userID);
+    });
+  }, []);
+
+  const searchContextValue = useMemo(
+    () => ({
+      searchHistory,
+      setSearchHistory,
+      onAddSearchHistory: handleAddSearchItem,
+      onFilterSearchItem: handleFilterSearchItem,
+      onRemoveSearchItem: handleRemoveSearchItem
+    }),
+    [searchHistory, handleAddSearchItem, handleFilterSearchItem, handleRemoveSearchItem]
+  );
 
   return (
     <div className={defStyles.app}>
@@ -77,15 +90,7 @@ export const MainWrapper = () => {
         <img src={'/images/main/main-1.webp'} alt={'메인'} />
         <h1>{locales.main['introduce'] || 'introduce'}</h1>
       </div>
-      <SearchContext.Provider
-        value={{
-          searchHistory,
-          setSearchHistory,
-          onAddSearchHistory: handleAddSearchItem,
-          onFilterSearchItem: handleFilterSearchItem,
-          onRemoveSearchItem: handleRemoveSearchItem
-        }}
-      >
+      <SearchContext.Provider value={searchContextValue}>
         <SearchUserContainer />
       </SearchContext.Provider>
       <NewsSummaryContainer />

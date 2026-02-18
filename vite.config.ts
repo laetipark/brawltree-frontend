@@ -5,13 +5,11 @@ import svgrPlugin from 'vite-plugin-svgr';
 import prerender from '@prerenderer/rollup-plugin';
 import { resolve } from 'path';
 
-export default ({ mode }) => {
-  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  const port = Number.parseInt(env.VITE_PORT ?? '5173', 10);
 
-  return defineConfig({
-    define: {
-      'process.env': process.env
-    },
+  return {
     css: {
       preprocessorOptions: {
         scss: {
@@ -83,7 +81,7 @@ export default ({ mode }) => {
     server: {
       allowedHosts: ['brawltree.me', 'www.brawltree.me'],
       host: '0.0.0.0',
-      port: parseInt(process.env.VITE_PORT),
+      port,
       proxy: {
         '/cdn': {
           target: 'https://cdn.brawltree.me',
@@ -109,7 +107,7 @@ export default ({ mode }) => {
     },
     preview: {
       host: '0.0.0.0',
-      port: parseInt(process.env.VITE_PORT)
+      port
     }
-  });
-};
+  };
+});

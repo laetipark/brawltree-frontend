@@ -1,12 +1,10 @@
 import { useQuery } from 'react-query';
 import { MainService } from '~/services/main.service';
 
-const getResultByKeyword = async (keyword: string) => {
-  return MainService.getUsersByKeyword(keyword);
-};
+const getResultByKeyword = (keyword: string) => MainService.getUsersByKeyword(keyword);
 
-export const searchItems = (keyword: string) =>
+export const useSearchItems = (keyword: string) =>
   useQuery(['keyword', keyword], () => getResultByKeyword(keyword), {
-    enabled: !!keyword,
-    select: (data) => (keyword.length > 1 ? data : null)
+    enabled: keyword.length > 1,
+    staleTime: 30_000
   });
