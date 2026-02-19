@@ -21,21 +21,21 @@ export const UserSeasonModeBox = ({ season }: { season: UserSeasonModeType }) =>
   return (
     <div className={styles.seasonModeBox}>
       <div className={styles.seasonModeStatsSummaryBox} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
-        <img className={styles.modeImage} src={`${config.assets}/modes/icon/${season.mode}.webp`} alt={'게임모드'} />
+        <img className={styles.modeImage} src={`${config.assets}/modes/icon/${season.mode}.webp`} alt={'season_mode'} />
         <span>
           <div>
             <span>{season.matchCount}</span>
             <span>{locales.battle['result'].game}</span>
           </div>
-          <div style={{ color: '#5AA469' }}>
+          <div style={{ color: 'var(--user-win)' }}>
             <span>{season.victoriesCount}</span>
             <span>{locales.battle['result'].w}</span>
           </div>
-          <div style={{ color: '#556FB5' }}>
+          <div style={{ color: 'var(--user-draw)' }}>
             <span>{drwCount(season.matchCount, season.victoriesCount, season.defeatsCount)}</span>
             <span>{locales.battle['result'].d}</span>
           </div>
-          <div style={{ color: '#D35D6E' }}>
+          <div style={{ color: 'var(--user-loss)' }}>
             <span>{season.defeatsCount}</span>
             <span>{locales.battle['result'].l}</span>
           </div>

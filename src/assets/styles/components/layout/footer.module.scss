@@ -1,11 +1,14 @@
 .footerWrapper {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
   min-width: 280px;
-  height: 60px;
-  padding: 20px;
+  min-height: 76px;
+  padding: 12px 20px;
+  flex-shrink: 0;
   background-color: #343A40;
   color: white;
   gap: 12px;
@@ -14,7 +17,8 @@
 
 .footerLinks {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
 
   & > a {
@@ -23,6 +27,7 @@
     text-decoration: none;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
   }
 
   & svg {
@@ -40,7 +45,7 @@
   justify-content: center;
   text-align: center;
   position: relative;
-  width: 280px;
+  width: min(280px, calc(100% - 24px));
   height: 20px;
   padding: 8px;
   border-radius: 4px;
@@ -74,18 +79,22 @@
     & svg {
       font-size: 16px;
     }
-
-    & div {
-      font-size: 18px;
-    }
   }
 
   .footerLinks {
     justify-content: flex-start;
+
+    & > a > div {
+      font-size: 18px;
+    }
   }
 
   .languageMenu {
     width: 80px;
+
+    & > div {
+      font-size: 18px;
+    }
 
     & > ul {
       width: 80px;

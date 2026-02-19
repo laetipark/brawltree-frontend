@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { ResponsiveLine } from '@nivo/line';
+import ReactECharts from 'echarts-for-react';
 
-import { ItemTooltip } from '~/components/items/item-info';
+import { ItemTooltip } from '~/components/items/item-info/item-tooltip';
 
 import { CdnContext } from '~/context/cdn.context';
 
@@ -24,21 +24,145 @@ export const UserBrawlerDetailContent = ({
   checkedList
 }) => {
   const locales = useContext(CdnContext);
+  const isVisible = checkedList.includes(brawlerID);
 
   const brawlerGadgets = userBrawlerItems?.filter(({ brawlerID: item, itemKind }) => item === brawlerID && itemKind === 'gadget');
   const brawlerStarPowers = userBrawlerItems?.filter(({ brawlerID: item, itemKind }) => item === brawlerID && itemKind === 'starPower');
   const brawlerGears = userBrawlerItems?.filter(({ brawlerID: item, itemKind }) => item === brawlerID && itemKind === 'gear');
-  const brawlerData = brawlerGraphs?.filter((item) => item.brawlerID === brawlerID);
-  const brawlerGraphData = [
-    {
-      id: brawlerID,
-      color: 'hsl(137, 70%, 50%)',
-      data: brawlerData
-    }
-  ];
+  const brawlerData = brawlerGraphs?.filter((item) => item.brawlerID === brawlerID) || [];
+  const lineCategories = brawlerData.map(({ x }) => x);
+  const lineValues = brawlerData.map(({ y }) => y);
+  const minTrophy = lineValues.length > 0 ? Math.min(...lineValues) - 40 : 0;
+  const maxTrophy = lineValues.length > 0 ? Math.max(...lineValues) + 40 : 100;
+  const lineOption = {
+    animation: false,
+    tooltip: {
+      show: true,
+      trigger: 'axis',
+      axisPointer: {
+        type: 'line',
+        lineStyle: {
+          color: '#8fb2bf',
+          width: 1
+        }
+      },
+      borderColor: '#b6cdd8',
+      borderWidth: 1,
+      backgroundColor: '#f8fcff',
+      textStyle: {
+        color: '#233348',
+        fontFamily:
+          '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+      },
+      formatter: (params) => {
+        const point = Array.isArray(params) ? params[0] : params;
+        if (!point) {
+          return '';
+        }
+
+        return `${point.axisValue}<br/>${locales.user['records']?.trophies || 'trophies'}: ${point.value}`;
+      }
+    },
+    grid: {
+      top: 14,
+      right: 16,
+      bottom: 42,
+      left: 52
+    },
+    xAxis: {
+      type: 'category',
+      data: lineCategories,
+      axisTick: {
+        show: true,
+        alignWithLabel: true,
+        length: 4
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#a6c4d2'
+        }
+      },
+      axisLabel: {
+        color: '#4f657b',
+        fontSize: 11,
+        fontFamily:
+          '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+      },
+      name: locales.application['date'] || 'date',
+      nameLocation: 'middle',
+      nameGap: 30,
+      nameTextStyle: {
+        color: '#233348',
+        fontWeight: 700,
+        fontSize: 12,
+        fontFamily:
+          '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+      }
+    },
+    yAxis: {
+      type: 'value',
+      min: minTrophy,
+      max: maxTrophy,
+      axisTick: {
+        show: true,
+        length: 4
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: '#a6c4d2'
+        }
+      },
+      splitLine: {
+        lineStyle: {
+          color: '#c7dce5',
+          width: 1
+        }
+      },
+      axisLabel: {
+        color: '#4f657b',
+        fontSize: 11,
+        fontFamily:
+          '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+      },
+      name: locales.user['records']?.trophies || 'trophies',
+      nameLocation: 'middle',
+      nameGap: 40,
+      nameRotate: 90,
+      nameTextStyle: {
+        color: '#233348',
+        fontWeight: 700,
+        fontSize: 12,
+        fontFamily:
+          '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+      }
+    },
+    series: [
+      {
+        type: 'line',
+        data: lineValues,
+        smooth: false,
+        silent: false,
+        symbol: 'circle',
+        symbolSize: 7,
+        lineStyle: {
+          color: '#8fb2bf',
+          width: 2
+        },
+        itemStyle: {
+          color: '#8fb2bf',
+          borderColor: '#8fb2bf',
+          borderWidth: 2
+        },
+        areaStyle: {
+          color: 'rgba(143, 178, 191, 0.28)'
+        }
+      }
+    ]
+  };
 
   return (
-    <div className={`${styles.userBrawlerDetailContent} ${defStyles[`${brawlerRarity}Background`]}`} style={{ display: checkedList.includes(brawlerID) ? 'flex' : 'none' }}>
+    <div className={`${styles.userBrawlerDetailContent} ${defStyles[`${brawlerRarity}Background`]}`} style={{ display: isVisible ? 'flex' : 'none' }}>
       <div>
         <h4>{locales.user['brawlers']?.items || 'items'}</h4>
         {brawlerGadgets && (
@@ -87,60 +211,9 @@ export const UserBrawlerDetailContent = ({
           <span>{rankedVictoryRate}%</span>
         </div>
       </div>
-      {brawlerGraphData[0].data.length > 1 && (
-        <div className={styles.nivoLineFrame}>
-          <ResponsiveLine
-            data={brawlerGraphData}
-            margin={{ top: 12, right: 16, bottom: 40, left: 52 }}
-            yFormat=" >-.0f"
-            xScale={{ type: 'point' }}
-            yScale={{
-              type: 'linear',
-              min:
-                brawlerData
-                  ?.map((item) => item.y)
-                  .reduce((a, b) => {
-                    return Math.min(a, b);
-                  }) - 40,
-              max:
-                brawlerData
-                  ?.map((item) => item.y)
-                  .reduce((a, b) => {
-                    return Math.max(a, b);
-                  }) + 40,
-              stacked: true,
-              reverse: false
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-              tickSize: 4,
-              tickPadding: 4,
-              tickRotation: 0,
-              legend: locales.application['date'] || 'date',
-              legendOffset: 32,
-              legendPosition: 'middle'
-            }}
-            axisLeft={{
-              tickSize: 8,
-              tickPadding: 4,
-              tickRotation: 0,
-              legend: locales.user['records']?.trophies || 'trophies',
-              legendOffset: -44,
-              legendPosition: 'middle'
-            }}
-            colors={{ scheme: 'category10' }}
-            enableArea={true}
-            pointSize={8}
-            pointColor={{ from: 'color' }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: 'serieColor' }}
-            pointLabelYOffset={-12}
-            enablePointLabel={true}
-            useMesh={true}
-            animate={false}
-            isInteractive={false}
-          />
+      {isVisible && brawlerData.length > 1 && (
+        <div className={styles.brawlerLineChartFrame}>
+          <ReactECharts key={`${brawlerID}-${lineCategories.length}`} option={lineOption} notMerge={true} lazyUpdate={true} opts={{ renderer: 'svg' }} style={{ width: '100%', height: '100%' }} />
         </div>
       )}
     </div>

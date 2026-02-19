@@ -1,9 +1,10 @@
 .userBrawlerDetailContent {
+  border-radius: var(--user-radius-sm, 8px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 8px;
-  border: solid #618264CC;
+  border: solid var(--user-line-strong, #90b3c0);
   border-width: 0 1px 1px 1px;
   gap: 8px;
 
@@ -39,17 +40,33 @@
       gap: 4px;
 
       & > span:last-child {
-        color: #0B666A;
+        color: var(--user-soft-ink, #4f657b);
       }
     }
   }
 }
 
-.nivoLineFrame {
+.brawlerLineChartFrame {
   width: 100%;
   min-width: 0;
   height: 240px;
+  position: relative;
+  isolation: isolate;
+  contain: layout paint;
   overflow: hidden;
+
+  & > div {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0;
+  }
+
+  & > div > svg {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    display: block;
+  }
 }
 
 .brawlerProfile {
@@ -95,8 +112,7 @@
   gap: 4px;
 
   .brawlerName {
-    font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     font-size: 24px;
   }
 }
@@ -112,4 +128,3 @@
     margin-left: 4px;
   }
 }
-

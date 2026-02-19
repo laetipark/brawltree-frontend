@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom';
 
 import { UserInfoContainer } from './user/user-info';
@@ -29,6 +28,7 @@ import {
 
 import { SeasonType } from '~/common/types/season.type';
 import { CdnContext } from '~/context/cdn.context';
+import { PageSeo } from '~/components/seo/page-seo';
 
 import defStyles from '~/common/styles/app.module.scss';
 import styles from '~/assets/styles/pages/user.module.scss';
@@ -224,36 +224,39 @@ export const UserWrapper = () => {
     }
   }, [retryUserInfoCount]);
 
-  return userInfoLoaded ? (
-    <UserContext.Provider value={contextValue}>
-      {userInfoLoaded && (
-        <Helmet>
-          <title>
-            {user.userName}({user.userID}) - {locales.user['title'].brawlianStats}
-          </title>
-          <desc>
-            {user.userName}({user.userID}) {locales.user['title'].brawlianStatsDesc}
-          </desc>
-        </Helmet>
+  const userTag = id ? `#${id}` : 'player';
+  const seoTitle = userInfoLoaded
+    ? `${user.userName} (${user.userID}) Stats`
+    : `${userTag.toUpperCase()} ${locales.user['title'].brawlianStats || 'Brawlian Stats'}`;
+  const seoDescription = userInfoLoaded
+    ? `${user.userName} (${user.userID}) ${locales.user['title'].brawlianStatsDesc || 'player performance and match history'}`
+    : 'Check player trophy progress, ranked stats, and recent battle logs.';
+
+  return (
+    <React.Fragment>
+      <PageSeo page="user" language={locales.language} title={seoTitle} description={seoDescription} />
+      {userInfoLoaded ? (
+        <UserContext.Provider value={contextValue}>
+          <div className={`${defStyles.app} ${styles.userPage}`}>
+            <div className={styles.userWrapper}>
+              <UserInfoContainer />
+              <UserButtonsContainer />
+            </div>
+            <UserMenuContainer menu={menu} setMenu={setMenu} />
+            {menu === 'profile' ? (
+              <UserProfileContext.Provider value={userProfileContextValue}>
+                <UserProfileContainer />
+              </UserProfileContext.Provider>
+            ) : (
+              <UserBrawlersContext.Provider value={userBrawlersContextValue}>
+                <UserBrawlersContainer />
+              </UserBrawlersContext.Provider>
+            )}
+          </div>
+        </UserContext.Provider>
+      ) : (
+        <Spinner fill={true} />
       )}
-      <div className={defStyles.app}>
-        <div className={styles.userWrapper}>
-          <UserInfoContainer />
-          <UserButtonsContainer />
-          <UserMenuContainer menu={menu} setMenu={setMenu} />
-        </div>
-        {menu === 'profile' ? (
-          <UserProfileContext.Provider value={userProfileContextValue}>
-            <UserProfileContainer />
-          </UserProfileContext.Provider>
-        ) : (
-          <UserBrawlersContext.Provider value={userBrawlersContextValue}>
-            <UserBrawlersContainer />
-          </UserBrawlersContext.Provider>
-        )}
-      </div>
-    </UserContext.Provider>
-  ) : (
-    <Spinner />
+    </React.Fragment>
   );
 };

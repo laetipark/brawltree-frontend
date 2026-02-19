@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, createContext } from 'react';
+import { SupportedLanguage } from '~/common/i18n/language';
 
 export type CdnLocale = Record<string, any>;
 
@@ -13,8 +14,8 @@ export type CdnBundle = {
 };
 
 export type CdnContextType = CdnBundle & {
-  language: string;
-  setLanguage: Dispatch<SetStateAction<string>>;
+  language: SupportedLanguage;
+  setLanguage: Dispatch<SetStateAction<SupportedLanguage>>;
 };
 
 export const EMPTY_CDN_BUNDLE: CdnBundle = {

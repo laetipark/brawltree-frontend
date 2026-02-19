@@ -12,7 +12,7 @@ import config from '~/common/config/config';
 
 import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-battles/user-battle-logs-item.module.scss';
 
-const gameResultColors = ['#9ED2BE', '#9EA1D4', '#FD8A8A'];
+const gameResultColors = ['var(--user-win-bg)', 'var(--user-draw-bg)', 'var(--user-loss-bg)'];
 const typeArray = {
   0: 'trophy',
   2: 'ranked',
@@ -22,6 +22,11 @@ const typeArray = {
   6: 'clubLeague'
 };
 const roman = ['I', 'II', 'III'];
+const teamResultTheme = [
+  { title: 'resultWinTitle', content: 'resultWinContent' },
+  { title: 'resultDrawTitle', content: 'resultDrawContent' },
+  { title: 'resultLossTitle', content: 'resultLossContent' }
+];
 
 export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
   const locales = useContext(CdnContext);
@@ -66,7 +71,7 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
           <div className={styles.matchInfo}>
             <img className={styles.brawlerImage} src={`${config.assets}/brawlers/profiles/${battleInfo.brawlerID}.webp`} alt={battleInfo.brawlerID} />
             <div className={styles.matchInfoImageBox}>
-              <img src={`${config.assets}/modes/icon/${typeArray[battleInfo.matchType]}.webp`} alt={battleInfo.matchType} />
+              <img src={`${config.assets}/modes/icon/${typeArray[battleInfo.matchType]}.webp`} alt={typeArray[battleInfo.matchType]} />
               <img src={`${config.assets}/modes/icon/${battleInfo.mode}.webp`} alt={battleInfo.mode} />
             </div>
             <div>
@@ -108,12 +113,14 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
                 : battleInfo.gameResult * -1 + 1
               : matchTeams[index][0].gameResult + 1;
 
+          const teamLabel = battleInfo.modeCode === 3 ? (index === 0 ? 'Blue' : 'Red') : `Team ${index + 1}`;
+
           return (
             <React.Fragment key={`${battleInfo.battleTime}_${index}`}>
-              <div className={styles.battleLogsDetailTitle}>
-                {locales.battle['result'][`${teamGameResult - 1}`]}({battleInfo.modeCode === 3 ? (index === 0 ? '블루' : '레드') : `${index + 1}등`})
+              <div className={`${styles.battleLogsDetailTitle} ${styles[teamResultTheme[teamGameResult].title]}`}>
+                {locales.battle['result'][`${teamGameResult - 1}`]} ({teamLabel})
               </div>
-              <div className={styles.battleLogsDetailContent} style={{ backgroundColor: gameResultColors[teamGameResult] }}>
+              <div className={`${styles.battleLogsDetailContent} ${styles[teamResultTheme[teamGameResult].content]}`}>
                 {team?.map(({ brawlerID, brawlerPower, brawlerTrophies, playerID, playerName, isStarPlayer }) => {
                   return (
                     <a
@@ -134,14 +141,14 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
                       }}
                     >
                       <div>
-                        <img className={styles.matchBrawler} src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`} alt={'브롤러'} />
+                        <img className={styles.matchBrawler} src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`} alt={'brawler_profile'} />
                       </div>
                       <div>
                         <div className={styles.matchTitle}>{playerName}</div>
                         <div className={styles.matchSubTitle}>
                           {isStarPlayer === 1 && (
                             <React.Fragment>
-                              <img src={`${config.assets}/game/icon/logo_star.webp`} alt={'게임모드'} />
+                              <img src={`${config.assets}/game/icon/logo_star.webp`} alt={'star_player'} />
                               <span>{locales.battle['result'].starPlayer}</span>
                             </React.Fragment>
                           )}
@@ -157,7 +164,7 @@ export const UserBattleLogsItemBox = ({ battleInfo, battlePlayers }) => {
                             </React.Fragment>
                           ) : (
                             <React.Fragment>
-                              <img src={`${config.assets}/modes/icon/${typeArray[battleInfo.matchType]}.webp`} alt={'게임모드'} />
+                              <img src={`${config.assets}/modes/icon/${typeArray[battleInfo.matchType]}.webp`} alt={typeArray[battleInfo.matchType]} />
                               <span>{brawlerTrophies}</span>
                             </React.Fragment>
                           )}

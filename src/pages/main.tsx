@@ -11,6 +11,7 @@ import { EventService } from '~/services/event.service';
 import { BrawlerService } from '~/services/brawler.service';
 import { CdnContext } from '~/context/cdn.context';
 import { SearchContext } from '~/context/search.context';
+import { PageSeo } from '~/components/seo/page-seo';
 
 import defStyles from '~/common/styles/app.module.scss';
 import styles from '~/assets/styles/pages/main.module.scss';
@@ -85,7 +86,8 @@ export const MainWrapper = () => {
   );
 
   return (
-    <div className={defStyles.app}>
+    <div className={`${defStyles.app} ${styles.mainPage}`}>
+      <PageSeo page="home" language={locales.language} />
       <div className={styles.mainHeadContainer}>
         <img src={'/images/main/main-1.webp'} alt={'메인'} />
         <h1>{locales.main['introduce'] || 'introduce'}</h1>

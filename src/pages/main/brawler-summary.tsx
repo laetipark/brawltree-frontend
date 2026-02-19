@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import { BrawlerSummaryItem } from '~/components/main/brawlers/content';
+import { BrawlerSummaryItem } from '~/components/main/brawlers/content/brawler-summary-item';
 
 import { CdnContext } from '~/context/cdn.context';
 

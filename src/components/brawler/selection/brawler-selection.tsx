@@ -17,15 +17,17 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
   const [filterBrawlers, setFilterBrawlers] = useState([]);
 
   const locales = useContext(CdnContext);
+  const brawlerLocale = locales.brawler?.brawler || {};
   const navigate = useNavigate();
 
   useEffect(() => {
     setFilterBrawlers(
       brawlers.filter((brawler) => {
-        return isRRMatch(searchBrawlerName, locales.brawler['brawler'][`${brawler.name}`]);
+        const localizedName = brawlerLocale[`${brawler.name}`] || brawler.name;
+        return isRRMatch(searchBrawlerName, localizedName);
       })
     );
-  }, [searchBrawlerName]);
+  }, [searchBrawlerName, brawlers, brawlerLocale]);
 
   useEffect(() => {
     setRadio(brawler.id);
@@ -39,6 +41,8 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
       </div>
       <div>
         {filterBrawlers?.map((brawler) => {
+          const portraitUrl = `${config.assets}/brawlers/profiles/${brawler.id}.webp`;
+
           return (
             <React.Fragment key={brawler.id}>
               <input
@@ -53,9 +57,11 @@ export const BrawlerSelection = ({ brawlers, brawler, setBrawler }) => {
                 }}
               />
               <label htmlFor={brawler.id} className={styles.brawlerImage}>
-                <img src={`${config.assets}/brawlers/profiles/${brawler.id}.webp`} alt={brawler.id} />
+                <div className={styles.thumbnailFrame}>
+                  <img src={portraitUrl} alt={brawler.id} />
+                </div>
                 <div>
-                  <span>{locales.brawler['brawler'][`${brawler.name}`]}</span>
+                  <span>{brawlerLocale[`${brawler.name}`] || brawler.name}</span>
                 </div>
               </label>
             </React.Fragment>

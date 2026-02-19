@@ -57,18 +57,21 @@ export const UserSeasonsContent = ({ seasonList }: { seasonList: UserSeasonsType
       <div>
         <h2>
           {locales.user['crew'].seasonRecord}
-          <span>({matchCount}회)</span>
+          <span>
+            ({matchCount}
+            {locales.battle['result'].game})
+          </span>
         </h2>
         <div className={styles.seasonTotalSummaryBox}>
-          <div style={{ color: '#5AA469' }}>
+          <div style={{ color: 'var(--user-win)' }}>
             <span>{totalMatchVicCount}</span>
             <span>{locales.battle['result'].w}</span>
           </div>
-          <div style={{ color: '#556FB5' }}>
+          <div style={{ color: 'var(--user-draw)' }}>
             <span>{drwCount(matchCount, totalMatchVicCount, totalMatchDefCount)}</span>
             <span>{locales.battle['result'].d}</span>
           </div>
-          <div style={{ color: '#D35D6E' }}>
+          <div style={{ color: 'var(--user-loss)' }}>
             <span>{totalMatchDefCount}</span>
             <span>{locales.battle['result'].l}</span>
           </div>

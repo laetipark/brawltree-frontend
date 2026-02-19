@@ -7,24 +7,24 @@ body{
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #E5F9DB;
+    background-color: #dceadf;
 }
 
 ::-webkit-scrollbar{
-    width: 6px; /* 스크롤바의 너비 */
+    width: 6px; /* ?�크롤바???�비 */
     -ms-overflow-style: none; /* IE, Edge */
     scrollbar-width: none; /* Firefox */
 }
 
 ::-webkit-scrollbar-thumb{
-    height: 30%; /* 스크롤바의 길이 */
-    background: #2CC4CB; /* 스크롤바의 색상 */
+    height: 30%; /* ?�크롤바??길이 */
+    background: #2CC4CB; /* ?�크롤바???�상 */
 
-    border-radius: 40px;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-track{
-    background: rgba(25, 114, 164, 0.1); /*스크롤바 뒷 배경 색상*/
+    background: rgba(25, 114, 164, 0.1); /*?�크롤바 ??배경 ?�상*/
 }
 
 code{

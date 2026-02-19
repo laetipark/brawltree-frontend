@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-import { Pie } from '@nivo/pie';
-import { useMediaQuery } from 'react-responsive';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import ReactECharts from 'echarts-for-react';
 
 import { UserBattleLogsItemBox } from '~/pages/user/user-menu/user-profile/user-battles/user-battle-logs-item';
 import { UserBrawlerStatsBox } from '~/pages/user/user-menu/user-profile/user-battles/user-brawler-stats';
@@ -10,33 +9,38 @@ import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-battl
 
 export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) => {
   const locales = useContext(CdnContext);
-  const isDesktop = useMediaQuery({ minWidth: 1280 });
+  const [viewportWidth, setViewportWidth] = useState<number>(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
+  const battlePieRef = useRef<any>(null);
+  const rolePieRef = useRef<any>(null);
 
-  const battlePieWidth = isDesktop ? 320 : 280;
-  const battlePieHeight = isDesktop ? 242 : 224;
-  const rolePieWidth = isDesktop ? 320 : 280;
-  const rolePieHeight = isDesktop ? 262 : 244;
-  const pieTheme = {
-    text: {
-      fontFamily:
-        '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
-      fill: '#1f2e22',
-      fontSize: isDesktop ? 12 : 11
-    },
-    legends: {
-      text: {
-        fill: '#1f2e22',
-        fontSize: isDesktop ? 12 : 10
-      }
-    },
-    labels: {
-      text: {
-        fill: '#1d2b21',
-        fontSize: isDesktop ? 13 : 11,
-        fontWeight: 700
-      }
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
     }
-  };
+
+    const onResize = () => setViewportWidth(window.innerWidth);
+
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  useEffect(() => {
+    const resizeCharts = () => {
+      battlePieRef.current?.getEchartsInstance?.().resize();
+      rolePieRef.current?.getEchartsInstance?.().resize();
+    };
+
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined') {
+        window.requestAnimationFrame(resizeCharts);
+      } else {
+        resizeCharts();
+      }
+    }, 40);
+
+    return () => clearTimeout(timer);
+  }, [viewportWidth, recentBattles?.length]);
 
   const matchCount = recentBattles?.length || 0;
   const vicCount = recentBattles?.filter(({ gameResult }) => gameResult === -1).length || 0;
@@ -53,62 +57,165 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
 
   const battleData = [
     {
-      id: 'Defeat',
-      label: locales.battle['result']['1'],
+      name: locales.battle['result']['1'],
       value: defCount,
-      color: 'hsl(351,57%,60%)'
+      itemStyle: { color: '#d19aa7' }
     },
     {
-      id: 'Draw',
-      label: locales.battle['result']['0'],
+      name: locales.battle['result']['0'],
       value: drwCount,
-      color: 'hsl(224,39%,52%)'
+      itemStyle: { color: '#93aed2' }
     },
     {
-      id: 'Victory',
-      label: locales.battle['result']['-1'],
+      name: locales.battle['result']['-1'],
       value: vicCount,
-      color: 'hsl(132,29%,50%)'
+      itemStyle: { color: '#84b898' }
     }
   ];
 
   const brawlerData = [
     {
-      id: 'Artillery',
-      label: locales.brawler['brawlerRole'].Artillery,
-      value: Number((artCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Artillery,
+      value: Number(((artCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Assassin',
-      label: locales.brawler['brawlerRole'].Assassin,
-      value: Number((sinCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Assassin,
+      value: Number(((sinCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Tank',
-      label: locales.brawler['brawlerRole'].Tank,
-      value: Number((tnkCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Tank,
+      value: Number(((tnkCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Damage Dealer',
-      label: locales.brawler['brawlerRole']['Damage Dealer'],
-      value: Number((dmgCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole']['Damage Dealer'],
+      value: Number(((dmgCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Marksman',
-      label: locales.brawler['brawlerRole'].Marksman,
-      value: Number((mrkCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Marksman,
+      value: Number(((mrkCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Support',
-      label: locales.brawler['brawlerRole'].Support,
-      value: Number((supCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Support,
+      value: Number(((supCount / matchCount) * 100).toFixed(1)) || 0
     },
     {
-      id: 'Controller',
-      label: locales.brawler['brawlerRole'].Controller,
-      value: Number((cntCount / matchCount).toFixed(3)) || 0
+      name: locales.brawler['brawlerRole'].Controller,
+      value: Number(((cntCount / matchCount) * 100).toFixed(1)) || 0
     }
   ];
+
+  const pieTier = useMemo(() => {
+    if (viewportWidth < 430) {
+      return 'sm';
+    }
+    if (viewportWidth < 1024) {
+      return 'md';
+    }
+    return 'lg';
+  }, [viewportWidth]);
+
+  const pieRadiusByTier: Record<string, [number, number]> = {
+    sm: [34, 62],
+    md: [42, 78],
+    lg: [52, 92]
+  };
+  const pieCenterByTier: Record<string, [string, string]> = {
+    sm: ['50%', '35%'],
+    md: ['50%', '38%'],
+    lg: ['50%', '41%']
+  };
+  const pieRadius = pieRadiusByTier[pieTier];
+  const pieCenter = pieCenterByTier[pieTier];
+  const isNarrowPie = pieTier === 'sm';
+
+  const battlePieOption = useMemo(
+    () => ({
+      animation: false,
+      tooltip: { show: false },
+      legend: {
+        bottom: isNarrowPie ? 2 : 0,
+        left: 'center',
+        itemWidth: isNarrowPie ? 9 : 11,
+        itemHeight: isNarrowPie ? 9 : 11,
+        itemGap: isNarrowPie ? 10 : 14,
+        textStyle: {
+          color: '#233348',
+          fontSize: isNarrowPie ? 11 : 12,
+          fontWeight: 700,
+          fontFamily:
+            '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: pieRadius,
+          center: pieCenter,
+          silent: true,
+          label: {
+            show: true,
+            position: 'inside',
+            formatter: (params: { value: number }) => (params.value > 0 ? `${params.value}` : ''),
+            color: '#233348',
+            fontWeight: 700,
+            fontSize: isNarrowPie ? 10 : 12
+          },
+          labelLine: { show: false },
+          itemStyle: {
+            borderColor: '#f8fcff',
+            borderWidth: 1
+          },
+          data: battleData
+        }
+      ]
+    }),
+    [battleData, isNarrowPie, pieCenter, pieRadius]
+  );
+
+  const rolePieOption = useMemo(
+    () => ({
+      animation: false,
+      tooltip: { show: false },
+      legend: {
+        bottom: isNarrowPie ? 2 : 0,
+        left: 'center',
+        itemWidth: isNarrowPie ? 7 : 8,
+        itemHeight: isNarrowPie ? 7 : 8,
+        itemGap: isNarrowPie ? 8 : 12,
+        textStyle: {
+          color: '#233348',
+          fontSize: isNarrowPie ? 10 : 12,
+          fontWeight: 700,
+          fontFamily:
+            '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
+        }
+      },
+      series: [
+        {
+          type: 'pie',
+          radius: pieRadius,
+          center: pieCenter,
+          silent: true,
+          label: {
+            show: false,
+            formatter: (params: { value: number }) => {
+              return params.value > 0 ? `${params.value}%` : '';
+            },
+            color: '#233348',
+            fontWeight: 700,
+            fontSize: 11
+          },
+          labelLine: { show: false },
+          itemStyle: {
+            borderColor: '#f8fcff',
+            borderWidth: 1
+          },
+          data: brawlerData
+        }
+      ]
+    }),
+    [brawlerData, isNarrowPie, pieCenter, pieRadius]
+  );
 
   return (
     (recentBattles?.length || 0) > 0 && (
@@ -123,15 +230,15 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
                     {matchCount}
                     {locales.battle['result'].game}
                   </span>{' '}
-                  <span style={{ color: '#5AA469' }}>
+                  <span style={{ color: 'var(--user-win)' }}>
                     {vicCount}
                     {locales.battle['result'].w}
                   </span>{' '}
-                  <span style={{ color: '#556FB5' }}>
+                  <span style={{ color: 'var(--user-draw)' }}>
                     {drwCount}
                     {locales.battle['result'].d}
                   </span>{' '}
-                  <span style={{ color: '#D35D6E' }}>
+                  <span style={{ color: 'var(--user-loss)' }}>
                     {defCount}
                     {locales.battle['result'].l}
                   </span>{' '}
@@ -140,76 +247,29 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
                   </span>
                 </div>
               </div>
-              <div className={`${styles.nivoPieFrame} ${styles.nivoPieFrameCompact}`}>
-                <Pie
-                  data={battleData}
-                  width={battlePieWidth}
-                  height={battlePieHeight}
-                  margin={isDesktop ? { top: 12, right: 16, bottom: 56, left: 16 } : { top: 12, right: 16, bottom: 56, left: 16 }}
-                  sortByValue={false}
-                  innerRadius={0.42}
-                  padAngle={0.6}
-                  cornerRadius={3}
-                  colors={{ scheme: 'set1' }}
-                  enableArcLinkLabels={false}
-                  arcLabelsSkipAngle={10}
-                  theme={pieTheme}
-                  isInteractive={false}
-                  animate={false}
-                  legends={[
-                    {
-                      anchor: 'bottom',
-                      direction: 'row',
-                      justify: false,
-                      translateY: isDesktop ? 18 : 18,
-                      itemsSpacing: isDesktop ? 12 : 10,
-                      itemWidth: isDesktop ? 46 : 44,
-                      itemHeight: 10,
-                      itemTextColor: '#111',
-                      itemDirection: 'top-to-bottom',
-                      itemOpacity: 1,
-                      symbolSize: isDesktop ? 14 : 12,
-                      symbolShape: 'circle'
-                    }
-                  ]}
+              <div className={`${styles.pieFrame} ${styles.pieFrameCompact}`}>
+                <ReactECharts
+                  key={`battle-pie-${pieTier}-${Math.floor(viewportWidth / 40)}`}
+                  ref={battlePieRef}
+                  option={battlePieOption}
+                  notMerge={true}
+                  lazyUpdate={true}
+                  opts={{ renderer: 'svg' }}
+                  style={{ width: '100%', height: '100%' }}
                 />
               </div>
             </div>
             <div>
               <h3>{locales.user['battle'].brawlerRoleUsed}</h3>
-              <div className={styles.nivoPieFrame}>
-                <Pie
-                  data={brawlerData}
-                  width={rolePieWidth}
-                  height={rolePieHeight}
-                  margin={isDesktop ? { top: 8, right: 14, bottom: 52, left: 14 } : { top: 8, right: 12, bottom: 48, left: 12 }}
-                  valueFormat=" >-~%"
-                  sortByValue={true}
-                  innerRadius={0.42}
-                  padAngle={0.5}
-                  cornerRadius={2}
-                  colors={{ scheme: 'set3' }}
-                  enableArcLinkLabels={false}
-                  arcLabelsSkipAngle={10}
-                  theme={pieTheme}
-                  isInteractive={false}
-                  animate={false}
-                  legends={[
-                    {
-                      anchor: 'bottom',
-                      direction: 'row',
-                      justify: false,
-                      translateY: isDesktop ? 14 : 12,
-                      itemsSpacing: isDesktop ? 12 : 12,
-                      itemWidth: isDesktop ? 30 : 28,
-                      itemHeight: 4,
-                      itemTextColor: '#111',
-                      itemDirection: 'top-to-bottom',
-                      itemOpacity: 1,
-                      symbolSize: isDesktop ? 14 : 12,
-                      symbolShape: 'circle'
-                    }
-                  ]}
+              <div className={styles.pieFrame}>
+                <ReactECharts
+                  key={`role-pie-${pieTier}-${Math.floor(viewportWidth / 40)}`}
+                  ref={rolePieRef}
+                  option={rolePieOption}
+                  notMerge={true}
+                  lazyUpdate={true}
+                  opts={{ renderer: 'svg' }}
+                  style={{ width: '100%', height: '100%' }}
                 />
               </div>
             </div>

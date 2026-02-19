@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useMemo, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Header } from '~/components/layout/header';
 import { Footer } from '~/components/layout/footer';
@@ -7,18 +7,20 @@ import { CdnContext, EMPTY_CDN_BUNDLE } from '~/context/cdn.context';
 import type { CdnBundle } from '~/context/cdn.context';
 import { CdnService } from '~/services/cdn.service';
 import { Spinner } from '~/components/spinner/spinner';
+import { syncCdnBundleToI18n } from '~/common/i18n/cdn-resource-sync';
+import { DEFAULT_LANGUAGE, detectPreferredLanguage, normalizeLanguage, SupportedLanguage } from '~/common/i18n/language';
 
 const MainWrapper = lazy(() => import('~/pages/main').then((module) => ({ default: module.MainWrapper })));
 const UserWrapper = lazy(() => import('~/pages/user').then((module) => ({ default: module.UserWrapper })));
-const Brawlers = lazy(() => import('~/pages/brawlers').then((module) => ({ default: module.Brawlers })));
+const Brawlers = lazy(() => import('~/pages/brawlers/brawlers-page').then((module) => ({ default: module.Brawlers })));
 const Events = lazy(() => import('~/pages/events/events').then((module) => ({ default: module.Events })));
 const MapSummary = lazy(() => import('~/pages/maps/summary/summary').then((module) => ({ default: module.MapSummary })));
 const MapDetail = lazy(() => import('~/pages/maps/detail/detail').then((module) => ({ default: module.MapDetail })));
-const CrewMembers = lazy(() => import('~/pages/crew').then((module) => ({ default: module.CrewMembers })));
+const CrewMembers = lazy(() => import('~/pages/crew/crew-members-page').then((module) => ({ default: module.CrewMembers })));
 const NewsWrapper = lazy(() => import('~/pages/news').then((module) => ({ default: module.NewsWrapper })));
-const NewsListItem = lazy(() => import('~/pages/news/detail').then((module) => ({ default: module.NewsListItem })));
+const NewsListItem = lazy(() => import('~/pages/news/detail/news-detail-page').then((module) => ({ default: module.NewsListItem })));
 
-const fetchCdnBundle = async (language: string): Promise<CdnBundle> => {
+const fetchCdnBundle = async (language: SupportedLanguage): Promise<CdnBundle> => {
   const cacheBuster = Date.now();
   const [application, battle, brawler, main, map, news, user] = await Promise.all([
     CdnService.getApplicationCdn(language, cacheBuster),
@@ -33,13 +35,31 @@ const fetchCdnBundle = async (language: string): Promise<CdnBundle> => {
   return { application, battle, brawler, main, map, news, user };
 };
 
+const getInitialLanguage = () => {
+  if (typeof window === 'undefined') {
+    return DEFAULT_LANGUAGE;
+  }
+
+  const urlLanguage = new URLSearchParams(window.location.search).get('lang');
+  const storageLanguage = localStorage.getItem('language');
+  const storedLanguage = urlLanguage || storageLanguage;
+
+  if (storedLanguage) {
+    return normalizeLanguage(storedLanguage);
+  }
+
+  return detectPreferredLanguage();
+};
+
 const App = () => {
+  const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
-  const [language, setLanguage] = useState('ko');
+  const [language, setLanguage] = useState<SupportedLanguage>(getInitialLanguage);
   const [cdnBundle, setCdnBundle] = useState<CdnBundle>(EMPTY_CDN_BUNDLE);
 
   useEffect(() => {
     let isSubscribed = true;
+    setIsLoaded(false);
 
     fetchCdnBundle(language)
       .then((nextBundle) => {
@@ -48,7 +68,9 @@ const App = () => {
         }
 
         setCdnBundle(nextBundle);
-        setIsLoaded(true);
+        syncCdnBundleToI18n(language, nextBundle).finally(() => {
+          setIsLoaded(true);
+        });
       })
       .catch((error) => {
         console.error('Error fetching CDN data:', error);
@@ -59,6 +81,31 @@ const App = () => {
     };
   }, [language]);
 
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const nextUrl = new URL(window.location.href);
+
+    if (language === 'ko') {
+      nextUrl.searchParams.delete('lang');
+    } else {
+      nextUrl.searchParams.set('lang', language);
+    }
+
+    const nextPath = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
+    const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+
+    if (nextPath !== currentPath) {
+      window.history.replaceState({}, '', nextPath);
+    }
+  }, [language, location.pathname]);
+
   const contextValue = useMemo(
     () => ({
       ...cdnBundle,
@@ -67,27 +114,36 @@ const App = () => {
     }),
     [cdnBundle, language]
   );
+  const loadingFallback = (
+    <div style={{ display: 'flex', flex: '1 1 auto', width: '100%', minHeight: 0 }}>
+      <Spinner fill={true} />
+    </div>
+  );
 
-  return isLoaded ? (
+  return (
     <CdnContext.Provider value={contextValue}>
       <Header />
-      <Suspense fallback={<Spinner />}>
-        <Routes>
-          <Route path="/" element={<MainWrapper />} />
-          <Route path="/brawlian/:id" element={<UserWrapper />} />
-          <Route path="/brawler/:name" element={<Brawlers />} />
-          <Route path="/events/:mode" element={<Events />} />
-          <Route path="/maps" element={<MapSummary />} />
-          <Route path="/maps/:name" element={<MapDetail />} />
-          <Route path="/crew" element={<CrewMembers />} />
-          <Route path="/news" element={<NewsWrapper />} />
-          <Route path="/news/:title" element={<NewsListItem />} />
-        </Routes>
-      </Suspense>
+      <main style={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', width: '100%', minHeight: 0 }}>
+        {isLoaded ? (
+          <Suspense fallback={loadingFallback}>
+            <Routes>
+              <Route path="/" element={<MainWrapper />} />
+              <Route path="/brawlian/:id" element={<UserWrapper />} />
+              <Route path="/brawler/:name" element={<Brawlers />} />
+              <Route path="/events/:mode" element={<Events />} />
+              <Route path="/maps" element={<MapSummary />} />
+              <Route path="/maps/:name" element={<MapDetail />} />
+              <Route path="/crew" element={<CrewMembers />} />
+              <Route path="/news" element={<NewsWrapper />} />
+              <Route path="/news/:title" element={<NewsListItem />} />
+            </Routes>
+          </Suspense>
+        ) : (
+          loadingFallback
+        )}
+      </main>
       <Footer />
     </CdnContext.Provider>
-  ) : (
-    <Spinner />
   );
 };
 

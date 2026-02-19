@@ -30,22 +30,22 @@ export const UserSeasonModeItemBox = ({
               ) : [2, 3].includes(item.matchType) ? (
                 <img className={styles.iconImage} src={`${config.assets}/rank/ranked/${item.matchGrade}.webp`} alt={`ranked_${item.matchGrade}`} />
               ) : (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'챌린지'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'challenge_mode'} />
               )}
             </div>
             <div>
               <span>{item.matchCount}</span>
               <span>{locales.battle['result'].game}</span>
             </div>
-            <div style={{ color: '#5AA469' }}>
+            <div style={{ color: 'var(--user-win)' }}>
               <span>{item.victoriesCount}</span>
               <span>{locales.battle['result'].w}</span>
             </div>
-            <div style={{ color: '#556FB5' }}>
+            <div style={{ color: 'var(--user-draw)' }}>
               <span>{drwCount(item.matchCount, item.victoriesCount, item.defeatsCount)}</span>
               <span>{locales.battle['result'].d}</span>
             </div>
-            <div style={{ color: '#D35D6E' }}>
+            <div style={{ color: 'var(--user-loss)' }}>
               <span>{item.defeatsCount}</span>
               <span>{locales.battle['result'].l}</span>
             </div>

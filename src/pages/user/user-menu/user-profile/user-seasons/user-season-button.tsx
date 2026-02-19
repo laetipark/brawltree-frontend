@@ -47,15 +47,15 @@ export const UserSeasonButtonBox = ({
         {toggle && (
           <div>
             <div className={styles.seasonTypeSummaryBox}>
-              <div style={{ color: '#5AA469' }}>
+              <div style={{ color: 'var(--user-win)' }}>
                 <span>{matches.victoriesCount}</span>
                 <span>{locales.battle['result'].w}</span>
               </div>
-              <div style={{ color: '#556FB5' }}>
+              <div style={{ color: 'var(--user-draw)' }}>
                 <span>{drwCount(matches.matchCount, matches.victoriesCount, matches.defeatsCount)}</span>
                 <span>{locales.battle['result'].d}</span>
               </div>
-              <div style={{ color: '#D35D6E' }}>
+              <div style={{ color: 'var(--user-loss)' }}>
                 <span>{matches.defeatsCount}</span>
                 <span>{locales.battle['result'].l}</span>
               </div>

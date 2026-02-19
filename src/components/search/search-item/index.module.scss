@@ -1,14 +1,18 @@
 .searchItemWrapper {
   display: flex;
-  padding: 4px;
-  border-radius: 4px;
-  color: black;
+  padding: 8px;
+  border: 1px solid rgba(171, 197, 209, 0.52);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--main-ink, #233348);
   text-decoration: none;
   gap: 8px;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
 
   &:hover {
-    background-color: #9DC08B;
+    background: linear-gradient(145deg, #f5feff 0%, var(--main-mint, #dbf2e4) 100%);
+    border-color: var(--main-line-strong, #8eb3c0);
+    transform: translateY(-1px);
   }
 
   & > img {
@@ -16,6 +20,9 @@
     max-width: 48px;
     height: 48px;
     object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid rgba(160, 186, 199, 0.5);
+    background: linear-gradient(150deg, #f5fcff 0%, #fffef9 100%);
   }
 
   & > div {
@@ -31,11 +38,23 @@
   justify-content: space-between;
   height: 20px;
   align-items: center;
+  color: var(--main-ink, #233348);
+
+  & > span {
+    font-size: 14px;
+    font-weight: 700;
+  }
 
   & > img {
-    z-index: 1;
     width: 16px;
     object-fit: contain;
+    cursor: pointer;
+    opacity: 0.68;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 
@@ -47,21 +66,23 @@
 
 .searchItemTag {
   padding: 4px;
-  border-radius: 4px;
-  background-color: #9DC08B;
+  border-radius: 6px;
+  background: linear-gradient(140deg, var(--main-mint, #dbf2e4) 0%, #effbee 100%);
+  border: 1px solid rgba(139, 180, 159, 0.62);
   font-size: 12px;
-  color: #40513B;
+  color: #2d5b3f;
 }
 
 .searchItemCrewName {
   display: flex;
   align-items: center;
   padding: 4px;
-  border-radius: 4px;
-  background-color: #B2C8BA;
+  border-radius: 6px;
+  background: linear-gradient(140deg, var(--main-sky, #dff0ff) 0%, #edf8ff 100%);
+  border: 1px solid rgba(137, 173, 191, 0.58);
   font-size: 12px;
   zoom: 0.8;
-  color: #40513B;
+  color: #2f5d7a;
 }
 
 .searchItemTrophy {
@@ -69,9 +90,10 @@
   align-items: center;
   width: 84px;
   padding: 2px 4px;
-  border: 2px solid #7F669D;
-  border-radius: 4px;
-  background-color: #DEBACE;
+  border: 1px solid rgba(136, 125, 176, 0.66);
+  border-radius: 6px;
+  background: linear-gradient(140deg, #efe6ff 0%, #f7edff 100%);
+  color: #4f4a76;
   gap: 4px;
 }
 
@@ -81,9 +103,10 @@
   width: 40px;
   height: 20px;
   padding: 2px 4px;
-  border: 2px solid #BB5A5A;
-  border-radius: 4px;
-  background-color: #EACEB4;
+  border: 1px solid rgba(191, 134, 134, 0.7);
+  border-radius: 6px;
+  background: linear-gradient(140deg, #ffe9dd 0%, #fff2e7 100%);
+  color: #7a4f38;
   gap: 2px;
 }
 

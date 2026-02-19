@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { NewsItemsContent } from '~/components/news/news-items';
+import { PageSeo } from '~/components/seo/page-seo';
 
 import { CdnContext } from '~/context/cdn.context';
 
@@ -11,6 +12,7 @@ export const NewsWrapper = () => {
 
   return (
     <div className={`${defStyles.app} ${styles.newsListWrapper}`}>
+      <PageSeo page="news" language={locales.language} />
       <h2>{locales.main['news'] || 'news'}</h2>
       <h3>{locales.news['newsDesc'] || 'newsDesc'}</h3>
       <NewsItemsContent />

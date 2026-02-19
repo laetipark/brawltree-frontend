@@ -12,6 +12,7 @@ export type BrawlerStatsType = {
   mapID: string;
   mapName: string;
   mode: string;
+  matchType?: number | string;
   pickRate: number;
   victoryRate: number;
 };

@@ -23,15 +23,15 @@ export const UserBrawlerStatsBox = ({ brawlers, type }) => {
   const statContainer = (brawler: UserRecentBrawlersType) => {
     return (
       <div>
-        <span style={{ color: '#5AA469' }}>
+        <span style={{ color: 'var(--user-win)' }}>
           {brawler.resultCount['-1'] || 0}
           {locales.battle['result'].w}
         </span>
-        <span style={{ color: '#556FB5' }}>
+        <span style={{ color: 'var(--user-draw)' }}>
           {brawler.resultCount['0'] || 0}
           {locales.battle['result'].d}
         </span>
-        <span style={{ color: '#D35D6E' }}>
+        <span style={{ color: 'var(--user-loss)' }}>
           {brawler.resultCount['1'] || 0}
           {locales.battle['result'].l}
         </span>

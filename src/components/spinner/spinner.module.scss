@@ -1,36 +1,74 @@
 .spinnerWrapper {
   box-sizing: border-box;
-  display: block;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  overflow: auto;
-  outline: 0;
-  background-color: #E5F9DB;
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 10px;
+  background: transparent;
+}
+
+.spinnerWrapperFill {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: clamp(260px, calc(100vh - 136px), 760px);
+  min-height: clamp(260px, calc(100dvh - 136px), 760px);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  row-gap: 12px;
 }
 
 .spinner {
   position: relative;
-  width: 120px;
-  height: 120px;
-  top: 50%;
-  margin: 0 auto;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  border: 8px solid #9DC08B;
-
-  border-top-color: #4E944F;
-  border-bottom-color: #4E944F;
-
-  border-radius: 100%;
-  animation: spin 1s ease-in-out infinite;
+  width: 86px;
+  height: 86px;
 }
 
-@keyframes spin {
+.spinnerRingOuter {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  border: 6px solid rgba(139, 180, 154, 0.26);
+  border-top-color: #7daf95;
+  border-right-color: #8fbfb4;
+  border-radius: 50%;
+  animation: spinOuter 1.3s linear infinite;
+}
+
+.spinnerRingInner {
+  position: absolute;
+  inset: 14px;
+  box-sizing: border-box;
+  border: 5px solid rgba(168, 194, 225, 0.24);
+  border-bottom-color: #8ea8cb;
+  border-left-color: #6f8eb6;
+  border-radius: 50%;
+  animation: spinInner 1s linear infinite;
+}
+
+.spinnerLabel {
+  color: #2f4a66;
+  font-family: "Main Bold", "JP Bold", "CN Bold", "N Bold", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-shadow: none;
+}
+
+@keyframes spinOuter {
   100% {
-    transform: rotate(180deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinInner {
+  100% {
+    transform: rotate(-360deg);
   }
 }

@@ -27,7 +27,7 @@ export const UserBrawlerSummaryContent = ({ brawlerID, brawlerName, brawlerRarit
         checked={checkedList && checkedList.includes(brawlerID)}
         onChange={(e) => checkHandler && checkHandler(e, brawlerID)}
       />
-      <label htmlFor={`brawler_${brawlerID}`} style={{ backgroundColor: !brawlerPower ? '#f0f0f0' : '' }}>
+      <label htmlFor={`brawler_${brawlerID}`} style={{ backgroundColor: !brawlerPower ? 'var(--user-card-muted)' : '' }}>
         <img src={`${config.assets}/brawlers/profiles/${brawlerID}.webp`} alt={brawlerID} />
         <div>
           <div>

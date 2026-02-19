@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { SearchItem } from '~/components/search/search-item';
+import { SearchItem } from '~/components/search/search-item/search-item';
 
 import { SearchUserItemType } from '~/common/types/main.type';
 import { SearchContext } from '~/context/search.context';

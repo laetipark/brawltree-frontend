@@ -11,6 +11,7 @@ import styles from '~/assets/styles/components/layout/header.module.scss';
 
 export const Header = () => {
   const locales = useContext(CdnContext);
+  const headerLocale = locales.application?.header || {};
   const toggleVisible = useMediaQuery({ maxWidth: 768 });
   const [isToggled, setIsToggled] = useState(false);
 
@@ -35,32 +36,32 @@ export const Header = () => {
     >
       <li>
         <Link to={'/'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].main}</div>
+          <div>{headerLocale.main || 'Main'}</div>
         </Link>
       </li>
       <li>
         <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].brawler}</div>
+          <div>{headerLocale.brawler || 'Brawler'}</div>
         </Link>
       </li>
       <li>
         <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].events}</div>
+          <div>{headerLocale.events || 'Events'}</div>
         </Link>
       </li>
       <li>
         <Link to={'/maps'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].maps}</div>
+          <div>{headerLocale.maps || 'Maps'}</div>
         </Link>
       </li>
       <li>
         <Link to={'/crew'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].crew}</div>
+          <div>{headerLocale.crew || 'Crew'}</div>
         </Link>
       </li>
       <li>
         <Link to={'/news'} onClick={() => setIsToggled(false)}>
-          <div>{locales.application['header'].news}</div>
+          <div>{headerLocale.news || 'News'}</div>
         </Link>
       </li>
     </ul>

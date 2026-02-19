@@ -7,8 +7,8 @@
   grid-template-columns: 65% 31% 4%;
   align-items: center;
   padding: 8px;
-  border: 1px solid #39375B;
-  border-radius: 4px;
+  border: 1px solid var(--user-line-strong, #90b3c0);
+  border-radius: var(--user-radius-sm, 8px);
 }
 
 .matchInfo {
@@ -25,12 +25,14 @@
 }
 
 .matchResultBox {
+  border-radius: var(--user-radius-sm, 8px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-end;
   font-size: 14px;
   gap: 6px;
+  color: var(--user-ink, #233348);
 
   & > div {
     display: flex;
@@ -41,9 +43,12 @@
 .battleArrow {
   display: flex;
   justify-content: flex-end;
+  color: var(--user-soft-ink, #4f657b);
 }
 
 .matchInfoImageBox {
+  border-radius: var(--user-radius-sm, 8px);
+
   & > img {
     width: 22px;
     height: 22px;
@@ -57,7 +62,7 @@
   height: 40px;
   object-fit: cover;
   object-position: left;
-  border-radius: 40%;
+  border-radius: var(--user-radius-sm, 8px);
 }
 
 .battleSummaryTitle {
@@ -70,24 +75,28 @@
 
 .battleSummarySubTitle {
   font-size: 14px;
+  color: var(--user-soft-ink, #4f657b);
 }
 
 .battleLogsDetail {
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
-  border: 1px solid #39375B;
-  background-color: #83BD75;
+  border-radius: var(--user-radius-sm, 8px);
+  border: 1px solid var(--user-line-strong, #90b3c0);
+  background-color: var(--user-mint-soft, #e7f3e2);
+  overflow: hidden;
 }
 
 .battleLogsDetailTitle {
   padding: 8px;
-  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
+  font-weight: 700;
+  color: var(--user-ink, #233348);
 }
 
 .battleLogsDetailContent {
+  border-radius: var(--user-radius-sm, 8px);
   display: flex;
   flex-direction: column;
 }
@@ -96,8 +105,40 @@
   display: grid;
   grid-template-columns: 12% 58% 30%;
   padding: 8px;
-  color: black;
+  color: var(--user-ink, #233348);
   text-decoration-line: none;
+  border-top: 1px solid rgba(143, 179, 192, 0.26);
+
+  &:hover {
+    background-color: rgba(248, 252, 255, 0.58);
+  }
+}
+
+.resultWinTitle {
+  background: linear-gradient(90deg, rgba(111, 155, 136, 0.26) 0%, rgba(216, 236, 223, 0.88) 100%);
+  border-left: 4px solid var(--user-win, #6f9b88);
+}
+
+.resultDrawTitle {
+  background: linear-gradient(90deg, rgba(116, 141, 186, 0.24) 0%, rgba(222, 230, 242, 0.9) 100%);
+  border-left: 4px solid var(--user-draw, #748dba);
+}
+
+.resultLossTitle {
+  background: linear-gradient(90deg, rgba(194, 127, 144, 0.22) 0%, rgba(241, 220, 227, 0.92) 100%);
+  border-left: 4px solid var(--user-loss, #c27f90);
+}
+
+.resultWinContent {
+  background-color: rgba(216, 236, 223, 0.88);
+}
+
+.resultDrawContent {
+  background-color: rgba(222, 230, 242, 0.88);
+}
+
+.resultLossContent {
+  background-color: rgba(241, 220, 227, 0.88);
 }
 
 .matchBrawler {
@@ -105,7 +146,7 @@
   height: 32px;
   object-fit: cover;
   object-position: left;
-  border-radius: 40%;
+  border-radius: var(--user-radius-sm, 8px);
 }
 
 .matchTitle {
@@ -117,6 +158,7 @@
   align-items: center;
   font-size: 11px;
   gap: 2px;
+  color: var(--user-soft-ink, #4f657b);
 }
 
 .matchSubTitle > img {

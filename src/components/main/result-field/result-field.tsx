@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { SearchItem } from '~/components/search/search-item';
+import { SearchItem } from '~/components/search/search-item/search-item';
 
 import { SearchUserItemType } from '~/common/types/main.type';
 import { SearchContext } from '~/context/search.context';

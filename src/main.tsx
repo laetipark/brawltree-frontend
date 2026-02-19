@@ -2,8 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { HelmetProvider } from 'react-helmet-async';
+import { I18nextProvider } from 'react-i18next';
 import App from './App';
 import reportWebVitals from './report-web-vitals';
+import { i18n } from '~/common/i18n/i18n';
 
 import '~/common/styles/index.css';
 
@@ -26,11 +29,15 @@ if (!rootElement) {
 const root = ReactDOM.createRoot(rootElement);
 
 root.render(
-  <BrowserRouter>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </BrowserRouter>
+  <HelmetProvider>
+    <I18nextProvider i18n={i18n}>
+      <BrowserRouter>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </BrowserRouter>
+    </I18nextProvider>
+  </HelmetProvider>
 );
 
 reportWebVitals();

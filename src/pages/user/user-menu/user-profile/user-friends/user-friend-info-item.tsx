@@ -26,38 +26,38 @@ export const UserFriendInfoItemBox = ({
           <div key={`${match.friendID}_${match.mode}_${match.matchType}_${match.matchGrade}`}>
             <div>
               {match.matchType === 0 ? (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/trophy.webp`} alt={'게임방식'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/trophy.webp`} alt={'trophy_mode'} />
               ) : match.matchType === 2 ? (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/ranked.webp`} alt={'게임방식'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/ranked.webp`} alt={'ranked_mode'} />
               ) : match.matchType === 3 ? (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/powerLeagueTeam.webp`} alt={'게임방식'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/powerLeagueTeam.webp`} alt={'powerleague_mode'} />
               ) : (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'게임방식'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'challenge_mode'} />
               )}
               <span>|</span>
-              <img className={styles.iconImage} src={`${config.assets}/modes/icon/${match.mode}.webp`} alt={'챌린지'} />
+              <img className={styles.iconImage} src={`${config.assets}/modes/icon/${match.mode}.webp`} alt={'battle_mode'} />
               <span>|</span>
               {match.matchType === 0 ? (
-                <img className={styles.iconImage} src={`${config.assets}/rank/trophy/grade/${match.matchGrade}.webp`} alt={'트로피'} />
+                <img className={styles.iconImage} src={`${config.assets}/rank/trophy/grade/${match.matchGrade}.webp`} alt={'trophy_grade'} />
               ) : [2, 3].includes(match.matchType) ? (
-                <img className={styles.iconImage} src={`${config.assets}/rank/ranked/${match.matchGrade}.webp`} alt={'경쟁전'} />
+                <img className={styles.iconImage} src={`${config.assets}/rank/ranked/${match.matchGrade}.webp`} alt={'ranked_grade'} />
               ) : (
-                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'챌린지'} />
+                <img className={styles.iconImage} src={`${config.assets}/modes/icon/challenge.webp`} alt={'challenge_grade'} />
               )}
             </div>
             <div>
               <span>{match.matchCount}</span>
               <span>{locales.battle['result'].game}</span>
             </div>
-            <div style={{ color: '#5AA469' }}>
+            <div style={{ color: 'var(--user-win)' }}>
               <span>{match.victoriesCount}</span>
               <span>{locales.battle['result'].w}</span>
             </div>
-            <div style={{ color: '#556FB5' }}>
+            <div style={{ color: 'var(--user-draw)' }}>
               <span>{drwCount(match.matchCount, match.victoriesCount, match.defeatsCount)}</span>
               <span>{locales.battle['result'].d}</span>
             </div>
-            <div style={{ color: '#D35D6E' }}>
+            <div style={{ color: 'var(--user-loss)' }}>
               <span>{match.defeatsCount}</span>
               <span>{locales.battle['result'].l}</span>
             </div>

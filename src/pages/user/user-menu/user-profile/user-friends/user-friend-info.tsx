@@ -35,15 +35,15 @@ export const UserFriendInfoBox = ({ friend }: { friend: UserFriendType }) => {
               <span>{friend.matchCount}</span>
               <span>{locales.battle['result'].game}</span>
             </div>
-            <div style={{ color: '#5AA469' }}>
+            <div style={{ color: 'var(--user-win)' }}>
               <span>{friend.victoriesCount}</span>
               <span>{locales.battle['result'].w}</span>
             </div>
-            <div style={{ color: '#556FB5' }}>
+            <div style={{ color: 'var(--user-draw)' }}>
               <span>{drwCount(friend.matchCount, friend.victoriesCount, friend.defeatsCount)}</span>
               <span>{locales.battle['result'].d}</span>
             </div>
-            <div style={{ color: '#D35D6E' }}>
+            <div style={{ color: 'var(--user-loss)' }}>
               <span>{friend.defeatsCount}</span>
               <span>{locales.battle['result'].l}</span>
             </div>

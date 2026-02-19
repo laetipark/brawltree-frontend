@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MapService } from '~/services/map.service';
-import { MapInput } from '~/components/maps/summary/map-input';
-import { ModeFilter } from '~/components/maps/summary/mode-filter';
-import { MapList } from '~/components/maps/summary/map-list';
+import { MapInput } from '~/components/maps/summary/map-input/map-input';
+import { ModeFilter } from '~/components/maps/summary/mode-filter/mode-filter';
+import { MapList } from '~/components/maps/summary/map-list/map-list';
 import { MapSummaryType } from '~/common/types/maps.type';
 
 import { isRRMatch } from '~/utils/korean-pattern';
 import { CdnContext } from '~/context/cdn.context';
+import { PageSeo } from '~/components/seo/page-seo';
 
 import styles from './summary.module.scss';
 
@@ -34,6 +35,7 @@ export const MapSummary = () => {
 
   return (
     <div className={styles.app}>
+      <PageSeo page="maps" language={locales.language} />
       <MapInput setMapName={setSearchMapName} />
       <ModeFilter maps={filterMaps} />
       <MapList maps={filterMaps} />

@@ -3,6 +3,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   width: 100%;
+  position: relative;
+  z-index: 30;
 }
 
 .typeMenuButton {
@@ -11,20 +13,21 @@
   align-items: center;
   width: 100%;
   padding: 8px;
-  background-color: #E1ECC8;
-  border-top: 1px solid #83BD75;
-  border-left: 1px solid #83BD75;
-  border-right: 1px solid #83BD75;
+  background: linear-gradient(145deg, var(--user-mint-soft, #e7f3e2) 0%, var(--user-card-soft, #ebf6ff) 100%);
+  border-top: 1px solid var(--user-line-strong, #90b3c0);
+  border-left: 1px solid var(--user-line-strong, #90b3c0);
+  border-right: 1px solid var(--user-line-strong, #90b3c0);
   border-bottom: none;
-  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  border-radius: var(--user-radius-sm, 8px) var(--user-radius-sm, 8px) 0 0;
+  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
+  color: var(--user-ink, #233348);
   gap: 4px;
-  transition: background-color 0.2s ease-in;
+  transition: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #A0C49D;
+    background: var(--user-sage, #c0d8c0);
   }
 
   & > img {
@@ -41,8 +44,10 @@
   list-style: none;
   width: 100%;
   height: 0;
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 40;
 }
 
 @media (min-width: 576px) {
@@ -60,20 +65,20 @@
   align-items: center;
   text-align: center;
   padding: 8px 0 8px 8px;
-  border-bottom: 1px solid #83BD75;
-  border-left: 1px solid #83BD75;
-  border-right: 1px solid #83BD75;
-  background-color: #E1ECC8;
-  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  border-bottom: 1px solid var(--user-line-strong, #90b3c0);
+  border-left: 1px solid var(--user-line-strong, #90b3c0);
+  border-right: 1px solid var(--user-line-strong, #90b3c0);
+  background: linear-gradient(145deg, var(--user-card, #f8fcff) 0%, var(--user-card-soft, #ebf6ff) 100%);
+  font-family: "Main Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
+  color: var(--user-ink, #233348);
   gap: 4px;
-  transition: background-color 0.2s ease-in-out;
+  transition: none;
   cursor: pointer;
 }
 
 .typeButton:first-child + label {
-  border-top: 1px solid #83BD75;
+  border-top: 1px solid var(--user-line-strong, #90b3c0);
 }
 
 .typeButton + label > img {
@@ -86,5 +91,5 @@
 
 .typeButton:checked + label,
 .typeButton + label:hover {
-  background-color: #A0C49D;
+  background: var(--user-mint, #d6ead0);
 }
