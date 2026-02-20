@@ -11,6 +11,9 @@ import config from '~/common/config/config';
 import styles from '~/assets/styles/components/maps/event-summary/event-summary0item.module.scss';
 
 const MOBILE_TOOLTIP_QUERY = '(max-width: 1024px), (hover: none) and (pointer: coarse)';
+const TOOLTIP_SAFE_PADDING_Y = 12;
+const TOOLTIP_ANCHOR_GAP = 8;
+const TOOLTIP_PREFERRED_HEIGHT = 260;
 
 export const EventItemContent = ({
   event,
@@ -53,6 +56,8 @@ export const EventItemContent = ({
       : 0
   };
   const [mouseOver, setMouseOver] = useState(false);
+  const [isToolTipUp, setIsToolTipUp] = useState(false);
+  const [tooltipMaxHeight, setTooltipMaxHeight] = useState(360);
   const [isMobileTooltipModal, setIsMobileTooltipModal] = useState<boolean>(() => {
     if (typeof window === 'undefined') {
       return false;
@@ -60,11 +65,53 @@ export const EventItemContent = ({
     return window.matchMedia(MOBILE_TOOLTIP_QUERY).matches;
   });
   const infoAnchorRef = useRef<HTMLDivElement | null>(null);
+  const toolTipRef = useRef<HTMLDivElement | null>(null);
+
+  const getTooltipBottomBoundary = () => {
+    if (typeof window === 'undefined') {
+      return 0;
+    }
+
+    const viewportBottom = window.innerHeight - TOOLTIP_SAFE_PADDING_Y;
+    const footerElement = document.querySelector('footer');
+
+    if (!footerElement) {
+      return viewportBottom;
+    }
+
+    const footerTop = footerElement.getBoundingClientRect().top;
+
+    if (footerTop > 0 && footerTop < viewportBottom) {
+      return footerTop - TOOLTIP_SAFE_PADDING_Y;
+    }
+
+    return viewportBottom;
+  };
+
+  const updateTooltipDirection = (toolTipHeight = TOOLTIP_PREFERRED_HEIGHT) => {
+    if (typeof window === 'undefined' || !infoAnchorRef.current) {
+      return;
+    }
+
+    const anchorRect = infoAnchorRef.current.getBoundingClientRect();
+    const lowerBoundary = getTooltipBottomBoundary() - TOOLTIP_ANCHOR_GAP;
+    const upperBoundary = TOOLTIP_SAFE_PADDING_Y + TOOLTIP_ANCHOR_GAP;
+    const spaceBelow = lowerBoundary - anchorRect.bottom;
+    const spaceAbove = anchorRect.top - upperBoundary;
+    const safeSpaceBelow = Math.max(120, spaceBelow);
+    const safeSpaceAbove = Math.max(120, spaceAbove);
+    const nextIsToolTipUp = safeSpaceBelow < toolTipHeight && safeSpaceAbove > safeSpaceBelow;
+    const nextMaxHeight = Math.max(160, Math.round(nextIsToolTipUp ? safeSpaceAbove : safeSpaceBelow));
+
+    setIsToolTipUp(nextIsToolTipUp);
+    setTooltipMaxHeight(nextMaxHeight);
+  };
 
   const openMapToolTip = () => {
     if (isMobileTooltipModal) {
       return;
     }
+    updateTooltipDirection();
     setMouseOver(true);
   };
 
@@ -78,12 +125,14 @@ export const EventItemContent = ({
   const toggleMapToolTip = (event: React.MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.stopPropagation();
+    updateTooltipDirection();
     setMouseOver((prev) => !prev);
   };
 
   const onInfoAnchorKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
+      updateTooltipDirection();
       setMouseOver((prev) => !prev);
       return;
     }
@@ -151,6 +200,43 @@ export const EventItemContent = ({
     };
   }, [mouseOver, isMobileTooltipModal]);
 
+  useEffect(() => {
+    if (isMobileTooltipModal || !mouseOver) {
+      return;
+    }
+
+    const syncDirection = () => {
+      const measuredTooltipHeight = toolTipRef.current?.offsetHeight || 260;
+      updateTooltipDirection(measuredTooltipHeight);
+    };
+
+    syncDirection();
+    window.addEventListener('resize', syncDirection);
+    window.addEventListener('scroll', syncDirection, true);
+
+    return () => {
+      window.removeEventListener('resize', syncDirection);
+      window.removeEventListener('scroll', syncDirection, true);
+    };
+  }, [mouseOver, isMobileTooltipModal]);
+
+  useEffect(() => {
+    if (isMobileTooltipModal || !mouseOver || !toolTipRef.current || typeof ResizeObserver === 'undefined') {
+      return;
+    }
+
+    const observer = new ResizeObserver(() => {
+      const measuredTooltipHeight = toolTipRef.current?.offsetHeight || TOOLTIP_PREFERRED_HEIGHT;
+      updateTooltipDirection(measuredTooltipHeight);
+    });
+
+    observer.observe(toolTipRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [mouseOver, isMobileTooltipModal]);
+
   useInterval(() => {
     if (!time) {
       return;
@@ -192,10 +278,21 @@ export const EventItemContent = ({
               }}
             >
               <img src={'/images/etc/info.webp'} alt={'info'} />
-              {!isMobileTooltipModal && (
-                <div className={`${styles.mapToolTip} ${mouseOver ? styles.mapToolTipVisible : ''}`} aria-hidden={!mouseOver}>
+              {!isMobileTooltipModal && mouseOver && (
+                <div
+                  ref={toolTipRef}
+                  className={`${styles.mapToolTip} ${isToolTipUp ? styles.mapToolTipUp : ''}`}
+                  style={{ '--event-map-tooltip-max-height': `${tooltipMaxHeight}px` } as React.CSSProperties}
+                >
                   <h3 className={styles.mapToolTipTitle}>{locales.map['map'][`${event.mapID}`] || event.mapName}</h3>
-                  <img src={imgSrc} alt={event.mapID} />
+                  <img
+                    src={imgSrc}
+                    alt={event.mapID}
+                    onLoad={() => {
+                      const measuredTooltipHeight = toolTipRef.current?.offsetHeight || TOOLTIP_PREFERRED_HEIGHT;
+                      updateTooltipDirection(measuredTooltipHeight);
+                    }}
+                  />
                 </div>
               )}
             </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import ReactECharts from 'echarts-for-react';
 
 import { UserBrawlerStatsBox } from '~/pages/user/user-menu/user-profile/user-battles/user-brawler-stats';
@@ -102,7 +102,8 @@ export const UserDailyStatsBox = ({ summaryBattles, dailyBrawlers, season }) => 
   const locales = useContext(CdnContext);
   const [dailyBrawlerItem, setDailyBrawlerItem] = useState<UserDailyBrawlersType[]>([]);
   const [selectedDayKey, setSelectedDayKey] = useState<string>(toLocalDay(new Date()));
-  const [isCompactCalendar, setIsCompactCalendar] = useState<boolean>(() => (typeof window !== 'undefined' ? window.innerWidth < 420 : false));
+  const calendarFrameRef = useRef<HTMLDivElement | null>(null);
+  const [calendarFrameWidth, setCalendarFrameWidth] = useState<number>(0);
 
   const calendarColors = ['#d8e8d4', '#b8d3bc', '#96bd9f', '#6f9b88'];
   const seasonBeginDate = season?.beginDate ? new Date(new Date(season.beginDate).getTime() - DAY_MS) : new Date();
@@ -121,7 +122,15 @@ export const UserDailyStatsBox = ({ summaryBattles, dailyBrawlers, season }) => 
     const dayDiff = Math.floor((toUtcMsByDayKey(endWeekKey) - toUtcMsByDayKey(startWeekKey)) / DAY_MS);
     return Math.max(1, Math.floor(dayDiff / 7) + 1);
   }, [monthRangeStart, rangeEnd]);
-  const calendarCellSize = isCompactCalendar ? 18 : 28;
+  const effectiveCalendarWidth = calendarFrameWidth || (typeof window !== 'undefined' ? window.innerWidth : 360);
+  const isCompactCalendar = effectiveCalendarWidth < 390;
+  const calendarSidePadding = isCompactCalendar ? 18 : 24;
+  const calendarFrameHeightByWidth = Math.round(effectiveCalendarWidth * (isCompactCalendar ? 0.72 : 0.74));
+  const calendarTargetFrameHeight = Math.max(isCompactCalendar ? 236 : 272, Math.min(isCompactCalendar ? 300 : 360, calendarFrameHeightByWidth));
+  const calendarFrameBasePadding = isCompactCalendar ? 58 : 108;
+  const calendarCellSizeByWidth = Math.floor(Math.max(220, effectiveCalendarWidth - calendarSidePadding) / 7);
+  const calendarCellSizeByHeight = Math.floor((calendarTargetFrameHeight - calendarFrameBasePadding) / Math.max(1, calendarWeekSpan));
+  const calendarCellSize = Math.max(10, Math.min(isCompactCalendar ? 22 : 30, calendarCellSizeByWidth, calendarCellSizeByHeight));
   const calendarGridWidth = calendarCellSize * 7;
   const calendarGridHeight = calendarCellSize * calendarWeekSpan;
 
@@ -264,18 +273,44 @@ export const UserDailyStatsBox = ({ summaryBattles, dailyBrawlers, season }) => 
   }, [dailyBrawlers, selectedDayKey]);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !calendarFrameRef.current) {
       return;
     }
 
-    const onResize = () => {
-      setIsCompactCalendar(window.innerWidth < 420);
+    const element = calendarFrameRef.current;
+    let rafId = 0;
+
+    const updateWidth = () => {
+      const nextWidth = Math.round(element.getBoundingClientRect().width);
+      if (nextWidth <= 0) {
+        return;
+      }
+
+      setCalendarFrameWidth((prevWidth) => (prevWidth === nextWidth ? prevWidth : nextWidth));
     };
 
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+    updateWidth();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(() => {
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+        }
+        rafId = window.requestAnimationFrame(updateWidth);
+      });
+
+      observer.observe(element);
+      return () => {
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+        }
+        observer.disconnect();
+      };
+    }
+
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, [summaryBattles]);
 
   const selectedDateLabel = useMemo(() => {
     const date = new Date(`${selectedDayKey}T00:00:00`);
@@ -402,7 +437,7 @@ export const UserDailyStatsBox = ({ summaryBattles, dailyBrawlers, season }) => 
           <span className={styles.trophyCutoff}>- {formatShortDay(trophyCutoffDay)} Trophy cutoff</span>
         </div>
         {summaryBattles && (
-          <div className={styles.dailyCalendarChartFrame}>
+          <div className={styles.dailyCalendarChartFrame} ref={calendarFrameRef}>
             <ReactECharts option={chartOption} onEvents={chartEvents} notMerge={true} lazyUpdate={true} opts={{ renderer: 'svg' }} style={{ width: '100%', height: '100%' }} />
           </div>
         )}

@@ -6,12 +6,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import { CdnContext } from '~/context/cdn.context';
+import { SupportedLanguage } from '~/common/i18n/language';
 
 import styles from '~/assets/styles/components/layout/header.module.scss';
 
-export const Header = () => {
+type HeaderProps = {
+  isCdnLoading?: boolean;
+};
+
+const HEADER_FALLBACK: Record<SupportedLanguage, { main: string; brawler: string; events: string; maps: string; news: string }> = {
+  ko: {
+    main: '\uBA54\uC778',
+    brawler: '\uBE0C\uB864\uB7EC',
+    events: '\uB85C\uD14C\uC774\uC158',
+    maps: '\uB9F5',
+    news: '\uB274\uC2A4'
+  },
+  en: {
+    main: 'Main',
+    brawler: 'Brawler',
+    events: 'Events',
+    maps: 'Maps',
+    news: 'News'
+  }
+};
+
+export const Header = ({ isCdnLoading = false }: HeaderProps) => {
   const locales = useContext(CdnContext);
   const headerLocale = locales.application?.header || {};
+  const headerFallback = HEADER_FALLBACK[locales.language || 'ko'];
+  const hasHeaderLocale = Object.keys(headerLocale).length > 0;
+  const shouldShowSkeleton = isCdnLoading && !hasHeaderLocale;
   const toggleVisible = useMediaQuery({ maxWidth: 768 });
   const [isToggled, setIsToggled] = useState(false);
 
@@ -36,32 +61,27 @@ export const Header = () => {
     >
       <li>
         <Link to={'/'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.main || 'Main'}</div>
+          <div>{headerLocale.main || headerFallback.main}</div>
         </Link>
       </li>
       <li>
         <Link to={'/brawler/shelly'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.brawler || 'Brawler'}</div>
+          <div>{headerLocale.brawler || headerFallback.brawler}</div>
         </Link>
       </li>
       <li>
         <Link to={'/events/curr'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.events || 'Events'}</div>
+          <div>{headerLocale.events || headerFallback.events}</div>
         </Link>
       </li>
       <li>
         <Link to={'/maps'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.maps || 'Maps'}</div>
-        </Link>
-      </li>
-      <li>
-        <Link to={'/crew'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.crew || 'Crew'}</div>
+          <div>{headerLocale.maps || headerFallback.maps}</div>
         </Link>
       </li>
       <li>
         <Link to={'/news'} onClick={() => setIsToggled(false)}>
-          <div>{headerLocale.news || 'News'}</div>
+          <div>{headerLocale.news || headerFallback.news}</div>
         </Link>
       </li>
     </ul>
@@ -74,7 +94,13 @@ export const Header = () => {
           <img className={styles.menuLogo} src={`/images/logo/brawltree/logo192.png`} alt={'Logo'} />
           <div>Brawl Tree</div>
         </a>
-        {toggleVisible ? (
+        {shouldShowSkeleton ? (
+          <div className={styles.headerSkeleton} aria-hidden={'true'}>
+            <span className={styles.skeletonText} />
+            <span className={styles.skeletonText} />
+            <span className={styles.skeletonText} />
+          </div>
+        ) : toggleVisible ? (
           <div
             className={styles.menuToggle}
             onClick={() => {
@@ -87,7 +113,7 @@ export const Header = () => {
           menuList
         )}
       </header>
-      {toggleVisible && menuList}
+      {toggleVisible && !shouldShowSkeleton && menuList}
     </React.Fragment>
   );
 };

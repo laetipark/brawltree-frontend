@@ -1,5 +1,8 @@
 .footerWrapper {
   box-sizing: border-box;
+  position: relative;
+  z-index: 40;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

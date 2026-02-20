@@ -9,7 +9,8 @@ import styles from '~/assets/styles/pages/user/user-menu/user-profile/user-battl
 
 export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) => {
   const locales = useContext(CdnContext);
-  const [viewportWidth, setViewportWidth] = useState<number>(() => (typeof window !== 'undefined' ? window.innerWidth : 1024));
+  const [graphWidth, setGraphWidth] = useState<number>(0);
+  const graphContainerRef = useRef<HTMLDivElement | null>(null);
   const battlePieRef = useRef<any>(null);
   const rolePieRef = useRef<any>(null);
 
@@ -18,11 +19,42 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
       return;
     }
 
-    const onResize = () => setViewportWidth(window.innerWidth);
+    const element = graphContainerRef.current;
+    if (!element) {
+      return;
+    }
 
-    onResize();
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
+    let rafId = 0;
+    const updateWidth = () => {
+      const nextWidth = Math.round(element.getBoundingClientRect().width);
+      if (nextWidth <= 0) {
+        return;
+      }
+
+      setGraphWidth((prevWidth) => (prevWidth === nextWidth ? prevWidth : nextWidth));
+    };
+
+    updateWidth();
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(() => {
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+        }
+        rafId = window.requestAnimationFrame(updateWidth);
+      });
+
+      observer.observe(element);
+      return () => {
+        if (rafId) {
+          window.cancelAnimationFrame(rafId);
+        }
+        observer.disconnect();
+      };
+    }
+
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
   useEffect(() => {
@@ -40,7 +72,7 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
     }, 40);
 
     return () => clearTimeout(timer);
-  }, [viewportWidth, recentBattles?.length]);
+  }, [graphWidth, recentBattles?.length]);
 
   const matchCount = recentBattles?.length || 0;
   const vicCount = recentBattles?.filter(({ gameResult }) => gameResult === -1).length || 0;
@@ -104,43 +136,57 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
     }
   ];
 
+  const effectiveWidth = graphWidth || (typeof window !== 'undefined' ? window.innerWidth : 1024);
   const pieTier = useMemo(() => {
-    if (viewportWidth < 430) {
+    if (effectiveWidth < 320) {
+      return 'xs';
+    }
+    if (effectiveWidth < 430) {
       return 'sm';
     }
-    if (viewportWidth < 1024) {
+    if (effectiveWidth < 640) {
       return 'md';
     }
     return 'lg';
-  }, [viewportWidth]);
+  }, [effectiveWidth]);
 
-  const pieRadiusByTier: Record<string, [number, number]> = {
-    sm: [34, 62],
-    md: [42, 78],
-    lg: [52, 92]
+  const pieRadiusByTier: Record<string, [string, string]> = {
+    xs: ['30%', '56%'],
+    sm: ['32%', '58%'],
+    md: ['36%', '63%'],
+    lg: ['38%', '66%']
   };
   const pieCenterByTier: Record<string, [string, string]> = {
+    xs: ['50%', '33%'],
     sm: ['50%', '35%'],
     md: ['50%', '38%'],
     lg: ['50%', '41%']
   };
   const pieRadius = pieRadiusByTier[pieTier];
   const pieCenter = pieCenterByTier[pieTier];
-  const isNarrowPie = pieTier === 'sm';
+  const isNarrowPie = pieTier === 'sm' || pieTier === 'xs';
+  const isVeryNarrowPie = pieTier === 'xs';
+  const pieRenderKeySeed = Math.floor(effectiveWidth / 24);
 
   const battlePieOption = useMemo(
     () => ({
       animation: false,
       tooltip: { show: false },
       legend: {
-        bottom: isNarrowPie ? 2 : 0,
+        type: isVeryNarrowPie ? 'scroll' : 'plain',
+        bottom: isVeryNarrowPie ? 12 : isNarrowPie ? 18 : 22,
         left: 'center',
-        itemWidth: isNarrowPie ? 9 : 11,
-        itemHeight: isNarrowPie ? 9 : 11,
-        itemGap: isNarrowPie ? 10 : 14,
+        itemWidth: isVeryNarrowPie ? 8 : isNarrowPie ? 9 : 11,
+        itemHeight: isVeryNarrowPie ? 8 : isNarrowPie ? 9 : 11,
+        itemGap: isVeryNarrowPie ? 8 : isNarrowPie ? 10 : 14,
+        pageIconColor: '#6d95b3',
+        pageTextStyle: {
+          color: '#4f657b',
+          fontSize: 10
+        },
         textStyle: {
           color: '#233348',
-          fontSize: isNarrowPie ? 11 : 12,
+          fontSize: isVeryNarrowPie ? 10 : isNarrowPie ? 11 : 12,
           fontWeight: 700,
           fontFamily:
             '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
@@ -153,12 +199,12 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
           center: pieCenter,
           silent: true,
           label: {
-            show: true,
+            show: !isVeryNarrowPie,
             position: 'inside',
             formatter: (params: { value: number }) => (params.value > 0 ? `${params.value}` : ''),
             color: '#233348',
             fontWeight: 700,
-            fontSize: isNarrowPie ? 10 : 12
+            fontSize: isVeryNarrowPie ? 9 : isNarrowPie ? 10 : 12
           },
           labelLine: { show: false },
           itemStyle: {
@@ -169,7 +215,7 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
         }
       ]
     }),
-    [battleData, isNarrowPie, pieCenter, pieRadius]
+    [battleData, isNarrowPie, isVeryNarrowPie, pieCenter, pieRadius]
   );
 
   const rolePieOption = useMemo(
@@ -177,14 +223,20 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
       animation: false,
       tooltip: { show: false },
       legend: {
-        bottom: isNarrowPie ? 2 : 0,
+        type: isNarrowPie ? 'scroll' : 'plain',
+        bottom: isVeryNarrowPie ? 12 : isNarrowPie ? 18 : 22,
         left: 'center',
-        itemWidth: isNarrowPie ? 7 : 8,
-        itemHeight: isNarrowPie ? 7 : 8,
-        itemGap: isNarrowPie ? 8 : 12,
+        itemWidth: isVeryNarrowPie ? 6 : isNarrowPie ? 7 : 8,
+        itemHeight: isVeryNarrowPie ? 6 : isNarrowPie ? 7 : 8,
+        itemGap: isVeryNarrowPie ? 6 : isNarrowPie ? 8 : 12,
+        pageIconColor: '#6d95b3',
+        pageTextStyle: {
+          color: '#4f657b',
+          fontSize: 10
+        },
         textStyle: {
           color: '#233348',
-          fontSize: isNarrowPie ? 10 : 12,
+          fontSize: isVeryNarrowPie ? 9 : isNarrowPie ? 10 : 12,
           fontWeight: 700,
           fontFamily:
             '"Main Medium", "JP Medium", "CN Medium", "N Medium", -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif'
@@ -214,14 +266,14 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
         }
       ]
     }),
-    [brawlerData, isNarrowPie, pieCenter, pieRadius]
+    [brawlerData, isNarrowPie, isVeryNarrowPie, pieCenter, pieRadius]
   );
 
   return (
     (recentBattles?.length || 0) > 0 && (
       <div className={styles.userBattleLogBox}>
         <div className={styles.recentBattlesBox}>
-          <div className={styles.recentBattlesGraphBox}>
+          <div className={styles.recentBattlesGraphBox} ref={graphContainerRef}>
             <div>
               <div>
                 <h3>{locales.user['battle']?.recentBattles || 'recentBattles'}</h3>
@@ -249,7 +301,7 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
               </div>
               <div className={`${styles.pieFrame} ${styles.pieFrameCompact}`}>
                 <ReactECharts
-                  key={`battle-pie-${pieTier}-${Math.floor(viewportWidth / 40)}`}
+                  key={`battle-pie-${pieTier}-${pieRenderKeySeed}`}
                   ref={battlePieRef}
                   option={battlePieOption}
                   notMerge={true}
@@ -263,7 +315,7 @@ export const UserBattleLogsBox = ({ recentBattles, recentBrawlers, battles }) =>
               <h3>{locales.user['battle'].brawlerRoleUsed}</h3>
               <div className={styles.pieFrame}>
                 <ReactECharts
-                  key={`role-pie-${pieTier}-${Math.floor(viewportWidth / 40)}`}
+                  key={`role-pie-${pieTier}-${pieRenderKeySeed}`}
                   ref={rolePieRef}
                   option={rolePieOption}
                   notMerge={true}

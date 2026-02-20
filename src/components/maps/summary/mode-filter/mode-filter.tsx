@@ -4,11 +4,12 @@ import { CdnContext } from '~/context/cdn.context';
 import config from '~/common/config/config';
 
 export const ModeFilter = ({ maps }) => {
+  const locales = useContext(CdnContext);
+
   return (
     <div className={styles.modeFilterWrapper}>
       {Object.keys(maps).map((mode) => {
         const modeName = mode.split('_')[0];
-        const locales = useContext(CdnContext);
 
         return maps[`${mode}`].length ? (
           <a key={modeName} href={`#${modeName}`}>

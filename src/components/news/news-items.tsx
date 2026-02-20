@@ -5,7 +5,11 @@ import { CdnContext } from '~/context/cdn.context';
 
 import styles from '~/assets/styles/components/news/news-items.module.scss';
 
-export const NewsItemsContent = () => {
+type NewsItemsContentProps = {
+  layout?: 'compact' | 'full';
+};
+
+export const NewsItemsContent = ({ layout = 'compact' }: NewsItemsContentProps) => {
   const locales = useContext(CdnContext);
   const [news, setNews] = useState([]);
 
@@ -31,7 +35,7 @@ export const NewsItemsContent = () => {
   };
 
   return (
-    <div className={styles.newsItemsContent}>
+    <div className={`${styles.newsItemsContent} ${layout === 'full' ? styles.newsItemsContentFull : ''}`}>
       {news.map((item) => {
         let url: string;
 
@@ -42,9 +46,17 @@ export const NewsItemsContent = () => {
         } else if (item.type === 'imageNewsEntry') {
           url = null;
         }
+        const isClickable = Boolean(url);
 
         return (
-          <a key={item.id} href={url} target="_blank" rel="noreferrer">
+          <a
+            key={item.id}
+            href={url || '#'}
+            target={isClickable ? '_blank' : undefined}
+            rel={isClickable ? 'noreferrer' : undefined}
+            aria-disabled={!isClickable}
+            className={!isClickable ? styles.disabledNewsLink : undefined}
+          >
             <img src={`/inbox${item.thumbnailPath}`} alt={item.thumbnailPath} />
             <div>
               <div>

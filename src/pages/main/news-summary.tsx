@@ -34,8 +34,12 @@ export const NewsSummaryContainer = () => {
       return undefined;
     }
 
+    const shouldSyncNewsHeight = (width: number) => {
+      return width <= 900 || width >= 1024;
+    };
+
     const syncNewsHeight = () => {
-      if (window.innerWidth < 1024 || !youtubeStackRef.current) {
+      if (!youtubeStackRef.current || !shouldSyncNewsHeight(window.innerWidth)) {
         setNewsColumnHeight(null);
         return;
       }

@@ -9,16 +9,19 @@ import { CdnContext } from '~/context/cdn.context';
 
 import styles from './event-menu.module.scss';
 
+const EVENT_MODES = ['curr', 'next', 'ranked'] as const;
+
 export const EventMenu = () => {
   const navigate = useNavigate();
   const { mode } = useParams();
   const locales = useContext(CdnContext);
+  const normalizedMode = mode && EVENT_MODES.includes(mode as (typeof EVENT_MODES)[number]) ? mode : 'curr';
 
-  const [menu, setMenu] = useState('');
+  const [menu, setMenu] = useState(normalizedMode || 'curr');
 
   useEffect(() => {
-    setMenu(mode);
-  }, [mode]);
+    setMenu(normalizedMode || 'curr');
+  }, [normalizedMode]);
 
   return (
     <div className={styles.menuWrapper}>
@@ -34,8 +37,7 @@ export const EventMenu = () => {
               onChange={(e) => {
                 const { target } = e;
                 setMenu(target.id);
-                const baseURL = location.pathname.split('/');
-                navigate(`../${baseURL[1]}/${target.id}`);
+                navigate(`/events/${target.id}`);
               }}
             />
             <label htmlFor={'curr'}>
@@ -52,8 +54,7 @@ export const EventMenu = () => {
               onChange={(e) => {
                 const { target } = e;
                 setMenu(target.id);
-                const baseURL = location.pathname.split('/');
-                navigate(`../${baseURL[1]}/${target.id}`);
+                navigate(`/events/${target.id}`);
               }}
             />
             <label htmlFor={'next'}>
@@ -70,8 +71,7 @@ export const EventMenu = () => {
               onChange={(e) => {
                 const { target } = e;
                 setMenu(target.id);
-                const baseURL = location.pathname.split('/');
-                navigate(`../${baseURL[1]}/${target.id}`);
+                navigate(`/events/${target.id}`);
               }}
             />
             <label htmlFor={'ranked'}>
@@ -80,7 +80,9 @@ export const EventMenu = () => {
           </li>
         </ul>
       </div>
-      {menu === 'curr' ? <TrophyCurrentEvents /> : menu === 'next' ? <TrophyTomorrowEvents /> : menu === 'ranked' ? <RankedEvents /> : <div></div>}
+      <div className={styles.eventPanel}>
+        {menu === 'curr' ? <TrophyCurrentEvents /> : menu === 'next' ? <TrophyTomorrowEvents /> : menu === 'ranked' ? <RankedEvents /> : <div></div>}
+      </div>
     </div>
   );
 };

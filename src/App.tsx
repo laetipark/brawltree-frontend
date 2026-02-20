@@ -8,7 +8,9 @@ import type { CdnBundle } from '~/context/cdn.context';
 import { CdnService } from '~/services/cdn.service';
 import { Spinner } from '~/components/spinner/spinner';
 import { syncCdnBundleToI18n } from '~/common/i18n/cdn-resource-sync';
-import { DEFAULT_LANGUAGE, detectPreferredLanguage, normalizeLanguage, SupportedLanguage } from '~/common/i18n/language';
+import { SupportedLanguage } from '~/common/i18n/language';
+import { getInitialLanguage, persistLanguage } from '~/common/i18n/language-storage';
+import { i18n } from '~/common/i18n/i18n';
 
 const MainWrapper = lazy(() => import('~/pages/main').then((module) => ({ default: module.MainWrapper })));
 const UserWrapper = lazy(() => import('~/pages/user').then((module) => ({ default: module.UserWrapper })));
@@ -33,22 +35,6 @@ const fetchCdnBundle = async (language: SupportedLanguage): Promise<CdnBundle> =
   ]);
 
   return { application, battle, brawler, main, map, news, user };
-};
-
-const getInitialLanguage = () => {
-  if (typeof window === 'undefined') {
-    return DEFAULT_LANGUAGE;
-  }
-
-  const urlLanguage = new URLSearchParams(window.location.search).get('lang');
-  const storageLanguage = localStorage.getItem('language');
-  const storedLanguage = urlLanguage || storageLanguage;
-
-  if (storedLanguage) {
-    return normalizeLanguage(storedLanguage);
-  }
-
-  return detectPreferredLanguage();
 };
 
 const App = () => {
@@ -82,7 +68,11 @@ const App = () => {
   }, [language]);
 
   useEffect(() => {
-    localStorage.setItem('language', language);
+    persistLanguage(language);
+
+    if (i18n.language !== language) {
+      void i18n.changeLanguage(language);
+    }
   }, [language]);
 
   useEffect(() => {
@@ -122,27 +112,29 @@ const App = () => {
 
   return (
     <CdnContext.Provider value={contextValue}>
-      <Header />
-      <main style={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', width: '100%', minHeight: 0 }}>
-        {isLoaded ? (
-          <Suspense fallback={loadingFallback}>
-            <Routes>
-              <Route path="/" element={<MainWrapper />} />
-              <Route path="/brawlian/:id" element={<UserWrapper />} />
-              <Route path="/brawler/:name" element={<Brawlers />} />
-              <Route path="/events/:mode" element={<Events />} />
-              <Route path="/maps" element={<MapSummary />} />
-              <Route path="/maps/:name" element={<MapDetail />} />
-              <Route path="/crew" element={<CrewMembers />} />
-              <Route path="/news" element={<NewsWrapper />} />
-              <Route path="/news/:title" element={<NewsListItem />} />
-            </Routes>
-          </Suspense>
-        ) : (
-          loadingFallback
-        )}
-      </main>
-      <Footer />
+      <div style={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', minHeight: '100%', width: '100%' }}>
+        <Header isCdnLoading={!isLoaded} />
+        <main style={{ display: 'flex', flexDirection: 'column', flex: '1 0 auto', width: '100%', minHeight: 0 }}>
+          {isLoaded ? (
+            <Suspense fallback={loadingFallback}>
+              <Routes>
+                <Route path="/" element={<MainWrapper />} />
+                <Route path="/brawlian/:id" element={<UserWrapper />} />
+                <Route path="/brawler/:name" element={<Brawlers />} />
+                <Route path="/events/:mode" element={<Events />} />
+                <Route path="/maps" element={<MapSummary />} />
+                <Route path="/maps/:name" element={<MapDetail />} />
+                <Route path="/crew" element={<CrewMembers />} />
+                <Route path="/news" element={<NewsWrapper />} />
+                <Route path="/news/:title" element={<NewsListItem />} />
+              </Routes>
+            </Suspense>
+          ) : (
+            loadingFallback
+          )}
+        </main>
+        <Footer />
+      </div>
     </CdnContext.Provider>
   );
 };
