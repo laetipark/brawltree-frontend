@@ -5,8 +5,8 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
-import itemStyles from '~/components/items/item-info/index.module.scss';
+import styles from './brawler-info.module.scss';
+import itemStyles from '~/components/items/item-info/item-tooltip.module.scss';
 
 export const BrawlerInfo = ({ brawler, skills, items }) => {
   const locales = useContext(CdnContext);

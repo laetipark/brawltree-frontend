@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { CdnContext } from '~/context/cdn.context';
 
-import styles from './index.module.scss';
+import styles from './brawler-info-detail.module.scss';
 
 const powerLevelElement = ['health', 'attack-damage'];
 

@@ -5,7 +5,7 @@ import { BrawlerSummaryItem } from '~/components/main/brawlers/content/brawler-s
 
 import { CdnContext } from '~/context/cdn.context';
 
-import styles from '~/components/main/brawlers/index.module.scss';
+import styles from '~/components/main/brawlers/brawler-summary-container.module.scss';
 
 export const BrawlerSummaryContainer = ({ brawlersTrophy, brawlersRanked }) => {
   const locales = useContext(CdnContext);

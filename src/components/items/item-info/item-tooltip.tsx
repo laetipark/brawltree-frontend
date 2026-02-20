@@ -4,7 +4,7 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
+import styles from './item-tooltip.module.scss';
 
 const MOBILE_TOOLTIP_QUERY = '(max-width: 1024px), (hover: none) and (pointer: coarse)';
 

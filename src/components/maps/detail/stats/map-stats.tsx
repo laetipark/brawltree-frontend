@@ -5,7 +5,7 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
+import styles from './map-stats.module.scss';
 
 const MapStats = ({ brawlers }: { brawlers: MapBrawlerStatsType[] }) => {
   const locales = useContext(CdnContext);
@@ -16,7 +16,7 @@ const MapStats = ({ brawlers }: { brawlers: MapBrawlerStatsType[] }) => {
         return (
           <a key={`${brawlerID}`} className={styles.brawlerStatsItem} href={`../brawler/${brawlerName.toLowerCase().replaceAll(' ', '')}`}>
             <div className={styles.brawlerTitle}>
-              <img src={`${config.assets}/brawlers/pins/${brawlerID}.webp`} alt={'브롤러'} />
+              <img src={`${config.assets}/brawlers/pins/${brawlerID}.webp`} alt={'brawler_pin'} />
               <div>{locales.brawler['brawler'][`${brawlerName}`]}</div>
             </div>
             <div className={styles.brawlerContent}>

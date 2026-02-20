@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import styles from './index.module.scss';
+import styles from './mode-filter.module.scss';
 import { CdnContext } from '~/context/cdn.context';
 import config from '~/common/config/config';
 

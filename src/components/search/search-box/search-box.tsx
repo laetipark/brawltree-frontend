@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 
-import styles from './index.module.scss';
+import styles from './search-box.module.scss';
 
 interface InputData {
   name?: string;
@@ -27,10 +27,11 @@ export const SearchBox = ({ crews, setFilterMembers }) => {
     const debounce = setTimeout(() => {
       updateData();
     }, 200);
+
     return () => {
       clearTimeout(debounce);
     };
-  }, [keyword, members]); // 키워드가 변경되면 api를 호출
+  }, [keyword, members]);
 
   return (
     <div className={styles.searchWrapper}>

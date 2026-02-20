@@ -5,7 +5,7 @@ import { SearchUserItemType } from '~/common/types/main.type';
 import { SearchContext } from '~/context/search.context';
 import { MainService } from '~/services/main.service';
 
-import styles from './index.module.scss';
+import styles from './search-history-box.module.scss';
 
 export const SearchHistoryBox = ({ searchHistory }) => {
   const [historyUsers, setHistoryUsers] = useState([]);

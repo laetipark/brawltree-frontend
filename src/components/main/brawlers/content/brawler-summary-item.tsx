@@ -3,7 +3,7 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
+import styles from './brawler-summary-item.module.scss';
 
 export const BrawlerSummaryItem = ({ brawlerID, brawlerName, pickRate, victoryRate }) => {
   const locales = useContext(CdnContext);

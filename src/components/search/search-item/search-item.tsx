@@ -2,7 +2,7 @@ import React from 'react';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
+import styles from './search-item.module.scss';
 
 const roman = ['I', 'II', 'III'];
 

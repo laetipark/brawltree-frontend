@@ -25,32 +25,12 @@
   row-gap: 12px;
 }
 
-.spinner {
-  position: relative;
+.spinnerImage {
   width: 86px;
   height: 86px;
-}
-
-.spinnerRingOuter {
-  position: absolute;
-  inset: 0;
-  box-sizing: border-box;
-  border: 6px solid rgba(139, 180, 154, 0.26);
-  border-top-color: #7daf95;
-  border-right-color: #8fbfb4;
-  border-radius: 50%;
-  animation: spinOuter 1.3s linear infinite;
-}
-
-.spinnerRingInner {
-  position: absolute;
-  inset: 14px;
-  box-sizing: border-box;
-  border: 5px solid rgba(168, 194, 225, 0.24);
-  border-bottom-color: #8ea8cb;
-  border-left-color: #6f8eb6;
-  border-radius: 50%;
-  animation: spinInner 1s linear infinite;
+  object-fit: contain;
+  image-rendering: auto;
+  animation: spinLogo 1.2s linear infinite;
 }
 
 .spinnerLabel {
@@ -61,14 +41,8 @@
   text-shadow: none;
 }
 
-@keyframes spinOuter {
+@keyframes spinLogo {
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes spinInner {
-  100% {
-    transform: rotate(-360deg);
   }
 }

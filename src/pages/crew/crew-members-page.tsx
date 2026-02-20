@@ -7,7 +7,7 @@ import { PageSeo } from '~/components/seo/page-seo';
 import { CrewMembersType, UserService } from '~/services/user.service';
 import { CdnContext } from '~/context/cdn.context';
 
-import styles from './index.module.scss';
+import styles from './crew-members-page.module.scss';
 
 export const CrewMembers = () => {
   const locales = useContext(CdnContext);

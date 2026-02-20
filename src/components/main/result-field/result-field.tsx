@@ -8,7 +8,7 @@ import { SearchContext } from '~/context/search.context';
 import { useSearchItems } from '~/utils/search-items';
 import { useWindowClick } from '~/hooks/use-window-click.hook';
 
-import styles from './index.module.scss';
+import styles from './result-field.module.scss';
 
 export const ResultField = ({ inputValue, onChangeInputValue, setToggle }) => {
   const context = useContext(SearchContext);

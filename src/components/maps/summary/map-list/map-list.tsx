@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './index.module.scss';
+import styles from './map-list.module.scss';
 import { EventSummaryContainer } from '~/components/maps/event-summary';
 
 export const MapList = ({ maps }) => {

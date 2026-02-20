@@ -7,7 +7,7 @@ import { BrawlerStatsType, BrawlerType } from '~/common/types/brawlers.type';
 import { CdnContext } from '~/context/cdn.context';
 import { useWindowClick } from '~/hooks/use-window-click.hook';
 
-import styles from './index.module.scss';
+import styles from './brawler-stats.module.scss';
 import config from '~/common/config/config';
 
 type SortKey = 'pickDesc' | 'pickAsc' | 'winDesc' | 'winAsc';

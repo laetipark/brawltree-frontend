@@ -4,7 +4,7 @@ import { CdnContext } from '~/context/cdn.context';
 
 import config from '~/common/config/config';
 
-import styles from './index.module.scss';
+import styles from './map-info.module.scss';
 
 export const MapInfo = ({ mapInfo }) => {
   const locales = useContext(CdnContext);

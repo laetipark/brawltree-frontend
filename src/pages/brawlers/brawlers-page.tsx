@@ -9,7 +9,7 @@ import { PageSeo } from '~/components/seo/page-seo';
 import { BrawlerType } from '~/common/types/brawlers.type';
 import { BrawlerService } from '~/services/brawler.service';
 
-import styles from './index.module.scss';
+import styles from './brawlers-page.module.scss';
 
 const toDisplayName = (value?: string) => {
   return (value || 'shelly')

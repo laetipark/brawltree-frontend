@@ -7,7 +7,7 @@ import { RankedEvents } from '~/components/events/list/ranked';
 
 import { CdnContext } from '~/context/cdn.context';
 
-import styles from './index.module.scss';
+import styles from './event-menu.module.scss';
 
 export const EventMenu = () => {
   const navigate = useNavigate();
